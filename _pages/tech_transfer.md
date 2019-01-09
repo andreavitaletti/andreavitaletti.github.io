@@ -3,9 +3,11 @@ layout: page
 permalink: /techtransf/
 title: tech transfer
 description: Materials for courses you taught. Replace this text with your description.
+sections: [[a,A], [b,B], [projects,'Projects']]
+
 ---
 
-Technology Transfer - [link to Projects](#projects)
+Technology Transfer
 ----------------------
 
 2002-2016
@@ -38,14 +40,8 @@ In 2001 (3 months)
 
 *   The research group of the DIAG on WSN coordinated by Andrea Vitaletti has developed and implemented the MagoNode: a new wireless device for WSN networks operating in the 2.4Ghz ISM band completely developed at DIAG which has been used in many field trials.
 
-# Projects
+## Projects
 
-
-Dirige le attività di ricerca sulle reti di sensori wireless e l’Internet of Things, nell’ambito del gruppo di ricerca su Computer Networks and Pervasive Systems del Dipartimento di Ingegneria informatica automatica e gestionale Antonio Ruberti della Sapienza Università di Roma (DIAG). In questo contesto collabora/ha collaborato con numerosi enti di ricerca internazionali, tra cui: Research Academic Computer Technology Institute (Grecia), Braunschweig University of Technology (Germania), Universitat Paderborn (Germania), University of Athens (Grecia), Ben-Gurion University of the Negev (Israele), Universita degli Studi di Salerno (Italia), Wroclaw University of Technology (Polonia), Universitat Politecnica de Catalunya (Spagna), University of Geneva (Svizzera), University of Lubeck (Germania).
-
--   Ha fondato e dirige il laboratorio sulle wireless sensor network del DIAG dove le soluzioni - sia hardware che software - progettate nell’ambito della ricerca, vengono implementate e testate sul campo.
-
--   Collabora alle attività di ricerca sul cooperative design e sul co-design insieme ai docenti del Master of Science in Product Design della Sapienza. In particolare è responsabile delle attività di ricerca sull’impiego degli algoritmi genetici per il design di prodotti.
 
 Andrea Vitaletti ha acquisito una notevole esperienza sui progetti di ricerca, maturata in più di 15 anni d’esperienza. In molti casi, i progetti in cui è stato coinvolto, sono caratterizzati da una marcata multidisciplinarietà e dalla collaborazione con le industrie. Nel tempo ha assunto vari ruoli, con diverse responsabilità, come investigator (I), principal investigator (PI) e infine coordinatore. Nel seguito vengono brevemente descritti i principali progetti in cui è stato coinvolto.
 
