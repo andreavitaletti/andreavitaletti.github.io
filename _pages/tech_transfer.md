@@ -81,3 +81,15 @@ Di seguito vengono brevemente elencate alcune attività progettuali svolte prima
 -   Ha partecipato al progetto europeo DELIS (Dynamically Evolving, Large-scale Information Systems - http://delis.upb.de/) come ricercatore. Il progetto ha sviluppato metodi, tecniche e strumenti per gestire efficacemente i moderni sistemi informativi, caratterizzati da informazioni di grandi dimensioni ed estremamente dinamiche.
 
 -   Nel progetto EU SOFIA (Artemisia - https://www.artemisia-association.org/sofia), è stato responsabile del TASK3.3 nell’ambito del WP3. Il progetto SOFIA ha realizzato una piattaforma per l’interoperabilità tra i sistemi embedded che partecipano alla realizzazione di uno smart environment;
+
+## Media
+
+<iframe width="480" height="270" src="https://www.youtube.com/embed/2tgdCB3v7mE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="480" height="270" src="https://www.youtube.com/embed/CN_8J4-nojU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="480" height="270" src="https://www.youtube.com/embed/VXL0ynIedOI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="480" height="270" src="https://www.youtube.com/embed/DKwOXz7DKWs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="480" height="270" src="https://www.youtube.com/embed/WYnr-6wwgCw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
