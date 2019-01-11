@@ -3,6 +3,9 @@ description: 'In this section I briefly present my research.'
 layout: page
 nocite: '@*'
 permalink: '/research/'
+sections:
+- - bibliography
+  - Bibliography
 title: research
 ---
 

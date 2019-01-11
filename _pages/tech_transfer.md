@@ -3,9 +3,14 @@ layout: page
 permalink: /techtransf/
 title: tech transfer
 description: Materials for courses you taught. Replace this text with your description.
-sections: [[a,A], [b,B], [projects,'Projects']]
+sections: [[projects,'Projects']]
 
 ---
+
+<!--
+sections: [[a,A], [b,B], [projects,'Projects']]
+-->
+
 
 Technology Transfer
 ----------------------

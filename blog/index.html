@@ -1,16 +1,31 @@
 ---
 layout: default
 ---
-
+<!--
 <h1 class="page-title" style="display:inline-block;"> {{ page.title }} </h1>
-
+-->
 <div>
     Browse by <a href="/blog/category/" class="post-tag">Category</a> or <a href="/blog/tag/" class="post-tag">Tag</a>
 </div>
 
 <br/><br/>
 
-<div class="posts">
+
+<!--
+
+<ul class="post-list">
+  {% for post in paginator.posts %}
+    <li>
+      <h2><a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+      <p class="post-meta">{{ post.date | date: '%B %-d, %Y — %H:%M' }}</p>
+      <p>{{ post.description }}</p>
+    </li>
+  {% endfor %}
+</ul>
+
+-->
+
+<div class="post-list">
     {% for post in paginator.posts %}
     <div class="post">
         <h1 class="post-title">
@@ -24,16 +39,16 @@ layout: default
             {% if post.tags != empty %}
             |
             {% for tag in post.tags %}
-            <a class="codinfox-tag-mark" href="/blog/tag/#{{ tag | slugify }}">{{ tag }}</a>
+            <a class="post-tag" href="/blog/tag/#{{ tag | slugify }}">{{ tag }}</a>
             {% endfor %}
             {% endif %}
         </span>
+          
+        <p>{{ post.description }}</p>
 
-        {{ post.content | split:"<!-- more -->" | first }}
-
-        <div class="codinfox-post-more">
-            <a href="{{ post.url }}#disqus_thread">Comment</a>&nbsp;
-            <a href="{{ post.url }}">Read more</a>
+        <div class="post-more">
+            <a class="post-tag" href="{{ post.url }}#disqus_thread">Comment</a>&nbsp;
+            <a class="post-tag" href="{{ post.url }}">Read more</a>
         </div>
         <hr/>
 

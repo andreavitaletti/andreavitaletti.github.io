@@ -19,14 +19,14 @@ social: true
 
 Andrea Vitaletti, Ph.D. in Computer Engineering. I am  currently Assistant professor (Ricercatore confermato) with National scientific qualification (09/H1 and 01/B1) as Associate Professor.
 
-My [research]({{site.baseurl}}/research/) interests include: networking algoritms and protocols, IoT and private and distributed data management. I co-authored more than 60 [papers]({{site.baseurl}}/research/#Bibliography).
+My [research]({{site.baseurl}}/research/) interests include: networking algoritms and protocols, IoT and private and distributed data management. I co-authored more than 60 [papers]({{site.baseurl}}/research/#bibliography)
 
-I have been involved in a number of EU [projects]({{site.baseurl}}/projects/) as researcher, Principal Investigator and coordinator. 
+I have been involved in a number of EU [projects]({{site.baseurl}}/techtransf/#projects) as researcher, Principal Investigator and coordinator. 
 
 In terms of [technology transfer]({{site.baseurl}}/techtransf/) I founded two SMEs: WLAB that has been sold in 2016 and WSENSE where I am the CTO. 
 
 I [teach]({{site.baseurl}}/teaching/) networking, data-management and IoT topics at enginnering and product design MsC and BsC in Sapienza.
 
-[CV]({{ '/assets/pdf/CV.pdf' | prepend: site.baseurl | prepend: site.url }}){: .button-blue}
+[CV]({{ '/assets/pdf/CV.pdf' | prepend: site.baseurl | prepend: site.url }}){: .post-tag}
 
 
