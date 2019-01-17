@@ -8,11 +8,11 @@ tags: [barca]
 
 ---
 
-Il (Grabner Happy cat)[https://www.francobordo.com/manuals/hcl_2010[1].pdf] è un natante con omologazoine CE (2003/44/EC) di Categoria C.
+Il [Grabner Happy cat](https://www.francobordo.com/manuals/hcl_2010[1].pdf) è un natante con omologazoine CE (2003/44/EC) di Categoria C.
 
-I limiti di navigazione per le unità marcate CE sono stabiliti dall’art. 27, comma 4, del D. Lgs.​​ n.171 del 18.07.2005, in base alla categoria di progettazione di appartenenza (A,B,C,D). I criteri utilizzati per determinare tale limiti prendono in considerazione non la distanza dalla costa, bensì le condizioni meteo-marine. (vedi)[http://www.guardiacostiera.gov.it/servizi-al-cittadino/limiti-navigazione-natanti-targati-ce]
+I limiti di navigazione per le unità marcate CE sono stabiliti dall’art. 27, comma 4, del D. Lgs.​​ n.171 del 18.07.2005, in base alla categoria di progettazione di appartenenza (A,B,C,D). I criteri utilizzati per determinare tale limiti prendono in considerazione non la distanza dalla costa, bensì le condizioni meteo-marine. [vedi](http://www.guardiacostiera.gov.it/servizi-al-cittadino/limiti-navigazione-natanti-targati-ce)
 
-L'(articolo 27)[http://www.camera.it/parlam/leggi/deleghe/05171dl.htm] recita: 
+L'[articolo 27](http://www.camera.it/parlam/leggi/deleghe/05171dl.htm) recita: 
 
 > I natanti provvisti di marcatura CE possono navigare nei limiti stabiliti dalla categoria di progettazione di appartenenza di cui all'allegato II.
 
@@ -22,7 +22,7 @@ Nell'allegato II si dice per la cetgoria C:
 
 Sebbene dunque l'Happy cat possa navigare entro le 12 miglia, per motivi prudenziali e di opportunità mi limiterò a navigare entro le 6 miglia. Nota che anche i natanti non omologati CE possono navigare entro le 6 miglia (vedi articolo 27).
 
-Per una navigazione entro le 6 miglia le (dotazioni di sicurezza necessarie)[http://www.guardiacostiera.gov.it/servizi-al-cittadino/Documents/dotazionidisicurezza_upd20042010.pdf] sono:
+Per una navigazione entro le 6 miglia le [dotazioni di sicurezza necessarie](http://www.guardiacostiera.gov.it/servizi-al-cittadino/Documents/dotazionidisicurezza_upd20042010.pdf) sono:
 
 * cinture di salvataggio (una per ogni persona a bordo)
 * 1 salvagente anulare con cima
