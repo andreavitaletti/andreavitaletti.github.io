@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Cominciamo ad attrezzzarci
+title:  Cominciamo ad attrezzarci
 date:   2019-01-17 16:40:16
 description: Attrezzatura
 category: vela
@@ -12,15 +12,15 @@ Il [Grabner Happy cat](https://www.francobordo.com/manuals/hcl_2010[1].pdf) è u
 
 I limiti di navigazione per le unità marcate CE sono stabiliti dall’art. 27, comma 4, del D. Lgs.​​ n.171 del 18.07.2005, in base alla categoria di progettazione di appartenenza (A,B,C,D). I criteri utilizzati per determinare tale limiti prendono in considerazione non la distanza dalla costa, bensì le condizioni meteo-marine. [vedi](http://www.guardiacostiera.gov.it/servizi-al-cittadino/limiti-navigazione-natanti-targati-ce)
 
-L'[articolo 27](http://www.camera.it/parlam/leggi/deleghe/05171dl.htm) recita: 
+L'[articolo 27](http://www.camera.it/parlam/leggi/deleghe/05171dl.htm) recita:
 
 > I natanti provvisti di marcatura CE possono navigare nei limiti stabiliti dalla categoria di progettazione di appartenenza di cui all'allegato II.
 
 Nell'allegato II si dice per la cetgoria C:
 
-> C. In prossimità della costa: progettate per crociere in acque costiere, grandi baie, estuari, fiumi e laghi, in cui la forza del vento può essere pari a 6 (scala Beaufort) e l'altezza significativa delle onde può raggiungere 2 m.
+> C. In prossimità della costa: progettate per crociere in acque costiere, grandi baie, estuari, fiumi e laghi, in cui la forza del vento può essere pari a 6 ([scala Beaufort](https://it.wikipedia.org/wiki/Scala_di_Beaufort)) e l'altezza significativa delle onde può raggiungere 2 m.
 
-Sebbene dunque l'Happy cat possa navigare entro le 12 miglia, per motivi prudenziali e di opportunità mi limiterò a navigare entro le 6 miglia. Nota che anche i natanti non omologati CE possono navigare entro le 6 miglia (vedi articolo 27).
+Sebbene dunque l'Happy cat possa navigare entro le 12 miglia, per motivi prudenziali e di opportunità mi limiterò a navigare entro le 6 miglia anzi preferibilmente entro le 3. Nota che anche i natanti non omologati CE possono navigare entro le 6 miglia (vedi articolo 27).
 
 Per una navigazione entro le 6 miglia le [dotazioni di sicurezza necessarie](http://www.guardiacostiera.gov.it/servizi-al-cittadino/Documents/dotazionidisicurezza_upd20042010.pdf) sono:
 
@@ -32,4 +32,3 @@ Per una navigazione entro le 6 miglia le [dotazioni di sicurezza necessarie](htt
 * 2 razzi a paracadute luce rossa
 * fanali regolamentari. Nel caso di navigazione diurna  fino a dodici  miglia dalla costa, i fanali regolamentari possono essere sostituiti con  una torcia disicurezza a luce bianca
 * apparecchi di segnalazione sonora
-
