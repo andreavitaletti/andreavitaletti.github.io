@@ -19,7 +19,7 @@ social: true
 
 Andrea Vitaletti, Ph.D. in Computer Engineering. I am  currently Assistant professor (Ricercatore confermato) with National scientific qualification (09/H1 and 01/B1) as Associate Professor.
 
-My [research]({{site.baseurl}}/research/) interests include: networking algoritms and protocols, IoT and private and distributed data management. I co-authored more than 60 [papers]({{site.baseurl}}/research/#bibliography)
+My [research]({{site.baseurl}}/research/) interests include: networking algoritms and protocols, IoT, private and distributed data management and Distributed Ledger Technologies. I co-authored more than 60 [papers]({{site.baseurl}}/research/#bibliography)
 
 I have been involved in a number of EU [projects]({{site.baseurl}}/techtransf/#projects) as researcher, Principal Investigator and coordinator. 
 
