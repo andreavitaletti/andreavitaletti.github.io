@@ -84,14 +84,15 @@ In  the following I briefly outline some of the activities performed before
 
 
 
-<iframe width="480" height="270" src="https://www.youtube.com/embed/2tgdCB3v7mE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="three" width="480" height="270" src="https://www.youtube.com/embed/2tgdCB3v7mE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="480" height="270" src="https://www.youtube.com/embed/CN_8J4-nojU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="480" height="270" src="https://www.youtube.com/embed/VXL0ynIedOI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="three" width="480" height="270" src="https://www.youtube.com/embed/CN_8J4-nojU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="480" height="270" src="https://www.youtube.com/embed/DKwOXz7DKWs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="three" width="480" height="270" src="https://www.youtube.com/embed/VXL0ynIedOI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="480" height="270" src="https://www.youtube.com/embed/WYnr-6wwgCw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="three" width="480" height="270" src="https://www.youtube.com/embed/DKwOXz7DKWs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe class="three" width="480" height="270" src="https://www.youtube.com/embed/WYnr-6wwgCw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
