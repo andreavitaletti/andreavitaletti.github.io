@@ -16,8 +16,8 @@ Un'altro principio che vorrei seguire è usare strumenti open source e DIY. Per 
 
 Per cominciare a ragionarci su ho pianificato le tappe nel Lazio. Ed il risultato è questo:
 
-<img src="/assets/img/tappalazio.jpg">
+<img class="three" src="/assets/img/tappalazio.jpg">
 
 che su [Google Earth](https://earth.app.goo.gl/1fm1Jk) appare così:
 
-<img src="/assets/img/tappalazio1.jpg">
+<img class="three" src="/assets/img/tappalazio1.jpg">

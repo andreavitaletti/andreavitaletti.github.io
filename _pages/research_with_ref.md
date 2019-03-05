@@ -35,28 +35,27 @@ Furthermore, a distinctive chracteristics of my research is the attempt
 to always validate the performance of the proposed solutions, both
 theoretical and practical, via simulations and real testbeds.
 
-Dirige le attività di ricerca sulle reti di sensori wireless e
-l’Internet of Things, nell’ambito del gruppo di ricerca su Computer
-Networks and Pervasive Systems del Dipartimento di Ingegneria
-informatica automatica e gestionale Antonio Ruberti della Sapienza
-Università di Roma (DIAG). In questo contesto collabora/ha collaborato
-con numerosi enti di ricerca internazionali, tra cui: Research Academic
-Computer Technology Institute (Grecia), Braunschweig University of
-Technology (Germania), Universitat Paderborn (Germania), University of
-Athens (Grecia), Ben-Gurion University of the Negev (Israele),
-Universita degli Studi di Salerno (Italia), Wroclaw University of
-Technology (Polonia), Universitat Politecnica de Catalunya (Spagna),
-University of Geneva (Svizzera), University of Lubeck (Germania).
+I lead the research activities on wireless sensor networks and the
+Internet of Things, in the research group on Computer Networks and
+Pervasive Systems of the Department of Automatic Computer Engineering
+and Management Antonio Ruberti della Sapienza University of Rome (DIAG).
+In this context, I enjoied the cooperation with several international
+research organizations, including: Research Academic Computer Technology
+Institute (Greece), Braunschweig University of Technology (Germany),
+Universitat Paderborn (Germany), University of Athens (Greece),
+Ben-Gurion University of the Negev (Israel), University of Salerno
+(Italy), Wroclaw University of Technology (Poland), Universitat
+Politecnica de Catalunya (Spain), University of Geneva (Switzerland),
+University of Lubeck (Germany).
 
--   Ha fondato e dirige il laboratorio sulle wireless sensor network del
-    DIAG dove le soluzioni - sia hardware che software - progettate
-    nell’ambito della ricerca, vengono implementate e testate sul campo.
+I founded the laboratory on the wireless sensor network of DIAG where
+the solutions - both hardware and software - designed in the our
+research activities, are implemented and tested in the field.
 
--   Collabora alle attività di ricerca sul cooperative design e sul
-    co-design insieme ai docenti del Master of Science in Product Design
-    della Sapienza. In particolare è responsabile delle attività di
-    ricerca sull’impiego degli algoritmi genetici per il design di
-    prodotti.
+I enjoy a long term collaboration on cooperative design and co-design
+with faculties of the MSc in Product Design at Sapienza. In particular,
+I'm leading the research activities on the emplyment of genetic
+algorithms for product design.
 
 Bibliography
 ------------
