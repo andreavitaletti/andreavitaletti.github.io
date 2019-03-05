@@ -64,21 +64,21 @@ I have acquired a significant experience on research projects, gained in more th
 
 -   EASME [ARCHEOSUb](http://www.archeosub.eu/index.php/en/) (I) . The ARCHEOSUb (Autonomous underwater Robotic and sensing systems for Cultural Heritage discovery Conservation and in situ valorization) project aims to develop products and services in support of the discovery of new Underwater Cultural Heritage (UCH) sites and of the surveying, conservation, protection, and valorization of new and existing ones. 
 
-Di seguito vengono brevemente elencate alcune attività progettuali svolte prima del 2007.
+In  the following I briefly outline some of the activities performed before
 
--   È stato responsabile tecnico del gruppo del DIS di Roma “La Sapienza” per il progetto VICOM (Virtual Immersive COMmunications - http://www.vicom-project.it/ ). Il progetto ha realizzato un sistema di comunicazione per servizi mobili di realtà aumentata. In modo particolare il gruppo di Roma ha realizzato l’intero framework per la localizzazione degli utenti mobili attraverso dispositivi eterogenei (GPS, CellID, WiFi, Reti di Sensori ...)
+- He has been the technical manager of the DIAG group in Rome "La Sapienza" for the project VICOM (Virtual Immersive COMmunications - http://www.vicom-project.it/). The project has developed the infrastructure for the provisioning of augmented realty mobile services. In particular, the group of Rome has developed the  framework for the location of mobile users through heterogeneous technologies (GPS, CellID, WiFi, Sensor Networks ...)
 
--   È stato coordinatore e responsabile tecnico del laboratorio CINI di Roma Il laboratorio ha partecipato al progetto FIRB WEB) con la realizzazione di un framework per l’accesso remoto ubiquo a servizi multimediali sensibili al contesto (es: guide turistiche su cellulari in cui l’informazione è georeferenziata).
+- He was the coordinator and technical manager of the CINI lab in Rome. The lab participated in the FIRB project WEB developing a framework for the remote access to multimedia context sensitive services (eg: tourist guides on mobile phones where the information is georeferenced).
 
--   Ha collaborato con il gruppo della professoressa Chiara Petrioli nell’ambito del progetto europeo EYES (EnergY Efficient Sensor networks - http://www.eyes.eu.org/) per la realizzazione di reti di sensori che si auto-organizzino e collaborano alla realizzazione di un sistema energeticamente. In modo particolare si è studiato come tecniche di sparsificazione del grafo della connettività possano condurre a una riduzione significativa del consumo energetico.
+- He collaborated with the group of Professor Chiara Petrioli within the European project EYES (Energy Efficient Sensor networks - http://www.eyes.eu.org/) for the creation of sensor networks that self-organize and collaborate to the realization of a system energetically efficient. In particular, it has been studied how the emplyment of sparsifying techniques of the connectivity graph can lead to a significant reduction in energy consumption.
 
--   Ha collaborato con il gruppo della professoressa Chiara Petrioli nell’ambito del progetto europeo WiSeNts (Wireless Sensor Networks and Cooperating Smart Objects). Il progetto ha studiato le dinamiche dei processi che sottendono alla realizzazione di sistemi complessi di oggetti intelligenti e cooperanti (es: reti di sensori). Nell’ambito di questo progetto ha visitato l’ETHZ (si veda \[visit\])
+- He collaborated with the group of Professor Chiara Petrioli as part of the European project WiSeNts (Wireless Sensor Networks and Cooperating Smart Objects). The project studied the dynamics of the processes that underlie the realization of complex systems of intelligent and cooperating objects (eg sensor networks). As part of this project he visited the ETHZ (see \ [visit \])
 
--   Ha partecipato al progetto europeo AEOLUS (Algorithmic Principles for Building Efficient Overlay Computers - http://dmod.cs.uoi.gr/aeolus site/main.htm) come ricercatore. Il progetto ha studiato metodi e algoritmi per la realizzazione di reti di overlay per l’accesso efficiente e trasparente alle risorse di Internet.
+- He has participated in the European project AEOLUS (Algorithmic Principles for Building Efficient Overlay Computers - http://dmod.cs.uoi.gr/aeolus site / main.htm) as a researcher. The project investigated methods and algorithms for creating overlay networks for the efficient and transparent access to Internet resources.
 
--   Ha partecipato al progetto europeo DELIS (Dynamically Evolving, Large-scale Information Systems - http://delis.upb.de/) come ricercatore. Il progetto ha sviluppato metodi, tecniche e strumenti per gestire efficacemente i moderni sistemi informativi, caratterizzati da informazioni di grandi dimensioni ed estremamente dinamiche.
+- He participated in the European project DELIS (Dynamically Evolving, Large-scale Information Systems - http://delis.upb.de/) as a researcher. The project has developed methods, techniques and tools to effectively manage modern information systems, characterized by large and extremely dynamic information.
 
--   Nel progetto EU SOFIA (Artemisia - https://www.artemisia-association.org/sofia), è stato responsabile del TASK3.3 nell’ambito del WP3. Il progetto SOFIA ha realizzato una piattaforma per l’interoperabilità tra i sistemi embedded che partecipano alla realizzazione di uno smart environment;
+- In the EU SOFIA project (Artemisia - https://www.artemisia-association.org/sofia), he was responsible for TASK3.3 under WP3. The SOFIA project has created a platform for interoperability between embedded systems that participate in the creation of a smart environment
 
 ## Media
 
