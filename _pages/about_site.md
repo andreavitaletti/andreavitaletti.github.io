@@ -12,7 +12,7 @@ profile:
     <p>via Arisoto 25</p>
     <p>00185, Rome, Italy</p>
 
-news: true
+news: false
 social: true
 ---
 
