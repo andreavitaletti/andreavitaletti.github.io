@@ -1,18 +1,13 @@
 ---
 layout: page
 permalink: /techtransf/
-title: tech transfer
+title: TOT
 description: Materials for courses you taught. Replace this text with your description.
 sections: [[projects,'Projects'],[media,'Media']]
 
 ---
 
-<!--
-sections: [[a,A], [b,B], [projects,'Projects']]
--->
-
-
-Technology Transfer
+Transfer of Technology 
 ----------------------
 
 2002-2016

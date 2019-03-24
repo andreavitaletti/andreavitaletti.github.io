@@ -6,7 +6,7 @@ permalink: '/research/'
 sections:
 - - bibliography
   - Bibliography
-title: research
+title: Research
 ---
 
 Research
