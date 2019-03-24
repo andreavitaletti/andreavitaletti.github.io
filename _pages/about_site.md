@@ -6,7 +6,7 @@ description: <a href="">University of Rome "La Sapienza"</a>.
 
 profile:
   align: right
-  image: andrea1.jpg
+  image: andrea_cartoon1.png
   address: >
     <p>DIAG room B206</p>
     <p>via Arisoto 25</p>
