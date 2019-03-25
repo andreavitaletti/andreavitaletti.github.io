@@ -23,7 +23,7 @@ My [research]({{site.baseurl}}/research/) interests include: networking algorith
 
 I have been involved in a number of EU [projects]({{site.baseurl}}/techtransf/#projects) as researcher, principal investigator and coordinator. 
 
-I have some successful experience in [transfer of technology]({{site.baseurl}}/techtransf/): I founded WLAB that has been sold in 2016 and WSENSE where I am the CTO. 
+I am a maker and I have some successful experience in [transfer of technology]({{site.baseurl}}/techtransf/): I founded the spin-offs WLAB that has been sold in 2016 and [WSENSE](www.wsense.it) where I am the CTO. 
 
 I [teach]({{site.baseurl}}/eduwork/#teaching) networking, data-management and IoT topics at engineering and product design MsC and BsC in Sapienza.
 
@@ -31,6 +31,6 @@ I [teach]({{site.baseurl}}/eduwork/#teaching) networking, data-management and Io
 [CV]({{ '/assets/pdf/CV.pdf' | prepend: site.baseurl | prepend: site.url }}){: .post-tag}
 -->
 
-Hobby: sailing, cycling and paragliding ... I play the piano and the guitar for fun... be aware!
+Hobbies: sailing, cycling and paragliding ... I play the piano and the guitar for fun... be aware!
 
 
