@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/cv/edu/</loc>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/cv/work/</loc>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/cv/research/</loc>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/cv/tech_transfer/</loc>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/cv/</loc>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="it"
+                href="https://andreavitaletti.github.io/it/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://andreavitaletti.github.io/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/</loc>
+  </url>
+  
+</urlset>
