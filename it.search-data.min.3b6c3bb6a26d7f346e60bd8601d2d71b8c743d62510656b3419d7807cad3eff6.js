@@ -1,0 +1,1 @@
+'use strict';(function(){const indexCfg={cache:true};indexCfg.doc={id:'id',field:['title','content'],store:['title','href'],};const index=FlexSearch.create('balance',indexCfg);window.bookSearchIndex=index;index.add({'id':0,'href':'/it/','title':"Andrea Vitaletti",'content':"In Italiano Ci sto lavorando su \u0026hellip; work in prgress!\n"});})();
