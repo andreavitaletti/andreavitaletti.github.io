@@ -3,23 +3,71 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://andreavitaletti.github.io/docs/cv/edu/</loc>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/</loc>
   </url>
   
   <url>
-    <loc>https://andreavitaletti.github.io/docs/cv/work/</loc>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/</loc>
   </url>
   
   <url>
-    <loc>https://andreavitaletti.github.io/docs/cv/research/</loc>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Application-Server/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://andreavitaletti.github.io/docs/cv/tech_transfer/</loc>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Authentication-and-Authorization/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://andreavitaletti.github.io/docs/cv/</loc>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Beyond-Client-Server/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/IoT/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Messaging/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Microservices/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/PaaS/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/REST/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Socket-and-HTTP/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Streaming/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Tools/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Web-Sockets/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -34,6 +82,10 @@
                 hreflang="en"
                 href="https://andreavitaletti.github.io/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://andreavitaletti.github.io/docs/cv/</loc>
   </url>
   
   <url>

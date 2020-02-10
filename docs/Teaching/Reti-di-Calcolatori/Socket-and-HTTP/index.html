@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Socket and H T T P"><meta property="og:title" content="" />
+<meta property="og:description" content="All you need to know on sockets and communication can be found in the Java Tutorial on What Is a Socket?
+In a sentence:
+ A socket is one endpoint of a two-way communication link between two programs running on the network. A socket is bound to a port number so that the TCP layer can identify the application that data is destined to be sent to. An endpoint is a combination of an IP address and a port number." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://andreavitaletti.github.io/docs/Teaching/Reti-di-Calcolatori/Socket-and-HTTP/" />
+
+<title>Socket and H T T P | Andrea Vitaletti</title>
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/book.min.8ee891d8dd34fb8b09309d336809d47b0da3d2b94b945845deb52a04253304a4.css" integrity="sha256-juiR2N00&#43;4sJMJ0zaAnUew2j0rlLlFhF3rUqBCUzBKQ=">
+
+
+<script defer src="/en.search.min.6f84012a01eefc632eed3b279383c53dbbd17075bbd708a6d27a19abdef68527.js" integrity="sha256-b4QBKgHu/GMu7Tsnk4PFPbvRcHW71wim0noZq972hSc="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="flex container">
+
+    <aside class="book-menu fixed">
+      <nav>
+<h2 class="book-brand">
+  <a href="https://andreavitaletti.github.io/"><span>Andrea Vitaletti</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+    <ul>
+<li><a href="/docs/cv/">Curriculum</a></li>
+</ul>
+
+
+
+
+
+</nav>
+
+
+<script>
+(function() {
+  var menu = document.querySelector("aside.book-menu nav");
+  addEventListener("beforeunload", function(event) {
+    localStorage.setItem("menu.scrollTop", menu.scrollTop);
+  });
+  menu.scrollTop = localStorage.getItem("menu.scrollTop");
+})();
+</script>
+
+    </aside>
+
+    <div class="book-page">
+      <header class="flex align-center justify-between book-header">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+  <strong>Socket and H T T P</strong>
+</header>
+
+      
+<article class="markdown"><p>All you need to know on sockets and communication can be found in the Java Tutorial on
+<a href="https://docs.oracle.com/javase/tutorial/networking/sockets/definition.html">What Is a Socket?</a></p>
+<p>In a sentence:</p>
+<blockquote>
+<p>A socket is one endpoint of a two-way communication link between two programs running on the network. A socket is bound to a port number so that the TCP layer can identify the application that data is destined to be sent to. An endpoint is a combination of an IP address and a port number. Every TCP connection can be uniquely identified by its two endpoints. That way you can have multiple connections between your host and the server.</p>
+</blockquote>
+<p>We explore sockets implementing the HTTP protocol using the JAVA language.</p>
+<p>As already observed, a protocol is a controlled sequence of messages that is exchanged between two or more systems to accomplish a given task.</p>
+<p>Protocol specifications define this sequence together with the format or layout of the messages that are exchanged</p>
+<p>In HTTP a client makes a request, characterized by a method, as depicted in the following figures.</p>
+<p><img src="img/http_request.png" alt=""></p>
+<p><img src="img/http_methods.jpg" alt=""></p>
+<p>The server responds to the request specifying the nature of the response with a status code.</p>
+<p><img src="img/http_response.png" alt=""></p>
+<p><img src="img/http_status_code.jpg" alt=""></p>
+<h3 id="experiments">Experiments</h3>
+<p>As a Web server we use <a href="https://www.nginx.com/resources/wiki/">NGINX</a>, a free, open-source, high-performance HTTP server.</p>
+<p>In most of the experiments, we will setup a convenient experimental environment employing <a href="https://www.docker.com/">docker</a> see [[Tools]] for further details</p>
+<p><a href="https://hub.docker.com/_/nginx/">NGINX sul Docker Hub</a></p>
+<p><code>docker run --name ngix4RC -d nginx</code></p>
+<p><code>docker ps</code>  lists all the running images</p>
+<p>The code for this part is available <a href="https://github.com/andreavitaletti/RC/tree/master/Socket%20and%20HTTP">here</a></p>
+<p>Note that the service is running but cannot be accessed from the host. The following script allows us to map the folder in the host machine
+<code>/home/andrea/Documents/University/...</code> into the folder in the container <code>/usr/share/nginx/html</code> and to <strong>map</strong> the port 80 in the container to the port 8080 of the host.</p>
+<pre><code>docker run --name ngix4RC -p 8080:80  
+-v '/home/andrea/Documents/University/Didattica/RC2018/docker/1. Simple Web Server/some/content':/usr/share/nginx/html:ro
+-d nginx
+</code></pre><p>Now if put in your browser the localhost:8080 you can finally access the content in <code>/usr/share/nginx/html</code>.</p>
+<p><img src="img/simple.jpg" alt=""></p>
+<p>If you need a shell to open a shell in the container, get the container id by <code>docker ps</code>  and then</p>
+<p><code>sudo docker exec -i -t &lt;container_id&gt; /bin/bash</code></p>
+<p>Finally, it can be convenient to build new images automatically by reading the instructions from a Dockerfile</p>
+<p><code>docker build -t some-content-nginx .</code></p>
+<p>Then you can run the corresponding container by</p>
+<p><code>docker run --name some-nginx -d -p 8080:80 some-content-nginx</code></p>
+<p>It is now time to inspect the underlying HTTP flow. To this purpose we will use the protocol analyser  <a href="https://www.wireshark.org/">Wireshark</a>. Remember to filter only http traffic and enjoy.</p>
+<p><img src="img/wireshark.jpg" alt=""></p>
+<p>This tool allows you to inspect at all levels the interaction between the client and the server. Up to know we used &ldquo;commercial&rdquo; software, now we aim at implementing our PoC (Proof-of-Concept)of the client and the server. Please note that even if those are only PoC they can effectively interact with &ldquo;commercial&rdquo; softwares. Why? Simple, they correctly implement a minimal set of HTTP commands.</p>
+<h3 id="our-http-client-poc-ie-a-browser--it-works-with-nginx">Our HTTP-client PoC (i.e. a browser) &hellip; it works with NGINX</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.net.*<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SocketSimpleWebBrowser</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> 
+    	<span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+
+        Socket echoSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        PrintWriter out <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        BufferedReader in <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        
+     
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            echoSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Socket<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;localhost&#34;</span><span style="color:#f92672">,</span> 8080<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            out <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PrintWriter<span style="color:#f92672">(</span>
+            	echoSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            in <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span>
+            	<span style="color:#66d9ef">new</span> InputStreamReader<span style="color:#f92672">(</span>
+                echoSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>UnknownHostException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">err</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Don&#39;t know about the host&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">exit</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">err</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Couldn&#39;t get I/O for this connection.&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">exit</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+		out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;GET /index.html HTTP/1.1\r&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+		out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Host: localhost\r&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+		out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36\r&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+		out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;\r&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+
+		String data<span style="color:#f92672">;</span>
+
+		<span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span><span style="color:#f92672">(</span>data <span style="color:#f92672">=</span> in<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+			System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>data<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+		<span style="color:#f92672">}</span>
+	
+
+		out<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+		in<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+		echoSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="our-http-server-poc-ie-a-web-server--it-works-with-chrome">Our HTTP-server PoC (i.e. a web server) &hellip; it works with Chrome</h3>
+<p>With a little effort let&rsquo;s make it multi thread&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.net.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleWebServer</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+
+        ServerSocket serverSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            serverSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ServerSocket<span style="color:#f92672">(</span>4444<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">err</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Could not listen on port: 4444.&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">exit</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        Socket clientSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            clientSocket <span style="color:#f92672">=</span> serverSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">err</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Accept failed.&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">exit</span><span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        PrintWriter out <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PrintWriter<span style="color:#f92672">(</span>clientSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">getOutputStream</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        BufferedReader in <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span>
+				<span style="color:#66d9ef">new</span> InputStreamReader<span style="color:#f92672">(</span>
+				clientSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">getInputStream</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        String inputLine<span style="color:#f92672">;</span>
+        
+
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span><span style="color:#f92672">(</span>inputLine <span style="color:#f92672">=</span> in<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+			<span style="color:#75715e">// https://stackoverflow.com/questions/4758525/carriage-return-and-new-line-with-java-and-readline
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>inputLine<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>  
+				System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>inputLine<span style="color:#f92672">)</span><span style="color:#f92672">;</span>                
+        <span style="color:#f92672">}</span>
+        
+        String message <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">(</span>args<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;HTTP/1.1 200 ok\r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;html&gt; \r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;head&gt; \r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;title&gt; index &lt;/title&gt;\r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;/head&gt; \r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;body&gt; \r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;p&gt;&lt;b&gt;&#34;</span><span style="color:#f92672">+</span>message<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;&lt;/b&gt;&lt;/p&gt; \r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;/body&gt; \r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&lt;/html&gt; \r\n&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        
+        out<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        in<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        clientSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        serverSocket<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><h3 id="handling-the-post">Handling the POST</h3>
+<p>In order to handle a POST in an interesting scenario we need an application server [[Application-Server]]</p>
+<blockquote>
+<p>Docker creates isolated machine (container). Each container contains only one process (Apache or Mysql or another); And Dockerfile defines how to build a image.
+Docker compose allows run, links and configure the bunch of containers together.
+<a href="http://v0cdocker.blogspot.com/2017/11/docker-compose-vs-dockerfile.html">ref</a></p>
+</blockquote>
+<p>We will use the following docker.compose.yml</p>
+<pre><code>version: &quot;2&quot;
+services:
+  node1:
+    image: &quot;node:8&quot;
+    user: &quot;node&quot;
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - /home/andrea/Documents/University/Didattica/RC2018/docker/2.Node:/home/node/app
+    ports:
+      - &quot;8081:8081&quot;
+    expose:
+      - 8081
+    command: &quot;npm start&quot;
+  node2:
+    image: &quot;node:8&quot;
+    user: &quot;node&quot;
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - /home/andrea/Documents/University/Didattica/RC2018/docker/2.Node:/home/node/app
+    ports:
+      - &quot;8082:8081&quot;
+    expose:
+      - 8081
+    command: &quot;npm start&quot;
+</code></pre><p>To run the container simply digit <code>docker-compose up</code></p>
+<p>and you will run the following server on port 8081 and 8082 of localhost both mapped into port 8081 on the containers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">createServer</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;GET&#34;</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;text/html&#34;</span> });
+        <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">createReadStream</span>(<span style="color:#e6db74">&#34;form.html&#34;</span>, <span style="color:#e6db74">&#34;UTF-8&#34;</span>).<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">res</span>);
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;POST&#34;</span>) {
+    
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;data&#34;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">chunk</span>) {
+            <span style="color:#a6e22e">body</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">chunk</span>;
+        });
+
+        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;end&#34;</span>, <span style="color:#66d9ef">function</span>(){
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;text/html&#34;</span> });
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">body</span>);
+        });
+    }
+
+}).<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">8081</span>);
+</code></pre></div><p>As you can image the else statement manages POST requests. Now you can access the app at localhost:8081 and you first go to the GET</p>
+<p><img src="img/get1.jpg" alt=""></p>
+<p>the one you fill-up the form and submit you go to the POST that is econded in the form.html</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">http-equiv</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;X-UA-Compatible&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ie=edge&#34;</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;Document&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;POST&#34;</span>&gt;
+        &lt;<span style="color:#f92672">label</span>&gt;Name: &lt;/<span style="color:#f92672">label</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dname&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> /&gt;&lt;<span style="color:#f92672">br</span> /&gt;
+        &lt;<span style="color:#f92672">label</span>&gt;Email: &lt;/<span style="color:#f92672">label</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;demail&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> /&gt;&lt;<span style="color:#f92672">br</span> /&gt;
+        &lt;<span style="color:#f92672">label</span>&gt;Address: &lt;/<span style="color:#f92672">label</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;daddress&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> /&gt;&lt;<span style="color:#f92672">br</span> /&gt;
+        &lt;<span style="color:#f92672">button</span>&gt;submit&lt;/<span style="color:#f92672">button</span>&gt;
+    &lt;/<span style="color:#f92672">form</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+
+</code></pre></div><p>and you get the following result</p>
+<p><img src="img/post1.jpg" alt=""></p>
+<p>As usual you can inspect the whole flow with wireshark.</p>
+<p><img src="img/wire1.jpg" alt=""></p>
+</article>
+
+      <div class="book-footer justify-between">
+  
+  
+
+
+  
+
+  
+
+
+
+<div class="book-languages">
+
+  <ul>
+    <li class="flex">
+      <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+      English
+    </li> 
+  </ul>
+
+  <ul class="book-languages-list">
+    
+    <li class="active">
+      <a href="https://andreavitaletti.github.io/" class="flex">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        English
+      </a>
+    </li>
+    
+    <li class="">
+      <a href="https://andreavitaletti.github.io/it/" class="flex">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        Italiano
+      </a>
+    </li>
+    
+  </ul>
+
+</div>
+
+  
+
+  
+
+  
+
+</div>
+
+      
+    </div>
+
+    
+  
+
+  <aside class="book-toc levels-3 fixed">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#experiments">Experiments</a></li>
+            <li><a href="#our-http-client-poc-ie-a-browser--it-works-with-nginx">Our HTTP-client PoC (i.e. a browser) &hellip; it works with NGINX</a></li>
+            <li><a href="#our-http-server-poc-ie-a-web-server--it-works-with-chrome">Our HTTP-server PoC (i.e. a web server) &hellip; it works with Chrome</a></li>
+            <li><a href="#handling-the-post">Handling the POST</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </aside>
+
+
+
+  </main>
+
+  
+</body>
+
+</html>
