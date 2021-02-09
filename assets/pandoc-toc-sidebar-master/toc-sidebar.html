@@ -18,6 +18,7 @@ $if(keywords)$
 $endif$
 
     <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+   
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -57,6 +58,8 @@ $endfor$
   </head>
 
   <body>
+	 
+	  
 $for(include-before)$
     $include-before$
 $endfor$
@@ -74,7 +77,9 @@ $if(toc)$
 $else$
         <div class="col-sm-12 main">
 $endif$
-        
+
+<h1 class="title">$pagetitle$</h1>  
+       
 $body$
         </div>
       </div>
