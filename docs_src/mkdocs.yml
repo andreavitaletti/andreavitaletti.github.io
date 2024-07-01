@@ -1,5 +1,9 @@
 site_name: Andrea Vitaletti
 
+site_url: https://andreavitaletti.github.io
+
+repo_url: https://github.com/andreavitaletti/docs
+
 theme:
   name: 'material'
   logo: assets/images/logo.png
