@@ -1,8 +1,8 @@
 site_name: Andrea Vitaletti
 
-site_url: https://andreavitaletti.github.io
+# site_url: https://andreavitaletti.github.io
 
-repo_url: https://github.com/andreavitaletti/docs
+# repo_url: https://github.com/andreavitaletti/docs
 
 theme:
   name: 'material'
