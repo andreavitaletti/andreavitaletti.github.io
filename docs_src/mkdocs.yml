@@ -1,0 +1,75 @@
+site_name: Andrea Vitaletti
+
+theme:
+  name: 'material'
+  logo: assets/images/logo.png
+  icon:
+    repo: fontawesome/brands/git-alt
+  palette:
+    primary: lime
+  features:
+    - toc:
+        collapse: true
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.path
+    - toc.integrate
+plugins:
+  - search
+  # https://pypi.org/project/mkdocs-with-pdf/
+  - with-pdf:
+      author: Andrea Vitaletti
+      #copyright: ANY TEXT
+      #cover: false
+      #back_cover: true
+      #cover_title: TITLE TEXT
+      #cover_subtitle: SUBTITLE TEXT
+      #custom_template_path: TEMPLATES PATH
+      #
+      #toc_title: TOC TITLE TEXT
+      #heading_shift: false
+      #toc_level: 3
+      #ordered_chapter_level: 2
+      #excludes_children:
+      #    - 'release-notes/:upgrading'
+      #    - 'release-notes/:changelog'
+      #
+      exclude_pages:
+          - 'thesis/'
+      #    - 'appendix/contribute/'
+      #convert_iframe:
+      #    - src: IFRAME SRC
+      #      img: POSTER IMAGE URL
+      #      text: ALTERNATE TEXT
+      #    - src: ...
+      #two_columns_level: 3
+      #
+      #render_js: true
+      #headless_chrome_path: headless-chromium
+      #
+      #output_path: any-place/document.pdf
+      #enabled_if_env: ENABLE_PDF_EXPORT
+      #
+      #debug_html: true
+      #show_anchors: true
+      #verbose: true
+  - bibtex:
+      bib_file: "Andrea Bib June 2024.bib"
+      csl_file: "acm.csl"
+      bib_by_default: False
+      full_bib_command: \nocite{*} 
+extra:
+  generator: true
+  social:
+    - icon: fontawesome/brands/linkedin 
+      link: https://www.linkedin.com
+    - icon: fontawesome/brands/github 
+      link: https://github.com
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - footnotes
+  - tables
