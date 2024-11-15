@@ -1,0 +1,842 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://andreavitaletti.github.io/IoT/session2/">
+      
+      
+        <link rel="prev" href="../session1/">
+      
+      
+        <link rel="next" href="../session3/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+    
+    
+      
+        <title>SESSION 2 - Andrea Vitaletti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lime" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#session-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andrea Vitaletti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SESSION 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    Andrea Vitaletti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        About me
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Blockchain
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Blockchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/" class="md-nav__link">
+        Blockchain
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          IoT
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          IoT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        GOAL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iot-lab/" class="md-nav__link">
+        IOT-LAB
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session1/" class="md-nav__link">
+        SESSION 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          SESSION 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        SESSION 2
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-reference-hardware-esp32-devkit" class="md-nav__link">
+    The reference hardware: ESP32-DevKit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lets-start-by-simulating-it" class="md-nav__link">
+    Let's start by simulating it
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-breadboard" class="md-nav__link">
+    Understanding the Breadboard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-scenario" class="md-nav__link">
+    A simple scenario
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt" class="md-nav__link">
+    MQTT
+  </a>
+  
+    <nav class="md-nav" aria-label="MQTT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-httpsioadafruitcom" class="md-nav__link">
+    Build a simple backend with https://io.adafruit.com/
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-thingsboard-httpsdemothingsboardiologin" class="md-nav__link">
+    Build a simple backend with thingsboard https://demo.thingsboard.io/login
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#it-is-time-to-work-with-a-real-device" class="md-nav__link">
+    It is time to Work with a real device
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session3/" class="md-nav__link">
+        SESSION 3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session4/" class="md-nav__link">
+        SESSION 4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement1/" class="md-nav__link">
+        Tensorflow Lite Micro on ESP32
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement2/" class="md-nav__link">
+        Kalman Filters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement3/" class="md-nav__link">
+        Interact with a Mobile Phone via BLE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../supplement4/" class="md-nav__link">
+        From [Wokwi](https://wokwi.com/) to a real device
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-reference-hardware-esp32-devkit" class="md-nav__link">
+    The reference hardware: ESP32-DevKit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lets-start-by-simulating-it" class="md-nav__link">
+    Let's start by simulating it
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-breadboard" class="md-nav__link">
+    Understanding the Breadboard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-scenario" class="md-nav__link">
+    A simple scenario
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt" class="md-nav__link">
+    MQTT
+  </a>
+  
+    <nav class="md-nav" aria-label="MQTT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-httpsioadafruitcom" class="md-nav__link">
+    Build a simple backend with https://io.adafruit.com/
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-thingsboard-httpsdemothingsboardiologin" class="md-nav__link">
+    Build a simple backend with thingsboard https://demo.thingsboard.io/login
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#it-is-time-to-work-with-a-real-device" class="md-nav__link">
+    It is time to Work with a real device
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="session-2">SESSION 2</h1>
+<p><strong>GOAL:</strong> Small experiment (a single sensor). Prove you can integrate sensors suitable for you monitoring purpose.  Focus on effectiveness, namely doing the right things, i.e., the Maker approach.</p>
+<h2 id="the-reference-hardware-esp32-devkit">The reference hardware: ESP32-DevKit</h2>
+<p><img alt="" src="../assets/images/esp32_dev_kit_pinout_v1_mischianti.jpg" /></p>
+<h2 id="lets-start-by-simulating-it">Let's start by simulating it</h2>
+<p><a href="https://docs.wokwi.com/">Wokwi</a> is an online Electronics simulator. You can use it to simulate Arduino, ESP32, STM32, and many other popular boards, parts and sensors.</p>
+<p>Open a new project and select ESP32 as the platform and the Arduino template. </p>
+<p>If you now open the diagram.json tab you have something like the following in the parts entry</p>
+<div class="highlight"><pre><span></span><code>&quot;parts&quot;: [ { &quot;type&quot;: &quot;board-esp32-devkit-c-v4&quot;, &quot;id&quot;: &quot;esp&quot;, ...} ],
+</code></pre></div>
+<p>This implies that the pinout is the one in the <a href="https://mischianti.org/esp32-devkitc-v4-high-resolution-pinout-and-specs/">devkit v4</a>. 
+To get the same pinout as the one in the picture above you need a V1 devkit, so you have to modify the entry as in the following</p>
+<div class="highlight"><pre><span></span><code>&quot;parts&quot;: [ { &quot;type&quot;: &quot;board-esp32-devkit-v1&quot;, &quot;id&quot;: &quot;esp&quot;, ...} ],
+</code></pre></div>
+<p>To make running the serial interface be sure that under connection you have th following settings</p>
+<div class="highlight"><pre><span></span><code>&quot;connections&quot;: [
+    [ &quot;esp:TX0&quot;, &quot;$serialMonitor:RX&quot;, &quot;&quot;, [] ],
+    [ &quot;esp:RX0&quot;, &quot;$serialMonitor:TX&quot;, &quot;&quot;, [] ],
+    .....
+</code></pre></div>
+<ul>
+<li>The simplest actuator, namely a <a href="https://wokwi.com/projects/367336864678247425">led</a></li>
+</ul>
+<h2 id="understanding-the-breadboard">Understanding the Breadboard</h2>
+<p><img alt="" src="../assets/images/breadboard.png" /></p>
+<ul>
+<li>The Simplest sensor, namely a <a href="https://wokwi.com/projects/367336996835545089">button</a></li>
+<li>A bit more interesting sensor, namely a <a href="https://wokwi.com/projects/367338868313181185">potentiometer</a></li>
+<li>A simple example with <a href="https://wokwi.com/projects/367320442567677953">SR04 Ultrasonic Sensor</a>. The width is measured by the function <a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/pulsein/">pulseIn()</a>.</li>
+</ul>
+<p><img alt="" src="../assets/images/2023-07-18-14-16-39.png" /></p>
+<ul>
+<li>A nice example with the <a href="https://randomnerdtutorials.com/esp32-mpu-6050-accelerometer-gyroscope-arduino/">MPU6050</a> accelerometer and gyroscope. <a href="https://www.ijnrd.org/papers/IJNRD2404282.pdf">Predictive Maintenance of Motors using Machine Learning</a>. <a href="https://doi.org/10.1109/ICOSICA4https://www.ijnrd.org/papers/IJNRD2404282.pdf9951.2020.9243180">Ensemble Learning for Predictive Maintenance on Wafer Stick Machine Using IoT Sensor Data</a></li>
+</ul>
+<h2 id="a-simple-scenario">A simple scenario</h2>
+<p>You want to transform a door into a <strong>smart door</strong>.</p>
+<ol>
+<li>A sensor will tell you when the door is open or closed &rarr; button</li>
+<li>A visual indicator will clearly show whether the door is open or closed &rarr; led</li>
+<li>Instead of a simple binary condition open/close you also want to know to what extent the door is open &rarr; potentiometer</li>
+</ol>
+<h2 id="mqtt"><a href="https://dev.to/hivemq_/series/18762">MQTT</a></h2>
+<p>Publish/Subscribe </p>
+<p><img alt="" src="../assets/images/2024-10-25-05-01-31.png" /></p>
+<p>TOPICS:</p>
+<ol>
+<li>myhome/groundfloor/livingroom/temperature</li>
+<li>myhome/groundfloor/bathroom/temperature</li>
+<li>myhome/groundfloor/bathroom/humidity</li>
+<li>myhome/firstfloor/bathroom/temperature</li>
+<li>myhome/groundfloor/+/temperature (1 and 2)</li>
+<li>myhome/groundfloor/# (1,2 and 3)</li>
+<li>
+<p>myhome/# (1,2,3 and 4)</p>
+</li>
+<li>
+<p>It's time to be connected by <a href="https://wokwi.com/projects/367405831605855233">MQTT</a>. The most convenient way is to use your mobile an Access Point and configure SSID and password consequently.</p>
+</li>
+</ol>
+<p>Note that the topics names are assigned to be consistent with the adafruit dashboard (see example below), but you are free to use any name you like.</p>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -h test.mosquitto.org -t &quot;avitaletti/feeds/threshold&quot; -m 2345
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mosquitto_sub -h test.mosquitto.org -t &quot;avitaletti/feeds/potentiometer&quot;
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>A multi platform easy to use alternative is https://mqtt-explorer.com/</li>
+<li>Another possible broker is mqtt://mqtt.eclipseprojects.io</li>
+</ul>
+</div>
+<h3 id="build-a-simple-backend-with-httpsioadafruitcom">Build a simple backend with <a href="https://io.adafruit.com/">https://io.adafruit.com/</a></h3>
+<ul>
+<li>Create an account on io.adafruit.com, in my case the username is avitaletti.</li>
+<li>Click on the yellow key to get yor credentials to publish data</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>#define IO_USERNAME  &quot;avitaletti&quot;
+#define IO_KEY       &quot;xxxxxxxxxxxxxxxxxxxx&quot;
+</code></pre></div>
+* Create two feeds named threshold and potentiometer with the corresponding topics avitaletti/feeds/threshold  and avitaletti/feeds/potentiometer</p>
+<p><img alt="" src="../assets/images/feeds.png" /></p>
+<p>The following code will publish the message 33 on the topic avitaletti/feeds/potentiometer and it is used by the IoT device to send the data acquired by the ADC</p>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/potentiometer -m 33
+</code></pre></div>
+<p>The node can subscribe to avitaletti/feeds/threshold  to get the commands from the backend</p>
+<div class="highlight"><pre><span></span><code>mosquitto_sub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/threshold
+</code></pre></div>
+<ul>
+<li>The dashboard link the components to the feeds and corresponding topics</li>
+</ul>
+<p><img alt="" src="../assets/images/dashboard.png" /></p>
+<p>In other words when the device publishes on the avitaletti/feeds/potentiometer topic a new entry is created in the line chart, while when you move the slider the corresponding value is published on avitaletti/feeds/threshold</p>
+<h3 id="build-a-simple-backend-with-thingsboard-httpsdemothingsboardiologin">Build a simple backend with thingsboard <a href="https://demo.thingsboard.io/login">https://demo.thingsboard.io/login</a></h3>
+<p><img alt="" src="../assets/images/2023-07-04-16-31-57.png" />
+<img alt="" src="../assets/images/2023-07-04-16-33-07.png" /></p>
+<p><a href="https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux">https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux</a></p>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -d -q 1 -h &quot;$THINGSBOARD_HOST_NAME&quot; -p &quot;1883&quot; -t &quot;v1/devices/me/telemetry&quot; -u &quot;$ACCESS_TOKEN&quot; -m {&quot;temperature&quot;:25}
+</code></pre></div>
+<p><strong>NOTE:</strong> for the sake of convenience, we will use WiFi connectivity, however it should be now clear WiFi is usually not appropriate for IoT applications due to the excessive energy demand. </p>
+<h2 id="it-is-time-to-work-with-a-real-device">It is time to Work with a real device</h2>
+<ul>
+<li>Download the code from Wokwi. It is also available on <a href="https://github.com/andreavitaletti/IoT_short_course/tree/main/src/simulator">https://github.com/andreavitaletti/IoT_short_course/tree/main/src/simulator</a></li>
+<li>The easiest way it to use the <a href="https://support.arduino.cc/hc/en-us/articles/360019833020-Download-and-install-Arduino-IDE">Arduino IDE</a> </li>
+<li>Since we are using the ESP32, you have to follow these <a href="https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/">intructions</a></li>
+<li>Select the DOIT ESP32 DEVKIT V1 as in the picture below and upload the code</li>
+</ul>
+<p><img alt="" src="../assets/images/2023-07-18-13-48-40.png" /></p>
+<ul>
+<li>The only novelty is the vibration sensor SW-420 ... but please have a look to the <a href="https://wokwi.com/projects/367320442567677953">SR04 Ultrasonic Sensor</a> and adapt it to make it working with the SW-420. </li>
+</ul>
+<p>This sketch could help</p>
+<div class="highlight"><pre><span></span><code>// Watch video here: https://www.youtube.com/watch?v=235BLk7vk00
+
+/* Vibration sensor connected to Arduino pins as follows:
+
+ ESP32 Arduino Vibration Sensor
+ https://wolles-elektronikkiste.de/esp32-mit-arduino-code-programmieren
+   D18 --&gt; GPIO18 --&gt; G18        DOut
+   GND                           GND
+   +5V --&gt; 3.3V                  VCC      
+*/
+
+int EP = 18;
+
+void setup(){
+  pinMode(EP, INPUT); //set EP input for measurment
+  Serial.begin(9600); //init serial 9600
+}
+void loop(){
+  long measurement =TP_init();
+  delay(50);
+  Serial.println(measurement);
+}
+
+long TP_init(){
+  delay(10);
+  long measurement=pulseIn (EP, HIGH);  //wait for the pin to get HIGH and returns measurement
+  return measurement;
+}
+</code></pre></div>
+<p>Through pulseIn() we can measure the duration of a vibration event exceeding the threshold, not the frequency of the vibrations themselves. Indeed, the Arduino pulseIn() function waits for a change in the binary input (Low to High in this instance) and returns the duration that the detected pulse was active (time for it to go back High to Low after going High).</p>
+<p>QUESTION: Can we use this function to help in anomaly detection? <a href="https://www.mdpi.com/1424-8220/22/16/6015">see here for inspiration!</a></p>
+<p><img alt="" src="../assets/images/com.gif" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/TZhMmbgq" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/andrea-vitaletti-3651442/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      
+    
+  </body>
+</html>

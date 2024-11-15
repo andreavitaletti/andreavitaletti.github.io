@@ -8,21 +8,27 @@
       
       
       
+        <link rel="canonical" href="https://andreavitaletti.github.io/IoT/supplement2/">
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+        <link rel="prev" href="../supplement1/">
+      
+      
+        <link rel="next" href="../supplement3/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
     
     
       
-        <title>Andrea Vitaletti</title>
+        <title>Kalman Filters - Andrea Vitaletti</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ecc896b0.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -38,7 +44,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,6 +68,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#kalman-filters" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -74,9 +85,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+    <a href="../.." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
       
-  <img src="/assets/images/logo.png" alt="logo">
+  <img src="../../assets/images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -92,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Kalman Filters
             
           </span>
         </div>
@@ -161,9 +172,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+    <a href="../.." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
       
-  <img src="/assets/images/logo.png" alt="logo">
+  <img src="../../assets/images/logo.png" alt="logo">
 
     </a>
     Andrea Vitaletti
@@ -179,7 +190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         About me
       </a>
     </li>
@@ -221,7 +232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/BC/" class="md-nav__link">
+      <a href="../../BC/" class="md-nav__link">
         Blockchain
       </a>
     </li>
@@ -241,14 +252,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -257,7 +270,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           IoT
@@ -270,7 +283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         GOAL
       </a>
     </li>
@@ -284,7 +297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/iot-lab/" class="md-nav__link">
+      <a href="../iot-lab/" class="md-nav__link">
         IOT-LAB
       </a>
     </li>
@@ -298,7 +311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/session1/" class="md-nav__link">
+      <a href="../session1/" class="md-nav__link">
         SESSION 1
       </a>
     </li>
@@ -312,7 +325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/session2/" class="md-nav__link">
+      <a href="../session2/" class="md-nav__link">
         SESSION 2
       </a>
     </li>
@@ -326,7 +339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/session3/" class="md-nav__link">
+      <a href="../session3/" class="md-nav__link">
         SESSION 3
       </a>
     </li>
@@ -340,7 +353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/session4/" class="md-nav__link">
+      <a href="../session4/" class="md-nav__link">
         SESSION 4
       </a>
     </li>
@@ -354,7 +367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/supplement1/" class="md-nav__link">
+      <a href="../supplement1/" class="md-nav__link">
         Tensorflow Lite Micro on ESP32
       </a>
     </li>
@@ -366,11 +379,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/IoT/supplement2/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Kalman Filters
       </a>
+      
     </li>
   
 
@@ -382,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/supplement3/" class="md-nav__link">
+      <a href="../supplement3/" class="md-nav__link">
         Interact with a Mobile Phone via BLE
       </a>
     </li>
@@ -396,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/IoT/supplement4/" class="md-nav__link">
+      <a href="../supplement4/" class="md-nav__link">
         From [Wokwi](https://wokwi.com/) to a real device
       </a>
     </li>
@@ -427,6 +450,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -438,8 +463,27 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="kalman-filters">Kalman Filters</h1>
+<p>A very nice, rich an exhaustive source of documentation for Kalman filters is available <a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python">here</a></p>
+<p>The main idea is that both our prior knowledge and the measurements of our sensors are to some extent inaccurate. To model such inaccuracy we use a Gaussian with mean $$\mu$$ and variance $$\rho$$</p>
+<p><img alt="" src="../assets/images/2023-08-22-09-46-59.png" /></p>
+<p>At each iteration we have our prior knowledge (in blue) and a new measurement (in orange) and we account for both source of information computing an average (in green)</p>
+<p><img alt="" src="../assets/images/2023-08-22-09-50-26.png" /></p>
+<blockquote>
+<p>The final mean gets shifted which is in between the two old means, the mean of the prior, and the mean of the measurement. It’s slightly further on the measurement side because the measurement was more certain as to where the vehicle is than prior. The more certain we are, the more we pull the mean on the direction of the certain answer. <a href="https://medium.com/analytics-vidhya/kalman-filters-a-step-by-step-implementation-guide-in-python-91e7e123b968">source</a></p>
+</blockquote>
+<p>Iteration after iteration the variance decreases (the spread of the blue gaussian), providing a better estimation (in green) despite the noisy measurements (in red) <a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python">source</a></p>
+<p><img alt="" src="../assets/images/evolution.gif" /></p>
+<p>A reference library is available <a href="https://github.com/denyssene/SimpleKalmanFilter">here</a></p>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -501,10 +545,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
     
   </body>
