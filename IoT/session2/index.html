@@ -568,6 +568,36 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/" class="md-nav__link">
+        links
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis/" class="md-nav__link">
+        thesis
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -723,13 +753,9 @@ To get the same pinout as the one in the picture above you need a V1 devkit, so 
 <li>myhome/firstfloor/bathroom/temperature</li>
 <li>myhome/groundfloor/+/temperature (1 and 2)</li>
 <li>myhome/groundfloor/# (1,2 and 3)</li>
-<li>
-<p>myhome/# (1,2,3 and 4)</p>
-</li>
-<li>
-<p>It's time to be connected by <a href="https://wokwi.com/projects/367405831605855233">MQTT</a>. The most convenient way is to use your mobile an Access Point and configure SSID and password consequently.</p>
-</li>
+<li>myhome/# (1,2,3 and 4)</li>
 </ol>
+<p>It's time to be connected by MQTT and <a href="https://wokwi.com/projects/367405831605855233">here</a> there is a reference example. The most convenient way is to use your mobile an Access Point and configure SSID and password consequently.</p>
 <p>Note that the topics names are assigned to be consistent with the adafruit dashboard (see example below), but you are free to use any name you like.</p>
 <div class="highlight"><pre><span></span><code>mosquitto_pub -h test.mosquitto.org -t &quot;avitaletti/feeds/threshold&quot; -m 2345
 </code></pre></div>
