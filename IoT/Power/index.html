@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://andreavitaletti.github.io/IoT/supplement3/">
+        <link rel="canonical" href="https://andreavitaletti.github.io/IoT/Power/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Interact with a Mobile Phone via BLE - Andrea Vitaletti</title>
+        <title>Power Consumption - Andrea Vitaletti</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#interact-with-a-mobile-phone-via-ble" class="md-skip">
+        <a href="#power-consumption" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Interact with a Mobile Phone via BLE
+              Power Consumption
             
           </span>
         </div>
@@ -766,327 +766,89 @@
 
 
 
-<h1 id="interact-with-a-mobile-phone-via-ble">Interact with a Mobile Phone via BLE</h1>
-<p>We aim at fast prototyping and <a href="https://thunkable.com/">Thunkable</a> is an excellent tool</p>
-<p><img alt="" src="../assets/images/2024-01-04-11-26-18.png" /></p>
-<p>The arduino code, adapted from https://www.instructables.com/ESP32-BLE-Android-App-Arduino-IDE-AWESOME/ is the following</p>
-<div class="highlight"><pre><span></span><code>/*
-    Video: https://www.youtube.com/watch?v=oCMOYS71NIU
-    Based on Neil Kolban example for IDF: https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/tests/BLE%20Tests/SampleNotify.cpp
-    Ported to Arduino ESP32 by Evandro Copercini
+<h1 id="power-consumption">Power Consumption</h1>
+<ul>
+<li>Connect board VIN (red wire) to Arduino 5V if you are running a 5V board Arduino (Mega, etc.). If your board is 3V, connect to that instead.</li>
+<li>Connect board GND (black wire) to Arduino GND</li>
+<li>Connect board SCL (white wire) to Arduino SCL</li>
+<li>Connect board SDA (blue wire) to Arduino SDA</li>
+<li>Connect Vin+ to the positive terminal of the power supply for the circuit under test</li>
+<li>Connect Vin- to the positive terminal or lead of the load</li>
+</ul>
+<p><img alt="" src="../assets/images/2024-11-28-11-17-03.png" /></p>
+<p><a href="https://learn.adafruit.com/adafruit-ina219-current-sensor-breakout/wiring" title="https://learn.adafruit.com/adafruit-ina219-current-sensor-breakout/wiring">source</a></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Wire.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_INA219.h&gt;</span>
 
-   Create a BLE server that, once we receive a connection, will send periodic notifications.
-   The service advertises itself as: 6E400001-B5A3-F393-E0A9-E50E24DCCA9E
-   Has a characteristic of: 6E400002-B5A3-F393-E0A9-E50E24DCCA9E - used for receiving data with &quot;WRITE&quot; 
-   Has a characteristic of: 6E400003-B5A3-F393-E0A9-E50E24DCCA9E - used to send data with  &quot;NOTIFY&quot;
+<span class="n">Adafruit_INA219</span><span class="w"> </span><span class="n">ina219</span><span class="p">;</span>
 
-   The design of creating the BLE server is:
-   1. Create a BLE Server
-   2. Create a BLE Service
-   3. Create a BLE Characteristic on the Service
-   4. Create a BLE Descriptor on the characteristic
-   5. Start the service.
-   6. Start advertising.
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// will pause Zero, Leonardo, etc until serial console opens</span>
+<span class="w">      </span><span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-   In this example rxValue is the data received (only accessible inside that function).
-   And txValue is the data to be sent, in this example just a byte incremented every second. 
-*/
-#include &lt;BLEDevice.h&gt;
-#include &lt;BLEServer.h&gt;
-#include &lt;BLEUtils.h&gt;
-#include &lt;BLE2902.h&gt;
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">currentFrequency</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
 
-// 78:21:84:9f:24:de
+<span class="w">  </span><span class="c1">// Initialize the INA219.</span>
+<span class="w">  </span><span class="c1">// By default the initialization will use the largest range (32V, 2A).  However</span>
+<span class="w">  </span><span class="c1">// you can call a setCalibration function to change this range (see comments).</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Failed to find INA219 chip&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// To use a slightly lower 32V, 1A range (higher precision on amps):</span>
+<span class="w">  </span><span class="c1">//ina219.setCalibration_32V_1A();</span>
+<span class="w">  </span><span class="c1">// Or to use a lower 16V, 400mA range (higher precision on volts and amps):</span>
+<span class="w">  </span><span class="c1">//ina219.setCalibration_16V_400mA();</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Measuring voltage and current with INA219 ...&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-BLECharacteristic *pCharacteristic;
-bool deviceConnected = false;
-float txValue = 0;
-const int readPin = 32; // Use GPIO number. See ESP32 board pinouts
-//const int LED = 9; // Could be different depending on the dev board. I used the DOIT ESP32 dev board.
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">current_mA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">loadvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">power_mW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-//std::string rxValue; // Could also make this a global var to access it in loop()
+<span class="w">  </span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getShuntVoltage_mV</span><span class="p">();</span>
+<span class="w">  </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getBusVoltage_V</span><span class="p">();</span>
+<span class="w">  </span><span class="n">current_mA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getCurrent_mA</span><span class="p">();</span>
+<span class="w">  </span><span class="n">power_mW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getPower_mW</span><span class="p">();</span>
+<span class="w">  </span><span class="n">loadvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
 
-// See the following for generating UUIDs:
-// https://www.uuidgenerator.net/
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">busvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">shuntvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">loadvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">current_mA</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">power_mW</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
 
-#define SERVICE_UUID           &quot;6E400001-B5A3-F393-E0A9-E50E24DCCA9E&quot; // UART service UUID
-#define CHARACTERISTIC_UUID_RX &quot;6E400002-B5A3-F393-E0A9-E50E24DCCA9E&quot; // Qui ricevi da EPS32
-#define CHARACTERISTIC_UUID_TX &quot;6E400003-B5A3-F393-E0A9-E50E24DCCA9E&quot; // Qui invii
-
-class MyServerCallbacks: public BLEServerCallbacks {
-    void onConnect(BLEServer* pServer) {
-      deviceConnected = true;
-    };
-
-    void onDisconnect(BLEServer* pServer) {
-      deviceConnected = false;
-    }
-};
-
-
-
-class MyCallbacks: public BLECharacteristicCallbacks {
-    void onWrite(BLECharacteristic *pCharacteristic) {
-      std::string rxValue = pCharacteristic-&gt;getValue();
-
-      char letto[] = &quot;          &quot;;
-
-      if (rxValue.length() &gt; 0) {
-        Serial.println(&quot;*********&quot;);
-        Serial.print(&quot;Received Value: &quot;);
-
-        for (int i = 0; i &lt; rxValue.length(); i++) {
-          Serial.print(rxValue[i]);
-          letto[i]=rxValue[i];
-        }
-
-        Serial.println();
-
-        String a = String(letto);
-
-        Serial.print(a.toFloat());
-
-        // Do stuff based on the command received from the app
-        if (rxValue.find(&quot;A&quot;) != -1) { 
-          Serial.print(&quot;Turning ON!&quot;);
-          digitalWrite(LED, HIGH);
-        }
-        else if (rxValue.find(&quot;B&quot;) != -1) {
-          Serial.print(&quot;Turning OFF!&quot;);
-          digitalWrite(LED, LOW);
-        }
-
-        Serial.println();
-        Serial.println(&quot;*********&quot;);
-      }
-    }
-};
-
-void setup() {
-  Serial.begin(115200);
-
-  pinMode(LED, OUTPUT);
-
-  // Create the BLE Device
-  BLEDevice::init(&quot;ESP32 UART Test&quot;); // Give it a name
-
-  Serial.print(&quot;local BLE Address is: &quot;);
-  Serial.println(BLEDevice::getAddress().toString().c_str());
-
-  // Create the BLE Server
-  BLEServer *pServer = BLEDevice::createServer();
-  pServer-&gt;setCallbacks(new MyServerCallbacks());
-
-  // Create the BLE Service
-  BLEService *pService = pServer-&gt;createService(SERVICE_UUID);
-
-
-  // BleCharacteristic deviceHealthCharacteristic(&quot;deviceHealth&quot;, BleCharacteristicProperty::READ, deviceHealthUuid, serviceUuid);
-  // see https://community.thunkable.com/t/ble-hrm-reading-bpm/2441754/6
-
-
-  // Create a BLE Characteristic
-  pCharacteristic = pService-&gt;createCharacteristic(
-                      CHARACTERISTIC_UUID_TX,
-                      //BLECharacteristic::PROPERTY_NOTIFY
-                      BLECharacteristic::PROPERTY_READ
-                    );
-
-  pCharacteristic-&gt;addDescriptor(new BLE2902());
-
-  BLECharacteristic *pCharacteristic = pService-&gt;createCharacteristic(
-                                         CHARACTERISTIC_UUID_RX,
-                                         BLECharacteristic::PROPERTY_WRITE
-                                       );
-
-  pCharacteristic-&gt;setCallbacks(new MyCallbacks());
-
-  // Start the service
-  pService-&gt;start();
-
-  // Start advertising
-  pServer-&gt;getAdvertising()-&gt;start();
-  Serial.println(&quot;Waiting a client connection to notify...&quot;);
-}
-
-void loop() {
-
-  if (deviceConnected) {
-    // Fabricate some arbitrary junk for now...
-    txValue = analogRead(readPin) / 3.456; // This could be an actual sensor reading!
-
-    // Let&#39;s convert the value to a char array:
-    char txString[8]; // make sure this is big enuffz
-    dtostrf(txValue, 1, 2, txString); // float_val, min_width, digits_after_decimal, char_buffer
-
-//    pCharacteristic-&gt;setValue(&amp;txValue, 1); // To send the integer value
-    pCharacteristic-&gt;setValue(&quot;Hello!&quot;); // Sending a test message
-    //pCharacteristic-&gt;setValue(txString);
-
-    pCharacteristic-&gt;notify(); // Send the value to the app!
-    Serial.print(&quot;*** Sent Value: &quot;);
-    Serial.print(txString);
-    Serial.println(&quot; ***&quot;);
-
-    // You can add the rxValue checks down here instead
-    // if you set &quot;rxValue&quot; as a global var at the top!
-    // Note you will have to delete &quot;std::string&quot; declaration
-    // of &quot;rxValue&quot; in the callback function.
-//    if (rxValue.find(&quot;A&quot;) != -1) { 
-//      Serial.println(&quot;Turning ON!&quot;);
-//      digitalWrite(LED, HIGH);
-//    }
-//    else if (rxValue.find(&quot;B&quot;) != -1) {
-//      Serial.println(&quot;Turning OFF!&quot;);
-//      digitalWrite(LED, LOW);
-//    }
-  }
-
-  delay(1000);
-}
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>// Adapted from https://github.com/SIMS-IOT-Devices/FreeRTOS-ESP-IDF-BLE-Server
-
-#include &lt;stdio.h&gt;
-#include &quot;freertos/FreeRTOS.h&quot;
-#include &quot;freertos/task.h&quot;
-#include &quot;freertos/event_groups.h&quot;
-#include &quot;esp_event.h&quot;
-#include &quot;nvs_flash.h&quot;
-#include &quot;esp_log.h&quot;
-#include &quot;esp_nimble_hci.h&quot;
-#include &quot;nimble/nimble_port.h&quot;
-#include &quot;nimble/nimble_port_freertos.h&quot;
-#include &quot;host/ble_hs.h&quot;
-#include &quot;services/gap/ble_svc_gap.h&quot;
-#include &quot;services/gatt/ble_svc_gatt.h&quot;
-#include &quot;sdkconfig.h&quot;
-
-char *TAG = &quot;BLE-Server&quot;;
-uint8_t ble_addr_type;
-void ble_app_advertise(void);
-
-//@_____________________Define UUIDs______________________________________
-//!! b2bbc642-46da-11ed-b878-0242ac120002
-//static const ble_uuid128_t gatt_svr_svc_uuid =
-//    BLE_UUID128_INIT(0x02, 0x00, 0x12, 0xac, 0x42, 0x02, 0x78, 0xb8, 0xed, 0x11, 0xda, 0x46, 0x42, 0xc6, 0xbb, 0xb2);
-
-static const ble_uuid128_t gatt_svr_svc_uuid =
-    BLE_UUID128_INIT(0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x01, 0x00, 0x40, 0x6e);
+<p>The following picture shows the variation in current consumption when the internal led of a nodMCU Blinks </p>
+<p><img alt="" src="../assets/images/duty.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// initialize digital pin LED_BUILTIN as an output.</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
 
 
-//!! c9af9c76-46de-11ed-b878-0242ac120002
-//static const ble_uuid128_t gatt_svr_chr_uuid =
-//    BLE_UUID128_INIT(0x02, 0x00, 0x12, 0xac, 0x42, 0x02, 0x78, 0xb8, 0xed, 0x11, 0xde, 0x46, 0x76, 0x9c, 0xaf, 0xc9);
-
-// 6E400002-B5A3-F393-E0A9-E50E24DCCA9E    
-
-static const ble_uuid128_t gatt_svr_chr_read_uuid =
-    BLE_UUID128_INIT(0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x02, 0x00, 0x40, 0x6e);
-static const ble_uuid128_t gatt_svr_chr_write_uuid =
-    BLE_UUID128_INIT(0x9e, 0xca, 0xdc, 0x24, 0x0e, 0xe5, 0xa9, 0xe0, 0x93, 0xf3, 0xa3, 0xb5, 0x03, 0x00, 0x40, 0x6e);
-
-
-// Write data to ESP32 defined as server
-static int device_write(uint16_t conn_handle, uint16_t attr_handle, struct ble_gatt_access_ctxt *ctxt, void *arg)
-{
-    printf(&quot;Data from the client: %.*s\n&quot;, ctxt-&gt;om-&gt;om_len, ctxt-&gt;om-&gt;om_data);
-    return 0;
-}
-
-// Read data from ESP32 defined as server
-static int device_read(uint16_t con_handle, uint16_t attr_handle, struct ble_gatt_access_ctxt *ctxt, void *arg)
-{
-    os_mbuf_append(ctxt-&gt;om, &quot;Data from the server&quot;, strlen(&quot;Data from the server&quot;));
-    return 0;
-}
-
-static const struct ble_gatt_svc_def gatt_svcs[] = {
-    {.type = BLE_GATT_SVC_TYPE_PRIMARY,
-     .uuid = &amp;gatt_svr_svc_uuid.u,                      // Define UUID for device type
-     .characteristics = (struct ble_gatt_chr_def[]){
-         {.uuid = &amp;gatt_svr_chr_write_uuid.u,           // Define UUID for reading
-          .flags = BLE_GATT_CHR_F_READ,
-          .access_cb = device_read},
-         {.uuid = &amp;gatt_svr_chr_read_uuid.u,           // Define UUID for writing
-          .flags = BLE_GATT_CHR_F_WRITE,
-          .access_cb = device_write},
-         {0}}},
-    {0}};
-
-
-
-// BLE event handling
-static int ble_gap_event(struct ble_gap_event *event, void *arg)
-{
-    switch (event-&gt;type)
-    {
-    // Advertise if connected
-    case BLE_GAP_EVENT_CONNECT:
-        ESP_LOGI(&quot;GAP&quot;, &quot;BLE GAP EVENT CONNECT %s&quot;, event-&gt;connect.status == 0 ? &quot;OK!&quot; : &quot;FAILED!&quot;);
-        if (event-&gt;connect.status != 0)
-        {
-            ble_app_advertise();
-        }
-        break;
-    // Advertise again after completion of the event
-    case BLE_GAP_EVENT_ADV_COMPLETE:
-        ESP_LOGI(&quot;GAP&quot;, &quot;BLE GAP EVENT&quot;);
-        ble_app_advertise();
-        break;
-    default:
-        break;
-    }
-    return 0;
-}
-
-// Define the BLE connection
-void ble_app_advertise(void)
-{
-    // GAP - device name definition
-    struct ble_hs_adv_fields fields;
-    const char *device_name;
-    memset(&amp;fields, 0, sizeof(fields));
-    device_name = ble_svc_gap_device_name(); // Read the BLE device name
-    fields.name = (uint8_t *)device_name;
-    fields.name_len = strlen(device_name);
-    fields.name_is_complete = 1;
-    ble_gap_adv_set_fields(&amp;fields);
-
-    // GAP - device connectivity definition
-    struct ble_gap_adv_params adv_params;
-    memset(&amp;adv_params, 0, sizeof(adv_params));
-    adv_params.conn_mode = BLE_GAP_CONN_MODE_UND; // connectable or non-connectable
-    adv_params.disc_mode = BLE_GAP_DISC_MODE_GEN; // discoverable or non-discoverable
-    ble_gap_adv_start(ble_addr_type, NULL, BLE_HS_FOREVER, &amp;adv_params, ble_gap_event, NULL);
-}
-
-// The application
-void ble_app_on_sync(void)
-{
-    ble_hs_id_infer_auto(0, &amp;ble_addr_type); // Determines the best address type automatically
-    ble_app_advertise();                     // Define the BLE connection
-}
-
-// The infinite task
-void host_task(void *param)
-{
-    nimble_port_run(); // This function will return only when nimble_port_stop() is executed
-}
-
-void app_main()
-{
-    nvs_flash_init();                          // 1 - Initialize NVS flash using
-    //esp_nimble_hci_and_controller_init();      // 2 - Initialize ESP controller
-    nimble_port_init();                        // 3 - Initialize the host stack
-    ble_svc_gap_device_name_set(&quot;BLE-Server&quot;); // 4 - Initialize NimBLE configuration - server name
-    ble_svc_gap_init();                        // 4 - Initialize NimBLE configuration - gap service
-    ble_svc_gatt_init();                       // 4 - Initialize NimBLE configuration - gatt service
-    ble_gatts_count_cfg(gatt_svcs);            // 4 - Initialize NimBLE configuration - config gatt services
-    ble_gatts_add_svcs(gatt_svcs);             // 4 - Initialize NimBLE configuration - queues gatt services.
-    ble_hs_cfg.sync_cb = ble_app_on_sync;      // 5 - Initialize application
-    nimble_port_freertos_init(host_task);      // 6 - Run the thread
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w">  </span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w">                      </span>
+<span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w">  </span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w">                      </span>
+<span class="p">}</span>
 </code></pre></div>
 
 
