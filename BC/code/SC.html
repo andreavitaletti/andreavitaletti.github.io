@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minimal Web3 Frontend</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+  <h1>Minimal Web3 Frontend</h1>
+
+  <button id="connect">Connect Wallet</button>
+  <button id="read">Retrieve Value</button>
+  <input type="number" id="inputValue" placeholder="Enter number">
+  <button id="write">Store Value</button>
+
+  <p id="status"></p>
+
+  <script>
+    let web3;
+    let contract;
+
+    const contractAddress = '0x4b0dAc5616574beE18cb60e78F59B97b08520a9c'; // Replace
+    const contractABI = [
+      {
+        "inputs": [],
+        "name": "retrieve",
+        "outputs": [
+          { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          { "internalType": "uint256", "name": "num", "type": "uint256" }
+        ],
+        "name": "store",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      }
+    ];
+
+    // Connect to MetaMask
+    document.getElementById("connect").onclick = async () => {
+      if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        contract = new web3.eth.Contract(contractABI, contractAddress);
+        document.getElementById("status").innerText = "Wallet connected!";
+      } else {
+        alert("Please install MetaMask!");
+      }
+    };
+
+    // Call retrieve()
+    document.getElementById("read").onclick = async () => {
+      if (!contract) return alert("Connect wallet first!");
+      try {
+        const value = await contract.methods.retrieve().call();
+        document.getElementById("status").innerText = `Stored Value: ${value}`;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = "Error retrieving value";
+      }
+    };
+
+    // Call store(uint256)
+    document.getElementById("write").onclick = async () => {
+      if (!contract) return alert("Connect wallet first!");
+      try {
+        const accounts = await web3.eth.getAccounts();
+        const num = document.getElementById("inputValue").value;
+        await contract.methods.store(num).send({
+          from: accounts[0],
+          value: web3.utils.toWei('0.00000000000000001', 'ether'), // if the function requires ETH
+          gasPrice: await web3.eth.getGasPrice()
+        });
+        document.getElementById("status").innerText = `Value ${num} stored successfully!`;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = "Error storing value";
+      }
+    };
+  </script>
+</body>
+</html>

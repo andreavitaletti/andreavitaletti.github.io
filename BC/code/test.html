@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minimal Web3 Frontend</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+  <h1>Minimal Web3 Frontend</h1>
+
+  <button id="connect">Connect Wallet</button>
+  <button id="write">Get Balance</button>
+
+  <p id="status"></p>
+
+  <script>
+    let web3;
+    const address = '0x2eA5eb1851959FdE85c51072ff505E37C0Bc7a28'; // Replace with target address
+
+    // Connect to MetaMask
+    document.getElementById("connect").onclick = async () => {
+      if (window.ethereum) {
+        try {
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+          web3 = new Web3(window.ethereum);
+          document.getElementById("status").innerText = "Wallet connected";
+        } catch (err) {
+          console.error(err);
+          document.getElementById("status").innerText = "Wallet connection failed";
+        }
+      } else {
+        alert("Please install MetaMask!");
+      }
+    };
+
+    // Get balance
+    document.getElementById("write").onclick = async () => {
+      if (!web3) {
+        document.getElementById("status").innerText = "Connect wallet first!";
+        return;
+      }
+
+      try {
+        const balanceWei = await web3.eth.getBalance(address);
+        const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
+        document.getElementById("status").innerText = `Balance: ${balanceEth} ETH`;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = "Error fetching balance";
+      }
+    };
+  </script>
+</body>
+</html>
+
+</html>
