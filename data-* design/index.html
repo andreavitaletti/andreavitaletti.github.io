@@ -1,0 +1,993 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://andreavitaletti.github.io/data-%2A%20design/">
+      
+      
+        <link rel="prev" href="../Startup/">
+      
+      
+        <link rel="next" href="../links/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>data-* - Andrea Vitaletti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lime" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-driven-vs-data-informed-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andrea Vitaletti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              data-*
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    Andrea Vitaletti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blockchain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BC/slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Startup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Startup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Startup/Learn%20from%20the%20master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn from the Master(s)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://andreavitaletti.github.io/IoT_short_course/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    data-*
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    data-*
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-the-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining the Approaches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-evolution-of-a-running-shoe-from-intuition-to-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Evolution of a Running Shoe: From Intuition to Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Evolution of a Running Shoe: From Intuition to Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-the-intuitive-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1: The Intuitive Baseline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2-data-driven-impact-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2: Data-Driven Impact Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-3-data-informed-efficiency-optimization-the-super-shoe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3: Data-Informed Efficiency Optimization (The "Super Shoe")
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approach-and-proxies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach and proxies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Approach and proxies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-of-direct-vs-proxy-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison of Direct vs. Proxy Measurement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    thesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-the-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining the Approaches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-evolution-of-a-running-shoe-from-intuition-to-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Evolution of a Running Shoe: From Intuition to Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Evolution of a Running Shoe: From Intuition to Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-the-intuitive-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1: The Intuitive Baseline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2-data-driven-impact-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2: Data-Driven Impact Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-3-data-informed-efficiency-optimization-the-super-shoe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3: Data-Informed Efficiency Optimization (The "Super Shoe")
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approach-and-proxies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach and proxies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Approach and proxies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-of-direct-vs-proxy-measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison of Direct vs. Proxy Measurement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="data-driven-vs-data-informed-design">Data-Driven vs. Data-Informed Design</h1>
+<p>Data is nowadays the universal currency. This is true also for design, however, how designers choose to spend that currency defines the final product. The terms <strong>data-driven</strong> and <strong>data-informed</strong> are often used interchangeably, but they represent fundamentally different philosophical approaches to innovation.</p>
+<p>This distinction determines whether data is the <em>master</em> of the design process, or a highly valued <em>consultant</em>.</p>
+<h3 id="defining-the-approaches">Defining the Approaches</h3>
+<ul>
+<li><strong>Data-Driven Design:</strong> The data <strong>dictates</strong> the decision. This is an objective, often algorithmic approach where specific, high-confidence data points automate or directly generate the design outcome. (e.g., "If $X$ increases by $10\%$, then design must change by $Y\%$.")</li>
+<li><strong>Data-Informed Design:</strong> Data is an <strong>input</strong>, not the answer. This is a holistic approach that interprets data alongside other critical, often subjective factors: human intuition, empathy, context, user feedback, and brand identity. Data <em>informs</em> the designer's judgment, but the final decision rests on human understanding.</li>
+</ul>
+<h3 id="the-evolution-of-a-running-shoe-from-intuition-to-algorithm">The Evolution of a Running Shoe: From Intuition to Algorithm</h3>
+<p>To illustrate these concepts, we can simulate the evolution of a professional marathon running shoe. A shoe is a good candidate for this comparison because its function is strictly measurable by performance data (seconds, energy cost), yet its adoption depends entirely on subjective experience (comfort, perception).</p>
+<p>This journey, visualized below, moves from a simple starting point (intuition), through an impactful (but blunt) use of data, to the highly sophisticated engineering loop that drives a "Super Shoe."</p>
+<p><img alt="" src="../assets/images/data-driven-shoes.png" /></p>
+<h4 id="stage-1-the-intuitive-baseline">Stage 1: The Intuitive Baseline</h4>
+<p>We begin with a traditional shoe: <strong>"Generation 1: The Baseline (Intuition Model)."</strong></p>
+<p>Here, data is almost entirely absent. The design is based on <strong>intuition</strong> and basic, static data, such as average foot size (anthropometrics). This model represents the "way we've always done it."</p>
+<p><strong>The Consequence:</strong> While simple and functional, this shoe fails to address dynamic forces. A force plate study of a runner in this shoe would show high, unmanaged peaks of impact force at the heel (the red spike in an imaginary graph). It is intuitive for basic walking, but not mathematically optimized for running 26.2 miles.</p>
+<hr />
+<h4 id="stage-2-data-driven-impact-management">Stage 2: Data-Driven Impact Management</h4>
+<p>In <strong>"Generation 2: Impact-Driven,"</strong> the design moves to a true data-driven loop.</p>
+<p><strong>The Data Input:</strong> The design team acquires dynamic <strong>Force Plate data</strong> from thousands of runners. This objective data reveals the precise magnitude and location of impact during a full marathon gait cycle.</p>
+<p><strong>The Data-Driven Choice:</strong> The data mandates a change. The designers do not sketch a wedge; an algorithm calculates the exact required volume and taper of <strong>EVA foam midsole</strong> needed to attenuate that specific force and prevent it from "bottoming out" against the asphalt.</p>
+<p><strong>The Clear Outcome:</strong> This objective change yields an objective metric: a measured <strong>20% reduction in knee strain.</strong></p>
+<hr />
+<h4 id="stage-3-data-informed-efficiency-optimization-the-super-shoe">Stage 3: Data-Informed Efficiency Optimization (The "Super Shoe")</h4>
+<p>This final stage, <strong>"Generation 3: The Super Shoe,"</strong> is where the concepts of data-driven and data-informed truly diverge.</p>
+<p>This shoe must optimize <em>running economy</em> (the metabolic cost of moving), which is a complex function of mechanical advantage (data-driven) and subjective comfort (data-informed).</p>
+<table>
+<thead>
+<tr>
+<th><strong>Design Element</strong></th>
+<th><strong>A Purely DATA-DRIVEN Approach</strong></th>
+<th><strong>A DATA-INFORMED Approach</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Midsole Plate Curve</strong></td>
+<td>The optimal curved shape of the carbon fiber plate is generated via 3D <strong>Finite Element Analysis (FEA)</strong>, simulating maximum energy return at $40\text{mm}$ of midsole thickness.</td>
+<td>The plate <em>is</em> included, but its aggressive curvature is modified. Professional athletes test the $40\text{mm}$ version and report feeling "wobbly" or unstable. The designer chooses to use the high-efficiency foam but reduces the midsole height to $38\text{mm}$ to increase <strong>perceived security</strong> and decrease ankle roll risk, accepting a negligible loss in theoretical energy return for a major gain in practical confidence.</td>
+</tr>
+<tr>
+<td><strong>Lacing System</strong></td>
+<td>The system is generated by an algorithmic pattern that evenly distributes tensile stress based on pressure maps (objective pressure).</td>
+<td>A designer reviews the data but overlays subjective feedback. The algorithm's pattern requires $14$ lace eyelets, which runners find tedious to use and "too fussy" for a high-stress race environment. The system is redesigned to use only $6$ ergonomic eyelets that "feel" more intuitive and secure.</td>
+</tr>
+</tbody>
+</table>
+<p>The "Super Shoe" of Generation 3 is only possible because both disciplines are applied. The carbon plate and Pebax foam are <strong>data-driven</strong> interventions based on VO2 sensors and energy transfer calculations. But their final shape, placement, and ergonomic integration, the elements that make a shoe feel fast, are <strong>data-informed</strong> decisions made by a designer who trusts the numbers, but prioritizes the athlete.</p>
+<h3 id="approach-and-proxies">Approach and proxies</h3>
+<p>In principle, the data-informed approach permeates every phase of Design Thinking, providing the empirical scaffolding for creative decisions. However, a significant challenge arises: the most critical design 'pinpoints', particularly those involving qualitative human experience, often elude direct sensing.</p>
+<p>When sensors cannot capture the nuance of a 'feeling,' the designer’s role shifts. It becomes a fundamental task of the designer to bridge this gap by <strong>designing a proxy</strong>: a method of translating inherently qualitative, subjective experiences into measurable, actionable data points. In this context, the designer doesn't just use data; they design the instruments that bring the 'unmeasurable' into the light.</p>
+<p>In the evolution of our <strong>Generation 3 Super Shoe</strong>, a major qualitative hurdle is <strong>Stability</strong>.</p>
+<p><strong>The Qualitative Problem:</strong> Runners report that while the new carbon-plate shoes are fast, they feel "nervous" or "unstable" during sharp turns or on uneven pavement. There is no "Confidence Sensor" to plug into a runner's brain to measure this anxiety.</p>
+<p><strong>The Data-Driven Failure:</strong> A standard sensor might measure <strong>Ankle Pronation Angle</strong>. The data shows the ankle is only moving $2^\circ$ more than usual—statistically negligible. A data-driven approach might ignore the runners' complaints because the "numbers look fine."</p>
+<p><strong>The Designer’s Proxy (The Solution):</strong></p>
+<p>The designer needs a proxy for "Confidence." They decide to measure <strong>"Step Frequency Variability during Directional Change."</strong></p>
+<ol>
+<li><strong>The Logic:</strong> When a human feels stable and confident, their gait is rhythmic and consistent. When they feel "nervous" about their footing, their brain makes micro-adjustments, causing tiny, irregular fluctuations in the timing between steps (cadence jitter).</li>
+<li><strong>The Measurement:</strong> By using high-frequency accelerometers, the designer measures the <strong>Standard Deviation of Step Time ($ms$)</strong> during a $90^\circ$ turn.</li>
+<li><strong>The Result:</strong> The proxy works. The data shows that in Shoe A, the cadence is erratic during turns, while in Shoe B, it remains steady.</li>
+</ol>
+<p>By designing this proxy, the designer has turned a "vague feeling of nervousness" into a hard numerical value that can be used to iterate the design of the shoe's outsole flare or traction pattern.</p>
+<h4 id="comparison-of-direct-vs-proxy-measurement">Comparison of Direct vs. Proxy Measurement</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Qualitative Goal</strong></th>
+<th><strong>Direct Sensor (Impossible)</strong></th>
+<th><strong>Designer’s Proxy (The "Hack")</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>User Comfort</strong></td>
+<td>"Pleasure" probe in the brain.</td>
+<td><strong>Micro-shift Frequency:</strong> Measuring how often a user shifts their weight or adjusts the shoe laces over a $2$-hour period.</td>
+</tr>
+<tr>
+<td><strong>Product Premiumness</strong></td>
+<td>"Luxury" meter.</td>
+<td><strong>Decibel/Frequency Analysis:</strong> The specific "thud" or "click" sound the shoe makes on pavement (Lower frequencies are often perceived as "sturdier" and more premium).</td>
+</tr>
+<tr>
+<td><strong>Mental Fatigue</strong></td>
+<td>Direct neuron monitoring.</td>
+<td><strong>Pupil Dilation / Eye-Track Jitter:</strong> Measuring how much visual focus is required to maintain balance on a treadmill.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">How I wrote this document</p>
+<p>I sketch the concept roughly, <a href="https://gemini.google.com/">Gemini</a> (in this case) provides a cleaner version, I review the version and iterate up to a point where I'm satisfied. It is a fair example of a <strong>collaborative, data-informed feedback loop</strong> ;-)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/andrea-vitaletti-3651442/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
