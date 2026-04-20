@@ -30,8 +30,26 @@ nav:
     - About me: index.md
     - Blockchain: BC
     - Startup: Startup
+    - IoT:
+        - Home: Iot_new/index.md
+        - Premise: Iot_new/premise.md
+        - Intro: Iot_new/intro.md
+        - Simulate a node: Iot_new/simulation.md
+        - A real node: Iot_new/real.md
+        - OS is better: Iot_new/os.md
+        - Sampling: Iot_new/sample.md
+        - Filters: Iot_new/filters.md
+        - Wireless: Iot_new/wireless.md
+        - Energy: Iot_new/energy.md
+        - Digital Twin: Iot_new/twin.md
+        - Security: Iot_new/security.md
+        - Iot and Web3: Iot_new/web3.md
+        - ML: Iot_new/ml.md
+        - Backnnd: Iot_new/backend.md
+        - Edge: Iot_new/edge.md
+        - Crowdsourcing: Iot_new/crowdsourcing.md
+        - Scale on Sim: Iot_new/scale.md
     - IoT_old: https://andreavitaletti.github.io/IoT_short_course/
-    - IoT: Iot_new
     - data-*: 'data-* design.md'
     - links: links.md
     - thesis: thesis.md
