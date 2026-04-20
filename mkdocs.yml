@@ -1,0 +1,43 @@
+site_name: Andrea Vitaletti
+site_url: https://andreavitaletti.github.io/
+
+theme:
+  name: 'material'
+  logo: assets/images/logo.png
+  icon:
+    repo: fontawesome/brands/git-alt
+  palette:
+    primary: lime
+  features:
+    - content.tooltips
+
+markdown_extensions:
+  - pymdownx.critic
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - include_dir_to_nav:
+      sort_file: true
+
+nav:
+    - About me: index.md
+    - Blockchain: BC
+    - Startup: Startup
+    - IoT: https://andreavitaletti.github.io/IoT_short_course/
+    - data-*: 'data-* design.md'
+    - links: links.md
+    - thesis: thesis.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin 
+      link: https://www.linkedin.com/in/andrea-vitaletti-3651442/
+
+copyright: Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
