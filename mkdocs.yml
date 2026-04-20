@@ -30,10 +30,12 @@ nav:
     - About me: index.md
     - Blockchain: BC
     - Startup: Startup
-    - IoT: https://andreavitaletti.github.io/IoT_short_course/
+    - IoT_old: https://andreavitaletti.github.io/IoT_short_course/
+    - IoT: Iot_new
     - data-*: 'data-* design.md'
     - links: links.md
     - thesis: thesis.md
+    - Grains of Insight: grain.md
 
 extra:
   social:
