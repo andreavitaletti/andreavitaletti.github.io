@@ -77,9 +77,9 @@ In 2025 Instructor for the 38 Escuela de Ciencias Informáticas [ECI 2025](https
 
 I have acquired a significant experience on research projects, gained in more than 15 years of participation to academic and industrial projects characterized in many cases by a marked multidisciplinarity approach. Over the time I assumed various roles, with different responsibilities, as researcher, principal investigator (PI) and finally coordinator.
 
-**On going projects**
+### On going projects
 
-* [Grains of Insight: A Data Science Perspective on Rice in Gastronomy](grain) This project, funded by [MAECI](https://www.esteri.it/en/),  explores the
+* [Grains of Insight: A Data Science Perspective on Rice in Gastronomy](grain.md) This project, funded by [MAECI](https://www.esteri.it/en/),  explores the
 role of rice through a data science lens, with a particular focus on two gastronomically rich contexts: Korea and Italy
 
 * Made in Italy Circolare e Sostenibile ([MICS](https://www.mics.tech/en/home/)) National Plan for Recovery and Resilience NextGenerationEU ([PNRR](https://www.agenziacoesione.gov.it/dossier_tematici/nextgenerationeu-e-pnrr/)) program, [SPOKE 8](https://www.mics.tech/en/spokes/spoke-8/) Digitally-oriented factory design and management through AI and data driven approaches,  [Project 8.06](https://www.mics.tech/en/projects/8-06-blockchain-based-solutions-for-trusted-and-quality-aware-data-sharing/) Blockchain-based solutions for trusted and quality-aware data sharing
@@ -88,7 +88,7 @@ role of rice through a data science lens, with a particular focus on two gastron
 
 * ERASMUS-EDU-2022-CBHE project titled “Smart City ASEAN Learning Network (SCALe)” with project number: [101083278](https://erasmus-plus.ec.europa.eu/projects/search/details/101083278) 
 
-**Past Projects**
+### Past Projects
 
 * MISE (Ministry of Economic Development) Project. [Copyright management on 5G network over Blockchain](https://www.mise.gov.it/images/stories/documenti/Sintesi-proposte-progettuali-vincitrici-TE20.pdf). The project is managed by [SIAE](https://www.siae.it/en), the Italian Collective Management Organization. I lead the activity of WP2 focused on the open research issues to implement a copyright management on blockchain
 
@@ -116,7 +116,7 @@ role of rice through a data science lens, with a particular focus on two gastron
 
 * EASME [ARCHEOSUb](http://www.archeosub.eu/index.php/en/) (I) . The ARCHEOSUb (Autonomous underwater Robotic and sensing systems for Cultural Heritage discovery Conservation and in situ valorization) project aims at developing products and services to support the discovery, monitoring and protection of Underwater Cultural Heritage (UCH) sites.
 
-**Other earlier project activities**
+### Other earlier project activities
 
 * I was the technical manager of the DIAG group in Rome “La Sapienza” for the project VICOM (Virtual Immersive COMmunications - http://www.vicom-project.it/). The project has developed the infrastructure for the provisioning of augmented realty mobile services. In particular, the group of Rome has developed the framework for the location of mobile users through heterogeneous technologies (GPS, CellID, WiFi, Sensor Networks …)
 
@@ -132,7 +132,7 @@ role of rice through a data science lens, with a particular focus on two gastron
 
 * In the EU SOFIA project (Artemisia - https://www.artemisia-association.org/sofia), I was task leader for TASK3.3 in WP3. The SOFIA project has created a platform for interoperability between embedded systems in smart environments.                                                                                                                                                                             |
   
-  ## Research
+## Research
 
 The following figure shows the [Wordcloud](https://www.wordclouds.com/) of the abstracts of my papers downloaded from [Scopus](https://www.scopus.com/authid/detail.uri?authorId=6506463530) and I think well capture the evolution of my research interests.
 
@@ -154,7 +154,7 @@ From 2008 to 2017 I was member of the PhD board  in Computer Engineering @ Sapie
 
 Since 2018 I am member of the PhD board  in Data Science @ Sapienza
 
-### Recent activities include
+**Recent activities include**
 
 **2024**
 
