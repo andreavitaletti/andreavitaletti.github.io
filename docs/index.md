@@ -79,6 +79,9 @@ I have acquired a significant experience on research projects, gained in more th
 
 **On going projects**
 
+* [Grains of Insight: A Data Science Perspective on Rice in Gastronomy](grain) This project, funded by [MAECI](https://www.esteri.it/en/),  explores the
+role of rice through a data science lens, with a particular focus on two gastronomically rich contexts: Korea and Italy
+
 * Made in Italy Circolare e Sostenibile ([MICS](https://www.mics.tech/en/home/)) National Plan for Recovery and Resilience NextGenerationEU ([PNRR](https://www.agenziacoesione.gov.it/dossier_tematici/nextgenerationeu-e-pnrr/)) program, [SPOKE 8](https://www.mics.tech/en/spokes/spoke-8/) Digitally-oriented factory design and management through AI and data driven approaches,  [Project 8.06](https://www.mics.tech/en/projects/8-06-blockchain-based-solutions-for-trusted-and-quality-aware-data-sharing/) Blockchain-based solutions for trusted and quality-aware data sharing
 
 * SEcurity and RIghts in the CyberSpace [SERICS](https://serics.eu/en/) National Plan for Recovery and Resilience NextGenerationEU ([PNRR](https://www.agenziacoesione.gov.it/dossier_tematici/nextgenerationeu-e-pnrr/)), [SPOKE 9: Securing Digital Transformation](https://serics.eu/en/services/spoke-9-sicurezza-trasformazione-digitale/)
