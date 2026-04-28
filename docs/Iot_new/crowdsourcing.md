@@ -8,6 +8,8 @@ Nowadays, mobile devices, such as our smart phone or watch are plenty of sensors
     
 ![](assets/images/BT_mobile.png)
 
+
+
 Instead, we aim at developing solution where a node, in our case an ESP32, collects some sensor data and interact with the mobile phone (e.g. via BLE) to possibly enrich the observed data by the phone sensors and to deliver them to the backend.  
 
 !!! warning
