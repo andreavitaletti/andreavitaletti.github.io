@@ -1,0 +1,1846 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://andreavitaletti.github.io/Iot_new/twin/">
+      
+      
+        <link rel="prev" href="../energy/">
+      
+      
+        <link rel="next" href="../security/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Digital Twin - Andrea Vitaletti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lime" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#digital-twin" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andrea Vitaletti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Digital Twin
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    Andrea Vitaletti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blockchain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Startup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Startup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/Learn%20from%20the%20master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn from the Master(s)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IoT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../premise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Premise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulate a node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../real/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A real node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS is better
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sampling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireless/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wireless
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Twin
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Twin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-clock-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimating clock drift
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estimating clock drift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adjustment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp32-code-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 Code (C++)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#digital-twin-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Digital Twin (Python)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-difference-between-static-and-dynamic-unbalance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The difference between Static and Dynamic Unbalance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A simple experiment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A simple model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#water-distribution-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Water Distribution Systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Water Distribution Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esp32-as-a-node-in-epanet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 as a node in EPANET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iot and Web3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backnnd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crowdsourcing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crowdsourcing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scale on Sim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://andreavitaletti.github.io/IoT_short_course/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT_old
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-%2A%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    data-*
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    thesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../grain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grains of Insight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-clock-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimating clock drift
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estimating clock drift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adjustment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp32-code-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 Code (C++)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#digital-twin-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Digital Twin (Python)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintenance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-difference-between-static-and-dynamic-unbalance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The difference between Static and Dynamic Unbalance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A simple experiment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-simple-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A simple model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#water-distribution-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Water Distribution Systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Water Distribution Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esp32-as-a-node-in-epanet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 as a node in EPANET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="digital-twin">Digital Twin</h1>
+<p>A <strong>digital twin</strong> is a virtual representation of a physical system that stays continuously synchronized with it through real-time data, enabling real-time monitoring, predictive simulation, and closed-loop control. In other words, it is a live, data-driven model of a real object, process, or environment. Specifically, sensors on the physical system send continuous data to the digital model, keeping the digital twin up-to-date with what is happening in reality. This data also trains and feeds a model, which is the core component to run simulations to predict performance, failures, and behavior under different conditions. This enables testing different scenarios, including most problematic ones, without putting at risk the real system. The results of the simulations inform decision-makers and guide the actions into the physical system, enabling adaptive control, automated tuning, and optimization of operation. In summary, a typical digital twin forms an iterative loop,  continuously improving with more data, encompassing the following tasks: sense, model, predict, act. This enables faster experimentation rounds (especially when physical tests are slow or expensive), cost reduction, enhanced reliability, intelligent automation, and continuous improvement through data-driven feedback.</p>
+<p>The following picture depicts a Digital Twin for a fermentator developed in collaboration with <a href="https://yeastime.com/">yeastime</a></p>
+<p><img alt="" src="../assets/images/DT.drawio.png" /></p>
+<h2 id="estimating-clock-drift">Estimating clock drift</h2>
+<p>ESP32 internal oscillators are cost-effective but notoriously sensitive to temperature, leading to a drift that can be several seconds a day.</p>
+<p>By building a <strong>Digital Twin</strong>, we aren't just syncing the time; we are creating a mathematical model that lives on your PC, predicts how "wrong" the ESP32 is at any given moment, and feeds back a correction.</p>
+<h3 id="the-architecture">The Architecture</h3>
+<p>To model the drift, the Twin needs to observe the relationship between the <strong>Physical Clock</strong> (ESP32) and the <strong>Reference Clock</strong> (PC).</p>
+<p><img alt="image-2026231832291.png" src="../assets/images/image-2026231832291.png" /></p>
+<p>We assume the clock drift is linear over short-to-medium durations. The relationship between the ESP32 time ($t_{esp}$) and the PC time ($t_{ref}$) can be modeled as:</p>
+<p>$$t_{esp} = (1 + R) \cdot t_{ref} + \phi$$</p>
+<p><img alt="image-2026231539281.png" src="../assets/images/image-2026231539281.png" /></p>
+<p>Where:</p>
+<ul>
+<li><strong>$R$</strong>: The drift rate (the slope). If $R &gt; 0$, the ESP32 is running fast.</li>
+<li><strong>$\phi$</strong>: The initial phase offset.</li>
+</ul>
+<p>The Digital Twin’s job is to continuously estimate $R$ and $\phi$ using <strong>Linear Regression</strong>.</p>
+<h3 id="adjustment">Adjustment</h3>
+<p>Once the Twin calculates the drift rate $R$, it can send a <strong>Correction Factor</strong> back to the ESP32.</p>
+<p>Instead of just resetting the time (which causes "time jumps"), the Digital Twin tells the ESP32 how much to "stretch" or "shrink" its perception of a second.</p>
+<blockquote>
+<p><strong>The Adjustment Logic:</strong></p>
+<p>If the Twin calculates that the ESP32 is running <strong>1%</strong> fast, it sends a command: <code>drift_multiplier = 0.99</code>. The ESP32 then multiplies its internal delays or timestamps by this factor to stay in sync without jumping.</p>
+</blockquote>
+<p>If you simply did <code>micros() * multiplier</code>, the moment your Digital Twin sent a new multiplier (say, from <code>1.0001</code> to <code>0.9999</code>), your clock would instantly jump backwards by thousands of microseconds.</p>
+<p>By using the <strong>Anchor Method</strong> ($base + elapsed \times mult$), we ensure that:</p>
+<ol>
+<li><strong>Continuity:</strong> The time at the exact moment of the update remains the same.</li>
+<li><strong>Smoothness:</strong> Only the <em>slope</em> of the time progression changes after the update.</li>
+</ol>
+<h3 id="esp32-code-c">ESP32 Code (C++)</h3>
+<p>:fontawesome-brands-github: <a href="https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin">https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin</a></p>
+<p>We add a <code>SET_PHASE</code> command to set the initial "Wall Clock" time.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">drift_multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">last_raw_micros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// The Wall Clock time in seconds (Epoch)</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">get_wall_clock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">current_raw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">elapsed_raw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_raw</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_raw_micros</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Convert elapsed microseconds to adjusted seconds</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">elapsed_adjusted_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">elapsed_raw</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">drift_multiplier</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000000.0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">elapsed_adjusted_s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. Send heartbeat to Twin</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">last_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_report</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">last_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;RAW_MICROS:&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">micros</span><span class="p">());</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;,CUR_WALL:&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">get_wall_clock</span><span class="p">(),</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// Tell the twin what we THINK the time is</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 2. Handle Commands</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">readStringUntil</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Set the &quot;Starting Line&quot; (Phase)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s">&quot;SET_PHASE:&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="n">toDouble</span><span class="p">();</span>
+<span class="w">            </span><span class="n">last_raw_micros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="w">            </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;ACK: Phase (Wall Clock) Initialized.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Adjust the &quot;Speed&quot; (Frequency)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s">&quot;SET_MULT:&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Anchor the time before changing the rate</span>
+<span class="w">            </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_wall_clock</span><span class="p">();</span>
+<span class="w">            </span><span class="n">last_raw_micros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="w">            </span><span class="n">drift_multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">9</span><span class="p">).</span><span class="n">toDouble</span><span class="p">();</span>
+<span class="w">            </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;ACK: Rate Adjusted.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="digital-twin-python">Digital Twin (Python)</h3>
+<p>The Python script now performs two steps:</p>
+<ol>
+<li><strong>Sync Phase:</strong> Sends the current PC time immediately upon connection.</li>
+<li><strong>Sync Frequency:</strong> Continues to calculate and send the drift multiplier.</li>
+</ol>
+<p>Python - only relevant parts, full code available at  :fontawesome-brands-github: <a href="https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin">https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin</a></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">serial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClockDigitalTwin</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">esp_micros</span><span class="p">):</span>
+        <span class="c1"># Record the &quot;Gold Standard&quot; time from the PC</span>
+        <span class="n">now_pc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">esp_micros</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc_ref_seconds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">now_pc</span><span class="p">)</span>
+
+        <span class="c1"># Keep only the most recent samples to adapt to temperature changes</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">WINDOW_SIZE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pc_ref_seconds</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span> <span class="c1"># Not enough data yet</span>
+
+        <span class="c1"># Fit model: PC_Time = (m * ESP_Micros) + c</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc_ref_seconds</span><span class="p">)</span>
+
+        <span class="c1"># The slope &#39;m&#39; tells us how many PC seconds pass per 1 ESP32 microsecond</span>
+        <span class="c1"># We multiply by 1,000,000 because the ESP32 works in microseconds</span>
+        <span class="n">multiplier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1_000_000</span>
+        <span class="k">return</span> <span class="n">multiplier</span>
+
+<span class="k">with</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">as</span> <span class="n">ser</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Wait for ESP32 reboot</span>
+            <span class="n">ser</span><span class="o">.</span><span class="n">reset_input_buffer</span><span class="p">()</span> <span class="c1"># Clear old data</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># 1. INITIAL PHASE SYNC</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">phase_synced</span><span class="p">:</span>
+                    <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                    <span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SET_PHASE:</span><span class="si">{</span><span class="n">now</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+                    <span class="n">phase_synced</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="n">line</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="s2">&quot;ACK&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ESP32: </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="s2">&quot;RAW_MICROS&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="c1"># Parse: RAW_MICROS:12345,CUR_WALL:17000.123</span>
+                        <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                        <span class="n">raw_micros</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">esp_thinks_wall</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+                        <span class="n">twin</span><span class="o">.</span><span class="n">add_sample</span><span class="p">(</span><span class="n">raw_micros</span><span class="p">)</span>
+
+                        <span class="c1"># 2. FREQUENCY ADJUSTMENT</span>
+                        <span class="n">mult</span> <span class="o">=</span> <span class="n">twin</span><span class="o">.</span><span class="n">calculate_multiplier</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">mult</span><span class="p">:</span>
+                            <span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SET_MULT:</span><span class="si">{</span><span class="n">mult</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+                            <span class="n">error</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">esp_thinks_wall</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[PC] Time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | [ESP] Thinks: </span><span class="si">{</span><span class="n">esp_thinks_wall</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Error: </span><span class="si">{</span><span class="n">error</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">ms | Mult: </span><span class="si">{</span><span class="n">mult</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[PC] Time: 1773932593.460 | [ESP] Thinks: 1773932593.483 | Error: -22.51ms | Mult: 0.99999873
+ESP32: ACK: Rate Adjusted.
+[PC] Time: 1773932598.463 | [ESP] Thinks: 1773932598.484 | Error: -20.65ms | Mult: 0.99999029
+</code></pre></div>
+<ol>
+<li><strong>The Phase Correction (<code>SET_PHASE</code>)</strong>: This is like setting a watch. It happens once (or rarely) to align the two clocks to the same "zero" point.</li>
+<li><strong>The Frequency Correction (<code>SET_MULT</code>)</strong>: This is like adjusting the watch's internal gears. It happens continuously to ensure that as the ESP32 gets hot or cold, the Digital Twin keeps the "Virtual Clock" perfectly aligned with the PC.</li>
+</ol>
+<p><img alt="image-2026319229688.png" src="../assets/images/image-2026319229688.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>20ms is not a true 'clock error,' but simply represents the physical latency required for a log string to travel from the ESP32 at 115200 baud (~3ms), traverse the USB cable, be processed by the PC's operating system drivers, pass through the Python stack, and finally be parsed to trigger <code>time.time()</code>. The PC will always capture the <code>time.time()</code> stamp with roughly a 20-millisecond delay relative to the exact instant the ESP32 captured the <code>micros()</code> value.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Clock drift depends on the temperature </p>
+</div>
+<h2 id="maintenance">Maintenance</h2>
+<ul>
+<li>Periodic</li>
+<li>Preventive</li>
+<li>Predictive</li>
+<li>Reactive</li>
+</ul>
+<p><img alt="" src="../assets/images/2025-02-22-08-39-20.png" title="https://www.sim-tek.com.tr/predictive-maintenance/" /></p>
+<h3 id="the-difference-between-static-and-dynamic-unbalance"><a href="https://www.youtube.com/watch?v=JB8i7LtY3mU">The difference between Static and Dynamic Unbalance</a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JB8i7LtY3mU?si=5j4mh8RmYGS-83ng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<h3 id="a-simple-experiment">A simple experiment</h3>
+<p><img alt="" src="../assets/images/schematics.png" />
+<img alt="" src="../assets/images/device.png" />
+<img alt="" src="../assets/images/rest.png" />
+<img alt="" src="../assets/images/balanced.png" />
+<img alt="" src="../assets/images/unbalanced.png" /></p>
+<p><a href="https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin">code</a></p>
+<h3 id="a-simple-model">A simple model</h3>
+<p>Centrifugal force of a mass $m_e$ at distance $r$ from the center of rotation, with angular velocity $\omega$: $F​=m_e ​r \omega$</p>
+<p>Using a lumped mass model, and assuming the damping coefficient and the stiffness of the support are negligible, if the mass or the rotor is $m$, we can write :</p>
+<p>$m \ddot{x} = m_e ​r \omega^2 cos(\omega t)$</p>
+<p>$m \ddot{y} = m_e ​r \omega^2 sin(\omega t)$</p>
+<p>This allows us to estimate the accelerations under the simplistic assumptions we made. </p>
+<h2 id="water-distribution-systems">Water Distribution Systems</h2>
+<p><a href="https://www.epa.gov/water-research/epanet">EPANET</a> is  a software application used throughout the world to model water distribution systems. A convenient way to experiment with EPANET is <a href="https://epanetjs.com/">epanet-js</a> that claims to be </p>
+<blockquote>
+<p>The EPANET you know, but modern, enhanced, and entirely in your browser</p>
+</blockquote>
+<p><img alt="image-20263135418791.png" src="../assets/images/image-20263135418791.png" /></p>
+<h3 id="esp32-as-a-node-in-epanet">ESP32 as a node in EPANET</h3>
+<p>We can run epanet-js on nodejs and specifically run a bridge interfacing the EPANET model, in the following '01-uk-style.inp',  with the ESP32 via the serial interface. </p>
+<p>In other words we can use the ESP32 as a sensor of a simulated water distribution network</p>
+<p>The bridge code, tunning on node </p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Project</span><span class="p">,</span><span class="w"> </span><span class="nx">Workspace</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;epanet-js&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">SerialPort</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;serialport&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+<span class="c1">// Serial port — adjust to your port (Linux: /dev/ttyACM0, Windows: COM3)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SerialPort</span><span class="p">({</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/dev/ttyACM0&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">baudRate</span><span class="o">:</span><span class="w"> </span><span class="mf">9600</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Serial Port Error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">inpPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;01-uk-style.inp&#39;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">inpPath</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`ERROR: network.inp not found at </span><span class="si">${</span><span class="nx">inpPath</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Workspace</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Project</span><span class="p">(</span><span class="nx">ws</span><span class="p">);</span>
+
+<span class="nx">ws</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="s1">&#39;net.inp&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">inpPath</span><span class="p">));</span>
+<span class="nx">model</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;net.inp&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;report.rpt&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;out.bin&#39;</span><span class="p">);</span>
+
+<span class="c1">// Resolve named IDs to indices once at startup</span>
+<span class="c1">// Pipe P1 connects J43 → J27</span>
+<span class="c1">// Junction J1 is the first junction in the network</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">idxP1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getLinkIndex</span><span class="p">(</span><span class="s1">&#39;P1&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">idxJ1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getNodeIndex</span><span class="p">(</span><span class="s1">&#39;J1&#39;</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[EPANET] Network loaded — P1 index: </span><span class="si">${</span><span class="nx">idxP1</span><span class="si">}</span><span class="sb">, J1 index: </span><span class="si">${</span><span class="nx">idxJ1</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">runSimulation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">model</span><span class="p">.</span><span class="nx">solveH</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">flow</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getLinkValue</span><span class="p">(</span><span class="nx">idxP1</span><span class="p">,</span><span class="w"> </span><span class="mf">8</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span><span class="w">  </span><span class="c1">// EN_FLOW (L/s)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getLinkValue</span><span class="p">(</span><span class="nx">idxP1</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span><span class="w">  </span><span class="c1">// EN_VELOCITY (m/s)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">pressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getNodeValue</span><span class="p">(</span><span class="nx">idxJ1</span><span class="p">,</span><span class="w"> </span><span class="mf">11</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// EN_PRESSURE (m)</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`PIPE,P1,</span><span class="si">${</span><span class="nx">flow</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">velocity</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">pressure</span><span class="si">}</span><span class="sb">\n`</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[EPANET] </span><span class="si">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span><span class="si">}</span><span class="sb"> -&gt; Sending to Arduino`</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">port</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Write error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">setInterval</span><span class="p">(</span><span class="nx">runSimulation</span><span class="p">,</span><span class="w"> </span><span class="mf">3000</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A similar approach can be exploited to interface multiple simulators, however in many case a convenient WASM implementation (i.e. epanet.js), as for EPANET, does not exixt. </p>
+<p>As an example, for traffic simulation you might consider <a href="https://eclipse.dev/sumo/">SUMO</a>. The process is more complex, since you need a local installation, but the approach is the same as the one described above for water.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/andrea-vitaletti-3651442/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

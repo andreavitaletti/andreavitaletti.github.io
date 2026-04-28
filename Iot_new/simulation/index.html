@@ -1,0 +1,1748 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://andreavitaletti.github.io/Iot_new/simulation/">
+      
+      
+        <link rel="prev" href="../intro/">
+      
+      
+        <link rel="next" href="../real/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Simulate a node - Andrea Vitaletti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lime" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#simulation-of-a-node" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andrea Vitaletti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Simulate a node
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    Andrea Vitaletti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blockchain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Startup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Startup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/Learn%20from%20the%20master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn from the Master(s)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IoT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../premise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Premise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulate a node
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulate a node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lets-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let's start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-breadboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the Breadboard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-simplest-digital-sensor-namely-a-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Simplest digital sensor, namely a button
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-bit-more-interesting-analog-sensor-namely-a-potentiometer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A bit more interesting analog sensor, namely a potentiometer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-overview-of-more-advanced-way-to-interact-with-sensors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick overview of more advanced way to interact with sensors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#an-i2c-sensor-the-mpu6050-accelerometer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        An I2C sensor, the MPU6050 Accelerometer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A simple scenario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#its-time-to-be-connected-by-mqtt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        It's time to be connected by MQTT.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="It&#39;s time to be connected by MQTT.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-httpsioadafruitcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build a simple backend with https://io.adafruit.com/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-thingsboard-httpsdemothingsboardiologin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build a simple backend with thingsboard https://demo.thingsboard.io/login
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../real/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A real node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS is better
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sampling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireless/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wireless
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../twin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Twin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iot and Web3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backnnd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crowdsourcing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crowdsourcing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scale on Sim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://andreavitaletti.github.io/IoT_short_course/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT_old
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-%2A%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    data-*
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    thesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../grain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grains of Insight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lets-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let's start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-breadboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the Breadboard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-simplest-digital-sensor-namely-a-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Simplest digital sensor, namely a button
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-bit-more-interesting-analog-sensor-namely-a-potentiometer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A bit more interesting analog sensor, namely a potentiometer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-overview-of-more-advanced-way-to-interact-with-sensors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick overview of more advanced way to interact with sensors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#an-i2c-sensor-the-mpu6050-accelerometer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        An I2C sensor, the MPU6050 Accelerometer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A simple scenario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#its-time-to-be-connected-by-mqtt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        It's time to be connected by MQTT.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="It&#39;s time to be connected by MQTT.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-httpsioadafruitcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build a simple backend with https://io.adafruit.com/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-a-simple-backend-with-thingsboard-httpsdemothingsboardiologin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build a simple backend with thingsboard https://demo.thingsboard.io/login
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="simulation-of-a-node">Simulation of a node</h1>
+<p><a href="https://docs.wokwi.com/">Wokwi</a> is an online Electronics simulator. You can use it to simulate many popular development environment (e.g. Arduino, Esp-idf and RUST just to mention few) boards (e.g. Arduino, <a href="https://docs.wokwi.com/guides/esp32">ESP32</a>, STM32), parts and sensors. </p>
+<p>In this course we will focus on the ESP32-DevKit-V1 and initially on the Arduino environment. Working on this environment with the ESP32 allow us to take advantage from the rich availability of libraries, but also to access  advanced and fundamental features provided by FreeRTOS. However, experimenting with the more advanced ESP-idf is strongly encouraged. </p>
+<p><img alt="" src="../assets/images/esp32_dev_kit_pinout_v1_mischianti.jpg" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An excellent reference for all what concerns the ESP 32 is available at <a href="https://www.electronicwings.com/esp32">electronic wings</a> </p>
+</div>
+<h2 id="lets-start">Let's start</h2>
+<p>On <a href="https://docs.wokwi.com/">Wokwi</a> open a new project, select ESP32 as the platform and the Arduino template. </p>
+<p>If you now open the diagram.json tab you have something like the following in the parts entry</p>
+<div class="highlight"><pre><span></span><code>&quot;parts&quot;: [ { &quot;type&quot;: &quot;board-esp32-devkit-c-v4&quot;, &quot;id&quot;: &quot;esp&quot;, ...} ],
+</code></pre></div>
+<p>This implies that the pinout is the one in the <a href="https://mischianti.org/esp32-devkitc-v4-high-resolution-pinout-and-specs/">devkit v4</a>. 
+To get the same pinout as the one in the picture above you need a V1 devkit, so you have to modify the entry as in the following</p>
+<div class="highlight"><pre><span></span><code>&quot;parts&quot;: [ { &quot;type&quot;: &quot;board-esp32-devkit-v1&quot;, &quot;id&quot;: &quot;esp&quot;, ...} ],
+</code></pre></div>
+<p>To make running the serial interface be sure that under connection you have th following settings</p>
+<div class="highlight"><pre><span></span><code>&quot;connections&quot;: [
+    [ &quot;esp:TX0&quot;, &quot;$serialMonitor:RX&quot;, &quot;&quot;, [] ],
+    [ &quot;esp:RX0&quot;, &quot;$serialMonitor:TX&quot;, &quot;&quot;, [] ],
+    .....
+</code></pre></div>
+<ul>
+<li>The simplest actuator, namely a <a href="https://wokwi.com/projects/367336864678247425">led</a></li>
+</ul>
+<h2 id="understanding-the-breadboard">Understanding the Breadboard</h2>
+<p><img alt="" src="../assets/images/breadboard.png" /></p>
+<h2 id="the-simplest-digital-sensor-namely-a-button">The Simplest digital sensor, namely a <a href="https://wokwi.com/projects/367336996835545089">button</a></h2>
+<p><img alt="" src="../assets/images/2024-12-16-11-00-26.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define LED 5</span>
+<span class="cp">#define BUTTON 4</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">BUTTON</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">digitalRead</span><span class="p">(</span><span class="n">BUTTON</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// check if the pushbutton is pressed. If it is, the buttonState is HIGH:</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">buttonState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HIGH</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// turn LED on:</span>
+<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// turn LED off:</span>
+<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="a-bit-more-interesting-analog-sensor-namely-a-potentiometer">A bit more interesting analog sensor, namely a <a href="https://wokwi.com/projects/367338868313181185">potentiometer</a></h2>
+<p><img alt="" src="../assets/images/2024-12-16-11-02-14.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">analogPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="c1">// potentiometer wiper (middle terminal) connected to analog pin</span>
+<span class="w">                    </span><span class="c1">// outside leads to ground and +5V</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// variable to store the value read</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w">           </span><span class="c1">//  setup serial</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="n">analogPin</span><span class="p">);</span><span class="w">  </span><span class="c1">// read the input pin</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w">          </span><span class="c1">// debug value</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<!--
+* A simple example with [SR04 Ultrasonic Sensor](https://wokwi.com/projects/367320442567677953). The width is measured by the function [pulseIn()](https://www.arduino.cc/reference/en/language/functions/advanced-io/pulsein/).
+
+
+![](assets/images/2023-07-18-14-16-39.png)
+-->
+
+<h2 id="quick-overview-of-more-advanced-way-to-interact-with-sensors">Quick overview of more advanced way to interact with sensors</h2>
+<p><img alt="" src="../assets/images/com.gif" /></p>
+<h2 id="an-i2c-sensor-the-mpu6050-accelerometer">An I2C sensor, the <a href="https://wokwi.com/projects/417422405654800385">MPU6050 Accelerometer</a></h2>
+<p><img alt="" src="../assets/images/2024-12-16-11-13-37.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_MPU6050.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_Sensor.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Wire.h&gt;</span>
+<span class="n">Adafruit_MPU6050</span><span class="w"> </span><span class="n">m_p_u</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// put your setup code here, to run once:</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_p_u</span><span class="p">.</span><span class="n">begin</span><span class="p">()){</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">      </span><span class="n">delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="n">sensors_event_t</span><span class="w"> </span><span class="n">acc</span><span class="p">,</span><span class="w"> </span><span class="n">gcc</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="n">m_p_u</span><span class="p">.</span><span class="n">getEvent</span><span class="p">(</span><span class="o">&amp;</span><span class="n">acc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gcc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">temp</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Acceleration on x axes&quot;</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">acc</span><span class="p">.</span><span class="n">acceleration</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// this speeds up the simulation</span>
+
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Acceleration on y axes&quot;</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">acc</span><span class="p">.</span><span class="n">acceleration</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Acceleration on z axes&quot;</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">acc</span><span class="p">.</span><span class="n">acceleration</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Rotation of x axes: &quot;</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="n">gcc</span><span class="p">.</span><span class="n">gyro</span><span class="p">.</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="mf">3.14</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Some more details on the <a href="https://randomnerdtutorials.com/esp32-mpu-6050-accelerometer-gyroscope-arduino/">MPU6050</a> accelerometer and gyroscope. This device can be used for <a href="https://www.ijnrd.org/papers/IJNRD2404282.pdf">Predictive Maintenance of Motors using Machine Learning</a> or <a href="https://doi.org/10.1109/ICOSICA4https://www.ijnrd.org/papers/IJNRD2404282.pdf9951.2020.9243180">Ensemble Learning for Predictive Maintenance on Wafer Stick Machine Using IoT Sensor Data</a>.</p>
+<p>A very interesting paper <a href="https://dl.acm.org/doi/pdf/10.1145/3694875.3694883">Real-Time Anomaly Detection with LSTM-Autoencoder Network
+on Microcontrollers for Industrial Applications</a> demonstrates how to implement anomaly detection spending as less as $20.</p>
+<h2 id="a-simple-scenario">A simple scenario</h2>
+<p>You want to transform a door into a <strong>smart door</strong>.</p>
+<ol>
+<li>A sensor will tell you when the door is open or closed &rarr; button</li>
+<li>A visual indicator will clearly show whether the door is open or closed &rarr; led</li>
+<li>Instead of a simple binary condition open/close you also want to know to what extent the door is open &rarr; potentiometer</li>
+<li>Finally all these information should be available online</li>
+</ol>
+<h2 id="mqtt">MQTT</h2>
+<p><a href="https://dev.to/hivemq_/series/18762">MQTT</a> is an example of Publish/Subscribe. </p>
+<p><img alt="" src="../assets/images/2024-10-25-05-01-31.png" /></p>
+<p>TOPICS:</p>
+<ol>
+<li>myhome/groundfloor/livingroom/temperature</li>
+<li>myhome/groundfloor/bathroom/temperature</li>
+<li>myhome/groundfloor/bathroom/humidity</li>
+<li>myhome/firstfloor/bathroom/temperature</li>
+<li>myhome/groundfloor/+/temperature (1 and 2)</li>
+<li>myhome/groundfloor/# (1,2 and 3)</li>
+<li>myhome/# (1,2,3 and 4)</li>
+</ol>
+<h2 id="its-time-to-be-connected-by-mqtt">It's time to be connected by MQTT.</h2>
+<p>A simulation of an MQTT connection is available <a href="https://wokwi.com/projects/367405831605855233">here</a> on Wokwi.</p>
+<p>The most convenient way to run on a real device is to use your mobile as an Access Point and configure SSID and password consequently.</p>
+<p>Note that the topics names are assigned to be consistent with the adafruit dashboard (see example below), but you are free to use any name you like.</p>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -h test.mosquitto.org -t &quot;avitaletti/feeds/threshold&quot; -m 2345
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mosquitto_sub -h test.mosquitto.org -t &quot;avitaletti/feeds/potentiometer&quot;
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>A multi platform easy to use alternative is https://mqtt-explorer.com/</li>
+<li>Another possible broker is mqtt://mqtt.eclipseprojects.io</li>
+</ul>
+</div>
+<p><img alt="https://www.linkedin.com/feed/update/urn:li:activity:7278279702052589569/" src="../assets/images/2025-01-03-11-03-48.png" /></p>
+<h3 id="build-a-simple-backend-with-httpsioadafruitcom">Build a simple backend with <a href="https://io.adafruit.com/">https://io.adafruit.com/</a></h3>
+<ul>
+<li>Create an account on io.adafruit.com, in my case the username is avitaletti.</li>
+<li>Click on the yellow key to get yor credentials to publish data</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>#define IO_USERNAME  &quot;avitaletti&quot;
+#define IO_KEY       &quot;xxxxxxxxxxxxxxxxxxxx&quot;
+</code></pre></div>
+* Create two feeds named threshold and potentiometer with the corresponding topics avitaletti/feeds/threshold  and avitaletti/feeds/potentiometer</p>
+<p><img alt="" src="../assets/images/feeds.png" /></p>
+<p>The following code will publish the message 33 on the topic avitaletti/feeds/potentiometer and it is used by the IoT device to send the data acquired by the ADC</p>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/potentiometer -m 33
+</code></pre></div>
+<p>The node can subscribe to avitaletti/feeds/threshold  to get the commands from the backend</p>
+<div class="highlight"><pre><span></span><code>mosquitto_sub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/threshold
+</code></pre></div>
+<ul>
+<li>The dashboard link the components to the feeds and corresponding topics</li>
+</ul>
+<p><img alt="" src="../assets/images/dashboard.png" /></p>
+<p>In other words when the device publishes on the avitaletti/feeds/potentiometer topic a new entry is created in the line chart, while when you move the slider the corresponding value is published on avitaletti/feeds/threshold</p>
+<h3 id="build-a-simple-backend-with-thingsboard-httpsdemothingsboardiologin">Build a simple backend with thingsboard <a href="https://demo.thingsboard.io/login">https://demo.thingsboard.io/login</a></h3>
+<p><img alt="" src="../assets/images/2023-07-04-16-31-57.png" />
+<img alt="" src="../assets/images/2023-07-04-16-33-07.png" /></p>
+<p><a href="https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux">https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux</a></p>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -d -q 1 -h &quot;$THINGSBOARD_HOST_NAME&quot; -p &quot;1883&quot; -t &quot;v1/devices/me/telemetry&quot; -u &quot;$ACCESS_TOKEN&quot; -m {&quot;temperature&quot;:25}
+</code></pre></div>
+<p><strong>NOTE:</strong> for the sake of convenience, we will use WiFi connectivity, however it should be now clear WiFi is usually not appropriate for IoT applications due to the excessive energy demand. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/andrea-vitaletti-3651442/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

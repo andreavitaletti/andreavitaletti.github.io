@@ -1,0 +1,2239 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://andreavitaletti.github.io/Iot_new/energy/">
+      
+      
+        <link rel="prev" href="../wireless/">
+      
+      
+        <link rel="next" href="../twin/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Energy - Andrea Vitaletti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lime" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#energy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andrea Vitaletti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Energy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    Andrea Vitaletti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blockchain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Startup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Startup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/Learn%20from%20the%20master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn from the Master(s)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IoT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../premise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Premise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulate a node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../real/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A real node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS is better
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sampling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireless/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wireless
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#power-the-esp32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power the ESP32
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Power the ESP32">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usb-port-easiest-most-common" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        USB Port (Easiest &amp; Most Common)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-5v-or-vin-pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 5V (or VIN) Pin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-33v-pin-regulated-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 3.3V Pin (Regulated Power)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#power-consumption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power consumption
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duty-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duty cycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esp32-sleep-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 Sleep Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ESP32 Sleep Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#light-sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Light Sleep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep Sleep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectivity-and-sleep-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connectivity and Sleep Modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wakeup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wakeup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deep-sleep-wakeup-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep Sleep wakeup example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deep Sleep wakeup example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ensuring-task-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensuring Task Completion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-components-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Components Explained
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-measure-energy-consumption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to measure energy consumption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to measure energy consumption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ina219-power-monitor-with-esp32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INA219 Power Monitor with ESP32
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ina219-pinout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INA219 Pinout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp32-wiring-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 Wiring Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-connection-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load Connection Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#energy-harvesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Energy Harvesting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../twin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Twin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iot and Web3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backnnd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crowdsourcing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crowdsourcing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scale on Sim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://andreavitaletti.github.io/IoT_short_course/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT_old
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-%2A%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    data-*
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    thesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../grain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grains of Insight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#power-the-esp32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power the ESP32
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Power the ESP32">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usb-port-easiest-most-common" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        USB Port (Easiest &amp; Most Common)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-5v-or-vin-pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 5V (or VIN) Pin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-33v-pin-regulated-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 3.3V Pin (Regulated Power)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#power-consumption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power consumption
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duty-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duty cycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esp32-sleep-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 Sleep Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ESP32 Sleep Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#light-sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Light Sleep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep Sleep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectivity-and-sleep-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connectivity and Sleep Modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wakeup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wakeup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deep-sleep-wakeup-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep Sleep wakeup example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deep Sleep wakeup example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ensuring-task-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensuring Task Completion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-components-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Components Explained
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-measure-energy-consumption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to measure energy consumption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to measure energy consumption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ina219-power-monitor-with-esp32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INA219 Power Monitor with ESP32
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ina219-pinout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INA219 Pinout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp32-wiring-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP32 Wiring Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-connection-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load Connection Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#energy-harvesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Energy Harvesting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="energy">Energy</h1>
+<h2 id="power-the-esp32">Power the ESP32</h2>
+<p>To power the ESP32 you can use <a href="https://esp32io.com/tutorials/how-to-power-esp32">several methods</a>  skteched below:</p>
+<h3 id="usb-port-easiest-most-common">USB Port (Easiest &amp; Most Common)</h3>
+<p>The most straightforward method is to plug a micro-USB or USB-C cable (depending on your board) into a computer, a 5V wall adapter (like an old phone charger), or a portable power bank. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Safe, provides both power and data for programming, and is regulated on-board.</p>
+<p>Ensure you use a data-capable USB cable if you also need to upload code. </p>
+</div>
+<h3 id="the-5v-or-vin-pin">The 5V (or VIN) Pin</h3>
+<p>You can provide an external unregulated power supply directly to the 5V or VIN pin and a GND (ground) pin. 
+Voltage Range: Typically 5V to 12V.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Higher voltages (like 9V or 12V) will cause the onboard regulator to generate more heat -&gt; energy waste.</p>
+<p>There is often no reverse polarity protection on these pins. Connecting power backward can instantly fry the board. </p>
+</div>
+<h3 id="the-33v-pin-regulated-power">The 3.3V Pin (Regulated Power)</h3>
+<p>If you already have a stable, regulated 3.3V supply, you can connect it directly to the 3.3V and GND pins. </p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>This method bypasses the onboard voltage regulator. If your supply exceeds 3.6V, you will damage the ESP32 chip.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>if you don't need 5V in you project, use 3.3V, it will save energy. However, finding suitable batteries is not easy!
+if the battery does not exceed 3.6V as in the LiFePO4, you can connect the battery to the 3.3V and bypass the voltage regulator</p>
+</div>
+<p><img alt="energy-20260327-080957.png" src="../assets/images/energy-20260327-080957.png" /></p>
+<p>The Heltec V3 has a nice battery management: Integrated lithium battery management system with charge and discharge management, overcharge protection, and automatic switching between USB and battery power.</p>
+<h2 id="power-consumption">Power consumption</h2>
+<p>The following picture from <a href="https://doi.org/10.3390/s18072104">https://doi.org/10.3390/s18072104 </a> depicts a typical sensor working scenario, where a node alternates different activities each with a different power consumption</p>
+<p><img alt="" src="../assets/images/2025-04-10-18-03-51.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It is always a valuable exercise to estimate the power consumption of your app with a diagram similar to the one above. Nonetheless, it is then necessary to confirm your estimation by measurements.</p>
+</div>
+<h2 id="duty-cycle">Duty cycle</h2>
+<p>The duty cycle of a system is the fraction of time it is active compared to the total period.    </p>
+<p><img alt="energy-20260327-080521.png" src="../assets/images/energy-20260327-080521.png" /></p>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Assuming the ESP32 is powered by a 3.6V - 1000mAh LiFePO4 battery. What is a lower bound on the active time? How does it change with a 50% duty cycle?</p>
+</div>
+<p>In many systems, the device only needs to be active for a tiny fraction of each cycle (in the figure above, only 1%). That small active window lets us save a huge amount of energy, stretching the system’s operation time so it can meet the application’s needs. </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Determining the optimal duty cycle for an application and supporting this choice with sound arguments is a fundamental aspect of the project.</p>
+</div>
+<h2 id="esp32-sleep-modes">ESP32 Sleep Modes</h2>
+<p><img alt="energy-20260327-082701.png" src="../assets/images/energy-20260327-082701.png" />
+<a href="https://www.researchgate.net/figure/Comparison-of-the-energy-consumption-of-different-ESP32-developer-modules-12_tbl1_369763204">:fontawesome-brands-creative-commons: :fontawesome-brands-creative-commons-by:</a></p>
+<ul>
+<li><strong>Active Mode:</strong> Fully powered, running Wi-Fi or CPU tasks.</li>
+<li><strong>Modem-Sleep:</strong> Wi-Fi radio is off but CPU can run. Power consumption depends on CPU frequency.</li>
+<li><strong>Light-Sleep:</strong> CPU paused, RAM retained, low-power clocks can run.</li>
+<li><strong>Deep-Sleep:</strong> CPU off, most peripherals off, only RTC (real-time clock) can wake up the chip.<ul>
+<li>ULP active: Ultra-Low-Power co-processor is active.</li>
+<li>ULP sensor-monitored: Low-power monitoring using ULP at 1% load</li>
+<li>RTC timer + memory: Only RTC and memory retained.</li>
+</ul>
+</li>
+<li><strong>Hibernation:</strong> Only RTC timer active; everything else off.</li>
+</ul>
+<p><a href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/sleep_modes.html">ESP32 supports two major power saving modes</a>: Light-sleep and Deep-sleep.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A visual representation of these modes can be found at: <a href="https://lastminuteengineers.com/esp32-sleep-modes-power-consumption/">lastminuteengineers</a></p>
+</div>
+<h3 id="light-sleep">Light Sleep</h3>
+<p>In Light-sleep mode, the digital peripherals, most of the RAM, and CPUs are <em>clock-gated</em> and their supply voltage is reduced. Upon exit from Light-sleep, the digital peripherals, RAM, and CPUs resume operation and their internal states are preserved.</p>
+<p>Clock gating is a power-saving technique used in digital circuits. A processor works because a clock signal tells all components when to update their state. If the clock keeps ticking, circuits keep switching—and switching consumes power. Clock gating means temporarily stopping the clock signal to parts of the circuit that aren’t doing anything. When a block (e.g. digital peripherals, RAM, and CPUs) is clock-gated, it is effectively “paused”. Its internal data (state) is kept intact, but it doesn’t switch or compute, so it saves energy.</p>
+<h3 id="deep-sleep">Deep Sleep</h3>
+<p>In Deep-sleep mode, the CPUs, most of the RAM, and all digital peripherals that are clocked from APB_CLK are powered off. The only parts of the chip that remain powered on are: RTC controller, ULP coprocessor, RTC FAST memory, RTC SLOW memory. Deep-sleep is a much more aggressive power-saving mode than Light-sleep, and the key difference is power is actually removed, not just paused.</p>
+<ul>
+<li>CPUs are completely off → The main processors stop running entirely, All execution halts. When the chip wakes up, it restarts from reset (like powering it on again), not from where it left off</li>
+<li>Most RAM is lost → Regular RAM is powered down → data is erased. Any variables, stack, heap, program state are gone. Only RTC FAST and SLOW memory survive → So anything you need after wake-up must be stored there (or in flash)</li>
+<li>Digital peripherals are off → Peripherals using APB_CLK (timers, UART, SPI, I²C, etc.) are disabled. They stop working and lose configuration → After wake-up, you must reinitialize everything</li>
+</ul>
+<p>Only RTC domain stays alive. The chip keeps a tiny “always-on” subsystem:</p>
+<ul>
+<li>RTC controller → manages sleep &amp; wake-up</li>
+<li>ULP coprocessor → can run small programs at ultra-low power</li>
+<li>RTC memories → retain small amounts of data</li>
+</ul>
+<p>This allows:</p>
+<ul>
+<li>Timed wake-ups (e.g., every 10 seconds)</li>
+<li>Sensor monitoring without waking the main CPU</li>
+</ul>
+<h3 id="connectivity-and-sleep-modes">Connectivity and Sleep Modes</h3>
+<p>In Deep-sleep and Light-sleep modes, the wireless peripherals are powered down. Before entering Deep-sleep or Light-sleep modes, the application must disable Wi-Fi and Bluetooth using the appropriate calls.</p>
+<p>If Wi-Fi/Bluetooth connections need to be maintained, enable Wi-Fi/Bluetooth Modem-sleep mode and automatic Light-sleep feature (see Power Management APIs). This allows the system to wake up from sleep automatically when required by the Wi-Fi/Bluetooth driver, thereby maintaining the connection.</p>
+<h3 id="wakeup">Wakeup</h3>
+<p>There are several wake-up sources available in the ESP32 sleep modes. The following resources provide excellent information for understanding ESP32 sleep modes and their power consumption.</p>
+<ul>
+<li><a href="https://lastminuteengineers.com/esp32-sleep-modes-power-consumption/">Insight Into ESP32 Sleep Modes and Their Power Consumption</a></li>
+<li><a href="https://www.electronicwings.com/esp32/esp32-deep-sleep-mode">ESP32 Deep Sleep Mode</a></li>
+<li><a href="https://randomnerdtutorials.com/esp32-deep-sleep-arduino-ide-wake-up-sources/">ESP32 Deep Sleep with Arduino IDE and Wake Up Sources</a></li>
+</ul>
+<h2 id="deep-sleep-wakeup-example">Deep Sleep wakeup example</h2>
+<ol>
+<li><strong>Deep Sleep:</strong> The chip is off. Only the RTC controller watches the GPIO (button).</li>
+<li><strong>Wake Up:</strong> The button is pressed. The ESP32 boots.</li>
+<li><strong>Setup:</strong> We check <em>why</em> we woke up. If it was the button, we start our tasks.</li>
+<li><strong>Task 1:</strong> Handles user interaction or logic.</li>
+<li><strong>Task 2:</strong> Performs the "Monitoring Activity" (e.g., reading a sensor).</li>
+<li><strong>Back to Sleep:</strong> Once the tasks finish their job, they call for deep sleep again.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
+
+<span class="cp">#define BUTTON_PIN GPIO_NUM_27 </span>
+
+<span class="c1">// This variable survives deep sleep</span>
+<span class="n">RTC_DATA_ATTR</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">should_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+
+<span class="c1">// Task 2: The Monitor</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">taskMonitor</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">should_monitor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;[Task 2] Monitoring activity started...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Simulate sensor reading or WiFi upload</span>
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;[Task 2] Monitoring complete.&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Mission accomplished. Going back to deep sleep in 1 second.&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Prepare for next sleep</span>
+<span class="w">  </span><span class="n">esp_sleep_enable_ext0_wakeup</span><span class="p">(</span><span class="n">BUTTON_PIN</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Wake when button is LOW (pressed)</span>
+<span class="w">  </span><span class="n">esp_deep_sleep_start</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Task 1: The Coordinator</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">taskCoordinator</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;[Task 1] Checking wake-up reason...&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">esp_sleep_wakeup_cause_t</span><span class="w"> </span><span class="n">wakeup_reason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_sleep_get_wakeup_cause</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">wakeup_reason</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ESP_SLEEP_WAKEUP_EXT0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;[Task 1] Woke up by Button! Signaling Task 2.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">should_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;[Task 1] Normal boot or other wake source.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">should_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Task 1 can now delete itself or wait</span>
+<span class="w">  </span><span class="n">vTaskDelete</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">BUTTON_PIN</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT_PULLUP</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Create Task 1: Check why we woke up</span>
+<span class="w">  </span><span class="n">xTaskCreate</span><span class="p">(</span><span class="n">taskCoordinator</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Coordinator&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Create Task 2: Perform monitoring if needed</span>
+<span class="w">  </span><span class="n">xTaskCreate</span><span class="p">(</span><span class="n">taskMonitor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Monitor&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Empty. Everything happens in tasks and then deep sleep.</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="ensuring-task-completion">Ensuring Task Completion</h3>
+<p>If you put the sleep command in <code>setup()</code>, the ESP32 might go to sleep before the FreeRTOS scheduler even has a chance to start your tasks.</p>
+<ul>
+<li>
+<p><strong>The Problem:</strong> <code>setup()</code> runs, creates tasks, and then hits the "sleep" command immediately. The tasks never actually execute because the CPU powers down.</p>
+</li>
+<li>
+<p><strong>The Solution:</strong> By putting the sleep command at the end of the <strong>Monitoring Task</strong>, we ensure that the "work" is actually finished before the lights go out.</p>
+</li>
+</ul>
+<h3 id="key-components-explained">Key Components Explained</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Function</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>RTC_DATA_ATTR</code></strong></td>
+<td>Stores variables in the RTC slow memory. This is the only way Task 2 knows what Task 1 found out after a sleep cycle.</td>
+</tr>
+<tr>
+<td><strong><code>esp_sleep_enable_ext0_wakeup</code></strong></td>
+<td>Configures a specific GPIO to trigger the "wake up" signal while the rest of the chip is powered down.</td>
+</tr>
+<tr>
+<td><strong><code>esp_deep_sleep_start()</code></strong></td>
+<td>The "Off" switch. Execution stops here and the power draw drops to ~10µA.</td>
+</tr>
+<tr>
+<td>### Important Real-World Note</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>In a true FreeRTOS environment, if you want "Task 1" to trigger "Task 2" <strong>while the chip is already awake</strong>, you would use a <strong>Semaphore</strong> or <strong>Event Group</strong>. However, because Deep Sleep triggers a full reboot, the "trigger" here is actually the CPU reset and the shared RTC memory.</p>
+<h2 id="how-to-measure-energy-consumption">How to measure energy consumption</h2>
+<h3 id="ina219-power-monitor-with-esp32">INA219 Power Monitor with ESP32</h3>
+<p>The <a href="https://learn.adafruit.com/adafruit-ina219-current-sensor-breakout/wiring">INA219</a> is a high-side current shunt and power monitor with an $I^2C$ interface. It is ideal for monitoring the power consumption of battery-powered projects.</p>
+<h3 id="ina219-pinout">INA219 Pinout</h3>
+<p>The INA219 module typically breaks out the following pins for power and communication.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Pin</th>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>VCC</strong></td>
+<td style="text-align: left;">Power Supply</td>
+<td style="text-align: left;">3.3V – 5V (3.3V recommended for ESP32)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GND</strong></td>
+<td style="text-align: left;">Ground</td>
+<td style="text-align: left;">Common Ground</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SDA</strong></td>
+<td style="text-align: left;">$I^2C$ Data</td>
+<td style="text-align: left;">Serial Data line</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SCL</strong></td>
+<td style="text-align: left;">$I^2C$ Clock</td>
+<td style="text-align: left;">Serial Clock line</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>VIN+</strong></td>
+<td style="text-align: left;">Input (+)</td>
+<td style="text-align: left;">Connect to the <strong>Positive</strong> of the Power Source</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>VIN-</strong></td>
+<td style="text-align: left;">Output (-)</td>
+<td style="text-align: left;">Connect to the <strong>Positive</strong> side of the Load</td>
+</tr>
+</tbody>
+</table>
+<h3 id="esp32-wiring-diagram">ESP32 Wiring Diagram</h3>
+<p>This table shows the standard $I^2C$ wiring for an ESP32 Development Board.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">INA219 Pin</th>
+<th style="text-align: left;">ESP32 Pin</th>
+<th style="text-align: left;">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>VCC</strong></td>
+<td style="text-align: left;">3.3V</td>
+<td style="text-align: left;">Logic level matching</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GND</strong></td>
+<td style="text-align: left;">GND</td>
+<td style="text-align: left;">Common Ground</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SDA</strong></td>
+<td style="text-align: left;">GPIO 21</td>
+<td style="text-align: left;">Default SDA</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SCL</strong></td>
+<td style="text-align: left;">GPIO 22</td>
+<td style="text-align: left;">Default SCL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="load-connection-logic">Load Connection Logic</h3>
+<p>To measure current, the sensor must be placed in <strong>series</strong> on the high side of your circuit.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Connection</th>
+<th style="text-align: left;">Direction</th>
+<th style="text-align: left;">Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Power Source (+)</strong></td>
+<td style="text-align: left;">→</td>
+<td style="text-align: left;"><strong>VIN+</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>VIN-</strong></td>
+<td style="text-align: left;">→</td>
+<td style="text-align: left;"><strong>Load (+)</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Load (-)</strong></td>
+<td style="text-align: left;">→</td>
+<td style="text-align: left;"><strong>Ground</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Measurement Principle</p>
+<p>The INA219 measures the <strong>shunt voltage</strong> drop across a precision resistor located between <strong>VIN+</strong> and <strong>VIN-</strong>. It then calculates the current ($I$) based on the known resistance.</p>
+</div>
+<!--
+In the following example, the LOAD is our ESP32 and we use the [INA219](https://learn.adafruit.com/adafruit-ina219-current-sensor-breakout/wiring) connected to an Arduino UNO to measure the power consumption. The same can be obtained using another ESP32 instead of the UNO, but remember the correct pins for SDA (default is GPIO 21) SCL (default is GPIO 22) ([See the schematics](assets/images/esp32_dev_kit_pinout_v1_mischianti.jpg))
+
+* Connect board VIN (red wire) to Arduino 5V if you are running a 5V board Arduino (Mega, etc.). If your board is 3V, connect to that instead.
+* Connect board GND (black wire) to Arduino GND
+* Connect board SCL (white wire) to Arduino SCL
+* Connect board SDA (blue wire) to Arduino SDA
+* Connect Vin+ to the positive terminal of the power supply for the circuit under test
+* Connect Vin- to the positive terminal or lead of the load
+-->
+
+<p><a href="https://github.com/ShotokuTech/HeltecLoRa32v3_I2C/tree/main">Note on Heltec V3</a></p>
+<p><img alt="" src="../assets/images/INA219.drawio.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// use https://github.com/nathandunk/BetterSerialPlotter to visualize the data</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Wire.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_INA219.h&gt;</span>
+
+<span class="n">Adafruit_INA219</span><span class="w"> </span><span class="n">ina219</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// will pause Zero, Leonardo, etc until serial console opens</span>
+<span class="w">      </span><span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">currentFrequency</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Initialize the INA219.</span>
+<span class="w">  </span><span class="c1">// By default the initialization will use the largest range (32V, 2A).  However</span>
+<span class="w">  </span><span class="c1">// you can call a setCalibration function to change this range (see comments).</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Failed to find INA219 chip&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// To use a slightly lower 32V, 1A range (higher precision on amps):</span>
+<span class="w">  </span><span class="c1">//ina219.setCalibration_32V_1A();</span>
+<span class="w">  </span><span class="c1">// Or to use a lower 16V, 400mA range (higher precision on volts and amps):</span>
+<span class="w">  </span><span class="c1">//ina219.setCalibration_16V_400mA();</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Measuring voltage and current with INA219 ...&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">current_mA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">loadvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">power_mW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getShuntVoltage_mV</span><span class="p">();</span>
+<span class="w">  </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getBusVoltage_V</span><span class="p">();</span>
+<span class="w">  </span><span class="n">current_mA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getCurrent_mA</span><span class="p">();</span>
+<span class="w">  </span><span class="n">power_mW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getPower_mW</span><span class="p">();</span>
+<span class="w">  </span><span class="n">loadvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">busvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(&quot;,&quot;);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">shuntvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(&quot;,&quot;);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">loadvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(&quot;,&quot;);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">current_mA</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(&quot;,&quot;);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">power_mW</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.println(&quot;&quot;);</span>
+<span class="w">  </span><span class="cm">/*</span>
+
+<span class="cm">  delay(50);</span>
+<span class="cm">}</span>
+</code></pre></div>
+<p><img alt="energy-20260327-085242.png" src="../assets/images/energy-20260327-085242.png" /></p>
+<ol>
+<li><code>getShuntVoltage_mV()</code> Voltage drop across the small $0.1 \Omega$ shunt resistor on the board. This is the raw data used to determine how much current is flowing (see <code>getCurrent_mA()</code>).</li>
+<li><code>getBusVoltage_V()</code> Voltage between the V- pin and Ground.  This tells you the nominal supply voltage to the load; doesn’t include the small drop across the shunt resistor.</li>
+<li><code>getCurrent_mA()</code> The chip takes the Shunt Voltage and divides it by the Shunt Resistance $I = \frac{V_{shunt}}{R_{shunt}}$</li>
+<li><code>getPower_mW()</code> A simple multiplication of the bus voltage and the current. $P = V_{bus} \times I$</li>
+<li><code>loadvoltage = busvoltage + (shuntvoltage / 1000)</code>This line calculates the total voltage at the source. Since there is a tiny drop across the sensor itself, the "true" source voltage is the voltage at the load plus what was lost across the shunt. Note that we divide shuntvoltage by 1000 to convert millivolts into volts so the units match.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm">  ESP32 Deep Sleep Mode Timer Wake UP</span>
+<span class="cm"> http:://www.electronicwings.com</span>
+<span class="cm">*/</span><span class="w"> </span>
+
+
+<span class="cp">#define Time_To_Sleep 5   </span><span class="c1">//Time ESP32 will go to sleep (in seconds)</span>
+<span class="cp">#define S_To_uS_Factor 1000000ULL      </span><span class="c1">//Conversion factor for micro seconds to seconds </span>
+
+<span class="n">RTC_DATA_ATTR</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bootCount</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">//Take some time to open up the Serial Monitor</span>
+
+<span class="w">  </span><span class="c1">//Increment boot number and print it every reboot</span>
+<span class="w">  </span><span class="o">++</span><span class="n">bootCount</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Boot number: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">bootCount</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">//Set timer to 5 seconds</span>
+<span class="w"> </span><span class="n">esp_sleep_enable_timer_wakeup</span><span class="p">(</span><span class="n">Time_To_Sleep</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">S_To_uS_Factor</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Setup ESP32 to sleep for every &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">Time_To_Sleep</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="s">&quot; Seconds&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">//Go to sleep now</span>
+<span class="w">  </span><span class="n">esp_deep_sleep_start</span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;This will not print!!&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// This will not get print,as ESP32 goes in Sleep mode.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// We don&#39;t need loop as ESP32 will initilize each time.</span>
+</code></pre></div>
+<p>We use <a href="https://github.com/nathandunk/BetterSerialPlotter">Better Serial Plotter</a> to visualize the data.</p>
+<p><img alt="" src="../assets/images/2025-04-11-10-45-59.png" /></p>
+<p>A powerful alternative is <a href="https://github.com/Serial-Studio/Serial-Studio?tab=readme-ov-file">Serial-Studio</a></p>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Write a simple code  that  mimics the diagram at the beginning of this section of a typical sensor working scenario and measure the consumption of each activity</p>
+</div>
+<h2 id="energy-harvesting">Energy Harvesting</h2>
+<p><a href="https://randomnerdtutorials.com/power-esp32-esp8266-solar-panels-battery-level-monitoring/">Power ESP32/ESP8266 with Solar Panels</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/andrea-vitaletti-3651442/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
