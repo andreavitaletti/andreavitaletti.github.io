@@ -22,3 +22,7 @@ that are currently organizing together the 1st International Workshop on on Comp
 Cooking.
 
 The [site of the project](https://andreavitaletti.github.io/Grains-of-Insight/)
+
+## References
+
+A [bibtex file](assets/ComputationalGastronomy.bib) with relevant references
