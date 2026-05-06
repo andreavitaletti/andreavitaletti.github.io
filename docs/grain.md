@@ -25,4 +25,4 @@ The [site of the project](https://andreavitaletti.github.io/Grains-of-Insight/)
 
 ## References
 
-A [bibtex file](assets/ComputationalGastronomy.bib) with relevant references
+[A Zotero library on Computational Gastronomy and rice specifically](https://www.zotero.org/groups/6504580/computational_gastronomy/library)
