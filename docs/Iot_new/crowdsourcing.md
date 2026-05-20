@@ -18,6 +18,36 @@ Instead, we aim at developing solution where a node, in our case an ESP32, colle
 
 For this reason, we will use fast prototyping mobile app tools. 
 
+## ESP32 BLE + Web Bluetooth (Chrome on Android)
+
+Zero app install, runs in the browser:
+
+- Chrome on Android supports Web Bluetooth API
+- A small HTML/JS page can connect to the ESP32 via BLE, read characteristics, grab GPS via the Geolocation API, and POST to your server
+- Caveat: Web Bluetooth is Chrome/Android only (no iOS Safari support)
+- Code available at [https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Crowd](https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Crowd)
+
+### esp32/esp32_ble_sensor.ino
+
+- Creates a GATT server with two characteristics: a notify one that pushes JSON readings every 5 seconds, and a write one to receive commands from the phone
+- The readSensors() stub is where you drop your DHT22 code — everything else is wired up
+- No extra libraries needed beyond the ESP32 Arduino core
+
+### web/gateway.html
+
+- Single self-contained file, no build step
+- Connects to the ESP32 via navigator.bluetooth.requestDevice(), subscribes to notifications, and decodes the JSON payload
+- Grabs phone GPS via navigator.geolocation.watchPosition()
+- Merges both into an enriched payload and POSTs it to your server URL
+- Has an auto-send toggle so every new BLE reading triggers an upload automatically
+
+### Key practical notes:
+
+- The UUIDs in both files must match — generate fresh ones at uuidgenerator.net if you deploy multiple nodes
+- For local testing, opening gateway.html directly from the phone filesystem (file://) works fine in Chrome Android — no HTTPS needed
+- For remote hosting, HTTPS is mandatory (GitHub Pages is the zero-effort option)
+
+
 ## [Remotexy](https://remotexy.com/) 
 
 [Remotexy](https://remotexy.com/) it's probably the easiest way 
@@ -25,6 +55,7 @@ For this reason, we will use fast prototyping mobile app tools.
 * A nice tutorial by [Andreas Spiess](https://www.youtube.com/watch?v=dyEnOyQS1w8)
 * [Temperature sensor output values on smartphone](https://remotexy.com/en/examples/temperature/)
 * [ESP32 Bluetooth LE](https://remotexy.com/en/help/start/esp32-bluetooth/)
+* Caveat: the gateway functionality cannot be implemented
 
 ![](assets/images/remoteXY.png)
 

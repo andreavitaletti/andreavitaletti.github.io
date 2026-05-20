@@ -11,6 +11,8 @@
 
 ## Kalman Filters
 
+Fantastic series of [lectures](https://www.youtube.com/playlist?list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT) on Kalman Filters by prof. Michel van Biezen. The [Simple Kalman Filter Library](https://github.com/denyssene/SimpleKalmanFilter) to run those filters in ESP32.
+
 A very nice, rich an exhaustive source of documentation for Kalman filters is available [here](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
 
 The main idea is that both our prior knowledge and the measurements of our sensors are to some extent inaccurate. To model such inaccuracy we use a Gaussian with mean $\mu$ and variance $\rho$
@@ -28,4 +30,3 @@ Iteration after iteration the variance decreases (the spread of the blue gaussia
 ![](assets/images/evolution.gif)
 
 A reference library is available [here](https://github.com/denyssene/SimpleKalmanFilter)
-
