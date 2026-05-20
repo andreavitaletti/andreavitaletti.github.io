@@ -44,7 +44,7 @@ Zero app install, runs in the browser:
 ### Key practical notes:
 
 - The UUIDs in both files must match — generate fresh ones at uuidgenerator.net if you deploy multiple nodes
-- HTTPS is mandatory: GitHub Pages is the zero-effort option
+- HTTPS is mandatory: GitHub Pages is the zero-effort option [https://andreavitaletti.github.io/PlatformIO/gateway.html](https://andreavitaletti.github.io/PlatformIO/gateway.html)
 
 ![](assets/images/web.jpg)
 
