@@ -44,8 +44,9 @@ Zero app install, runs in the browser:
 ### Key practical notes:
 
 - The UUIDs in both files must match — generate fresh ones at uuidgenerator.net if you deploy multiple nodes
-- For local testing, opening gateway.html directly from the phone filesystem (file://) works fine in Chrome Android — no HTTPS needed
-- For remote hosting, HTTPS is mandatory (GitHub Pages is the zero-effort option)
+- HTTPS is mandatory: GitHub Pages is the zero-effort option
+
+![](assets/images/web.jpg)
 
 
 ## [Remotexy](https://remotexy.com/) 
