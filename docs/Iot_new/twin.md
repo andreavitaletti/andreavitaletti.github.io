@@ -1,10 +1,55 @@
 # Digital Twin
 
-A **digital twin** is a virtual representation of a physical system that stays continuously synchronized with it through real-time data, enabling real-time monitoring, predictive simulation, and closed-loop control. In other words, it is a live, data-driven model of a real object, process, or environment. Specifically, sensors on the physical system send continuous data to the digital model, keeping the digital twin up-to-date with what is happening in reality. This data also trains and feeds a model, which is the core component to run simulations to predict performance, failures, and behavior under different conditions. This enables testing different scenarios, including most problematic ones, without putting at risk the real system. The results of the simulations inform decision-makers and guide the actions into the physical system, enabling adaptive control, automated tuning, and optimization of operation. In summary, a typical digital twin forms an iterative loop,  continuously improving with more data, encompassing the following tasks: sense, model, predict, act. This enables faster experimentation rounds (especially when physical tests are slow or expensive), cost reduction, enhanced reliability, intelligent automation, and continuous improvement through data-driven feedback.
+A **digital twin** is a virtual representation of a physical system that stays continuously synchronized with it through real-time data, enabling real-time monitoring, predictive simulation, and closed-loop control. In other words, it is a live, data-driven model of a real object, process, or environment. Specifically, sensors on the physical system send continuous data to the digital model, keeping the digital twin up-to-date with what is happening in reality. This data also trains and feeds a model, which is the core component to run simulations to predict performance, failures, and behavior under different conditions. This enables testing different scenarios, including most problematic ones, without putting at risk the real system. The results of the simulations inform decision-makers and guide the actions into the physical system, enabling adaptive control, automated tuning, and optimization of operation. In summary, a typical digital twin forms an iterative loop,  continuously improving with more data, encompassing the following tasks: sense, model, predict act. This enables faster experimentation rounds (especially when physical tests are slow or expensive), cost reduction, enhanced reliability, intelligent automation, and continuous improvement through data-driven feedback.
 
 The following picture depicts a Digital Twin for a fermentator developed in collaboration with [yeastime](https://yeastime.com/)
 
 ![](assets/images/DT.drawio.png)
+
+### The 3 Levels of Digital Convergence
+1. **Digital Model:** The physical and virtual elements exist independently. No automated data exchange occurs.
+2. **Digital Shadow:** Data flows automatically from the physical object to the digital object (e.g., standard IoT monitoring dashboards).
+3. **Digital Twin:** Data flows bidirectionally. Telemetry updates the virtual model, and the virtual model runs predictive simulations to optimize parameters and **actively send commands back** to change the physical object’s behavior.
+
+## Smart Incubator Thermal Management
+
+We will optimize a thermal incubator chamber tasked with protecting sensitive biomedical samples. 
+
+![](assets/images/DT.png)
+
+### The Physical System (The ESP32 Edge Device)
+The incubator contains a heating element and a temperature sensor. To reach a new target temperature, it relies on two operating parameters:
+
+* **ECO Mode ($0$):** Consumes very low power ( $45\text{W}$ ), but increases heat gradually.
+* **BOOST Mode ($1$):** Provides high thermal flux but triggers massive power overhead ($180\text{ W}$).
+
+### The Operational Constraint
+The biomedical samples will spoil if they remain outside their target temperature window for too long. 
+
+**System Constraint:** The target temperature *must* be reached within **45 seconds**. 
+
+### The Mathematics of the Twin: Dynamic Simulation
+
+Instead of using hardcoded formulas, our Digital Twin uses a **Physics-Based Dynamic Simulation** running right in the web browser. It models thermodynamics using **Newton's Law of Cooling**:
+
+$$\frac{dT}{dt} = -K \cdot (T_{\text{current}} - T_{\text{ambient}}) + Q_{\text{heater}}$$
+
+Where:
+* $T_{\text{current}}$ = Current temperature of the incubator (°C)
+* $T_{\text{ambient}}$ = Surrounding room temperature ($20^\circ\text{C}$)
+* $K$ = Thermal dissipation coefficient (rate of heat leaking out)
+* $Q_{\text{heater}}$ = Active thermal energy added by the heater parameter matrix ($Q_{\text{eco}}$ vs $Q_{\text{boost}}$)
+
+### Numerical Integration (Euler / Runge-Kutta Approach)
+Because computers cannot natively solve continuous calculus equations in real time, the Digital Twin uses numerical integration to project states forward in time. Step-by-step, it solves the future trajectory:
+
+$$T(t + \Delta t) = T(t) + \left[ \frac{dT}{dt} \right] \cdot \Delta t$$
+
+When you request a new target temperature, the twin immediately boots **two parallel simulation threads** evaluating the system state second-by-second up to 3 minutes into the future.
+
+[https://andreavitaletti.github.io/PlatformIO/DT.html](https://andreavitaletti.github.io/PlatformIO/DT.html)
+
+[https://andreavitaletti.github.io/PlatformIO/DT1.html](https://andreavitaletti.github.io/PlatformIO/DT1.html)
 
 ## Estimating clock drift 
 
