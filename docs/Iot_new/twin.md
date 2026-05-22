@@ -35,13 +35,13 @@ Instead of using hardcoded formulas, our Digital Twin uses a **Physics-Based Dyn
 $$\frac{dT}{dt} = -K \cdot (T_{\text{current}} - T_{\text{ambient}}) + Q_{\text{heater}}$$
 
 Where:
-* $T_{\text{current}}$ = Current temperature of the incubator (°C)
-* $T_{\text{ambient}}$ = Surrounding room temperature ($20^\circ\text{C}$)
-* $K$ = Thermal dissipation coefficient (rate of heat leaking out)
-* $Q_{\text{heater}}$ = Active thermal energy added by the heater parameter matrix ($Q_{\text{eco}}$ vs $Q_{\text{boost}}$)
+
+- $T_{\text{current}}$ = Current temperature of the incubator (°C)
+- $T_{\text{ambient}}$ = Surrounding room temperature ($20^\circ\text{C}$)
+- $K$ = Thermal dissipation coefficient (rate of heat leaking out)
+- $Q_{\text{heater}}$ = Active thermal energy added by the heater parameter matrix ($Q_{\text{eco}}$ vs $Q_{\text{boost}}$)
 
 ### Numerical Integration (Euler / Runge-Kutta Approach)
-Because computers cannot natively solve continuous calculus equations in real time, the Digital Twin uses numerical integration to project states forward in time. Step-by-step, it solves the future trajectory:
 
 $$T(t + \Delta t) = T(t) + \left[ \frac{dT}{dt} \right] \cdot \Delta t$$
 
