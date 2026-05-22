@@ -6,8 +6,8 @@ The following picture depicts a Digital Twin for a fermentator developed in coll
 
 ![](assets/images/DT.drawio.png)
 
-![slides](https://github.com/andreavitaletti/slides/blob/main/IE2026/presentation.pdf)
-![paper](https://github.com/andreavitaletti/slides/blob/main/IE2026/Paper_Proof_of_Concept_for_a_Digital_Twin_of_an_Ultrasonic_Fermentation_System.pdf)
+- [slides](https://github.com/andreavitaletti/slides/blob/main/IE2026/presentation.pdf)
+- [paper](https://github.com/andreavitaletti/slides/blob/main/IE2026/Paper_Proof_of_Concept_for_a_Digital_Twin_of_an_Ultrasonic_Fermentation_System.pdf)
 
 ### The 3 Levels of Digital Convergence
 1. **Digital Model:** The physical and virtual elements exist independently. No automated data exchange occurs.
