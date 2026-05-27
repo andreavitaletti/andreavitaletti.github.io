@@ -130,8 +130,32 @@ role of rice through a data science lens, with a particular focus on two gastron
 
 * I was a researcher in the European project DELIS (Dynamically Evolving, Large-scale Information Systems - http://delis.upb.de/). The project has developed methods, techniques and tools to effectively manage modern information systems, characterized by large and extremely dynamic information.
 
-* In the EU SOFIA project (Artemisia - https://www.artemisia-association.org/sofia), I was task leader for TASK3.3 in WP3. The SOFIA project has created a platform for interoperability between embedded systems in smart environments.                                                                                                                                                                             |
+* In the EU SOFIA project (Artemisia - https://www.artemisia-association.org/sofia), I was task leader for TASK3.3 in WP3. The SOFIA project has created a platform for interoperability between embedded systems in smart environments.                                                                                                                   <!--
+MISE SIAE   PI Sapienza 500K
+MISE REASSET Responsabile attività blockchain. 500K
+Sapienza Project on Blockchain and Public Administration. Coordinatore 30K
+FP7-PEOPLE-ITN-2008 responsabile unità, 3.1 Mln.
+FP7-ICT-2009-5 responsabile di unità, 3.4 Mln.
+ARTEMISI-JU call 2009,  responsabile di unità, 17.8 Mln.
+EU EUROSTARS-EUREKA, PharmAID, responsabile di unità, 2 Mln.
+FP7-ICT-2011-C FET OPEN, coordinatore, EUR 1.46 Mln.
+EU FI-ADOPT, Coordinatore, 150K
+-->                                                 |
   
+## Awards
+
+- 2000: Winner of media and communication category at Wonderland Contest
+- 2002: Innovation Prize at Simagine 2002,
+- 2004: Bronze Award at Simagine 2004
+- 2007: Third place award in the Start Cup Roma
+- 2008: Top prize winner at Premio Perotto 2008 sponsored by AICA and Confindustria
+- 2010: Honorable Mention at Premio Nazionale Innovazione nei Servizi 2010 organized by Confcommercio
+- 2012: Winner of Italiacamp with COVA (Crowd funding for cOnserving and VAlorizing minor monuments) 
+- 2020: Algorand Grand Prize at Future of Blockchain Competition.
+
+
+
+
 ## Research
 
 The following figure shows the [Wordcloud](https://www.wordclouds.com/) of the abstracts of my papers downloaded from [Scopus](https://www.scopus.com/authid/detail.uri?authorId=6506463530) and I think well capture the evolution of my research interests.
@@ -154,6 +178,8 @@ From 2008 to 2017 I was member of the PhD board  in Computer Engineering @ Sapie
 
 Since 2018 I am member of the PhD board  in Data Science @ Sapienza
 
+I was a member of the Steering Board of ARTEMISIA - Artemis In Action - from 2010 to 2013, a European initiative dedicated to defining guidelines and research agendas for embedded systems.
+
 **Recent activities include**
 
 **2024**
@@ -171,6 +197,16 @@ Since 2018 I am member of the PhD board  in Data Science @ Sapienza
   Advanced tools, programming languages, and PLatforms for Implementing and Evaluating algorithms for Distributed systems, Held in conjunction with PODC-2025
 * PC member - [IEEE International Conference on Blockchain and Cryptocurrency](https://icbc2025.ieee-icbc.org/committees/technical-program-committee)
 * PC member - [The 8th IEEE International Conference on Blockchain](https://ieee-cybermatics.org/2025/blockchain/tpc.html)
+
+**2026**
+
+* Organizing Commitee of the 40th International Symposium on Distributed Computing ([DISC 2026](https://www.disc-conference.org/wp/disc2026/)) 
+
+## Editorial Activities
+
+- Guest editor of the special issue on Emerging Trends in Distributed Ledger Technology and its Applications on Blockchain: Research and Applications journal (Q1).
+- Editorial Board Fintech 
+- Topical Advisory Panel Sensor
 
 ## Publications
 
