@@ -54,6 +54,8 @@ In 2023 and 2024 Instructor, togheter with prof. Paolo Merialdo of “L’impren
 
 In 2025 Instructor for the 38 Escuela de Ciencias Informáticas [ECI 2025](https://eci.dc.uba.ar/) in Buenos Aires Argentina of the course on [The Evolution of Blockchain Technologies](https://eci.dc.uba.ar/cursos-eci/m2-the-evolution-of-blockchain-technologies/) 
 
+Instructor in the [4th International Summer School of Scientific and Computational Gastronomy](https://www.futurecookinglab.it/?page_id=1720)
+
 ## Transfer of Technology
 
 | From    | To    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
