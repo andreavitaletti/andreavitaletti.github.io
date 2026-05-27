@@ -51,7 +51,6 @@ nav:
       - Edge: Iot_new/edge.md
       - Crowdsourcing: Iot_new/crowdsourcing.md
       - Scale on Sim: Iot_new/scale.md
-  - IoT_old: https://andreavitaletti.github.io/IoT_short_course/
   - data-*: "data-* design.md"
   - links: links.md
   - thesis: thesis.md
