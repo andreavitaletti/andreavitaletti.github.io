@@ -31,6 +31,7 @@ Hobbies: Traveling, sailing, cycling, and paragliding. I also play the piano and
 | --------- | --------- | --------------------------------------------------------------------------------------------------- |
 | Dec. 2019 | Present   | Associate Professor at University of Rome “La Sapienza”                                             |
 | Nov. 2007 | Nov. 2019 | Assistant Professor (Ricercatore) University of Rome “La Sapienza”                                  |
+| Apr. 2021 | Aug. 2025| Co-founder and CTO of GIUSTA                                                |
 | Jul. 2007 | Jun. 2019 | Co-founder and CTO of [WSENSE](http://www.wsense.it)                                                |
 | Jul. 2002 | Jun. 2016 | Co-founder and CTO of WLAB (exit: sold to Alten)                                                    |
 | Mar. 2002 | Oct. 2007 | Post-doc and research grant at University of Rome “La Sapienza”                                     |
