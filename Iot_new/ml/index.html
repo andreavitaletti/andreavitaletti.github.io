@@ -1,0 +1,1735 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://andreavitaletti.github.io/Iot_new/ml/">
+      
+      
+        <link rel="prev" href="../web3/">
+      
+      
+        <link rel="next" href="../backend/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>ML - Andrea Vitaletti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lime" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ml-playground" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andrea Vitaletti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ML
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    Andrea Vitaletti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blockchain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Startup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Startup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/Learn%20from%20the%20master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn from the Master(s)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IoT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../premise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Premise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulate a node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../real/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A real node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS is better
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sampling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireless/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wireless
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../twin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Twin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iot and Web3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backnnd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../edge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../crowdsourcing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crowdsourcing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scale on Sim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://andreavitaletti.github.io/IoT_short_course/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT_old
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-%2A%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    data-*
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    thesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../grain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grains of Insight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ml-playground">ML Playground</h1>
+<p><a href="https://playground.scienxlab.org/">https://playground.scienxlab.org/</a>
+<a href="https://mlplaygrounds.com/machine/learning/linearRegression.html">https://mlplaygrounds.com/machine/learning/linearRegression.html</a></p>
+<h1 id="tensorflow-lite-micro-on-esp32">Tensorflow Lite Micro on ESP32</h1>
+<p>Reference examples are available <a href="https://github.com/espressif/tflite-micro-esp-examples">here</a>. You have to download from github <a href="https://github.com/espressif/esp-nn">esp-nn</a> and <a href="https://github.com/espressif/esp32-camera">esp32-camera</a> and place them into the relative folders under components.</p>
+<p>Then go to examples/hello_worlds and as usual idf.py build, idf.py flash and finally idf.py monitor.</p>
+<p>A nice explanation on how the model is generated can be found on the book <a href="https://www.oreilly.com/library/view/tinyml/9781492052036/ch04.html">TinyML by Pete Warden, Daniel Situnayake</a>. The corresponding jupyter notebook is available <a href="https://colab.research.google.com/github/goodboychan/goodboychan.github.io/blob/main/_notebooks/2020-09-24-01-Training-Hello-world-Model-for-Microcontroller.ipynb">here</a></p>
+<p>Some other useful resources are listed below:</p>
+<ul>
+<li><a href="https://medium.com/@dmytro.korablyov/first-steps-with-esp32-and-tensorflow-lite-for-microcontrollers-c2d8e238accf">First steps with ESP32 and TensorFlow Lite for Microcontrollers</a></li>
+<li><a href="https://www.tensorflow.org/lite/microcontrollers/get_started_low_level">Get started with microcontrollers</a></li>
+</ul>
+<h2 id="anomaly-detection">Anomaly detection</h2>
+<p>Build a <strong>real-time anomaly detector</strong> that identifies unusual patterns in sensor data (e.g., temperature, vibration, or audio) directly on the ESP32 using TinyML.</p>
+<hr />
+<h2 id="step-1-choose-a-dataset-sensor">Step 1: Choose a dataset / sensor</h2>
+<p>Some options suitable for ESP32 sensors:</p>
+<table>
+<thead>
+<tr>
+<th>Sensor type</th>
+<th>Example dataset / task</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accelerometer</td>
+<td>Detect unusual movement of a device (falling, shaking)</td>
+<td>Use onboard MPU6050</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>Detect abnormal temperature spikes</td>
+<td>Simple, easy for TinyML</td>
+</tr>
+<tr>
+<td>Microphone</td>
+<td>Detect unusual sounds (e.g., clapping, alarm)</td>
+<td>Use I2S mic, feasible with Edge Impulse</td>
+</tr>
+<tr>
+<td>Vibration</td>
+<td>Predict machine anomalies</td>
+<td>Requires IMU or piezo sensor</td>
+</tr>
+<tr>
+<td>## Step 2: Define the anomaly detection approach</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>There are several approaches suitable for TinyML:</p>
+<ol>
+<li><strong>Statistical thresholding</strong><ul>
+<li>Keep a running mean &amp; standard deviation of sensor readings.</li>
+<li>Flag readings that are &gt;2–3σ from the mean.</li>
+<li>Pros: very light, easy on ESP32 RAM.</li>
+<li>Cons: sensitive to noise.</li>
+</ul>
+</li>
+<li><strong>One-class ML model</strong><ul>
+<li>Train a model only on “normal” data, flag anything deviating.</li>
+<li>TinyML-compatible options:<ul>
+<li><strong>TensorFlow Lite for Microcontrollers (TFLM)</strong> with a small fully connected NN</li>
+<li><strong>Isolation Forest</strong> (can be converted to tiny NN)</li>
+<li><strong>Autoencoder</strong>: small network compressing and reconstructing input, high reconstruction error → anomaly</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>TinyML library examples</strong><ul>
+<li><strong>Edge Impulse Anomaly Detection</strong>: supports accelerometer, microphone, temp sensors. Generates ready-to-deploy TFLite micro models for ESP32.</li>
+</ul>
+</li>
+</ol>
+<h2 id="step-3-preprocessing-feature-extraction">Step 3: Preprocessing &amp; feature extraction</h2>
+<p>Depending on the sensor:</p>
+<table>
+<thead>
+<tr>
+<th>Sensor</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accelerometer</td>
+<td>RMS, mean, variance, FFT energy</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>Rolling mean, slope, variance</td>
+</tr>
+<tr>
+<td>Microphone</td>
+<td>MFCCs, energy, zero-crossing rate</td>
+</tr>
+<tr>
+<td>Vibration</td>
+<td>RMS, spectral centroid, peak-to-peak</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Keep the features small (&lt;10–20 floats) to fit TinyML models on ESP32.</p>
+</blockquote>
+<h2 id="step-4-train-the-model">Step 4: Train the model</h2>
+<ol>
+<li>Collect “normal” data with ESP32 or simulate in Python.</li>
+<li>Train a tiny autoencoder or fully connected NN (e.g., 2–3 hidden layers, 16–32 neurons each).</li>
+<li>Convert to <strong>TensorFlow Lite for Microcontrollers</strong>.</li>
+<li>Load onto ESP32 using Arduino, PlatformIO, or ESP-IDF.</li>
+</ol>
+<hr />
+<h2 id="step-5-run-inference-on-esp32">Step 5: Run inference on ESP32</h2>
+<ul>
+<li>Sample the sensor every X ms (e.g., 100 ms).</li>
+<li>Feed the features to the TinyML model.</li>
+<li>Compute anomaly score:<ul>
+<li>Autoencoder: <code>score = ||input - reconstructed||</code></li>
+<li>Threshold: if score &gt; threshold → anomaly</li>
+</ul>
+</li>
+<li>Optional: trigger an LED, buzzer, or send a message via Wi-Fi/LoRa.</li>
+</ul>
+<hr />
+<h2 id="exercise">Exercise</h2>
+<ol>
+<li>Collect <strong>1 minute of normal temperature data</strong> from ESP32 sensor.</li>
+<li>Train a <strong>TinyML autoencoder</strong> on this data.</li>
+<li>Introduce a <strong>synthetic anomaly</strong> (e.g., sudden spike).</li>
+<li>Deploy model on ESP32.</li>
+<li>Detect anomaly <strong>in real time</strong> and light up LED.</li>
+<li>Optional challenge: add <strong>wireless logging</strong> of anomalies to a server.</li>
+</ol>
+<h2 id="python-tensorflow-training-the-autoencoder">Python / TensorFlow – Training the Autoencoder</h2>
+<pre><code class="language-python">
+import tensorflow as tf
+
+import numpy as np
+
+# 1.0 Create dummy data (Normal = 20-30 degrees)
+#data = np.random.uniform(20, 30, (1000, 1)).astype('float32')
+
+# 1.1 Mean of 25 degrees, standard deviation of 2
+data = np.random.normal(25, 2, (1000, 1)).astype('float32')
+# Clip it to ensure it stays within reasonable physical bounds
+data = np.clip(normal_data, 15, 35)
+
+# 2. Define the Autoencoder
+model = tf.keras.Sequential([
+tf.keras.layers.Input(shape=(1,)),
+tf.keras.layers.Dense(4, activation='relu'), # Encoder
+tf.keras.layers.Dense(1, activation='linear') # Decoder
+])
+
+model.compile(optimizer='adam', loss='mse')
+model.fit(data, data, epochs=50, verbose=0)
+
+#######################################################################
+
+# 3. Convert to TFLit
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+
+# 4. Save as a C header file
+with open(&quot;model_data.h&quot;, &quot;wb&quot;) as f:
+    f.write(b&quot;const unsigned char autoencoder_model_data[] = {\n&quot;)
+
+    # Convert binary to hex strings
+    hex_data = [f&quot;0x{b:02x}&quot; for b in tflite_model]
+    f.write(&quot;, &quot;.join(hex_data).encode())
+    f.write(b&quot;\n};\n&quot;)
+    f.write(f&quot;const unsigned int autoencoder_model_data_len = {len(tflite_model)};&quot;.encode())
+
+</code></pre>
+<p>This trains a tiny autoencoder on "normal" temperature values. A convenient way to make a test is to use Colab</p>
+<pre><code class="language-python">
+test_anomaly = np.array([[50.0]]) # Way too hot!
+prediction = model.predict(test_anomaly)
+print(f&quot;Input: 50.0, Reconstruction: {prediction[0][0]}, Error: {abs(50.0 - prediction[0][0])}&quot;)
+
+</code></pre>
+<p>Adding <strong>Normalization</strong> is the "secret sauce" for neural networks.</p>
+<pre><code class="language-python">
+import numpy as np
+import tensorflow as tf
+
+# Define expected range
+MIN_TEMP = 10.0
+MAX_TEMP = 40.0
+
+def normalize(val):
+    return (val - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)
+
+# Generate normal training data (20 to 30 degrees)
+raw_data = np.random.normal(25, 2, (1000, 1)).astype('float32')
+normalized_data = normalize(raw_data)
+
+# Simple Autoencoder
+model = tf.keras.Sequential([
+    tf.keras.layers.Input(shape=(1,)),
+    tf.keras.layers.Dense(8, activation='relu'), 
+    tf.keras.layers.Dense(1, activation='sigmoid') # Sigmoid forces output 0-1
+])
+
+model.compile(optimizer='adam', loss='mse')
+model.fit(normalized_data, normalized_data, epochs=50, verbose=0)
+
+# Export... (use the same conversion script as before)
+
+</code></pre>
+<h2 id="arduino-esp32-load-run-tflite-model">Arduino / ESP32 – Load &amp; Run TFLite Model</h2>
+<pre><code class="language-c">#include &lt;Arduino.h&gt;
+#include &quot;model_data.h&quot; // Must contain autoencoder_model_data and autoencoder_model_data_len
+
+// TensorFlow Lite Micro Headers
+#include &quot;tensorflow/lite/micro/all_ops_resolver.h&quot;
+#include &quot;tensorflow/lite/micro/micro_interpreter.h&quot;
+#include &quot;tensorflow/lite/micro/micro_error_reporter.h&quot;
+#include &quot;tensorflow/lite/schema/schema_generated.h&quot;
+
+// --- Configuration ---
+#define SENSOR_PIN 34
+#define LED_PIN 2
+
+// Normalization constants (Must match your Python script!)
+const float MIN_TEMP = 10.0;
+const float MAX_TEMP = 40.0;
+const float ANOMALY_THRESHOLD = 0.15; // 15% reconstruction error
+
+// --- TFLM Globals ---
+// Alignment is crucial for ESP32/ARM performance
+alignas(16) uint8_t tensor_arena[15 * 1024]; 
+
+tflite::MicroInterpreter* interpreter = nullptr;
+TfLiteTensor* input = nullptr;
+TfLiteTensor* output = nullptr;
+static tflite::MicroErrorReporter error_reporter;
+
+void setup() {
+    Serial.begin(115200);
+    pinMode(LED_PIN, OUTPUT);
+    delay(1000);
+
+    Serial.println(&quot;Initializing Anomaly Detector...&quot;);
+
+    // 1. Load the Model
+    const tflite::Model* model = tflite::GetModel(autoencoder_model_data);
+    if (model-&gt;version() != TFLITE_SCHEMA_VERSION) {
+        Serial.println(&quot;Model schema mismatch!&quot;);
+        while (1);
+    }
+
+    // 2. Resolver (Registers the layers like Dense, Relu)
+    static tflite::AllOpsResolver resolver;
+
+    // 3. Create Interpreter
+    static tflite::MicroInterpreter static_interpreter(
+        model, resolver, tensor_arena, sizeof(tensor_arena), &amp;error_reporter);
+
+    interpreter = &amp;static_interpreter;
+
+    // 4. Allocate memory for tensors
+    TfLiteStatus allocate_status = interpreter-&gt;AllocateTensors();
+    if (allocate_status != kTfLiteOk) {
+        Serial.println(&quot;AllocateTensors() failed! Increase arena size.&quot;);
+        while (1);
+    }
+
+    // 5. Get pointers to input/output buffers
+    input = interpreter-&gt;input(0);
+    output = interpreter-&gt;output(0);
+
+    Serial.println(&quot;System Ready. Monitoring Sensor...&quot;);
+}
+
+void loop() {
+    // --- 1. Data Acquisition &amp; Scaling ---
+    // Read 12-bit analog (0-4095) and convert to Celsius (example math)
+    float raw_voltage = analogRead(SENSOR_PIN) * (3.3 / 4095.0);
+    float raw_temp = (raw_voltage * 10.0) + 20.0; 
+
+    // Normalize to 0.0 - 1.0 (Same as Python!)
+    float normalized_input = (raw_temp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP);
+
+    // Safety clip to keep input within 0.0 and 1.0
+    if (normalized_input &lt; 0.0f) normalized_input = 0.0f;
+    if (normalized_input &gt; 1.0f) normalized_input = 1.0f;
+
+    // --- 2. Inference ---
+    input-&gt;data.f[0] = normalized_input;
+
+    TfLiteStatus invoke_status = interpreter-&gt;Invoke();
+    if (invoke_status != kTfLiteOk) {
+        Serial.println(&quot;Inference failed!&quot;);
+        return;
+    }
+
+    float normalized_output = output-&gt;data.f[0];
+
+    // --- 3. Anomaly Logic ---
+    // Reconstruction error = |Input - Output|
+    float anomaly_score = abs(normalized_input - normalized_output);
+
+    // Convert reconstruction back to Celsius for display
+    float recon_temp = (normalized_output * (MAX_TEMP - MIN_TEMP)) + MIN_TEMP;
+
+    // --- 4. Reporting ---
+    Serial.print(&quot;Real: &quot;); Serial.print(raw_temp);
+    Serial.print(&quot; | Recon: &quot;); Serial.print(recon_temp);
+    Serial.print(&quot; | Score: &quot;); Serial.println(anomaly_score, 4);
+
+    if (anomaly_score &gt; ANOMALY_THRESHOLD) {
+        Serial.println(&quot;&gt;&gt;&gt; ANOMALY DETECTED! &lt;&lt;&lt;&quot;);
+        digitalWrite(LED_PIN, HIGH);
+    } else {
+        digitalWrite(LED_PIN, LOW);
+    }
+
+    delay(500); // 2Hz sampling
+}
+
+</code></pre>
+<ol>
+<li>In the context of an <strong>Autoencoder</strong>, an anomaly is detected when the model <strong>fails to recreate the input accurately</strong>. Anomaly Score == ∣∣x−x^∣∣ (see below)</li>
+<li>Very lightweight: <strong>fits ESP32 with ~2 KB tensor arena</strong>.</li>
+</ol>
+<h2 id="why-autoencoder">Why Autoencoder?</h2>
+<p>We want to <strong>detect anomalies</strong> in sensor data, e.g., temperature spikes, unusual vibration, or abnormal movement patterns.</p>
+<p>Key points:</p>
+<ul>
+<li><strong>Normal data is abundant</strong></li>
+<li><strong>Anomalies are rare</strong> or hard to label in advance</li>
+</ul>
+<p>This is a classic <strong>unsupervised anomaly detection problem</strong>.</p>
+<p>An <strong>autoencoder</strong> is a neural network trained to <strong>reconstruct its input</strong>:</p>
+<p><code>Input x  →  Encoder → Latent Space → Decoder → Output x̂ (reconstruction)</code></p>
+<ul>
+<li>It <strong>learns the patterns of “normal” data</strong>.</li>
+<li>If you feed it a <strong>normal sample</strong>, it reconstructs it accurately → low reconstruction error.</li>
+<li>If you feed it an <strong>anomalous sample</strong>, it cannot reconstruct it well → high reconstruction error.</li>
+</ul>
+<p>So the <strong>reconstruction error</strong> can be used as an <strong>anomaly score</strong>:</p>
+<p>Anomaly Score == ∣∣x−x^∣∣</p>
+<table>
+<thead>
+<tr>
+<th>Advantage</th>
+<th>Why it matters for ESP32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lightweight</strong></td>
+<td>A small autoencoder (few layers, few neurons) can run on a microcontroller.</td>
+</tr>
+<tr>
+<td><strong>No labeled anomalies needed</strong></td>
+<td>Only needs normal data to train. Useful because anomalies are rare.</td>
+</tr>
+<tr>
+<td><strong>Generalizable</strong></td>
+<td>Can detect anomalies that were not seen during training.</td>
+</tr>
+<tr>
+<td><strong>Simple inference</strong></td>
+<td>Forward pass only → low latency → real-time detection.</td>
+</tr>
+<tr>
+<td>## Alternative approaches vs autoencoder</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Pros</th>
+<th>Cons for ESP32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Statistical threshold (mean ± 3σ)</td>
+<td>Very light</td>
+<td>Doesn’t capture complex patterns; sensitive to noise</td>
+</tr>
+<tr>
+<td>One-class SVM</td>
+<td>Can capture nonlinear boundaries</td>
+<td>Memory-heavy; slower inference</td>
+</tr>
+<tr>
+<td>Isolation Forest</td>
+<td>Good for multidimensional data</td>
+<td>Not trivial to run on microcontrollers</td>
+</tr>
+<tr>
+<td>Autoencoder</td>
+<td>Captures complex patterns, light</td>
+<td>Needs tiny neural network tuning</td>
+</tr>
+</tbody>
+</table>
+<p>✅ Autoencoder is a <strong>perfect balance</strong> between capability and feasibility for TinyML on microcontrollers.</p>
+<h2 id="intuition">Intuition</h2>
+<p>Think of it like this:</p>
+<ul>
+<li>Autoencoder learns a <strong>“normal sensor behavior fingerprint.”</strong></li>
+<li>Anything that deviates from that fingerprint → flagged as anomaly.    </li>
+<li>Works for <strong>time series</strong>, <strong>multivariate data</strong>, or even <strong>audio features (MFCCs)</strong>.</li>
+</ul>
+<pre><code class="language-pgsql">
+         Normal Data                 Anomalous Data
+       ----------------          ----------------
+       Temp = 25 ± 0.5             Temp spike = 30
+           |                            |
+           v                            v
+      +-------------+             +-------------+
+      |   Encoder   |             |   Encoder   |
+      +-------------+             +-------------+
+           |                            |
+           v                            v
+     Latent representation         Latent representation
+           |                            |
+           v                            v
+      +-------------+             +-------------+
+      |   Decoder   |             |   Decoder   |
+      +-------------+             +-------------+
+           |                            |
+           v                            v
+      Reconstructed Temp = 25 ± 0.5   Reconstructed Temp ≈ 25.1
+           |                            |
+           v                            v
+   Reconstruction error ≈ 0        Reconstruction error ≈ 4.9
+           |                            |
+           v                            v
+   ✅ Normal                       ⚠️ Anomaly detected
+
+</code></pre>
+<ul>
+<li><strong>Normal Data</strong><ul>
+<li>Autoencoder is trained on “normal” temperature readings (~25°C).</li>
+<li>Encoder compresses input → decoder reconstructs it almost perfectly.</li>
+<li><strong>Reconstruction error ≈ 0 → Not an anomaly.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Anomalous Data</strong></p>
+<ul>
+<li>Temperature suddenly spikes to 30°C.</li>
+<li>Autoencoder has <strong>never seen this pattern</strong>, so reconstruction fails.</li>
+<li><strong>Reconstruction error is high → anomaly detected.</strong></li>
+</ul>
+</li>
+<li>
+<p>Works <strong>without labeled anomalies</strong>    </p>
+</li>
+<li><strong>Lightweight computation</strong>: forward pass only</li>
+<li>Can extend to <strong>multivariate input</strong> (temperature + humidity + vibration)</li>
+<li>Threshold on reconstruction error decides <strong>anomaly vs normal</strong></li>
+</ul>
+<p><img alt="reconstruction_error.png" src="../assets/images/reconstruction_error.png" /></p>
+<p><img alt="signal_vs_reconstruction-2026212474173.png" src="../assets/images/signal_vs_reconstruction-2026212474173.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/andrea-vitaletti-3651442/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

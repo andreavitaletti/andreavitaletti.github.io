@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="350pt"
+   height="350pt"
+   viewBox="0 0 350 350"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="logo1.svg"
+   inkscape:export-filename="/home/andrea/Documents/University/Didattica/IoT_short_course/docs_src/docs/assets/images/logo.png"
+   inkscape:export-xdpi="72"
+   inkscape:export-ydpi="72"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1292"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="pt"
+     showgrid="false"
+     inkscape:zoom="0.64052329"
+     inkscape:cx="397.33138"
+     inkscape:cy="561.25984"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1287">
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect2928"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <clipPath
+       id="presentation_clip_path"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         x="0"
+         y="0"
+         width="21000"
+         height="29700"
+         id="rect2" />
+    </clipPath>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g49"
+       transform="matrix(0.0235074,0,0,0.02242182,-64.515915,-176.17825)">
+      <g
+         id="id2"
+         class="Master_Slide">
+        <g
+           id="bg-id2"
+           class="Background" />
+        <g
+           id="bo-id2"
+           class="BackgroundObjects" />
+      </g>
+    </g>
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 48.554687,116.38867 v 0.75 h 67.160153 v -0.75 z"
+       id="path3466" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 107.97656,173.47266 -59.708982,71.18945 0.574219,0.48242 59.708983,-71.18945 z"
+       id="path3469" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 257.83789,173.49219 -0.60547,0.44336 52.23438,71.18945 0.60351,-0.44336 z"
+       id="path3472" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 250.06055,116.38867 v 0.75 h 59.70898 v -0.75 z"
+       id="path3475" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 309.49219,116.50977 -52.23242,56.95117 -0.0274,0.47461 52.8125,-56.91992 z"
+       id="path3478"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 48.814453,116.49219 -0.519531,0.54297 59.708988,56.95117 0.51757,-0.54297 z"
+       id="path3481" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 48.554687,244.5293 v 0.75 H 309.76953 v -0.75 z"
+       id="path3484" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 183.23828,146.91797 -0.67773,0.31836 67.16015,142.3789 0.67774,-0.32031 z"
+       id="path3487" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 182.56641,146.90234 -74.63477,142.37891 0.66406,0.34766 74.63672,-142.37696 z"
+       id="path3490" />
+    <path
+       style="color:#000000;fill:#000000;stroke-width:17;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 182.56055,47.148437 c -15.05577,-0.178792 -30.09705,2.653543 -40.63868,8.654297 -10.54162,6.000755 -16.51454,15.16449 -20.17578,25.845703 -3.66123,10.681214 -5.03221,22.888443 -6.40429,35.072263 l 0.74609,0.084 c 1.37208,-12.18383 2.74619,-24.344556 6.36914,-34.914065 3.62295,-10.569509 9.47333,-19.53865 19.83594,-25.4375 10.36261,-5.89885 25.30428,-8.732289 40.25976,-8.554688 14.95549,0.177602 29.9272,3.365079 40.35157,9.408204 10.42437,6.043126 16.36294,14.946143 20.08593,25.33789 3.723,10.391748 5.20995,22.265429 6.69727,34.164059 l 0.74414,-0.0918 c -1.48732,-11.89863 -2.97363,-23.821645 -6.73633,-34.324222 -3.7627,-10.502576 -9.82164,-19.592696 -20.41601,-25.734375 -10.59438,-6.14168 -25.66298,-9.330973 -40.71875,-9.509766 z"
+       id="path3493" />
+  </g>
+</svg>
