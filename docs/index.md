@@ -10,7 +10,7 @@ some_url: https://example.com
 # Andrea Vitaletti
 
 Andrea Vitaletti, Ph.D., Associate Professor of Computer Science at Sapienza University of Rome.
-My research focuses on designing systems for collecting, analyzing, and managing data in distributed networks, with a strong emphasis on decentralized governance. Over the years, I have worked on the Internet of Things (IoT), Distributed Ledger Technologies (DLT), and Federated Machine Learning, topics I also teach at Sapienza. More recently, I’ve started exploring Verifiable Computation and Computational Gastronomy
+My research focuses on designing systems for collecting, analyzing, and managing data in distributed networks, with a strong emphasis on decentralized governance. Over the years, I have worked on the Internet of Things (IoT), Distributed Ledger Technologies (DLT), and Federated Machine Learning, topics I also teach at Sapienza. More recently, my research has focused on Verifiable Computation and Computational Gastronomy.
 
 I am particularly interested in the trade-offs between data utility and privacy, as well as the balance between individual and collective interests in digital ecosystems. I have co-authored over 90 scientific papers and contributed to several European research projects, including serving as principal investigator and coordinator of the FET Open project PLEASED.
 
@@ -133,7 +133,9 @@ role of rice through a data science lens, with a particular focus on two gastron
 
 * I was a researcher in the European project DELIS (Dynamically Evolving, Large-scale Information Systems - http://delis.upb.de/). The project has developed methods, techniques and tools to effectively manage modern information systems, characterized by large and extremely dynamic information.
 
-* In the EU SOFIA project (Artemisia - https://www.artemisia-association.org/sofia), I was task leader for TASK3.3 in WP3. The SOFIA project has created a platform for interoperability between embedded systems in smart environments.                                                                                                                   <!--
+* In the EU SOFIA project (Artemisia - https://www.artemisia-association.org/sofia), I was task leader for TASK3.3 in WP3. The SOFIA project has created a platform for interoperability between embedded systems in smart environments.                                                                                                                
+
+<!--
 MISE SIAE   PI Sapienza 500K
 MISE REASSET Responsabile attività blockchain. 500K
 Sapienza Project on Blockchain and Public Administration. Coordinatore 30K
@@ -170,6 +172,8 @@ I initially focused on wireless networks for the collection of data to provide u
 A distinctive characteristics of my research is the attempt to always validate the performance of the proposed solutions, namely algorithms and protocols, both theoretically and practically.
 
 I lead the research activities on wireless sensor networks and the Internet of Things, in the research group on Computer Networks and Pervasive Systems of the Department of Automatic Computer Engineering and Management Antonio Ruberti della Sapienza University of Rome (DIAG). In this context, I enjoied the cooperation with several international research organizations, including: Research Academic Computer Technology Institute (Greece), Braunschweig University of Technology (Germany), Universitat Paderborn (Germany), University of Athens (Greece), Ben-Gurion University of the Negev (Israel), University of Salerno (Italy), Wroclaw University of Technology (Poland), Universitat Politecnica de Catalunya (Spain), University of Geneva (Switzerland), University of Lubeck (Germany).
+
+More recently, my research has focused on Verifiable Computation, where I have published papers in top-tier A* conferences such as the Network and Distributed System Security Symposium (NDSS) and the IEEE Symposium on Security and Privacy (SP), and on Computational Gastronomy. In this latter field, I am the Principal Investigator of the project Grains of Insight, co-chair of the 1st Workshop on Computational Gastronomy (CoGamy), and an active collaborator of Ganesh Bagler, widely regarded as one of the pioneers of Computational Gastronomy. I also regularly participate in the multidisciplinary group meetings on Scientific and Computational Gastronomy organized by Prof. Cassi, and I will serve as an instructor at the 4th International Summer School on Scientific and Computational Gastronomy.
 
 I founded the laboratory on the wireless sensor network at DIAG where the solutions - both hardware and software - designed in the our research activities, are implemented and tested in the field. In the lab, we developed and implemented the MagoNode: a new wireless device for WSN networks operating in the 2.4Ghz ISM band deployed in many field trials.
 
