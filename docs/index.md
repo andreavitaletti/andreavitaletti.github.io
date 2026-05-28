@@ -49,6 +49,8 @@ Andrea Vitaletti is instructor in the MOOC of Sapienza on Coursera entitled [“
 
 25-29 September 2023. Data Science PhD course: Crypto and Incentive-based Mechanisms for Blockchain Technology. Togheter with Vangelis Markakis (University of Athens), Ivan Visconti (University of Salerno) and Philip Lazos (Input Output IOG, United Kingdom).
 
+Lecturer of the [3rd Scientific School on Blockchain & Distributed Ledger Technologies]([https://](https://dlt-school.github.io/2022/) Pula (Italy), June 27 - July 1, 2022.
+
 [A Short Course on IoT ](https://andreavitaletti.github.io/IoT_short_course/) taught at the [University of Stellenbosch](https://www.sun.ac.za/english) (South Africa) the 19th and 21st July 2023 during an [Erasmus+](https://erasmus-plus.ec.europa.eu/resources-and-tools/mobility-and-learning-agreements/mobility-agreements) staff mobility for teaching visit. About 40 participants selected among more the 100 candidates. The second edition of the course was given in November 2024 at the [Business and Technology University](https://btu.edu.ge/en/home-english/) in Georgia.
 
 In 2023 and 2024 Instructor, togheter with prof. Paolo Merialdo of “L’imprenditoria digitale per la scuola” (Digital Entrepreneurship for the school) by [Fondazione i Lincei per la Scuola](https://www.linceiscuola.it/fondazione-lincei-scuola/). 
