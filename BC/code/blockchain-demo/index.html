@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Blockchain Node</title>
+<style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+    #chain { list-style: none; padding: 0; }
+    #chain li { font-family: monospace; font-size: 0.85rem; padding: 0.4rem 0; border-bottom: 1px solid #ddd; }
+    #log { font-family: monospace; font-size: 0.8rem; color: #555; max-height: 200px; overflow-y: auto; }
+    #log div { padding: 0.1rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Blockchain Node <span id="node-id"></span></h1>
+<p>Open this page in several tabs — each tab is an independent node talking over <code>BroadcastChannel</code>.</p>
+
+<div>
+    <input id="data-input" type="text" placeholder="block data">
+    <button id="mine-btn">Mine block</button>
+</div>
+
+<h2>Chain</h2>
+<ul id="chain"></ul>
+
+<h2>Network log</h2>
+<div id="log"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
