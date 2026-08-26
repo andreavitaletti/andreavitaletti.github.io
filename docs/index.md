@@ -4,7 +4,10 @@ summary: Curriculum Vitae
 authors:
     - Andrea Vitaletti
 date: \today
-some_url: https://example.com
+some_url: https://andreavitaletti.github.io/
+tags:
+  - Personal
+  - CV
 ---
 
 # Andrea Vitaletti
@@ -21,14 +24,14 @@ Hobbies: Traveling, sailing, cycling, and paragliding. I also play the piano and
 ## Education
 
 | From      | To        |                                                                                                                           |
-| --------- | --------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ---------- | ---------- | -------------------------------------------------- |
 | Nov. 1998 | Jan. 2002 | PhD in Engineering in Computer Science (Dottorato di Ricerca in Ingegneria Informatica), University of Rome “La Sapienza” |
 | Oct. 1992 | Feb. 1998 | MSc in Engineering in Computer Science (Laurea in Ingegneria Informatica), University of Rome “La Sapienza”               |
 
 ## Work Experience
 
 | From      | To        |                                                                                                     |
-| --------- | --------- | --------------------------------------------------------------------------------------------------- |
+| ---------- | ---------- | -------------------------------------------------- |
 | Dec. 2019 | Present   | Associate Professor at University of Rome “La Sapienza”                                             |
 | Nov. 2007 | Nov. 2019 | Assistant Professor (Ricercatore) University of Rome “La Sapienza”                                  |
 | Apr. 2021 | Aug. 2025 | Co-founder and CTO of GIUSTA                                                                        |
@@ -62,7 +65,7 @@ Instructor in the [4th International Summer School of Scientific and Computation
 ## Transfer of Technology
 
 | From    | To    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------- | ---------- | -------------------------------------------------- |
 | 2002    | 2016  | In 2002 I founded WLAB, a dynamic SME created to support applied research and prototyping  in the area of wireless technologies and pervasive and mobile computing. WLAB has been characterized  by the synergy with the universities of Rome (Sapienza and Tor Vergata) promoting a continuous and  effective technological transfer of innovative solutions from academia to the industry.  I was Chief Technology Officer (CTO) of WLAB until its sale in 2016                                                                                          |
 | 2012    | 2019  | In 2012 I founded WSENSE a spin-off of Sapienza University of Rome, with a strong and experienced R&D  team specialized in monitoring and communication systems with pioneering patented solutions in the  Internet of Underwater Things (IoUT). I was the CTO of WSENSE and I lead the activities for the development  of the WGATE, the cloud platform for the collection, analysis, visualisation and integration of IoT data.  WSENSE is an international company, with WSENSE Ltd hosted in the Marine Robotics Innovation Centre of Southampton U.K. |
 | 2014    | 2020  | Among the organizers of the Google Technologies Workshop for Cloud and Web Development now in its fifth edition.  The workshop is aimed at students to develop the skills leading them to the realization of a start-up.  The success of the workshop is also measured by the fact that some participants are now hosted in business accelerators                                                                                                                                                                                                          |
