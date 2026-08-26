@@ -8,6 +8,8 @@ proof-of-work, and resolve competing chains with the longest-chain rule.
 
 <iframe src="../code/blockchain-demo/index.html" width="100%" height="750" style="border:1px solid #ccc;"></iframe>
 
+[code](https://github.com/andreavitaletti/andreavitaletti.github.io/tree/master/docs/BC/code/blockchain-demo)
+
 ## Try it with multiple nodes
 
 `BroadcastChannel` is scoped to the whole site origin, not to this one
