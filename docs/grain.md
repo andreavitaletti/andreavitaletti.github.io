@@ -21,8 +21,20 @@ This project is also a unique opportunity to strengthen the already on-going col
 that are currently organizing together the 1st International Workshop on on Computational Gastronomy: Data Science for Food and
 Cooking.
 
-The [site of the project](https://andreavitaletti.github.io/Grains-of-Insight/)
+## A first attempt of an ontology on rice
+
+<iframe src="https://service.tib.eu/webvowl/#iri=https://gist.githubusercontent.com/andreavitaletti/fcfc9bc2a7ffea9496e184542141202f/raw/666d8fa9357a8c712ef9aec3057c08cfb7341c51/gistfile1.txt" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+* [Visualize the ontology](https://service.tib.eu/webvowl/#iri=https://gist.githubusercontent.com/andreavitaletti/fcfc9bc2a7ffea9496e184542141202f/raw/666d8fa9357a8c712ef9aec3057c08cfb7341c51/gistfile1.txt)
+* [The turtle file](https://gist.githubusercontent.com/andreavitaletti/fcfc9bc2a7ffea9496e184542141202f/raw/666d8fa9357a8c712ef9aec3057c08cfb7341c51/gistfile1.txt)
+
+## 4th International Summer School of Scientific and Computational Gastronomy 
+
+We presented our project at the [4th International Summer School of Scientific and Computational Gastronomy](https://www.futurecookinglab.it/?page_id=1721&lang=en)
+
+![](assets/images/rice1.jpg)
 
 ## References
 
-[A Zotero library on Computational Gastronomy and rice specifically](https://www.zotero.org/groups/6504580/computational_gastronomy/library)
+* [An article on the Indian Express](https://indianexpress.com/article/long-reads/how-ai-data-computational-gastronomy-redefining-flavour-pairings-10863553/)
+* [A Zotero library on Computational Gastronomy and rice specifically](https://www.zotero.org/groups/6504580/computational_gastronomy/library)
