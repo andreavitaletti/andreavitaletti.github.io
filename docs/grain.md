@@ -21,7 +21,7 @@ This project is also a unique opportunity to strengthen the already on-going col
 that are currently organizing together the 1st International Workshop on on Computational Gastronomy: Data Science for Food and
 Cooking.
 
-## A first attempt of an ontology on rice
+## A first attempt of an ontology on rice in gastronomy
 
 <iframe src="https://service.tib.eu/webvowl/#iri=https://gist.githubusercontent.com/andreavitaletti/fcfc9bc2a7ffea9496e184542141202f/raw/666d8fa9357a8c712ef9aec3057c08cfb7341c51/gistfile1.txt" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
