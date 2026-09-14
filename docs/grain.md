@@ -34,6 +34,10 @@ We presented our project at the [4th International Summer School of Scientific a
 
 ![](assets/images/rice1.jpg)
 
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQkauCk-OABsoCJex4lAdaA6Gmzj35hQPvBY0fgMAQbX8wJHZm6sjn22PHV-GUmnqTkicwvBnBh2WfU/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="1058" height="624" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ6OXOtkIWv4EUS8UO-nkNTl3nm8uRE31sqjNTF6JLiNzTSHZH-1g2Al9h1QSNzxvz9vxayj6gpvsXz/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
 ## References
 
 * [An article on the Indian Express](https://indianexpress.com/article/long-reads/how-ai-data-computational-gastronomy-redefining-flavour-pairings-10863553/)
