@@ -28,9 +28,9 @@ Cooking.
 * [Visualize the ontology](https://service.tib.eu/webvowl/#iri=https://gist.githubusercontent.com/andreavitaletti/fcfc9bc2a7ffea9496e184542141202f/raw/666d8fa9357a8c712ef9aec3057c08cfb7341c51/gistfile1.txt)
 * [The turtle file](https://gist.githubusercontent.com/andreavitaletti/fcfc9bc2a7ffea9496e184542141202f/raw/666d8fa9357a8c712ef9aec3057c08cfb7341c51/gistfile1.txt)
 
-## 4th International Summer School of Scientific and Computational Gastronomy 
+## 4th International Summer School of Scientific and Computational Gastronomy and II International Workshop of Scientific and Computational Gastronomy
 
-We presented our project at the [4th International Summer School of Scientific and Computational Gastronomy](https://www.futurecookinglab.it/?page_id=1721&lang=en)
+We presented our project at the [4th International Summer School of Scientific and Computational Gastronomy](https://www.futurecookinglab.it/?page_id=1721&lang=en) and at the [II International Workshop of Scientific and Computational Gastronomy](https://scientificgastronomy.org/education/workshops/workshop-2026/)
 
 ![](assets/images/rice1.jpg)
 
