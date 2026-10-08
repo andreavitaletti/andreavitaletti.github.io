@@ -1,0 +1,3016 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://andreavitaletti.github.io/IoT4PD/intro/">
+      
+      
+        <link rel="prev" href="../../Iot_new/scale/">
+      
+      
+        <link rel="next" href="../data-%2A%20design/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Outline - Andrea Vitaletti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="lime" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#iot-for-product-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Andrea Vitaletti" class="md-header__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Andrea Vitaletti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Outline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Andrea Vitaletti" class="md-nav__button md-logo" aria-label="Andrea Vitaletti" data-md-component="logo">
+      
+  <img src="../../assets/images/logo.png" alt="logo">
+
+    </a>
+    Andrea Vitaletti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blockchain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/blockchain-demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blockchain fork &amp; proof-of-work demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BC/slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Startup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Startup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/Learn%20from%20the%20master/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn from the Master(s)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IoT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/premise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Premise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulate a node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/real/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A real node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS is better
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/sample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sampling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/wireless/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wireless
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/energy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/twin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Twin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/web3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iot and Web3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backnnd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/edge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/crowdsourcing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crowdsourcing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Iot_new/scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scale on Sim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT4PD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IoT4PD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Outline
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Outline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-running-scenario-the-connected-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Running scenario: "The Connected Studio"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-target-audience-and-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Target audience and prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-hardware-kit-per-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Hardware kit (per group)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-software-and-cloud-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Software and cloud stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Software and cloud stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-one-platform-arduino-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 One platform: Arduino Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-shared-conventions-the-variable-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Shared conventions: the "variable contract"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-the-compilation-budget-where-to-do-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 The "compilation budget": where to do what
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-overview-of-the-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Overview of the path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Overview of the path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concept-progression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept progression
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-detailed-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Detailed exercises
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Detailed exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-a-the-smart-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A — The smart object
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase A — The smart object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-0-hello-esp32-three-workspaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 0 — Hello ESP32: three workspaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-1-sensing-the-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1 — Sensing the world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-2-acting-on-the-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2 — Acting on the world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-3-the-isolated-smart-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3 — The isolated smart object
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-b-the-connected-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase B — The connected object
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase B — The connected object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-4-going-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4 — Going online
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-5-remote-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5 — Remote control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-6-the-object-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6 — The object as a service
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-c-the-ecosystem-goal-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase C — The ecosystem (Goal 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase C — The ecosystem (Goal 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-7-objects-talking-to-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 7 — Objects talking to objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-8-who-is-there-presence-and-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 8 — Who is there? Presence and resilience
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-9-the-orchestrator-scenes-rules-and-external-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 9 — The orchestrator: scenes, rules and external services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-10-ecosystem-design-sprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 10 — Ecosystem design sprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-d-data-driven-design-goal-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase D — Data-driven design (Goal 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase D — Data-driven design (Goal 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-11-remembering-storing-and-visualising-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 11 — Remembering: storing and visualising data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-12-how-is-it-really-used-use-and-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 12 — How is it really used? (use and design)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-13-keeping-it-alive-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 13 — Keeping it alive (maintenance)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-14-closing-the-loop-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 14 — Closing the loop (development)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final project
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Final project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-15-a-connected-product-service-designed-and-improved-with-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 15 — A connected product-service, designed and improved with data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-cross-cutting-themes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cross-cutting themes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-%2A%20design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    data-*
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    thesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../grain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grains of Insight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-running-scenario-the-connected-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Running scenario: "The Connected Studio"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-target-audience-and-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Target audience and prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-hardware-kit-per-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Hardware kit (per group)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-software-and-cloud-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Software and cloud stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Software and cloud stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-one-platform-arduino-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 One platform: Arduino Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-shared-conventions-the-variable-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Shared conventions: the "variable contract"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-the-compilation-budget-where-to-do-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 The "compilation budget": where to do what
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-overview-of-the-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Overview of the path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Overview of the path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concept-progression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept progression
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-detailed-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Detailed exercises
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Detailed exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-a-the-smart-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A — The smart object
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase A — The smart object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-0-hello-esp32-three-workspaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 0 — Hello ESP32: three workspaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-1-sensing-the-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1 — Sensing the world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-2-acting-on-the-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2 — Acting on the world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-3-the-isolated-smart-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 3 — The isolated smart object
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-b-the-connected-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase B — The connected object
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase B — The connected object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-4-going-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 4 — Going online
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-5-remote-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 5 — Remote control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-6-the-object-as-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6 — The object as a service
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-c-the-ecosystem-goal-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase C — The ecosystem (Goal 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase C — The ecosystem (Goal 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-7-objects-talking-to-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 7 — Objects talking to objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-8-who-is-there-presence-and-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 8 — Who is there? Presence and resilience
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-9-the-orchestrator-scenes-rules-and-external-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 9 — The orchestrator: scenes, rules and external services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-10-ecosystem-design-sprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 10 — Ecosystem design sprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-d-data-driven-design-goal-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase D — Data-driven design (Goal 2)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase D — Data-driven design (Goal 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-11-remembering-storing-and-visualising-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 11 — Remembering: storing and visualising data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-12-how-is-it-really-used-use-and-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 12 — How is it really used? (use and design)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-13-keeping-it-alive-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 13 — Keeping it alive (maintenance)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-14-closing-the-loop-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 14 — Closing the loop (development)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final project
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Final project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-15-a-connected-product-service-designed-and-improved-with-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 15 — A connected product-service, designed and improved with data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-cross-cutting-themes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cross-cutting themes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="iot-for-product-design">IoT for Product Design</h1>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>This set of exercises introduces product design students to the Internet of Things (IoT) through hands-on work with ESP32 boards programmed in Arduino. It has two goals:</p>
+<ol>
+<li><strong>From smart objects to ecosystems.</strong> Show that sensors, actuators and connectivity let us build an <em>ecosystem of cooperating objects</em>, not just isolated smart objects. The value comes from the relationships between objects, people and services.</li>
+<li><strong>From data to better products.</strong> Show that the data IoT devices collect can improve the <strong>design, development, use and maintenance</strong> of a product or service, closing the loop between the designer and the product in the field.</li>
+</ol>
+<p>The path goes step by step. Each exercise introduces <strong>one or two new concepts</strong> and reuses the skills from the previous ones. Every exercise ends with a short <strong>design reflection</strong>, because the aim is to train designers who understand what the technology makes possible, not to train embedded engineers.</p>
+<p>To minimize the burden of installintools,  all the connected parts of the course (connectivity, dashboards, phone control, data storage, notifications, remote updates) are done on a <strong>single platform: Arduino Cloud</strong>. The class is made of designers with little experience of programming tools, so the priority is to keep the number of tools, accounts and concepts as low as possible. Three tools are used, each with a clear role:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it is for</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wokwi</strong> (browser simulator)</td>
+<td>Sketching and trying behaviour, with no hardware and no risk</td>
+<td>None that matter for the course</td>
+</tr>
+<tr>
+<td><strong>Arduino IDE 2</strong> (desktop app)</td>
+<td>Free experimentation on the real board, Serial Plotter, unlimited uploads</td>
+<td>Does not create dashboards</td>
+</tr>
+<tr>
+<td><strong>Arduino Cloud</strong> (browser + phone app)</td>
+<td>The connected object: cloud variables, dashboards, phone control, data, sharing</td>
+<td>Limited number of compilations per day on the Free plan</td>
+</tr>
+</tbody>
+</table>
+<p>Because Arduino Cloud limits the number of compilations per day, students learn early to <strong>try things in Wokwi and the Arduino IDE, and to use the Cloud only for the "connected" version</strong> of their work (§5.3).</p>
+<p>To run Arduino Cloud 1) install the Arduino Cloud Agent https://cloud.arduino.cc/download-agent/, 2) Install pyserial <code>sudo apt update
+sudo apt install python3-serial</code></p>
+<p>If necessary reduce the upload speed <img alt="" src="../img/reduce_speed.png" /></p>
+<hr />
+<h2 id="2-running-scenario-the-connected-studio">2. Running scenario: "The Connected Studio"</h2>
+<p>To keep the exercises coherent, they all share one scenario: a <strong>shared studio / co-working room</strong> that the class progressively "brings to life".</p>
+<ul>
+<li>Every group designs and builds <strong>one object</strong> for the studio, e.g. a desk lamp, a "focus" totem, a plant pot, a window/air-quality monitor, a doorbell/presence badge, a coffee corner counter, or a noise meter.</li>
+<li>In the first exercises each object works <strong>alone</strong> (smart object).</li>
+<li>Later the objects <strong>talk to each other</strong> through Arduino Cloud (ecosystem).</li>
+<li>Finally the objects are <strong>used for real</strong> for sometimes, and the data they produce is used to <strong>redesign</strong> them (data-driven design).</li>
+</ul>
+<p>This scenario makes both goals concrete. Students experience first-hand what changes when their object is no longer alone, and when it starts "reporting back" how it is actually used.</p>
+<hr />
+<h2 id="3-target-audience-and-prerequisites">3. Target audience and prerequisites</h2>
+<ul>
+<li>Product design students (bachelor or master level) with <strong>limited experience of digital tools for programming</strong>.</li>
+<li>No prior programming experience is required. Variables, <code>if</code> and loops are introduced in Exercises 0–1, always starting from working examples that students modify rather than write from scratch.</li>
+<li>Groups of 2–3 students, one hardware kit per group.</li>
+<li>Each student needs a laptop with a Chromium-based browser or Firefox, the Arduino IDE 2, and the <strong>Arduino Cloud Agent</strong> (a small program that lets the browser upload code to the board). A smartphone with the <strong>Arduino IoT Remote</strong> app is useful from Exercise 5.</li>
+</ul>
+<hr />
+<h2 id="4-hardware-kit-per-group">4. Hardware kit (per group)</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+<th>First used in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32 DevKit (e.g. ESP32-WROOM-32 or ESP32-S3)</td>
+<td>Microcontroller with Wi-Fi</td>
+<td>Ex 0</td>
+</tr>
+<tr>
+<td>Breadboard, jumper wires, USB <strong>data</strong> cable</td>
+<td>Prototyping</td>
+<td>Ex 0</td>
+</tr>
+<tr>
+<td>LEDs + resistors, RGB LED ring (WS2812 / NeoPixel)</td>
+<td>Visual output</td>
+<td>Ex 0 / Ex 2</td>
+</tr>
+<tr>
+<td>Push buttons, potentiometer</td>
+<td>Direct user input</td>
+<td>Ex 1</td>
+</tr>
+<tr>
+<td>Light sensor (LDR or BH1750)</td>
+<td>Environment sensing</td>
+<td>Ex 1</td>
+</tr>
+<tr>
+<td>Temperature/humidity sensor (DHT22 or BME280)</td>
+<td>Environment sensing</td>
+<td>Ex 1</td>
+</tr>
+<tr>
+<td>PIR motion sensor</td>
+<td>Presence detection</td>
+<td>Ex 3</td>
+</tr>
+<tr>
+<td>Servo motor, buzzer</td>
+<td>Physical actuation, sound</td>
+<td>Ex 2</td>
+</tr>
+<tr>
+<td>Relay module (low voltage only)</td>
+<td>Switching loads</td>
+<td>Ex 7 (optional)</td>
+</tr>
+<tr>
+<td>Accelerometer (MPU6050), optional</td>
+<td>Handling / vibration / wear</td>
+<td>Ex 13</td>
+</tr>
+<tr>
+<td>LiPo battery + charger (optional)</td>
+<td>Autonomy, battery monitoring</td>
+<td>Ex 13</td>
+</tr>
+</tbody>
+</table>
+<p>All components above are available in <strong>Wokwi</strong>, so every circuit can be drawn and tested in the simulator before it is wired.</p>
+<hr />
+<h2 id="5-software-and-cloud-stack">5. Software and cloud stack</h2>
+<h3 id="51-one-platform-arduino-cloud">5.1 One platform: Arduino Cloud</h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Arduino Cloud feature</th>
+<th>Replaces (in the previous edition)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registering the board</td>
+<td><strong>Device</strong> (ESP32 added as a "third-party device", with a Device ID and a Secret Key)</td>
+<td>Broker credentials</td>
+</tr>
+<tr>
+<td>Describing what the object senses and does</td>
+<td><strong>Thing</strong> with <strong>cloud variables</strong> (name, type, permission, update policy)</td>
+<td>Topics and JSON payloads</td>
+</tr>
+<tr>
+<td>Writing and uploading code</td>
+<td><strong>Cloud Editor</strong> (web), with a sketch generated automatically from the Thing</td>
+<td>Arduino IDE + MQTT libraries</td>
+</tr>
+<tr>
+<td>Seeing and controlling the object</td>
+<td><strong>Dashboards</strong> and widgets (value, gauge, chart, switch, slider, colour, status, map, image, scheduler…)</td>
+<td>ThingsBoard dashboards, MQTT Explorer</td>
+</tr>
+<tr>
+<td>Phone as a remote</td>
+<td><strong>Arduino IoT Remote</strong> app (iOS/Android), with phone-specific dashboard layouts</td>
+<td>MQTT Panel apps</td>
+</tr>
+<tr>
+<td>Objects talking to objects</td>
+<td><strong>Variable synchronisation</strong> between Things</td>
+<td>Shared MQTT topics</td>
+</tr>
+<tr>
+<td>Places and groups of objects</td>
+<td><strong>Tags</strong> on Things and devices, shared <strong>studio dashboards</strong></td>
+<td>ThingsBoard assets and relations</td>
+</tr>
+<tr>
+<td>History and data export</td>
+<td>Chart widgets with time windows, <strong>download of historical data as CSV</strong></td>
+<td>ThingsBoard historical dashboards, InfluxDB</td>
+</tr>
+<tr>
+<td>Alerts</td>
+<td><strong>Triggers</strong> (conditions on variables or on device connection → e-mail / push notification)</td>
+<td>ThingsBoard alarm rules</td>
+</tr>
+<tr>
+<td>External services</td>
+<td><strong>Webhooks</strong> (to Zapier, IFTTT, Make, Google Sheets…) and "service Things" prepared by the instructor</td>
+<td>Node-RED</td>
+</tr>
+<tr>
+<td>Remote configuration</td>
+<td>Read &amp; Write cloud variables used as settings (their last value is kept by the cloud and restored when the object reconnects)</td>
+<td>Retained config topics / shared attributes</td>
+</tr>
+<tr>
+<td>Updating the product in the field</td>
+<td><strong>Over-the-air (OTA) upload</strong> from the Cloud Editor</td>
+<td>ArduinoOTA / HTTP OTA</td>
+</tr>
+<tr>
+<td>Working as a class</td>
+<td>A <strong>shared space</strong> (Arduino Cloud for Schools / organisation), where all Things and dashboards of the class live together</td>
+<td>One broker account per group</td>
+</tr>
+</tbody>
+</table>
+<p>Under the hood Arduino Cloud uses the same ideas seen in any IoT platform (a message broker, publish/subscribe, TLS encryption), but it hides them behind a simple mental model:</p>
+<blockquote>
+<p><strong>A cloud variable is a variable that exists in two places at the same time — on the board and in the cloud — and Arduino Cloud keeps the two copies in sync.</strong></p>
+</blockquote>
+<p>This model is enough for the whole course. The underlying protocol (MQTT) is mentioned in Exercise 4 and in the reflections, but students never have to program it directly.</p>
+<p><strong>Plan-dependent features.</strong> Some features depend on the Arduino Cloud plan (e.g. number of Things, data retention, number of daily compilations, OTA, triggers, sharing, shared spaces). In this document they are marked with <strong>(plan)</strong>. Check the current plan limits before the course starts (§10).</p>
+<h3 id="52-shared-conventions-the-variable-contract">5.2 Shared conventions: the "variable contract"</h3>
+<p>An ecosystem only works if objects "speak the same language". In Arduino Cloud, objects talk through <strong>synchronised cloud variables</strong>, and two variables can be synchronised only if they have the <strong>same type</strong>. From Exercise 7 onward the class therefore uses a shared <strong>variable contract</strong>, defined by the instructor together with the students:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Permission</th>
+<th>Meaning</th>
+<th>Who writes it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>studioScene</code></td>
+<td><code>int</code> (0 = normal, 1 = focus, 2 = presentation, 3 = closed)</td>
+<td>Read &amp; Write</td>
+<td>Current scene of the studio</td>
+<td>Scene dashboard, hub</td>
+</tr>
+<tr>
+<td><code>someoneAtDoor</code></td>
+<td><code>bool</code></td>
+<td>Read only</td>
+<td>A person has just arrived</td>
+<td>Door badge</td>
+</tr>
+<tr>
+<td><code>roomOccupied</code></td>
+<td><code>bool</code></td>
+<td>Read only</td>
+<td>Someone is in the room</td>
+<td>Presence objects</td>
+</tr>
+<tr>
+<td><code>co2</code></td>
+<td><code>int</code> (ppm)</td>
+<td>Read only</td>
+<td>Air quality</td>
+<td>Air monitor</td>
+</tr>
+<tr>
+<td><code>noiseLevel</code></td>
+<td><code>int</code> (0–100)</td>
+<td>Read only</td>
+<td>Loudness</td>
+<td>Noise meter</td>
+</tr>
+<tr>
+<td><code>&lt;object&gt;Heartbeat</code></td>
+<td><code>int</code> (counter)</td>
+<td>Read only</td>
+<td>"I am alive" signal, increases every minute</td>
+<td>Every object</td>
+</tr>
+<tr>
+<td><code>&lt;object&gt;Mode</code></td>
+<td><code>String</code></td>
+<td>Read &amp; Write</td>
+<td>Current mode of each object</td>
+<td>Object, dashboard</td>
+</tr>
+</tbody>
+</table>
+<p>Each group also documents, for its own object, a <strong>product sheet of its variables</strong>: name, type, unit, range, permission, update policy, and what it means for the user.</p>
+<p>Naming rules: <code>camelCase</code>, English, units written in the documentation (not in the name), no spaces or accents.</p>
+<p>Designing this contract is itself a design activity: it is the object's <strong>"interface" towards other objects</strong>, just as its form and controls are its interface towards people.</p>
+<h3 id="53-the-compilation-budget-where-to-do-what">5.3 The "compilation budget": where to do what</h3>
+<p>On the Free plan, every compilation in the Cloud Editor (including each upload and each OTA update) uses up part of a <strong>daily allowance</strong>. This is not only a constraint: it is an opportunity to teach a good prototyping habit — <strong>think and try cheaply first, commit to the real thing later.</strong></p>
+<p>The rule of thumb given to students:</p>
+<p><img alt="" src="../img/Diagram.png" /></p>
+<p>Practical tips:</p>
+<ul>
+<li><strong>Simulate the dashboard in Wokwi.</strong> A potentiometer or a button in the simulator can stand in for a dashboard slider or switch; the Serial Monitor can stand in for a value widget. The behaviour can be refined without any Cloud compilation.</li>
+<li><strong>Keep the behaviour in functions.</strong> The same functions (e.g. <code>updateLamp()</code>, <code>readSensors()</code>) are copied from the Wokwi/IDE sketch into the Cloud sketch unchanged; only the "glue" with cloud variables is new.</li>
+<li><strong>Use the "Verify" button sparingly</strong> in the Cloud Editor: fix errors in the IDE first.</li>
+<li><strong>Cloud sketches can also be compiled in the Arduino IDE 2.</strong> Once students are confident (from Exercise 6), they can open their Cloud sketch in the desktop IDE (via the IDE's <em>Remote Sketchbook</em>, or by downloading it) with the <code>ArduinoIoTCloud</code> library installed, and upload it with no daily limit. The object still connects to Arduino Cloud, because the Device ID and Secret Key are part of the sketch. After adding or changing variables in the Thing, the sketch must be pulled again, because the Cloud regenerates the <code>thingProperties.h</code> file.</li>
+<li>The table in §6 shows, for every exercise, which tools are used.</li>
+</ul>
+<hr />
+<h2 id="6-overview-of-the-path">6. Overview of the path</h2>
+<p>The exercises are grouped in four phases. The first two phases build the skills; phases C and D address the two main goals directly.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Exercises</th>
+<th>Key question</th>
+<th>Goal addressed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A — The smart object</strong></td>
+<td>0 – 3</td>
+<td>What can an object sense, decide and do on its own?</td>
+<td>Baseline</td>
+</tr>
+<tr>
+<td><strong>B — The connected object</strong></td>
+<td>4 – 6</td>
+<td>What changes when an object is on the network?</td>
+<td>Enabler for 1 &amp; 2</td>
+</tr>
+<tr>
+<td><strong>C — The ecosystem</strong></td>
+<td>7 – 10</td>
+<td>What emerges when objects cooperate?</td>
+<td><strong>Goal 1</strong></td>
+</tr>
+<tr>
+<td><strong>D — Data-driven design</strong></td>
+<td>11 – 14</td>
+<td>How can data from the field improve the product/service?</td>
+<td><strong>Goal 2</strong></td>
+</tr>
+<tr>
+<td><strong>Final project</strong></td>
+<td>15</td>
+<td>Design a connected product-service and iterate on it with data</td>
+<td>1 + 2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="concept-progression">Concept progression</h3>
+<p>W = Wokwi, IDE = Arduino IDE 2, AC = Arduino Cloud. <strong>Bold</strong> = main tool of the exercise.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Exercise</th>
+<th>New concepts</th>
+<th>Tools</th>
+<th>Builds on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Hello ESP32 — three workspaces</td>
+<td>Wokwi, IDE, upload, <code>setup()</code>/<code>loop()</code>, digital output; Arduino account</td>
+<td><strong>W</strong>, <strong>IDE</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Sensing the world</td>
+<td>Digital/analog input, sensors, Serial Monitor/Plotter, sampling</td>
+<td>W, <strong>IDE</strong></td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Acting on the world</td>
+<td>Actuators (PWM, servo, NeoPixel, buzzer), mapping values</td>
+<td>W, <strong>IDE</strong></td>
+<td>0, 1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>The isolated smart object</td>
+<td>Sense→decide→act loop, state machines, non-blocking timing, interaction design</td>
+<td><strong>W</strong>, IDE</td>
+<td>1, 2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Going online</td>
+<td>Device, Thing, cloud variables, auto-generated sketch, first dashboard</td>
+<td>W, <strong>AC</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Remote control</td>
+<td>Read &amp; Write variables, <code>onChange</code> callbacks, phone as a remote (IoT Remote)</td>
+<td>W, <strong>AC</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The object as a service</td>
+<td>Update policies, variable types, connection events, security, dashboard design, sharing; compiling Cloud sketches in the IDE</td>
+<td><strong>AC</strong>, IDE</td>
+<td>4, 5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Objects talking to objects</td>
+<td><strong>Variable synchronisation</strong>, shared contract, loose coupling</td>
+<td><strong>AC</strong></td>
+<td>5, 6</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Who is there?</td>
+<td>Device status, heartbeats, connection callbacks, graceful degradation, <strong>studio map dashboard</strong></td>
+<td>W, <strong>AC</strong></td>
+<td>6, 7</td>
+</tr>
+<tr>
+<td>9</td>
+<td>The orchestrator</td>
+<td>Scenes, hub Thing, scheduler, triggers, webhooks, service Things</td>
+<td><strong>AC</strong></td>
+<td>7, 8</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Ecosystem design sprint</td>
+<td>System mapping, emergent behaviour, conflicts, <strong>tags</strong> and studio dashboard</td>
+<td><strong>AC</strong></td>
+<td>7 – 9</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Remembering</td>
+<td>Historical data, telemetry vs. events, instrumentation plan, CSV export</td>
+<td><strong>AC</strong></td>
+<td>6, 9</td>
+</tr>
+<tr>
+<td>12</td>
+<td>How is it really used?</td>
+<td>Usage analytics in a spreadsheet, field study, design insights from data</td>
+<td><strong>AC</strong>, spreadsheet</td>
+<td>11</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Keeping it alive</td>
+<td>Device health, wear counters, predictive maintenance, <strong>triggers as alarms</strong></td>
+<td>IDE, <strong>AC</strong></td>
+<td>11, 12</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Closing the loop</td>
+<td>Settings variables, <strong>OTA updates</strong>, A/B testing</td>
+<td><strong>AC</strong></td>
+<td>12, 13</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Final project</td>
+<td>Integration of everything</td>
+<td>all</td>
+<td>all</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-detailed-exercises">7. Detailed exercises</h2>
+<p>Each exercise uses the same format: <strong>Goal · New concepts · Tools · Material · Activities · Deliverable · Design reflection · Indicative time</strong>.</p>
+<hr />
+<h3 id="phase-a-the-smart-object">Phase A — The smart object</h3>
+<p>In Phase A the object works alone, so <strong>Arduino Cloud is not used yet</strong>. Students become comfortable with code in the two unlimited environments, Wokwi and the Arduino IDE.</p>
+<h4 id="exercise-0-hello-esp32-three-workspaces">Exercise 0 — Hello ESP32: three workspaces</h4>
+<ul>
+<li><strong>Goal:</strong> Get familiar with the tools and with the idea that "behaviour is code".</li>
+<li><strong>New concepts:</strong> A simulator versus a real board, the Arduino IDE 2, the ESP32 board package, selecting board and port, uploading, <code>setup()</code> and <code>loop()</code>, digital output, <code>delay()</code>. Creating an Arduino account (used from Exercise 4).</li>
+<li><strong>Tools:</strong> Wokwi, Arduino IDE 2.</li>
+<li><strong>Material:</strong> ESP32, LED, resistor.</li>
+<li><strong>Activities:</strong></li>
+<li><strong>Wokwi:</strong> open the ESP32 <em>Blink</em> project provided by the instructor, press <em>Play</em>, then change the numbers in <code>delay()</code> and see what happens. Add a second LED to the circuit.</li>
+<li><strong>Arduino IDE 2:</strong> install the IDE and the ESP32 core (the instructor provides a step-by-step sheet with screenshots). Select the board and the port, and upload the same <em>Blink</em> sketch to the real ESP32.</li>
+<li>Change the rhythm of the blink to express a "mood" (calm, alarm, heartbeat). Try it first in Wokwi, then on the board.</li>
+<li>Create an Arduino account and install the Arduino Cloud Agent, so that everything is ready for Exercise 4.</li>
+<li><strong>Deliverable:</strong> A short video of the LED expressing three different moods, and the link to the Wokwi project.</li>
+<li><strong>Design reflection:</strong> Even a single LED can communicate. Which blinking patterns are unambiguous for a user? What was different between the simulated LED and the real one?</li>
+<li><strong>Time:</strong> 2 h.</li>
+</ul>
+<h4 id="exercise-1-sensing-the-world">Exercise 1 — Sensing the world</h4>
+<ul>
+<li><strong>Goal:</strong> Read the physical world and understand what a sensor actually measures.</li>
+<li><strong>New concepts:</strong> Digital input (button, pull-up), analog input (ADC, potentiometer, LDR), digital sensors (DHT22/BME280) through libraries, installing a library, Serial Monitor and <strong>Serial Plotter</strong>, sampling rate, noise.</li>
+<li><strong>Tools:</strong> Wokwi to prepare the circuit, Arduino IDE 2 to measure the real world.</li>
+<li><strong>Material:</strong> Button, potentiometer, LDR, DHT22/BME280.</li>
+<li><strong>Activities:</strong></li>
+<li>In Wokwi, wire the button and the sensors and print their values. Wokwi lets you "move" the simulated sensors with a slider.</li>
+<li>On the real board (IDE), read a button and print its state; notice bouncing, which does not happen in the simulator.</li>
+<li>Read the LDR and plot it with the Serial Plotter while covering it with a hand.</li>
+<li>Read temperature and humidity; breathe on the sensor and watch the response time.</li>
+<li><strong>Deliverable:</strong> Screenshot of the Serial Plotter with annotated "events" (hand, breath, lamp on…).</li>
+<li><strong>Design reflection:</strong> Sensors are imperfect. They are noisy, slow and limited in range, and a simulator hides most of these imperfections. How does this affect what a product can "know" about its user and environment?</li>
+<li><strong>Time:</strong> 2 h.</li>
+</ul>
+<h4 id="exercise-2-acting-on-the-world">Exercise 2 — Acting on the world</h4>
+<ul>
+<li><strong>Goal:</strong> Let the object produce physical, perceivable effects.</li>
+<li><strong>New concepts:</strong> PWM (LED dimming), servo motors, NeoPixel colour, buzzer tones, <code>map()</code> to translate input ranges into output ranges.</li>
+<li><strong>Tools:</strong> Wokwi, Arduino IDE 2.</li>
+<li><strong>Material:</strong> LED, NeoPixel ring, servo, buzzer, potentiometer.</li>
+<li><strong>Activities:</strong></li>
+<li>Dim an LED with the potentiometer.</li>
+<li>Move a servo in proportion to the light level (a "sunflower").</li>
+<li>Map temperature to a colour on the NeoPixel ring (blue → red).</li>
+<li>Explore freely: the IDE has no upload limit, so try many variations of speed, colour and sound.</li>
+<li><strong>Deliverable:</strong> A short demo of a sensor that directly drives an actuator.</li>
+<li><strong>Design reflection:</strong> Direct mapping (sensor → actuator) is simple but "dumb". When does the object need to <em>decide</em> instead of just react?</li>
+<li><strong>Time:</strong> 2 h.</li>
+</ul>
+<h4 id="exercise-3-the-isolated-smart-object">Exercise 3 — The isolated smart object</h4>
+<ul>
+<li><strong>Goal:</strong> Build the first version of the group's studio object as a <strong>stand-alone smart object</strong>.</li>
+<li><strong>New concepts:</strong> The sense → decide → act loop, finite-state machines (e.g. <code>IDLE</code>, <code>ACTIVE</code>, <code>ALERT</code>), non-blocking timing with <code>millis()</code>, hysteresis, basic interaction design (feedback, affordances). Organising code in functions (<code>readSensors()</code>, <code>decide()</code>, <code>updateOutputs()</code>).</li>
+<li><strong>Tools:</strong> Wokwi to design the behaviour, Arduino IDE 2 to build the prototype.</li>
+<li><strong>Material:</strong> Any combination of the previous components plus the PIR sensor.</li>
+<li><strong>Activities:</strong></li>
+<li>Each group picks its studio object (lamp, focus totem, plant pot, air monitor, etc.).</li>
+<li>Draw the state diagram on paper first, then implement it in Wokwi.</li>
+<li>Move the sketch to the real board with the IDE and tune the thresholds with real sensors.</li>
+<li>Example: a <em>focus lamp</em> that turns on when someone sits (PIR), adapts brightness to ambient light, and turns red when a button signals "do not disturb".</li>
+<li><strong>Why <code>millis()</code> matters here:</strong> from Exercise 4 the object must call <code>ArduinoCloud.update()</code> continuously to stay connected. Long <code>delay()</code>s would "freeze" the connection, so non-blocking timing is learned now, when it is still simple.</li>
+<li><strong>Deliverable:</strong> A working prototype, its state diagram, the Wokwi link, and a one-page "product card" (user, purpose, behaviour).</li>
+<li><strong>Design reflection (key moment):</strong> List everything your object <strong>cannot</strong> do because it is alone. It cannot know whether the room is empty, cannot be controlled from far away, cannot tell anyone it is broken, and you do not know how people use it. This list motivates the rest of the course.</li>
+<li><strong>Time:</strong> 4 h.</li>
+</ul>
+<hr />
+<h3 id="phase-b-the-connected-object">Phase B — The connected object</h3>
+<p>From Phase B the object lives on Arduino Cloud. Before each Cloud session, students prepare their changes in Wokwi or the IDE (§5.3).</p>
+<h4 id="exercise-4-going-online">Exercise 4 — Going online</h4>
+<ul>
+<li><strong>Goal:</strong> Put the object on the network and let it "speak" to the cloud.</li>
+<li><strong>New concepts:</strong> <strong>Device</strong> (the physical board), <strong>Thing</strong> (the digital description of the object), <strong>cloud variables</strong> (name, type, <em>Read only</em> permission), network credentials, the sketch that Arduino Cloud writes automatically (<code>thingProperties.h</code>, <code>ArduinoCloud.update()</code>), first <strong>dashboard</strong>. The idea behind the scenes: the cloud acts as a "post office" (a broker) that receives and delivers messages (publish/subscribe, MQTT).</li>
+<li><strong>Tools:</strong> Arduino Cloud (Cloud Editor, dashboards). Wokwi to prepare the code.</li>
+<li><strong>Activities:</strong></li>
+<li>In Arduino Cloud, add the ESP32 as a <strong>device</strong> (third-party device). Save the Device ID and Secret Key in a safe place.</li>
+<li>Create a <strong>Thing</strong> for the group's object, associate the device, and enter the Wi-Fi credentials.</li>
+<li>Add the object's sensors as <strong>Read only</strong> variables (e.g. <code>temperature</code>, <code>light</code>, <code>presence</code>).</li>
+<li>Open the automatically generated sketch. Paste in the functions from Exercise 3 and assign sensor readings to the cloud variables. <strong>One</strong> compilation and upload.</li>
+<li>Build a first dashboard with value and gauge widgets. Then look at the dashboards of other groups on the projector: the whole class is now online.</li>
+<li><strong>Code skeleton</strong> (the parts marked "generated" are written by Arduino Cloud):
+  ```cpp
+  #include "thingProperties.h"    // generated: cloud variables and connection</li>
+</ul>
+<p>unsigned long lastRead = 0;</p>
+<p>void setup() {
+    Serial.begin(9600);
+    initProperties();                                    // generated
+    ArduinoCloud.begin(ArduinoIoTPreferredConnection);   // generated
+    setupSensors();              // your code from Exercise 3
+  }</p>
+<p>void loop() {
+    ArduinoCloud.update();       // keeps the two copies of the variables in sync
+    if (millis() - lastRead &gt; 10000) {   // every 10 s, without delay()
+      lastRead = millis();
+      temperature = readTemperature();   // assigning = "sending to the cloud"
+      light = readLight();
+    }
+    updateOutputs();             // your behaviour from Exercise 3
+  }
+  ```
+- <strong>Deliverable:</strong> A screenshot of the Thing (variables) and of the first dashboard with live data.
+- <strong>Design reflection:</strong> Your data is now visible to others. What does that imply for privacy? What should an object send to the cloud, and what should it keep to itself?
+- <strong>Time:</strong> 3 h.</p>
+<h4 id="exercise-5-remote-control">Exercise 5 — Remote control</h4>
+<ul>
+<li><strong>Goal:</strong> Let the network change the object's behaviour.</li>
+<li><strong>New concepts:</strong> <strong>Read &amp; Write</strong> variables, <code>onXxxChange()</code> callback functions (the code that runs when the variable is changed from the dashboard), control widgets (switch, push button, slider, colour/coloured light, value selector), the <strong>Arduino IoT Remote</strong> app on the phone, keeping physical and digital controls consistent.</li>
+<li><strong>Tools:</strong> Arduino Cloud, IoT Remote app. Wokwi to test the callbacks, using a button or potentiometer in place of the widget.</li>
+<li><strong>Activities:</strong></li>
+<li>Add Read &amp; Write variables such as <code>mode</code> (String or int), <code>lampColor</code> (Coloured Light) and <code>brightness</code> (int), and implement their callbacks.</li>
+<li>Build a control panel on the dashboard and check its phone layout in the IoT Remote app.</li>
+<li>Keep the physical controls working. When the user presses the object's own button, the code must also update the cloud variable, so that the dashboard always shows the truth.</li>
+<li><strong>Code example:</strong>
+  ```cpp
+  // generated empty by Arduino Cloud, filled in by the students
+  void onBrightnessChange() {
+    setLampBrightness(brightness);   // the dashboard changed the value
+  }</li>
+</ul>
+<p>void onButtonPressed() {           // physical control
+    mode = "focus";                  // the dashboard will show "focus" too
+    applyMode(mode);
+  }
+  ```
+- <strong>Deliverable:</strong> A video that controls the object from the phone and from its button, with the dashboard staying consistent.
+- <strong>Design reflection:</strong> The object now has two interfaces, one physical and one digital. How do you keep them consistent? Who "wins" in a conflict?
+- <strong>Time:</strong> 3 h.</p>
+<h4 id="exercise-6-the-object-as-a-service">Exercise 6 — The object as a service</h4>
+<ul>
+<li><strong>Goal:</strong> Turn the object into a small <strong>service</strong> with a designed dashboard, and make it robust and secure.</li>
+<li><strong>New concepts:</strong></li>
+<li><strong>Update policies:</strong> <em>on change</em> (with a threshold) versus <em>periodically</em> — how often the object talks, and why it matters for energy, data and clarity.</li>
+<li><strong>Specialised variable types</strong> (e.g. temperature, percentage, coloured light, location, schedule) that carry meaning and units.</li>
+<li><strong>Connection events</strong> (<code>ArduinoCloud.addCallback(...CONNECT / DISCONNECT / SYNC...)</code>): what the object shows to the user while it is connecting or offline.</li>
+<li><strong>Security:</strong> the Secret Key and Wi-Fi password live in the <em>Secret</em> tab and must never be shared (screenshots, public sketches); who has access to a dashboard can control the object.</li>
+<li><strong>Dashboard design</strong> for a specific user; <strong>sharing</strong> dashboards (plan).</li>
+<li>Opening the Cloud sketch in the <strong>Arduino IDE 2</strong> to compile without the daily limit (§5.3).</li>
+<li><strong>Tools:</strong> Arduino Cloud, Arduino IDE 2.</li>
+<li><strong>Activities:</strong></li>
+<li>Set a sensible update policy for each variable and justify it (e.g. temperature on change with a 0.5 °C threshold; light every 60 s).</li>
+<li>Show the connection status on the object itself (e.g. a slow blue blink while connecting).</li>
+<li>Open the Thing's sketch in the Arduino IDE 2, compile and upload it from there, and check that the dashboard still works.</li>
+<li>Redesign the dashboard for a specific user. Which information is shown first, and which is hidden? Use layout, widget choice, labels and the phone layout on purpose. Make separate desktop and phone versions if they serve different moments of use.</li>
+<li>Share the dashboard with the instructor and with another group.</li>
+<li><strong>Deliverable:</strong> The shared dashboard (desktop and phone screenshots), the product sheet of the variables (§5.2), and a short description of the "service" the object now offers.</li>
+<li><strong>Design reflection:</strong> The product is now a <em>physical object plus a digital service</em>. Which part is the product? Sketch the service blueprint. Is the dashboard designed for the end user, the owner of the space, or the maintainer?</li>
+<li><strong>Time:</strong> 4 h.</li>
+</ul>
+<hr />
+<h3 id="phase-c-the-ecosystem-goal-1">Phase C — The ecosystem (Goal 1)</h3>
+<p>Phase C needs all the class's Things to be able to see each other. This is done in a <strong>shared space</strong> of Arduino Cloud (plan). See §10 for alternatives.</p>
+<h4 id="exercise-7-objects-talking-to-objects">Exercise 7 — Objects talking to objects</h4>
+<ul>
+<li><strong>Goal:</strong> Make objects from <strong>different groups</strong> cooperate directly, without any central logic.</li>
+<li><strong>New concepts:</strong> <strong>Variable synchronisation</strong> (a variable of one Thing is linked to a variable of another Thing, so that when one changes, the other changes too), the shared variable contract (§5.2), loose coupling (the object that produces a value does not need to know who uses it), events versus commands.</li>
+<li><strong>Tools:</strong> Arduino Cloud.</li>
+<li><strong>Activities:</strong></li>
+<li>Groups pair up. Object A reacts to a variable of object B. Examples:<ul>
+<li>The door presence badge sets <code>someoneAtDoor</code>, and the desk lamp greets the person.</li>
+<li>The air monitor's <code>co2</code> goes above a threshold, and the focus totem suggests a break with a colour.</li>
+<li>The plant pot's <code>thirsty</code> becomes true, and the coffee corner counter shows a reminder.</li>
+</ul>
+</li>
+<li>In each Thing, add the variable to listen to (with the <strong>same type</strong> as in the contract) and link it with <em>Sync with other Things</em>. Write the callback that reacts to it.</li>
+<li>Then swap partners. If the contract is respected, the objects must work with <em>new</em> partners without changing the code of the other group — often by only changing the synchronisation, without any new compilation.</li>
+<li><strong>Deliverable:</strong> A demo of two or more objects cooperating, plus a diagram of which variables each object produces and uses.</li>
+<li><strong>Design reflection:</strong> What made it easy or hard to connect to someone else's object? The contract is a design artefact, just like a physical connector standard.</li>
+<li><strong>Time:</strong> 3 h.</li>
+</ul>
+<h4 id="exercise-8-who-is-there-presence-and-resilience">Exercise 8 — Who is there? Presence and resilience</h4>
+<ul>
+<li><strong>Goal:</strong> Make the ecosystem aware of which objects are alive and able to cope when some are missing.</li>
+<li><strong>New concepts:</strong> Device status (online/offline) in Arduino Cloud, <strong>heartbeats</strong> (a counter that increases every minute: if it stops, the object is gone), connection callbacks, a "capabilities" description of each object, <strong>graceful degradation</strong>.</li>
+<li><strong>Tools:</strong> Arduino Cloud; Wokwi to test the fallback logic (a switch in the simulator plays the role of "partner offline").</li>
+<li><strong>Activities:</strong></li>
+<li>Each object publishes a <code>&lt;object&gt;Heartbeat</code> counter and a <code>&lt;object&gt;Capabilities</code> String (e.g. <code>"sensors: temp, lux; actuators: rgb"</code>), both part of the contract.</li>
+<li>Objects that depend on a partner watch its heartbeat, synchronised as in Exercise 7. If it does not change for 3 minutes, they switch to a fallback, e.g. the lamp goes back to its local PIR when the door badge is offline.</li>
+<li>Unplug objects at random. The others must notice and adapt, and the user must be able to tell (e.g. a small "alone" colour).</li>
+<li>As a class, build a <strong>"studio map" dashboard</strong>: an image widget with the floor plan of the room, and next to it one status/LED widget per object, arranged like the objects in the room and labelled with their position. Each widget shows whether the object is alive. Add links (or notes) to each group's own dashboard.</li>
+<li><strong>Deliverable:</strong> The studio map dashboard showing all objects and their capabilities, plus a video of the ecosystem reacting to objects that are unplugged.</li>
+<li><strong>Design reflection:</strong> In an ecosystem, failures are normal. How should each object behave when its partners disappear? Can the user tell what is going on?</li>
+<li><strong>Time:</strong> 3 h.</li>
+</ul>
+<h4 id="exercise-9-the-orchestrator-scenes-rules-and-external-services">Exercise 9 — The orchestrator: scenes, rules and external services</h4>
+<ul>
+<li><strong>Goal:</strong> Add a "brain" that coordinates many objects and brings in information from outside the room.</li>
+<li><strong>New concepts:</strong></li>
+<li><strong>Scenes:</strong> one intent controls many objects. A single <code>studioScene</code> variable, synchronised with every object, and each object decides how to interpret it.</li>
+<li>A <strong>hub Thing:</strong> an ESP32 (prepared by the instructor or by a volunteer group) that receives the variables of all objects and implements rules that combine several sources (context).</li>
+<li><strong>Scheduler</strong> widgets and schedule variables for time-based behaviour (e.g. "closed" scene every evening at 20:00).</li>
+<li><strong>Triggers</strong> (plan): e-mail or push notifications when a condition occurs.</li>
+<li><strong>Webhooks</strong> (plan) to external services (Zapier, IFTTT, Make, Google Sheets, Telegram), and <strong>service Things</strong> prepared by the instructor that bring external data into the Cloud (e.g. a <em>Weather</em> Thing with <code>rainExpected</code> and <code>outsideTemp</code>).</li>
+<li>Trade-offs between logic in the objects (edge) and logic in the cloud/hub.</li>
+<li><strong>Tools:</strong> Arduino Cloud.</li>
+<li><strong>Activities:</strong></li>
+<li>Build a <strong>scene dashboard</strong> with a value selector for <code>studioScene</code> (Normal, Focus, Presentation, Closed). Implement at least one scene in every object, e.g. <em>"Presentation"</em>: lamps dim, focus totems turn blue, the noise meter alerts on loud sounds.</li>
+<li>Implement one <strong>context rule</strong> in the hub that uses more than one object, e.g. "if nobody is present for 30 min and the window monitor says the window is open → set <code>windowAlert</code>", with a trigger that sends a notification to the phone.</li>
+<li>Add a schedule that changes the scene automatically at given times.</li>
+<li>Bring in an external service: sync with the <em>Weather</em> Thing, so the lamp at the entrance turns blue when rain is expected ("take an umbrella").</li>
+<li><em>(Optional)</em> Use the IoT Remote app's "phone as a device" function: the phone becomes a Thing that shares, for example, its position or light sensor with the ecosystem.</li>
+<li><strong>Deliverable:</strong> A demo of a scene and a rule, plus a diagram showing where each rule lives (object, hub, trigger, schedule).</li>
+<li><strong>Design reflection:</strong> Which logic should live in the object (fast, works offline, private) and which in the cloud or in the hub (global view, easy to change)? What happens to the user experience if the internet goes down?</li>
+<li><strong>Time:</strong> 4 h.</li>
+</ul>
+<h4 id="exercise-10-ecosystem-design-sprint">Exercise 10 — Ecosystem design sprint</h4>
+<ul>
+<li><strong>Goal:</strong> Consolidate Goal 1 by designing the studio as a <strong>system</strong> rather than a collection of objects.</li>
+<li><strong>New concepts:</strong> System maps, emergent behaviour, conflicts between objects (two rules that want opposite things), priorities and user override, ecosystem value versus object value. <strong>Tags</strong> in Arduino Cloud (e.g. <code>area: desk</code>, <code>area: coffee corner</code>, <code>role: sensor</code>) as a simple digital model of places and roles.</li>
+<li><strong>Tools:</strong> Arduino Cloud, paper and post-its.</li>
+<li><strong>Activities:</strong></li>
+<li>As a whole class, map all the objects, variables, rules and people in the studio.</li>
+<li>Turn the map into a model in Arduino Cloud: add <strong>tags</strong> to every Thing and device (area, role, owner group), and use them to filter the list of Things. Organise the studio dashboard by area.</li>
+<li>Find at least one <strong>emergent</strong> feature, a service that no single object can provide (e.g. an "occupancy and comfort" index of the room built from every object's data).</li>
+<li>Find and solve at least one <strong>conflict</strong> (e.g. the energy-saving rule turns the lamp off while someone is reading in a corner the PIR cannot see). Decide the priorities: what can the user always override?</li>
+<li>Implement the emergent feature in the hub Thing, save it as a variable (e.g. <code>comfortIndex</code>), and show it on a <strong>studio-level dashboard</strong>.</li>
+<li><strong>Deliverable:</strong> A system map poster, the tagged Things in Arduino Cloud, and a studio dashboard showing the emergent feature live.</li>
+<li><strong>Design reflection:</strong> Compare the list of limitations from Exercise 3 with what the ecosystem now does. What has the ecosystem added, and what new problems (complexity, privacy, dependency on one company's platform) has it introduced?</li>
+<li><strong>Time:</strong> 4 h (workshop).</li>
+</ul>
+<hr />
+<h3 id="phase-d-data-driven-design-goal-2">Phase D — Data-driven design (Goal 2)</h3>
+<p>Phase D needs data to be kept for the whole field study. Check the <strong>data retention</strong> of the plan (plan) before starting; if it is shorter than the deployment, download the data every day (Exercise 11).</p>
+<h4 id="exercise-11-remembering-storing-and-visualising-data">Exercise 11 — Remembering: storing and visualising data</h4>
+<ul>
+<li><strong>Goal:</strong> Move from live data to <strong>historical data</strong>, the raw material for design insights.</li>
+<li><strong>New concepts:</strong> Arduino Cloud stores every change of a variable with its time, so a variable is also a <strong>time series</strong>. The difference between <strong>telemetry</strong> (periodic measurements, e.g. <code>temperature</code>) and <strong>events</strong> (user actions, state changes). Representing events in Arduino Cloud: an event variable (e.g. <code>lastEvent</code> as a String such as <code>"long_press:focus"</code>) and <strong>event counters</strong> (e.g. <code>dimmerUses</code>, increased at each use). An <strong>instrumentation plan</strong> (deciding in advance what to record and why). Chart widgets and time windows. <strong>Downloading historical data</strong> as CSV.</li>
+<li><strong>Tools:</strong> Arduino Cloud, a spreadsheet (Google Sheets, Excel, Numbers).</li>
+<li><strong>Activities:</strong></li>
+<li>Write an instrumentation plan: for each design question you have about your object ("Do people use the dimmer?", "How long do they stay?"), define which variable or event answers it and its update policy.</li>
+<li>Add the event and counter variables to the Thing, and update them in the code. Prepare and test the changes in Wokwi first; then compile once in the Cloud (or in the IDE).</li>
+<li>Build a <strong>"usage" dashboard</strong>, separate from the live dashboard of Exercise 6, with charts over days and the counters. Give each widget the question it answers as its title.</li>
+<li>Download the historical data as CSV and open it in a spreadsheet. Make a first pivot table (e.g. events per hour of the day).</li>
+<li><strong>Deliverable:</strong> The instrumentation plan, the usage dashboard with at least 24 h of data, and a first spreadsheet chart.</li>
+<li><strong>Design reflection:</strong> Data only answers the questions you prepared for. What would you <em>like</em> to know that your object cannot measure? Which data should you <strong>not</strong> collect (data minimisation, GDPR)? Where is the data stored, and who can see it?</li>
+<li><strong>Time:</strong> 4 h.</li>
+</ul>
+<h4 id="exercise-12-how-is-it-really-used-use-and-design">Exercise 12 — How is it really used? (use and design)</h4>
+<ul>
+<li><strong>Goal:</strong> Use field data to understand real use and to derive <strong>design insights</strong>.</li>
+<li><strong>New concepts:</strong> Field deployment ("in the wild"), usage analytics (frequency, duration, time of day, feature adoption, error paths), combining quantitative data with qualitative observations (short interviews, diaries), and the difference between intended and actual use.</li>
+<li><strong>Tools:</strong> Arduino Cloud (dashboards, CSV download), spreadsheet.</li>
+<li><strong>Activities:</strong></li>
+<li>Deploy the objects in a real space (the studio, the department, the students' homes) for <strong>at least one week</strong>. Objects taken home need a 2.4 GHz Wi-Fi network: the Wi-Fi credentials in the Thing can be changed without touching the code, but a new upload is needed.</li>
+<li>Download the data (daily, if retention is short) and analyse it in the spreadsheet. Look for:<ul>
+<li>features that are never used, or that are used differently than expected;</li>
+<li>"struggle" patterns (e.g. repeated button presses, commands overridden right away);</li>
+<li>wrong defaults (e.g. people always change the brightness right after power-on).</li>
+</ul>
+</li>
+<li>Run 2–3 short interviews with users to explain what the data shows.</li>
+<li><strong>Deliverable:</strong> A "data-driven design review": 3 insights, each supported by a chart (dashboard or spreadsheet) and a user quote, and each followed by a redesign proposal.</li>
+<li><strong>Design reflection:</strong> Where did the data surprise you? Where would the data alone have misled you without talking to the users?</li>
+<li><strong>Time:</strong> 1 week of deployment + 3 h of analysis.</li>
+</ul>
+<h4 id="exercise-13-keeping-it-alive-maintenance">Exercise 13 — Keeping it alive (maintenance)</h4>
+<ul>
+<li><strong>Goal:</strong> Use data to <strong>monitor and maintain</strong> the product in the field.</li>
+<li><strong>New concepts:</strong> Device health variables (uptime, reboot reason, Wi-Fi signal strength RSSI, free memory, battery voltage), wear counters (servo cycles, relay switches, LED on-hours), sensor drift and plausibility checks ("stuck" values), threshold and trend-based alerts, basic <strong>predictive maintenance</strong>. <strong>Triggers as alarms</strong> (plan): conditions on health variables or on device disconnection, with e-mail or push notifications, and severity levels designed by the students.</li>
+<li><strong>Tools:</strong> Arduino IDE 2 to develop and test the health code on the board (Serial Monitor), then Arduino Cloud.</li>
+<li><strong>Activities:</strong></li>
+<li>Add a small set of health variables, updated every few minutes. Wear counters are <strong>Read &amp; Write</strong> variables: the cloud keeps their last value, so they survive a reboot of the object (alternatively, store them in the board's flash memory with <code>Preferences</code>).</li>
+<li>
+<p>Define alarms with a severity, for example:</p>
+<ul>
+<li><em>critical:</em> object disconnected for more than 10 min (device status trigger);</li>
+<li><em>major:</em> battery below a threshold;</li>
+<li><em>minor:</em> RSSI too weak;</li>
+<li><em>warning:</em> sensor stuck at a constant value, or servo cycles close to the expected lifetime.</li>
+</ul>
+<p>Implement the simple ones as triggers, and the complex ones on the object itself, which then sets an <code>alarmLevel</code> variable (0–3) that can itself fire a trigger.
+  3. Build a <strong>"fleet health" dashboard</strong> for the maintainer: the studio map from Exercise 8 with each object's <code>alarmLevel</code>, RSSI and battery widgets, and charts of the wear counters.
+  4. Optional: use the accelerometer to detect drops or vibration, or estimate when a battery will run out from its discharge trend.
+- <strong>Deliverable:</strong> The fleet health dashboard for all the class's objects, plus at least one alarm that actually fired during the deployment, with an explanation of its cause and how it was handled.
+- <strong>Design reflection:</strong> How would the maintenance data change the <em>physical</em> design of the next version (battery size, antenna position, component choice, access for repairs)? How does it change the service (support, warranty, replacement)?
+- <strong>Time:</strong> 3 h.</p>
+</li>
+</ul>
+<h4 id="exercise-14-closing-the-loop-development">Exercise 14 — Closing the loop (development)</h4>
+<ul>
+<li><strong>Goal:</strong> Improve the product <strong>after it has been deployed</strong>, and test the changes with data.</li>
+<li><strong>New concepts:</strong> <strong>Settings variables</strong> (Read &amp; Write variables that hold parameters such as timeouts, thresholds and colours; the cloud keeps them and sends them back to the object when it reconnects), <strong>A/B testing</strong>, versioning (a <code>firmwareVersion</code> String variable), <strong>OTA updates</strong> from the Cloud Editor (plan), and the ethics of changing a product after the user has bought it.</li>
+<li><strong>Tools:</strong> Arduino Cloud.</li>
+<li><strong>Activities:</strong></li>
+<li>Make the key behaviour parameters configurable remotely instead of hard-coding them (e.g. <code>autoOffMinutes</code>, <code>lightThreshold</code>, <code>alertColor</code>).</li>
+<li>Build a <strong>settings dashboard</strong> with sliders and selectors, so that non-programmers (e.g. the owner of the space) can also change the parameters. Changing a setting needs <strong>no compilation at all</strong>.</li>
+<li>Choose one insight from Exercise 12 and create two variants (A and B), e.g. two auto-off timeouts or two feedback styles.</li>
+<li>Assign half of the objects to A and half to B (an <code>abGroup</code> variable), run the test for a few days, and compare the metrics side by side on an <strong>A/B dashboard</strong>, then in the spreadsheet.</li>
+<li>Push a firmware update <strong>over the air</strong> that includes the winning variant, and show the <code>firmwareVersion</code> of each object on the fleet health dashboard. Plan the OTA updates carefully: each one uses a compilation.</li>
+<li><strong>Deliverable:</strong> A short A/B test report (hypothesis, metric, result, decision) with the A/B dashboard, and a working OTA update.</li>
+<li><strong>Design reflection:</strong> The product is no longer "finished" when it leaves the factory. What does this mean for the design process, for the business model, and for the user's trust? What changes when the settings can be modified by someone who is not in the room?</li>
+<li><strong>Time:</strong> 4 h + a few days of testing.</li>
+</ul>
+<hr />
+<h3 id="final-project">Final project</h3>
+<p>The final project changes every year, depending on the selected design theme. The following is an example for the sake of illustration.</p>
+<h4 id="exercise-15-a-connected-product-service-designed-and-improved-with-data">Exercise 15 — A connected product-service, designed and improved with data</h4>
+<ul>
+<li><strong>Goal:</strong> Integrate both goals in an original project.</li>
+<li><strong>Brief:</strong> Each group, or a team of groups, designs a <strong>product-service ecosystem</strong> in a domain of its choice (home, health and well-being, retail, mobility, workplace, museum, agriculture…) that:</li>
+<li>includes <strong>at least three cooperating objects</strong> (at least two physical ESP32 objects, plus the hub, a service Thing, the phone or an external service) that follow a documented variable contract;</li>
+<li>provides at least one <strong>emergent feature</strong> that no single object could provide;</li>
+<li>has an <strong>instrumentation plan</strong> covering use and maintenance;</li>
+<li>is deployed for a short field test and goes through <strong>at least one data-driven iteration</strong> (a settings change or an OTA update) that is justified by the data.</li>
+<li><strong>Deliverables:</strong></li>
+<li>working prototypes and a live demo;</li>
+<li>Wokwi versions of the objects' behaviour (for documentation and for testing);</li>
+<li>a system map and the variable contract;</li>
+<li>Arduino Cloud dashboards: a live/control dashboard for the end user (desktop and phone), a usage dashboard for the designer, and a health dashboard with alarms for the maintainer. Each dashboard is designed for its audience;</li>
+<li>a design report of max 10 pages: concept, ecosystem, data plan, insights, iteration, ethics/privacy considerations;</li>
+<li>a 3-minute video.</li>
+<li><strong>Time:</strong> 3–4 weeks.</li>
+</ul>
+<hr />
+<h2 id="8-cross-cutting-themes">8. Cross-cutting themes</h2>
+<p>These themes should come back throughout the path, especially in the design reflections:</p>
+<ul>
+<li><strong>Privacy and ethics:</strong> data minimisation, consent, transparency to users (e.g. an LED that shows when data is being sent), GDPR, who owns the data, where the servers are.</li>
+<li><strong>Security:</strong> Secret Keys and Wi-Fi passwords, who has access to a dashboard or to a shared space, what happens if someone else changes a Read &amp; Write variable of your object.</li>
+<li><strong>Sustainability:</strong> energy consumption (update policies, deep sleep), product lifespan, and repairability supported by maintenance data.</li>
+<li><strong>Platforms and dependency:</strong> doing everything on one platform is simple, but the product now depends on a company's service, its plans and prices. What happens to the objects if the service changes or closes? What is the "exit plan"?</li>
+<li><strong>Interoperability:</strong> the class variable contract, and a mention of real-world standards (Matter, Home Assistant, oneM2M) as the "grown-up" version of it.</li>
+<li><strong>Edge vs. cloud:</strong> what must keep working without the internet.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Created by Andrea Vitaletti.<br/><img alt="" style="border-width:0" src="https://andreavitaletti.github.io/IoT_short_course/assets/images/mail.png" /></br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/andrea-vitaletti-3651442/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/andreavitaletti" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tooltips"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
