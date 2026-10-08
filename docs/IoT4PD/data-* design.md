@@ -13,7 +13,7 @@ To illustrate these concepts, we can simulate the evolution of a professional ma
 
 This journey, visualized below, moves from a simple starting point (intuition), through an impactful (but blunt) use of data, to the highly sophisticated engineering loop that drives a "Super Shoe."
 
-![](assets/images/data-driven-shoes.png)
+![](img/data-driven-shoes.png)
 #### Stage 1: The Intuitive Baseline
 
 We begin with a traditional shoe: **"Generation 1: The Baseline (Intuition Model)."**
