@@ -53,7 +53,7 @@ nav:
       - Scale on Sim: Iot_new/scale.md
   - IoT4PD:
       - Outline: IoT4PD/intro.md
-      - data-*: "IoT4PD/data-* design.md"
+      - data-*: IoT4PD/datadesign.md
   - links: links.md
   - thesis: thesis.md
   - Grains of Insight: grain.md
