@@ -51,9 +51,9 @@ nav:
       - Edge: Iot_new/edge.md
       - Crowdsourcing: Iot_new/crowdsourcing.md
       - Scale on Sim: Iot_new/scale.md
-  - IoT4PD:
-      - Outline: IoT4PD/intro.md
-      - data-*: IoT4PD/datadesign.md
+  - IoTPD:
+      - Outline: IoTPD/intro.md
+      - data-*: IoTPD/datadesign.md
   - links: links.md
   - thesis: thesis.md
   - Grains of Insight: grain.md
