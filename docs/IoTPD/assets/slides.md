@@ -78,6 +78,21 @@ Andrea Vitaletti — Sapienza University of Rome
 
 ---
 
+## Course Agreement & Ground Rules
+
+<div class="highlight">
+
+### What we agree on from day one:
+
+- **Use of AI is perfectly fine, but it is not an excuse to do not understand**
+- **Physical reality matters:** At the end, I want to see a physical product made of real, interconnected things.
+- **No validation is unacceptable and dangerous:** If it isn't tested with real humans and real signals, it doesn't work.
+- **Validation needs measures:** Provide concrete numbers, latency, error counts, and observations , **not** generic sentences.
+
+</div>
+
+---
+
 ## 1. Course Purpose & Vision
 
 The course introduces product design students to physical computing and IoT using **ESP32** and **Arduino Cloud**, driven by two central goals:
@@ -93,21 +108,6 @@ The course introduces product design students to physical computing and IoT usin
 
 - **Target Audience:** Designers with no prior coding experience.
 - **Pedagogy:** Step-by-step progression; every technical step ends with a **Design Reflection** and an empirical **Validation**.
-
----
-
-## Course Agreement & Ground Rules
-
-<div class="highlight">
-
-### What we agree on from day one:
-
-- **Use of AI is perfectly fine, but it is not an excuse to do not understand**
-- **Physical reality matters:** At the end, I want to see a physical product made of real, interconnected things.
-- **No validation is unacceptable and dangerous:** If it isn't tested with real humans and real signals, it doesn't work.
-- **Validation needs measures:** Provide concrete numbers, latency, error counts, and observations , **not** generic sentences.
-
-</div>
 
 ---
 

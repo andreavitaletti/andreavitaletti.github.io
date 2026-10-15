@@ -2,6 +2,13 @@
 
 > 📊 **Course Slides:** [Download Presentation Slides (PDF)](assets/slides.pdf) | [View Slide Source (Marp Markdown)](assets/slides.md)
 
+!!! warning "Course Agreement & Ground Rules"
+
+    * **Use of AI is perfectly fine, but it is not an excuse to do not understand**
+    * **At the end I want to see a physical product** made of real interconnected things
+    * **No validation is unacceptable and dangerous**
+    * **Validation needs measures**, not generic sentences
+
 ## 1. Purpose
 
 This set of exercises introduces product design students to the Internet of Things (IoT) through hands-on work with ESP32 boards programmed in Arduino. It has two goals:
@@ -27,16 +34,6 @@ sudo apt install python3-serial`
 If necessary reduce the upload speed ![](img/reduce_speed.png)
 
 ---
-
-## Agreement
-
-!!! warning "Course Agreement & Ground Rules"
-
-    * **Use of AI is perfectly fine, but it is not an excuse to do not understand**
-    * **At the end I want to see a physical product** made of real interconnected things
-    * **No validation is unacceptable and dangerous**
-    * **Validation needs measures**, not generic sentences
-
 
 ## 2. Running scenario: "The Connected Studio"
 
