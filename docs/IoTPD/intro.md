@@ -11,11 +11,11 @@ The path goes step by step. Each exercise introduces **one or two new concepts**
 
 To minimize the burden of installintools,  all the connected parts of the course (connectivity, dashboards, phone control, data storage, notifications, remote updates) are done on a **single platform: Arduino Cloud**. The class is made of designers with little experience of programming tools, so the priority is to keep the number of tools, accounts and concepts as low as possible. Three tools are used, each with a clear role:
 
-| Tool | What it is for | Limits |
-|---|---|---|
-| **Wokwi** (browser simulator) | Sketching and trying behaviour, with no hardware and no risk | None that matter for the course |
-| **Arduino IDE 2** (desktop app) | Free experimentation on the real board, Serial Plotter, unlimited uploads | Does not create dashboards |
-| **Arduino Cloud** (browser + phone app) | The connected object: cloud variables, dashboards, phone control, data, sharing | Limited number of compilations per day on the Free plan |
+| Tool                                                                  | What it is for                                                                  | Limits                                                  |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **[Wokwi](https://wokwi.com/)** (browser simulator)                   | Sketching and trying behaviour, with no hardware and no risk                    | Limited number of simulations on the Free plan          |
+| **[Arduino IDE 2](https://www.arduino.cc/en/software)** (desktop app) | Free experimentation on the real board, Serial Plotter, unlimited uploads       | Does not create dashboards                              |
+| **[Arduino Cloud](https://cloud.arduino.cc)** (browser + phone app)   | The connected object: cloud variables, dashboards, phone control, data, sharing | Limited number of compilations per day on the Free plan |
 
 Because Arduino Cloud limits the number of compilations per day, students learn early to **try things in Wokwi and the Arduino IDE, and to use the Cloud only for the "connected" version** of their work (§5.3).
 
@@ -56,45 +56,45 @@ The kit is split into two parts: a **Core Kit** containing the bare minimal inte
 
 These components require zero external libraries and form the foundational **2×2 matrix of physical computing interaction**:
 
-| | Discrete / Binary (0 or 1) | Continuous / Modulated (0 … Max) |
-|---|---|---|
-| **Input (Controls & Sensors)** | **Push Button** (`digitalRead`, `INPUT_PULLUP`) | **Potentiometer** (`analogRead`, 0–4095) |
-| **Output (Feedback & Actuators)** | **LED On/Off** (`digitalWrite`, HIGH/LOW) | **LED Dimmer** (`analogWrite`, PWM 0–255) |
+|                                   | Discrete / Binary (0 or 1)                      | Continuous / Modulated (0 … Max)          |
+| --------------------------------- | ----------------------------------------------- | ----------------------------------------- |
+| **Input (Controls & Sensors)**    | **Push Button** (`digitalRead`, `INPUT_PULLUP`) | **Potentiometer** (`analogRead`, 0–4095)  |
+| **Output (Feedback & Actuators)** | **LED On/Off** (`digitalWrite`, HIGH/LOW)       | **LED Dimmer** (`analogWrite`, PWM 0–255) |
 
 This 2×2 foundation covers the universal vocabulary of physical product interfaces (switches, indicators, knobs, and dimmers) and maps 1-to-1 to the digital widgets used later in Arduino Cloud dashboards:
 
-| Interaction Primitive | Physical Component | Arduino Function | Cloud Dashboard Widget (Phase B) |
-|---|---|---|---|
-| **Digital Output** | Standard LED | `digitalWrite()` | Status LED / Value widget |
-| **Digital Input** | Push Button | `digitalRead()` | Push Button / Switch widget |
-| **Analog Input** | Rotary Potentiometer | `analogRead()` | Gauge / Percentage widget |
-| **PWM Output** | LED Dimmer | `analogWrite()` | Dimmer / Slider widget |
+| Interaction Primitive | Physical Component   | Arduino Function | Cloud Dashboard Widget (Phase B) |
+| --------------------- | -------------------- | ---------------- | -------------------------------- |
+| **Digital Output**    | Standard LED         | `digitalWrite()` | Status LED / Value widget        |
+| **Digital Input**     | Push Button          | `digitalRead()`  | Push Button / Switch widget      |
+| **Analog Input**      | Rotary Potentiometer | `analogRead()`   | Gauge / Percentage widget        |
+| **PWM Output**        | LED Dimmer           | `analogWrite()`  | Dimmer / Slider widget           |
 
 #### Core Kit Components:
 
-| Component | Interaction primitive | First used in |
-|---|---|---|
-| ESP32 DevKit (e.g. ESP32-WROOM-32 or ESP32-S3) | Microcontroller with Wi-Fi & Bluetooth | Ex 0 |
-| Breadboard, jumper wires, USB **data** cable | Prototyping infrastructure | Ex 0 |
-| Standard LEDs (red, green, blue) + 220–330 Ω resistors | **Digital Output** (`digitalWrite`) & **PWM Output** (`analogWrite`) | Ex 0 / Ex 2 |
-| Push buttons | **Digital Input** (`digitalRead` with internal `INPUT_PULLUP`) | Ex 1 |
-| Rotary potentiometer (10 kΩ) | **Analog Input** (`analogRead`, 0–4095) | Ex 2 |
+| Component                                              | Interaction primitive                                                | First used in |
+| ------------------------------------------------------ | -------------------------------------------------------------------- | ------------- |
+| ESP32 DevKit (e.g. ESP32-WROOM-32 or ESP32-S3)         | Microcontroller with Wi-Fi & Bluetooth                               | Ex 0          |
+| Breadboard, jumper wires, USB **data** cable           | Prototyping infrastructure                                           | Ex 0          |
+| Standard LEDs (red, green, blue) + 220–330 Ω resistors | **Digital Output** (`digitalWrite`) & **PWM Output** (`analogWrite`) | Ex 0 / Ex 2   |
+| Push buttons                                           | **Digital Input** (`digitalRead` with internal `INPUT_PULLUP`)       | Ex 1          |
+| Rotary potentiometer (10 kΩ)                           | **Analog Input** (`analogRead`, 0–4095)                              | Ex 2          |
 
 ### 4.2 Specialized Project Modules (Introduced from Exercise 3)
 
 Depending on the specific studio object each group designs (desk lamp, presence totem, air quality monitor, plant pot, etc.), groups select from these modules:
 
-| Component | Purpose & Target Object | First used in |
-|---|---|---|
-| Light sensor (LDR with 10 kΩ resistor or BH1750 I2C) | Ambient light sensing (smart lamp) | Ex 3 |
-| Temperature/humidity sensor (DHT22 or BME280) | Climate & comfort monitoring (air/plant monitor) | Ex 3 |
-| PIR motion sensor | Presence & arrival detection (door badge, focus totem) | Ex 3 |
-| RGB LED ring (WS2812 / NeoPixel) | Expressive multi-color visual output | Ex 3 |
-| Servo motor (SG90 / micro-servo) | Physical motion, indicators, mechanical flags | Ex 3 |
-| Piezo buzzer | Acoustic feedback and alerts | Ex 3 |
-| Relay module (low voltage only) | Switching external appliances / lights | Ex 7 (optional) |
-| Accelerometer (MPU6050, optional) | Handling, vibration, wear monitoring | Ex 13 |
-| LiPo battery + charger (optional) | Autonomy, portable power monitoring | Ex 13 |
+| Component                                            | Purpose & Target Object                                | First used in   |
+| ---------------------------------------------------- | ------------------------------------------------------ | --------------- |
+| Light sensor (LDR with 10 kΩ resistor or BH1750 I2C) | Ambient light sensing (smart lamp)                     | Ex 3            |
+| Temperature/humidity sensor (DHT22 or BME280)        | Climate & comfort monitoring (air/plant monitor)       | Ex 3            |
+| PIR motion sensor                                    | Presence & arrival detection (door badge, focus totem) | Ex 3            |
+| RGB LED ring (WS2812 / NeoPixel)                     | Expressive multi-color visual output                   | Ex 3            |
+| Servo motor (SG90 / micro-servo)                     | Physical motion, indicators, mechanical flags          | Ex 3            |
+| Piezo buzzer                                         | Acoustic feedback and alerts                           | Ex 3            |
+| Relay module (low voltage only)                      | Switching external appliances / lights                 | Ex 7 (optional) |
+| Accelerometer (MPU6050, optional)                    | Handling, vibration, wear monitoring                   | Ex 13           |
+| LiPo battery + charger (optional)                    | Autonomy, portable power monitoring                    | Ex 13           |
 
 All components above are available in **Wokwi**, so every circuit can be simulated before it is wired on the breadboard.
 
@@ -104,21 +104,21 @@ All components above are available in **Wokwi**, so every circuit can be simulat
 
 ### 5.1 One platform: Arduino Cloud
 
-| Need | Arduino Cloud feature | Replaces (in the previous edition) |
-|---|---|---|
-| Registering the board | **Device** (ESP32 added as a "third-party device", with a Device ID and a Secret Key) | Broker credentials |
-| Describing what the object senses and does | **Thing** with **cloud variables** (name, type, permission, update policy) | Topics and JSON payloads |
-| Writing and uploading code | **Cloud Editor** (web), with a sketch generated automatically from the Thing | Arduino IDE + MQTT libraries |
-| Seeing and controlling the object | **Dashboards** and widgets (value, gauge, chart, switch, slider, colour, status, map, image, scheduler…) | ThingsBoard dashboards, MQTT Explorer |
-| Phone as a remote | **Arduino IoT Remote** app (iOS/Android), with phone-specific dashboard layouts | MQTT Panel apps |
-| Objects talking to objects | **Variable synchronisation** between Things | Shared MQTT topics |
-| Places and groups of objects | **Tags** on Things and devices, shared **studio dashboards** | ThingsBoard assets and relations |
-| History and data export | Chart widgets with time windows, **download of historical data as CSV** | ThingsBoard historical dashboards, InfluxDB |
-| Alerts | **Triggers** (conditions on variables or on device connection → e-mail / push notification) | ThingsBoard alarm rules |
-| External services | **Webhooks** (to Zapier, IFTTT, Make, Google Sheets…) and "service Things" prepared by the instructor | Node-RED |
-| Remote configuration | Read & Write cloud variables used as settings (their last value is kept by the cloud and restored when the object reconnects) | Retained config topics / shared attributes |
-| Updating the product in the field | **Over-the-air (OTA) upload** from the Cloud Editor | ArduinoOTA / HTTP OTA |
-| Working as a class | A **shared space** (Arduino Cloud for Schools / organisation), where all Things and dashboards of the class live together | One broker account per group |
+| Need                                       | Arduino Cloud feature                                                                                                         | Replaces (in the previous edition)          |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Registering the board                      | **Device** (ESP32 added as a "third-party device", with a Device ID and a Secret Key)                                         | Broker credentials                          |
+| Describing what the object senses and does | **Thing** with **cloud variables** (name, type, permission, update policy)                                                    | Topics and JSON payloads                    |
+| Writing and uploading code                 | **Cloud Editor** (web), with a sketch generated automatically from the Thing                                                  | Arduino IDE + MQTT libraries                |
+| Seeing and controlling the object          | **Dashboards** and widgets (value, gauge, chart, switch, slider, colour, status, map, image, scheduler…)                      | ThingsBoard dashboards, MQTT Explorer       |
+| Phone as a remote                          | **Arduino IoT Remote** app (iOS/Android), with phone-specific dashboard layouts                                               | MQTT Panel apps                             |
+| Objects talking to objects                 | **Variable synchronisation** between Things                                                                                   | Shared MQTT topics                          |
+| Places and groups of objects               | **Tags** on Things and devices, shared **studio dashboards**                                                                  | ThingsBoard assets and relations            |
+| History and data export                    | Chart widgets with time windows, **download of historical data as CSV**                                                       | ThingsBoard historical dashboards, InfluxDB |
+| Alerts                                     | **Triggers** (conditions on variables or on device connection → e-mail / push notification)                                   | ThingsBoard alarm rules                     |
+| External services                          | **Webhooks** (to Zapier, IFTTT, Make, Google Sheets…) and "service Things" prepared by the instructor                         | Node-RED                                    |
+| Remote configuration                       | Read & Write cloud variables used as settings (their last value is kept by the cloud and restored when the object reconnects) | Retained config topics / shared attributes  |
+| Updating the product in the field          | **Over-the-air (OTA) upload** from the Cloud Editor                                                                           | ArduinoOTA / HTTP OTA                       |
+| Working as a class                         | A **shared space** (Arduino Cloud for Schools / organisation), where all Things and dashboards of the class live together     | One broker account per group                |
 
 Under the hood Arduino Cloud uses the same ideas seen in any IoT platform (a message broker, publish/subscribe, TLS encryption), but it hides them behind a simple mental model:
 
@@ -132,15 +132,15 @@ This model is enough for the whole course. The underlying protocol (MQTT) is men
 
 An ecosystem only works if objects "speak the same language". In Arduino Cloud, objects talk through **synchronised cloud variables**, and two variables can be synchronised only if they have the **same type**. From Exercise 7 onward the class therefore uses a shared **variable contract**, defined by the instructor together with the students:
 
-| Name | Type | Permission | Meaning | Who writes it |
-|---|---|---|---|---|
-| `studioScene` | `int` (0 = normal, 1 = focus, 2 = presentation, 3 = closed) | Read & Write | Current scene of the studio | Scene dashboard, hub |
-| `someoneAtDoor` | `bool` | Read only | A person has just arrived | Door badge |
-| `roomOccupied` | `bool` | Read only | Someone is in the room | Presence objects |
-| `co2` | `int` (ppm) | Read only | Air quality | Air monitor |
-| `noiseLevel` | `int` (0–100) | Read only | Loudness | Noise meter |
-| `<object>Heartbeat` | `int` (counter) | Read only | "I am alive" signal, increases every minute | Every object |
-| `<object>Mode` | `String` | Read & Write | Current mode of each object | Object, dashboard |
+| Name                | Type                                                        | Permission   | Meaning                                     | Who writes it        |
+| ------------------- | ----------------------------------------------------------- | ------------ | ------------------------------------------- | -------------------- |
+| `studioScene`       | `int` (0 = normal, 1 = focus, 2 = presentation, 3 = closed) | Read & Write | Current scene of the studio                 | Scene dashboard, hub |
+| `someoneAtDoor`     | `bool`                                                      | Read only    | A person has just arrived                   | Door badge           |
+| `roomOccupied`      | `bool`                                                      | Read only    | Someone is in the room                      | Presence objects     |
+| `co2`               | `int` (ppm)                                                 | Read only    | Air quality                                 | Air monitor          |
+| `noiseLevel`        | `int` (0–100)                                               | Read only    | Loudness                                    | Noise meter          |
+| `<object>Heartbeat` | `int` (counter)                                             | Read only    | "I am alive" signal, increases every minute | Every object         |
+| `<object>Mode`      | `String`                                                    | Read & Write | Current mode of each object                 | Object, dashboard    |
 
 Each group also documents, for its own object, a **product sheet of its variables**: name, type, unit, range, permission, update policy, and what it means for the user.
 
@@ -170,42 +170,44 @@ Practical tips:
 
 The exercises are grouped in four phases. The first two phases build the skills; phases C and D address the two main goals directly.
 
-| Phase | Exercises | Key question | Goal addressed |
-|---|---|---|---|
-| **A — The smart object** | 0 – 3 | What can an object sense, decide and do on its own? | Baseline |
-| **B — The connected object** | 4 – 6 | What changes when an object is on the network? | Enabler for 1 & 2 |
-| **C — The ecosystem** | 7 – 10 | What emerges when objects cooperate? | **Goal 1** |
-| **D — Data-driven design** | 11 – 14 | How can data from the field improve the product/service? | **Goal 2** |
-| **Final project** | 15 | Design a connected product-service and iterate on it with data | 1 + 2 |
+| Phase                        | Exercises | Key question                                                   | Goal addressed    |
+| ---------------------------- | --------- | -------------------------------------------------------------- | ----------------- |
+| **A — The smart object**     | 0 – 3     | What can an object sense, decide and do on its own?            | Baseline          |
+| **B — The connected object** | 4 – 6     | What changes when an object is on the network?                 | Enabler for 1 & 2 |
+| **C — The ecosystem**        | 7 – 10    | What emerges when objects cooperate?                           | **Goal 1**        |
+| **D — Data-driven design**   | 11 – 14   | How can data from the field improve the product/service?       | **Goal 2**        |
+| **Final project**            | 15        | Design a connected product-service and iterate on it with data | 1 + 2             |
 
 ### Concept progression
 
 W = Wokwi, IDE = Arduino IDE 2, AC = Arduino Cloud. **Bold** = main tool of the exercise.
 
-| # | Exercise | New concepts | Tools | Builds on |
-|---|---|---|---|---|
-| 0 | Hello Light (GPIO Output) | Wokwi, IDE, upload, `setup()`/`loop()`, `pinMode()`, `digitalWrite()`, `delay()`; light as visual language / expressing moods | **W**, **IDE** | — |
-| 1 | The Tactile Switch (GPIO Input) | `pinMode(..., INPUT_PULLUP)`, `digitalRead()`, Serial Monitor, conditional logic (`if/else`), momentary vs. latching/toggle state, switch bouncing | W, **IDE** | 0 |
-| 2 | The Continuous Dial (Analog Read & PWM) | Potentiometer, `analogRead()` (ADC 0–4095), Serial Plotter, PWM LED dimming (`analogWrite()`), `map()`, controlling brightness and blink tempo | W, **IDE** | 0, 1 |
-| 3 | The isolated smart object | Sense→decide→act loop, state machines, non-blocking timing with `millis()`, introducing specialized project modules (sensors & actuators) | **W**, IDE | 1, 2 |
-| 4 | Going online | Device, Thing, cloud variables, auto-generated sketch, first dashboard | W, **AC** | 3 |
-| 5 | Remote control | Read & Write variables, `onChange` callbacks, phone as a remote (IoT Remote) | W, **AC** | 4 |
-| 6 | The object as a service | Update policies, variable types, connection events, security, dashboard design, sharing; compiling Cloud sketches in the IDE | **AC**, IDE | 4, 5 |
-| 7 | Objects talking to objects | **Variable synchronisation**, shared contract, loose coupling | **AC** | 5, 6 |
-| 8 | Who is there? | Device status, heartbeats, connection callbacks, graceful degradation, **studio map dashboard** | W, **AC** | 6, 7 |
-| 9 | The orchestrator | Scenes, hub Thing, scheduler, triggers, webhooks, service Things | **AC** | 7, 8 |
-| 10 | Ecosystem design sprint | System mapping, emergent behaviour, conflicts, **tags** and studio dashboard | **AC** | 7 – 9 |
-| 11 | Remembering | Historical data, telemetry vs. events, instrumentation plan, CSV export | **AC** | 6, 9 |
-| 12 | How is it really used? | Usage analytics in a spreadsheet, field study, design insights from data | **AC**, spreadsheet | 11 |
-| 13 | Keeping it alive | Device health, wear counters, predictive maintenance, **triggers as alarms** | IDE, **AC** | 11, 12 |
-| 14 | Closing the loop | Settings variables, **OTA updates**, A/B testing | **AC** | 12, 13 |
-| 15 | Final project | Integration of everything | all | all |
+| #   | Exercise                                | New concepts                                                                                                                                       | Tools               | Builds on |
+| --- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------- |
+| 0   | Hello Light (GPIO Output)               | Wokwi, IDE, upload, `setup()`/`loop()`, `pinMode()`, `digitalWrite()`, `delay()`; light as visual language / expressing moods                      | **W**, **IDE**      | —         |
+| 1   | The Tactile Switch (GPIO Input)         | `pinMode(..., INPUT_PULLUP)`, `digitalRead()`, Serial Monitor, conditional logic (`if/else`), momentary vs. latching/toggle state, switch bouncing | W, **IDE**          | 0         |
+| 2   | The Continuous Dial (Analog Read & PWM) | Potentiometer, `analogRead()` (ADC 0–4095), Serial Plotter, PWM LED dimming (`analogWrite()`), `map()`, controlling brightness and blink tempo     | W, **IDE**          | 0, 1      |
+| 3   | The isolated smart object               | Sense→decide→act loop, state machines, non-blocking timing with `millis()`, introducing specialized project modules (sensors & actuators)          | **W**, IDE          | 1, 2      |
+| 4   | Going online                            | Device, Thing, cloud variables, auto-generated sketch, first dashboard                                                                             | W, **AC**           | 3         |
+| 5   | Remote control                          | Read & Write variables, `onChange` callbacks, phone as a remote (IoT Remote)                                                                       | W, **AC**           | 4         |
+| 6   | The object as a service                 | Update policies, variable types, connection events, security, dashboard design, sharing; compiling Cloud sketches in the IDE                       | **AC**, IDE         | 4, 5      |
+| 7   | Objects talking to objects              | **Variable synchronisation**, shared contract, loose coupling                                                                                      | **AC**              | 5, 6      |
+| 8   | Who is there?                           | Device status, heartbeats, connection callbacks, graceful degradation, **studio map dashboard**                                                    | W, **AC**           | 6, 7      |
+| 9   | The orchestrator                        | Scenes, hub Thing, scheduler, triggers, webhooks, service Things                                                                                   | **AC**              | 7, 8      |
+| 10  | Ecosystem design sprint                 | System mapping, emergent behaviour, conflicts, **tags** and studio dashboard                                                                       | **AC**              | 7 – 9     |
+| 11  | Remembering                             | Historical data, telemetry vs. events, instrumentation plan, CSV export                                                                            | **AC**              | 6, 9      |
+| 12  | How is it really used?                  | Usage analytics in a spreadsheet, field study, design insights from data                                                                           | **AC**, spreadsheet | 11        |
+| 13  | Keeping it alive                        | Device health, wear counters, predictive maintenance, **triggers as alarms**                                                                       | IDE, **AC**         | 11, 12    |
+| 14  | Closing the loop                        | Settings variables, **OTA updates**, A/B testing                                                                                                   | **AC**              | 12, 13    |
+| 15  | Final project                           | Integration of everything                                                                                                                          | all                 | all       |
 
 ---
 
 ## 7. Detailed exercises
 
-Each exercise uses the same format: **Goal · New concepts · Tools · Material · Activities · Deliverable · Design reflection · Indicative time**.
+Each exercise uses the same format: **Goal · New concepts · Tools · Material · Activities · Design reflection · Validation · Indicative time**.
+
+Every exercise requires an explicit form of **validation**. The goal is not merely to check whether code compiles, but to **validate the design reflection**: testing how people perceive the interaction, confirming that physical feedback is clear, verifying that the system behaves gracefully under failure, and checking whether data reflects real human experience.
 
 ---
 
@@ -215,10 +217,10 @@ In Phase A the object works alone, so **Arduino Cloud is not used yet**. Student
 
 Phase A is explicitly built around the **2×2 matrix of physical interaction**:
 
-| | **Discrete / Digital (0 or 1)** | **Continuous / Analog (0 … Max)** |
-|---|---|---|
+|                        | **Discrete / Digital (0 or 1)**             | **Continuous / Analog (0 … Max)**                 |
+| ---------------------- | ------------------------------------------- | ------------------------------------------------- |
 | **Output (Actuation)** | **Exercise 0:** LED On/Off (`digitalWrite`) | **Exercise 2:** LED Dimming (`analogWrite` / PWM) |
-| **Input (Sensing)** | **Exercise 1:** Push Button (`digitalRead`) | **Exercise 2:** Potentiometer (`analogRead`) |
+| **Input (Sensing)**    | **Exercise 1:** Push Button (`digitalRead`) | **Exercise 2:** Potentiometer (`analogRead`)      |
 
 No external libraries are needed for Exercises 0 to 2; the entire focus is on mastering these 4 primitives and understanding how they compose. In **Exercise 3**, these primitives are orchestrated with state logic and non-blocking timing (`millis()`), and groups can optionally introduce their chosen specialized sensor or actuator (project module).
 
@@ -233,8 +235,8 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
   2. **Arduino IDE 2:** Install the IDE and the ESP32 board package (step-by-step sheet provided). Connect the ESP32 via USB, select the correct COM/serial port and board model, and upload the *Blink* sketch to the physical hardware.
   3. **Visual expression:** Experiment with the rhythm and cadence of the LED to communicate distinct product "moods" (e.g. calm beacon, urgent warning, natural heartbeat pulse). Test in Wokwi first, then flash to the real board.
   4. Create an Arduino account and install the Arduino Cloud Agent, preparing the environment for Phase B.
-- **Deliverable:** A short video showing the physical LED expressing three distinct product states/moods, plus the link to the Wokwi simulation.
 - **Design reflection:** Even a single light emitter carries expressive semantics. Which blinking patterns are instantly understandable to a human user without instruction? What physical differences did you notice between the simulated LED on screen and the real LED in physical space?
+- **Validation:** Validate the visual communication: test the three mood rhythms with a peer without explaining them in advance. Can an observer unambiguously tell which pattern signals "calm", "alarm", or "heartbeat"? Validate that the physical LED's perceived brightness, viewing angle, and timing match the intended communication.
 - **Time:** 2 h.
 
 #### Exercise 1 — The Tactile Switch: GPIO Input and Interaction
@@ -248,8 +250,8 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
   2. **Direct feedback (Momentary):** Program the LED to illuminate only while the button is physically held down.
   3. **State memory (Toggle):** Introduce a boolean state variable (`bool lampOn = false;`). Modify the code so that each button press toggles the lamp between ON and OFF.
   4. **The reality of hardware (Bouncing):** Upload the toggle code to the real ESP32 board. Observe that occasionally one press causes the lamp to flicker or skip states — an artifact of mechanical metal contacts bouncing that does not appear in the simulator. Add a simple debounce delay (e.g. `delay(50)`) or edge-detection logic to stabilize the input.
-- **Deliverable:** Working breadboard prototype demonstrating a clean toggle switch, a screenshot of the Serial Monitor output, and the Wokwi project link.
 - **Design reflection:** Affordance and feedback in physical controls. What is the experiential difference between a momentary button (like a doorbell or camera shutter) and a toggle switch (like a table lamp)? How critical is instantaneous physical or visual feedback for user confidence?
+- **Validation:** Validate the interaction reliability and user feedback: confirm that the toggle mechanism responds reliably to 20 consecutive rapid presses without false triggers (contact bouncing), and validate with a user that the physical click and visual LED change provide unambiguous confirmation of the state transition.
 - **Time:** 2 h.
 
 #### Exercise 2 — The Continuous Dial: Analog Read and PWM Modulation
@@ -263,8 +265,8 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
   2. **PWM Dimming:** Connect the LED to a PWM-capable pin. Explain how duty cycle (rapid switching) creates the optical illusion of brightness. Use `analogWrite(LED_PIN, value)` to dim the LED.
   3. **Range mapping:** Use `map(potVal, 0, 4095, 0, 255)` to map the 12-bit input resolution directly to the 8-bit PWM brightness.
   4. **Modulating time vs. intensity:** Modify the sketch so the potentiometer does not change brightness, but instead controls the **frequency** of the blinking LED (mapping 0–4095 to a time delay of 50 ms–1500 ms). Students experience how the exact same analog gesture can control either magnitude (light intensity) or temporal rhythm (pulse rate).
-- **Deliverable:** A short video showing the potentiometer smoothly dimming the LED and/or tuning its pulse tempo, accompanied by an annotated screenshot of the Serial Plotter curve.
 - **Design reflection:** Discrete versus continuous interaction. In what product scenarios is a continuous dial superior to a discrete button? How do friction, throw, and range of motion in an analog knob communicate fidelity and control to the user?
+- **Validation:** Validate continuous control fidelity: check on the Serial Plotter that the analog signal covers the full 0–4095 range smoothly without dead zones, and validate with a user whether they can dial in and hold a precise target brightness or blink rhythm purely by physical feel and visual feedback.
 - **Time:** 2 h.
 
 #### Exercise 3 — The Isolated Smart Object: State Machines, Non-blocking Timing, and Project Modules
@@ -288,8 +290,8 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
      - The *Air Monitor* group hooks up a **DHT22/BME280** to track ambient comfort.
      - The *Meeting / Availability Gauge* group adds a **Servo motor** for a physical indicator needle.
 - **Why `millis()` matters here:** In Phase B (Exercise 4 onwards), the object must run `ArduinoCloud.update()` continuously to keep its network connection alive. Any long `delay()` would freeze network packets and cause disconnects. Mastering non-blocking timing now guarantees the code is cloud-ready.
-- **Deliverable:** A working physical prototype, its state diagram, the Wokwi simulation link, and a one-page "Product Sheet" (target user, context of use, physical controls, and state transitions).
 - **Design reflection (key milestone):** Compile a list of everything your object **cannot** do because it is completely isolated. It cannot know if anyone is in the wider room, cannot be monitored remotely, cannot warn maintenance if a component degrades, and provides no usage history to the designer. This limitation list forms the direct motivation for Phase B (The Connected Object).
+- **Validation:** Validate system responsiveness and state transitions: verify that inputs (buttons, dials, sensors) respond instantaneously without lag caused by blocking `delay()`, cycle through all operating states to verify that no dead-end states exist, and validate the list of "isolation limitations" by walking through a real scenario in the studio where the object fails to meet user needs because it is disconnected.
 - **Time:** 4 h.
 
 ---
@@ -332,8 +334,8 @@ From Phase B the object lives on Arduino Cloud. Before each Cloud session, stude
     updateOutputs();             // your behaviour from Exercise 3
   }
   ```
-- **Deliverable:** A screenshot of the Thing (variables) and of the first dashboard with live data.
 - **Design reflection:** Your data is now visible to others. What does that imply for privacy? What should an object send to the cloud, and what should it keep to itself?
+- **Validation:** Validate cloud synchronisation and data privacy: verify that physical sensor updates appear on the dashboard within acceptable latency, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced from the live dashboard widgets.
 - **Time:** 3 h.
 
 #### Exercise 5 — Remote control
@@ -357,8 +359,8 @@ From Phase B the object lives on Arduino Cloud. Before each Cloud session, stude
     applyMode(mode);
   }
   ```
-- **Deliverable:** A video that controls the object from the phone and from its button, with the dashboard staying consistent.
 - **Design reflection:** The object now has two interfaces, one physical and one digital. How do you keep them consistent? Who "wins" in a conflict?
+- **Validation:** Validate bi-directional consistency and conflict handling: simultaneously actuate the physical button/dial and the mobile app slider/switch to validate that both interfaces converge to a consistent state without glitches, and evaluate whether the physical user or remote user experience is prioritized and preserved.
 - **Time:** 3 h.
 
 #### Exercise 6 — The object as a service
@@ -378,8 +380,8 @@ From Phase B the object lives on Arduino Cloud. Before each Cloud session, stude
   3. Open the Thing's sketch in the Arduino IDE 2, compile and upload it from there, and check that the dashboard still works.
   4. Redesign the dashboard for a specific user. Which information is shown first, and which is hidden? Use layout, widget choice, labels and the phone layout on purpose. Make separate desktop and phone versions if they serve different moments of use.
   5. Share the dashboard with the instructor and with another group.
-- **Deliverable:** The shared dashboard (desktop and phone screenshots), the product sheet of the variables (§5.2), and a short description of the "service" the object now offers.
 - **Design reflection:** The product is now a *physical object plus a digital service*. Which part is the product? Sketch the service blueprint. Is the dashboard designed for the end user, the owner of the space, or the maintainer?
+- **Validation:** Validate service usability and network resilience: test the redesigned dashboard with a peer representing the target persona (end-user vs. space manager) to validate that they can understand and operate the service in under 30 seconds without coaching; intentionally disconnect Wi-Fi to validate that the physical object signals its offline status gracefully and maintains baseline local function.
 - **Time:** 4 h.
 
 ---
@@ -400,8 +402,8 @@ Phase C needs all the class's Things to be able to see each other. This is done 
      - The plant pot's `thirsty` becomes true, and the coffee corner counter shows a reminder.
   2. In each Thing, add the variable to listen to (with the **same type** as in the contract) and link it with *Sync with other Things*. Write the callback that reacts to it.
   3. Then swap partners. If the contract is respected, the objects must work with *new* partners without changing the code of the other group — often by only changing the synchronisation, without any new compilation.
-- **Deliverable:** A demo of two or more objects cooperating, plus a diagram of which variables each object produces and uses.
 - **Design reflection:** What made it easy or hard to connect to someone else's object? The contract is a design artefact, just like a physical connector standard.
+- **Validation:** Validate ecosystem interoperability: test variable synchronisation with one partner object, then swap to a different group's object without recompiling local firmware. Validate whether adhering to the shared variable contract makes multi-object cooperation truly plug-and-play or uncovers ambiguous edge cases in the data definition.
 - **Time:** 3 h.
 
 #### Exercise 8 — Who is there? Presence and resilience
@@ -414,8 +416,8 @@ Phase C needs all the class's Things to be able to see each other. This is done 
   2. Objects that depend on a partner watch its heartbeat, synchronised as in Exercise 7. If it does not change for 3 minutes, they switch to a fallback, e.g. the lamp goes back to its local PIR when the door badge is offline.
   3. Unplug objects at random. The others must notice and adapt, and the user must be able to tell (e.g. a small "alone" colour).
   4. As a class, build a **"studio map" dashboard**: an image widget with the floor plan of the room, and next to it one status/LED widget per object, arranged like the objects in the room and labelled with their position. Each widget shows whether the object is alive. Add links (or notes) to each group's own dashboard.
-- **Deliverable:** The studio map dashboard showing all objects and their capabilities, plus a video of the ecosystem reacting to objects that are unplugged.
 - **Design reflection:** In an ecosystem, failures are normal. How should each object behave when its partners disappear? Can the user tell what is going on?
+- **Validation:** Validate graceful degradation and failure visibility: power down partner objects at random and verify that the remaining objects transition to local fallback behavior within the 3-minute heartbeat timeout; validate with an outside observer whether the studio map dashboard and physical status cues make it obvious that a partner is offline rather than simply broken.
 - **Time:** 3 h.
 
 #### Exercise 9 — The orchestrator: scenes, rules and external services
@@ -435,8 +437,8 @@ Phase C needs all the class's Things to be able to see each other. This is done 
   3. Add a schedule that changes the scene automatically at given times.
   4. Bring in an external service: sync with the *Weather* Thing, so the lamp at the entrance turns blue when rain is expected ("take an umbrella").
   5. *(Optional)* Use the IoT Remote app's "phone as a device" function: the phone becomes a Thing that shares, for example, its position or light sensor with the ecosystem.
-- **Deliverable:** A demo of a scene and a rule, plus a diagram showing where each rule lives (object, hub, trigger, schedule).
 - **Design reflection:** Which logic should live in the object (fast, works offline, private) and which in the cloud or in the hub (global view, easy to change)? What happens to the user experience if the internet goes down?
+- **Validation:** Validate ecosystem orchestration and internet-loss resilience: trigger studio scenes and multi-object rules to validate that all devices respond synchronously and accurately; temporarily disconnect the studio's internet uplink to validate which critical safety/comfort interactions survive at the edge versus which break down when cloud logic is unavailable.
 - **Time:** 4 h.
 
 #### Exercise 10 — Ecosystem design sprint
@@ -450,8 +452,8 @@ Phase C needs all the class's Things to be able to see each other. This is done 
   3. Find at least one **emergent** feature, a service that no single object can provide (e.g. an "occupancy and comfort" index of the room built from every object's data).
   4. Find and solve at least one **conflict** (e.g. the energy-saving rule turns the lamp off while someone is reading in a corner the PIR cannot see). Decide the priorities: what can the user always override?
   5. Implement the emergent feature in the hub Thing, save it as a variable (e.g. `comfortIndex`), and show it on a **studio-level dashboard**.
-- **Deliverable:** A system map poster, the tagged Things in Arduino Cloud, and a studio dashboard showing the emergent feature live.
 - **Design reflection:** Compare the list of limitations from Exercise 3 with what the ecosystem now does. What has the ecosystem added, and what new problems (complexity, privacy, dependency on one company's platform) has it introduced?
+- **Validation:** Validate emergent system behavior and conflict resolution: stage a scenario where contradictory rules trigger simultaneously (e.g., energy-saving shutdown vs. active work in a sensor blind spot) to validate that user overrides function as expected; validate that the emergent studio metric (e.g. comfort index) genuinely reflects the actual physical experience in the room.
 - **Time:** 4 h (workshop).
 
 ---
@@ -470,8 +472,8 @@ Phase D needs data to be kept for the whole field study. Check the **data retent
   2. Add the event and counter variables to the Thing, and update them in the code. Prepare and test the changes in Wokwi first; then compile once in the Cloud (or in the IDE).
   3. Build a **"usage" dashboard**, separate from the live dashboard of Exercise 6, with charts over days and the counters. Give each widget the question it answers as its title.
   4. Download the historical data as CSV and open it in a spreadsheet. Make a first pivot table (e.g. events per hour of the day).
-- **Deliverable:** The instrumentation plan, the usage dashboard with at least 24 h of data, and a first spreadsheet chart.
 - **Design reflection:** Data only answers the questions you prepared for. What would you *like* to know that your object cannot measure? Which data should you **not** collect (data minimisation, GDPR)? Where is the data stored, and who can see it?
+- **Validation:** Validate telemetry completeness and data ethics: compare 24 hours of logged events and time-series charts against known physical interactions to validate that no critical usage events were lost or miscategorized; validate the dataset against the instrumentation plan to ensure no unnecessary personal or identifiable data is being gathered.
 - **Time:** 4 h.
 
 #### Exercise 12 — How is it really used? (use and design)
@@ -486,8 +488,8 @@ Phase D needs data to be kept for the whole field study. Check the **data retent
      - "struggle" patterns (e.g. repeated button presses, commands overridden right away);
      - wrong defaults (e.g. people always change the brightness right after power-on).
   3. Run 2–3 short interviews with users to explain what the data shows.
-- **Deliverable:** A "data-driven design review": 3 insights, each supported by a chart (dashboard or spreadsheet) and a user quote, and each followed by a redesign proposal.
 - **Design reflection:** Where did the data surprise you? Where would the data alone have misled you without talking to the users?
+- **Validation:** Validate quantitative data patterns against qualitative user reality: cross-validate behavioral anomalies found in the spreadsheet (e.g. repeated button presses, sudden overrides, unvisited modes) through user interviews to confirm whether the data reflects user friction or unexpected, creative workarounds.
 - **Time:** 1 week of deployment + 3 h of analysis.
 
 #### Exercise 13 — Keeping it alive (maintenance)
@@ -506,8 +508,8 @@ Phase D needs data to be kept for the whole field study. Check the **data retent
      Implement the simple ones as triggers, and the complex ones on the object itself, which then sets an `alarmLevel` variable (0–3) that can itself fire a trigger.
   3. Build a **"fleet health" dashboard** for the maintainer: the studio map from Exercise 8 with each object's `alarmLevel`, RSSI and battery widgets, and charts of the wear counters.
   4. Optional: use the accelerometer to detect drops or vibration, or estimate when a battery will run out from its discharge trend.
-- **Deliverable:** The fleet health dashboard for all the class's objects, plus at least one alarm that actually fired during the deployment, with an explanation of its cause and how it was handled.
 - **Design reflection:** How would the maintenance data change the *physical* design of the next version (battery size, antenna position, component choice, access for repairs)? How does it change the service (support, warranty, replacement)?
+- **Validation:** Validate diagnostic triggers and predictive alarms: simulate hardware distress (e.g. low battery voltage, weak Wi-Fi signal, or simulated sensor freeze) to validate that maintenance notifications trigger at the correct severity level without false alarms; validate whether the physical diagnostic data would provide sufficient guidance for a field technician.
 - **Time:** 3 h.
 
 #### Exercise 14 — Closing the loop (development)
@@ -521,8 +523,8 @@ Phase D needs data to be kept for the whole field study. Check the **data retent
   3. Choose one insight from Exercise 12 and create two variants (A and B), e.g. two auto-off timeouts or two feedback styles.
   4. Assign half of the objects to A and half to B (an `abGroup` variable), run the test for a few days, and compare the metrics side by side on an **A/B dashboard**, then in the spreadsheet.
   5. Push a firmware update **over the air** that includes the winning variant, and show the `firmwareVersion` of each object on the fleet health dashboard. Plan the OTA updates carefully: each one uses a compilation.
-- **Deliverable:** A short A/B test report (hypothesis, metric, result, decision) with the A/B dashboard, and a working OTA update.
 - **Design reflection:** The product is no longer "finished" when it leaves the factory. What does this mean for the design process, for the business model, and for the user's trust? What changes when the settings can be modified by someone who is not in the room?
+- **Validation:** Validate post-deployment iteration and remote updates: demonstrate that altering a cloud setting updates the deployed physical behavior with zero downtime or recompilation; execute an OTA update in the field and validate that the A/B metric discriminates which design variant delivers demonstrably better user experience.
 - **Time:** 4 h + a few days of testing.
 
 ---
@@ -539,13 +541,11 @@ The final project changes every year, depending on the selected design theme. Th
   2. provides at least one **emergent feature** that no single object could provide;
   3. has an **instrumentation plan** covering use and maintenance;
   4. is deployed for a short field test and goes through **at least one data-driven iteration** (a settings change or an OTA update) that is justified by the data.
-- **Deliverables:**
-  - working prototypes and a live demo;
-  - Wokwi versions of the objects' behaviour (for documentation and for testing);
-  - a system map and the variable contract;
-  - Arduino Cloud dashboards: a live/control dashboard for the end user (desktop and phone), a usage dashboard for the designer, and a health dashboard with alarms for the maintainer. Each dashboard is designed for its audience;
-  - a design report of max 10 pages: concept, ecosystem, data plan, insights, iteration, ethics/privacy considerations;
-  - a 3-minute video.
+- **Validation:**
+  - **Live ecosystem validation:** demonstrate the multi-object ecosystem functioning reliably under real studio conditions with active user interactions.
+  - **Interoperability validation:** verify that all objects exchange data strictly adhering to the variable contract without runtime type or timing conflicts.
+  - **Data-driven redesign validation:** prove that field telemetry collected directly justifies the design iteration (settings change or OTA update), and validate with end-users that the iteration improved product experience.
+  - **Design reflection validation:** evaluate the ecosystem against cross-cutting themes (ethics, privacy, graceful degradation when offline, and user trust).
 - **Time:** 3–4 weeks.
 
 ---
