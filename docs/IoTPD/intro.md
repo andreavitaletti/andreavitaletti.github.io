@@ -32,7 +32,7 @@ If necessary reduce the upload speed ![](img/reduce_speed.png)
 
 !!! warning "Course Agreement & Ground Rules"
 
-    * **Use of AI is perfectly fine**
+    * **Use of AI is perfectly fine, but it is not an excuse to do not understand**
     * **At the end I want to see a physical product** made of real interconnected things
     * **No validation is unacceptable and dangerous**
     * **Validation needs measures**, not generic sentences
