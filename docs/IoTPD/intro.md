@@ -50,21 +50,53 @@ This scenario makes both goals concrete. Students experience first-hand what cha
 
 ## 4. Hardware kit (per group)
 
-| Component | Purpose | First used in |
-|---|---|---|
-| ESP32 DevKit (e.g. ESP32-WROOM-32 or ESP32-S3) | Microcontroller with Wi-Fi | Ex 0 |
-| Breadboard, jumper wires, USB **data** cable | Prototyping | Ex 0 |
-| LEDs + resistors, RGB LED ring (WS2812 / NeoPixel) | Visual output | Ex 0 / Ex 2 |
-| Push buttons, potentiometer | Direct user input | Ex 1 |
-| Light sensor (LDR or BH1750) | Environment sensing | Ex 1 |
-| Temperature/humidity sensor (DHT22 or BME280) | Environment sensing | Ex 1 |
-| PIR motion sensor | Presence detection | Ex 3 |
-| Servo motor, buzzer | Physical actuation, sound | Ex 2 |
-| Relay module (low voltage only) | Switching loads | Ex 7 (optional) |
-| Accelerometer (MPU6050), optional | Handling / vibration / wear | Ex 13 |
-| LiPo battery + charger (optional) | Autonomy, battery monitoring | Ex 13 |
+The kit is split into two parts: a **Core Kit** containing the bare minimal interaction primitives (the 4 digital and continuous inputs/outputs) used by everyone from day one without any external libraries, and **Specialized Project Modules** introduced from Exercise 3 according to each group's studio object.
 
-All components above are available in **Wokwi**, so every circuit can be drawn and tested in the simulator before it is wired.
+### 4.1 Core Kit (Universal — used from Exercise 0)
+
+These components require zero external libraries and form the foundational **2×2 matrix of physical computing interaction**:
+
+| | Discrete / Binary (0 or 1) | Continuous / Modulated (0 … Max) |
+|---|---|---|
+| **Input (Controls & Sensors)** | **Push Button** (`digitalRead`, `INPUT_PULLUP`) | **Potentiometer** (`analogRead`, 0–4095) |
+| **Output (Feedback & Actuators)** | **LED On/Off** (`digitalWrite`, HIGH/LOW) | **LED Dimmer** (`analogWrite`, PWM 0–255) |
+
+This 2×2 foundation covers the universal vocabulary of physical product interfaces (switches, indicators, knobs, and dimmers) and maps 1-to-1 to the digital widgets used later in Arduino Cloud dashboards:
+
+| Interaction Primitive | Physical Component | Arduino Function | Cloud Dashboard Widget (Phase B) |
+|---|---|---|---|
+| **Digital Output** | Standard LED | `digitalWrite()` | Status LED / Value widget |
+| **Digital Input** | Push Button | `digitalRead()` | Push Button / Switch widget |
+| **Analog Input** | Rotary Potentiometer | `analogRead()` | Gauge / Percentage widget |
+| **PWM Output** | LED Dimmer | `analogWrite()` | Dimmer / Slider widget |
+
+#### Core Kit Components:
+
+| Component | Interaction primitive | First used in |
+|---|---|---|
+| ESP32 DevKit (e.g. ESP32-WROOM-32 or ESP32-S3) | Microcontroller with Wi-Fi & Bluetooth | Ex 0 |
+| Breadboard, jumper wires, USB **data** cable | Prototyping infrastructure | Ex 0 |
+| Standard LEDs (red, green, blue) + 220–330 Ω resistors | **Digital Output** (`digitalWrite`) & **PWM Output** (`analogWrite`) | Ex 0 / Ex 2 |
+| Push buttons | **Digital Input** (`digitalRead` with internal `INPUT_PULLUP`) | Ex 1 |
+| Rotary potentiometer (10 kΩ) | **Analog Input** (`analogRead`, 0–4095) | Ex 2 |
+
+### 4.2 Specialized Project Modules (Introduced from Exercise 3)
+
+Depending on the specific studio object each group designs (desk lamp, presence totem, air quality monitor, plant pot, etc.), groups select from these modules:
+
+| Component | Purpose & Target Object | First used in |
+|---|---|---|
+| Light sensor (LDR with 10 kΩ resistor or BH1750 I2C) | Ambient light sensing (smart lamp) | Ex 3 |
+| Temperature/humidity sensor (DHT22 or BME280) | Climate & comfort monitoring (air/plant monitor) | Ex 3 |
+| PIR motion sensor | Presence & arrival detection (door badge, focus totem) | Ex 3 |
+| RGB LED ring (WS2812 / NeoPixel) | Expressive multi-color visual output | Ex 3 |
+| Servo motor (SG90 / micro-servo) | Physical motion, indicators, mechanical flags | Ex 3 |
+| Piezo buzzer | Acoustic feedback and alerts | Ex 3 |
+| Relay module (low voltage only) | Switching external appliances / lights | Ex 7 (optional) |
+| Accelerometer (MPU6050, optional) | Handling, vibration, wear monitoring | Ex 13 |
+| LiPo battery + charger (optional) | Autonomy, portable power monitoring | Ex 13 |
+
+All components above are available in **Wokwi**, so every circuit can be simulated before it is wired on the breadboard.
 
 ---
 
@@ -152,10 +184,10 @@ W = Wokwi, IDE = Arduino IDE 2, AC = Arduino Cloud. **Bold** = main tool of the 
 
 | # | Exercise | New concepts | Tools | Builds on |
 |---|---|---|---|---|
-| 0 | Hello ESP32 — three workspaces | Wokwi, IDE, upload, `setup()`/`loop()`, digital output; Arduino account | **W**, **IDE** | — |
-| 1 | Sensing the world | Digital/analog input, sensors, Serial Monitor/Plotter, sampling | W, **IDE** | 0 |
-| 2 | Acting on the world | Actuators (PWM, servo, NeoPixel, buzzer), mapping values | W, **IDE** | 0, 1 |
-| 3 | The isolated smart object | Sense→decide→act loop, state machines, non-blocking timing, interaction design | **W**, IDE | 1, 2 |
+| 0 | Hello Light (GPIO Output) | Wokwi, IDE, upload, `setup()`/`loop()`, `pinMode()`, `digitalWrite()`, `delay()`; light as visual language / expressing moods | **W**, **IDE** | — |
+| 1 | The Tactile Switch (GPIO Input) | `pinMode(..., INPUT_PULLUP)`, `digitalRead()`, Serial Monitor, conditional logic (`if/else`), momentary vs. latching/toggle state, switch bouncing | W, **IDE** | 0 |
+| 2 | The Continuous Dial (Analog Read & PWM) | Potentiometer, `analogRead()` (ADC 0–4095), Serial Plotter, PWM LED dimming (`analogWrite()`), `map()`, controlling brightness and blink tempo | W, **IDE** | 0, 1 |
+| 3 | The isolated smart object | Sense→decide→act loop, state machines, non-blocking timing with `millis()`, introducing specialized project modules (sensors & actuators) | **W**, IDE | 1, 2 |
 | 4 | Going online | Device, Thing, cloud variables, auto-generated sketch, first dashboard | W, **AC** | 3 |
 | 5 | Remote control | Read & Write variables, `onChange` callbacks, phone as a remote (IoT Remote) | W, **AC** | 4 |
 | 6 | The object as a service | Update policies, variable types, connection events, security, dashboard design, sharing; compiling Cloud sketches in the IDE | **AC**, IDE | 4, 5 |
@@ -179,67 +211,85 @@ Each exercise uses the same format: **Goal · New concepts · Tools · Material 
 
 ### Phase A — The smart object
 
-In Phase A the object works alone, so **Arduino Cloud is not used yet**. Students become comfortable with code in the two unlimited environments, Wokwi and the Arduino IDE.
+In Phase A the object works alone, so **Arduino Cloud is not used yet**. Students become comfortable with code in the two unlimited environments, Wokwi and the Arduino IDE, using the **Core Kit** (LED, Button, Potentiometer).
 
-#### Exercise 0 — Hello ESP32: three workspaces
+Phase A is explicitly built around the **2×2 matrix of physical interaction**:
 
-- **Goal:** Get familiar with the tools and with the idea that "behaviour is code".
-- **New concepts:** A simulator versus a real board, the Arduino IDE 2, the ESP32 board package, selecting board and port, uploading, `setup()` and `loop()`, digital output, `delay()`. Creating an Arduino account (used from Exercise 4).
+| | **Discrete / Digital (0 or 1)** | **Continuous / Analog (0 … Max)** |
+|---|---|---|
+| **Output (Actuation)** | **Exercise 0:** LED On/Off (`digitalWrite`) | **Exercise 2:** LED Dimming (`analogWrite` / PWM) |
+| **Input (Sensing)** | **Exercise 1:** Push Button (`digitalRead`) | **Exercise 2:** Potentiometer (`analogRead`) |
+
+No external libraries are needed for Exercises 0 to 2; the entire focus is on mastering these 4 primitives and understanding how they compose. In **Exercise 3**, these primitives are orchestrated with state logic and non-blocking timing (`millis()`), and groups can optionally introduce their chosen specialized sensor or actuator (project module).
+
+#### Exercise 0 — Hello Light: GPIO Output and Visual Feedback
+
+- **Goal:** Get familiar with the prototyping tools and learn how code controls physical output through a simple LED.
+- **New concepts:** Simulator (Wokwi) versus physical hardware, Arduino IDE 2, ESP32 board package, selecting board and serial port, uploading code, structure of a sketch (`setup()` and `loop()`), configuring GPIO pins (`pinMode()`, `OUTPUT`), digital output (`digitalWrite()`, `HIGH`/`LOW`), blocking delays with `delay()`. Creating an Arduino account for later phases.
+- **Tools:** Wokwi (sketching), Arduino IDE 2 (uploading).
+- **Material (Core Kit):** ESP32, 1–2 standard LEDs, 220–330 Ω current-limiting resistors, breadboard, USB data cable.
+- **Activities:**
+  1. **Wokwi:** Open the ESP32 *Blink* project provided by the instructor, press *Play*, change the duration numbers in `delay()`, and observe the changes immediately. Add a second LED to the circuit on another GPIO pin and make them alternate.
+  2. **Arduino IDE 2:** Install the IDE and the ESP32 board package (step-by-step sheet provided). Connect the ESP32 via USB, select the correct COM/serial port and board model, and upload the *Blink* sketch to the physical hardware.
+  3. **Visual expression:** Experiment with the rhythm and cadence of the LED to communicate distinct product "moods" (e.g. calm beacon, urgent warning, natural heartbeat pulse). Test in Wokwi first, then flash to the real board.
+  4. Create an Arduino account and install the Arduino Cloud Agent, preparing the environment for Phase B.
+- **Deliverable:** A short video showing the physical LED expressing three distinct product states/moods, plus the link to the Wokwi simulation.
+- **Design reflection:** Even a single light emitter carries expressive semantics. Which blinking patterns are instantly understandable to a human user without instruction? What physical differences did you notice between the simulated LED on screen and the real LED in physical space?
+- **Time:** 2 h.
+
+#### Exercise 1 — The Tactile Switch: GPIO Input and Interaction
+
+- **Goal:** Read user intention through a physical push button and build the first responsive interactive loop.
+- **New concepts:** Digital input (`digitalRead()`), internal pull-up resistors (`pinMode(pin, INPUT_PULLUP)` — why connecting the button directly to GND eliminates external resistors and avoids floating pins), the **Serial Monitor** as a text-based inspection window, conditional logic (`if / else`), interaction paradigms: **momentary action** (active only while pressed) versus **latching / toggle state** (memory of state), mechanical contact bouncing on real switches.
 - **Tools:** Wokwi, Arduino IDE 2.
-- **Material:** ESP32, LED, resistor.
+- **Material (Core Kit):** ESP32, push button, LED + resistor, breadboard, jumper wires.
 - **Activities:**
-  1. **Wokwi:** open the ESP32 *Blink* project provided by the instructor, press *Play*, then change the numbers in `delay()` and see what happens. Add a second LED to the circuit.
-  2. **Arduino IDE 2:** install the IDE and the ESP32 core (the instructor provides a step-by-step sheet with screenshots). Select the board and the port, and upload the same *Blink* sketch to the real ESP32.
-  3. Change the rhythm of the blink to express a "mood" (calm, alarm, heartbeat). Try it first in Wokwi, then on the board.
-  4. Create an Arduino account and install the Arduino Cloud Agent, so that everything is ready for Exercise 4.
-- **Deliverable:** A short video of the LED expressing three different moods, and the link to the Wokwi project.
-- **Design reflection:** Even a single LED can communicate. Which blinking patterns are unambiguous for a user? What was different between the simulated LED and the real one?
+  1. **Wokwi wiring & inspection:** Connect one terminal of the push button to a GPIO pin (e.g. GPIO 18) and the other directly to GND. Configure the pin as `INPUT_PULLUP`. Open the Serial Monitor and print the value of `digitalRead()`. Observe that unpressed is `HIGH` (1) and pressed is `LOW` (0).
+  2. **Direct feedback (Momentary):** Program the LED to illuminate only while the button is physically held down.
+  3. **State memory (Toggle):** Introduce a boolean state variable (`bool lampOn = false;`). Modify the code so that each button press toggles the lamp between ON and OFF.
+  4. **The reality of hardware (Bouncing):** Upload the toggle code to the real ESP32 board. Observe that occasionally one press causes the lamp to flicker or skip states — an artifact of mechanical metal contacts bouncing that does not appear in the simulator. Add a simple debounce delay (e.g. `delay(50)`) or edge-detection logic to stabilize the input.
+- **Deliverable:** Working breadboard prototype demonstrating a clean toggle switch, a screenshot of the Serial Monitor output, and the Wokwi project link.
+- **Design reflection:** Affordance and feedback in physical controls. What is the experiential difference between a momentary button (like a doorbell or camera shutter) and a toggle switch (like a table lamp)? How critical is instantaneous physical or visual feedback for user confidence?
 - **Time:** 2 h.
 
-#### Exercise 1 — Sensing the world
+#### Exercise 2 — The Continuous Dial: Analog Read and PWM Modulation
 
-- **Goal:** Read the physical world and understand what a sensor actually measures.
-- **New concepts:** Digital input (button, pull-up), analog input (ADC, potentiometer, LDR), digital sensors (DHT22/BME280) through libraries, installing a library, Serial Monitor and **Serial Plotter**, sampling rate, noise.
-- **Tools:** Wokwi to prepare the circuit, Arduino IDE 2 to measure the real world.
-- **Material:** Button, potentiometer, LDR, DHT22/BME280.
-- **Activities:**
-  1. In Wokwi, wire the button and the sensors and print their values. Wokwi lets you "move" the simulated sensors with a slider.
-  2. On the real board (IDE), read a button and print its state; notice bouncing, which does not happen in the simulator.
-  3. Read the LDR and plot it with the Serial Plotter while covering it with a hand.
-  4. Read temperature and humidity; breathe on the sensor and watch the response time.
-- **Deliverable:** Screenshot of the Serial Plotter with annotated "events" (hand, breath, lamp on…).
-- **Design reflection:** Sensors are imperfect. They are noisy, slow and limited in range, and a simulator hides most of these imperfections. How does this affect what a product can "know" about its user and environment?
-- **Time:** 2 h.
-
-#### Exercise 2 — Acting on the world
-
-- **Goal:** Let the object produce physical, perceivable effects.
-- **New concepts:** PWM (LED dimming), servo motors, NeoPixel colour, buzzer tones, `map()` to translate input ranges into output ranges.
+- **Goal:** Capture continuous physical gestures and translate them into nuanced, modulated physical output.
+- **New concepts:** Analog input, Analog-to-Digital Conversion (ADC on ESP32: 12-bit resolution yielding values 0–4095), potentiometer as a mechanical voltage divider, `analogRead()`, the **Serial Plotter** for visualising continuous sensor waveforms, Pulse Width Modulation (PWM) to simulate analog output on a digital pin, LED dimming (`analogWrite()`), linear mapping with `map()`, dual modulation (modulating brightness vs. modulating tempo).
 - **Tools:** Wokwi, Arduino IDE 2.
-- **Material:** LED, NeoPixel ring, servo, buzzer, potentiometer.
+- **Material (Core Kit):** ESP32, rotary potentiometer (10 kΩ), LED + resistor, breadboard, jumper wires.
 - **Activities:**
-  1. Dim an LED with the potentiometer.
-  2. Move a servo in proportion to the light level (a "sunflower").
-  3. Map temperature to a colour on the NeoPixel ring (blue → red).
-  4. Explore freely: the IDE has no upload limit, so try many variations of speed, colour and sound.
-- **Deliverable:** A short demo of a sensor that directly drives an actuator.
-- **Design reflection:** Direct mapping (sensor → actuator) is simple but "dumb". When does the object need to *decide* instead of just react?
+  1. **Wokwi & Real Board:** Connect the outer pins of the potentiometer to 3.3V and GND, and the central wiper to an ADC-capable GPIO pin (e.g. GPIO 34 or 35). Read the value with `analogRead()` and open the **Serial Plotter** in Arduino IDE 2. Turn the dial smoothly to visualize the continuous wave and inspect electrical noise.
+  2. **PWM Dimming:** Connect the LED to a PWM-capable pin. Explain how duty cycle (rapid switching) creates the optical illusion of brightness. Use `analogWrite(LED_PIN, value)` to dim the LED.
+  3. **Range mapping:** Use `map(potVal, 0, 4095, 0, 255)` to map the 12-bit input resolution directly to the 8-bit PWM brightness.
+  4. **Modulating time vs. intensity:** Modify the sketch so the potentiometer does not change brightness, but instead controls the **frequency** of the blinking LED (mapping 0–4095 to a time delay of 50 ms–1500 ms). Students experience how the exact same analog gesture can control either magnitude (light intensity) or temporal rhythm (pulse rate).
+- **Deliverable:** A short video showing the potentiometer smoothly dimming the LED and/or tuning its pulse tempo, accompanied by an annotated screenshot of the Serial Plotter curve.
+- **Design reflection:** Discrete versus continuous interaction. In what product scenarios is a continuous dial superior to a discrete button? How do friction, throw, and range of motion in an analog knob communicate fidelity and control to the user?
 - **Time:** 2 h.
 
-#### Exercise 3 — The isolated smart object
+#### Exercise 3 — The Isolated Smart Object: State Machines, Non-blocking Timing, and Project Modules
 
-- **Goal:** Build the first version of the group's studio object as a **stand-alone smart object**.
-- **New concepts:** The sense → decide → act loop, finite-state machines (e.g. `IDLE`, `ACTIVE`, `ALERT`), non-blocking timing with `millis()`, hysteresis, basic interaction design (feedback, affordances). Organising code in functions (`readSensors()`, `decide()`, `updateOutputs()`).
-- **Tools:** Wokwi to design the behaviour, Arduino IDE 2 to build the prototype.
-- **Material:** Any combination of the previous components plus the PIR sensor.
+- **Goal:** Synthesize the core primitives into a cohesive stand-alone product prototype with distinct operational modes, introducing specialized sensors and actuators for the group's chosen studio object.
+- **New concepts:**
+  - The **Sense $\rightarrow$ Decide $\rightarrow$ Act** control loop.
+  - **Finite-State Machines (FSM):** explicit product modes (e.g., `OFF`, `ACTIVE`, `ALERT`, `AUTOMATIC`).
+  - **Non-blocking timing with `millis()`**: why blocking `delay()` cripples interactive responsiveness, and how to replace it with timestamp arithmetic.
+  - Code architecture for products: modular functions (`readInputs()`, `decide()`, `renderOutputs()`).
+  - **Specialized Project Modules:** selecting and integrating the specific peripheral needed for the group's studio object concept (PIR presence sensor, LDR light sensor, DHT22 temperature/humidity, NeoPixel ring, or Servo motor).
+- **Tools:** Wokwi (interaction design & logic testing), Arduino IDE 2 (physical prototype assembly).
+- **Material:** Core Kit (Button, Potentiometer, LEDs) + **Specialized Project Modules** chosen by each group based on their concept.
 - **Activities:**
-  1. Each group picks its studio object (lamp, focus totem, plant pot, air monitor, etc.).
-  2. Draw the state diagram on paper first, then implement it in Wokwi.
-  3. Move the sketch to the real board with the IDE and tune the thresholds with real sensors.
-  4. Example: a *focus lamp* that turns on when someone sits (PIR), adapts brightness to ambient light, and turns red when a button signals "do not disturb".
-- **Why `millis()` matters here:** from Exercise 4 the object must call `ArduinoCloud.update()` continuously to stay connected. Long `delay()`s would "freeze" the connection, so non-blocking timing is learned now, when it is still simple.
-- **Deliverable:** A working prototype, its state diagram, the Wokwi link, and a one-page "product card" (user, purpose, behaviour).
-- **Design reflection (key moment):** List everything your object **cannot** do because it is alone. It cannot know whether the room is empty, cannot be controlled from far away, cannot tell anyone it is broken, and you do not know how people use it. This list motivates the rest of the course.
+  1. **Select the Studio Object:** Each group selects the concept they will develop for the shared studio scenario (e.g. an adaptive desk lamp, a "focus" totem, an ambient window monitor, or a plant pot).
+  2. **Non-blocking timing:** Refactor previous code to eliminate all calls to `delay()`, replacing them with `millis()` intervals. Verify that the button and potentiometer remain instantaneously responsive even while an LED is pulsing or fading.
+  3. **Define and implement states:** Draw an explicit state diagram on paper with at least three states (e.g., for a *Focus Lamp*: `IDLE/OFF` $\rightarrow$ `FOCUS` [potentiometer tunes warm light level] $\rightarrow$ `DO_NOT_DISTURB` [pulsing alert]). Use the push button to switch states.
+  4. **Integrate the Specialized Module:** Incorporate the group's chosen project module using dedicated reference sheets:
+     - The *Desk Lamp* group integrates an **LDR** (automatic ambient dimming) or **PIR** sensor (auto-shutoff when the desk is vacated).
+     - The *Focus Totem* group connects an **RGB NeoPixel ring** for rich chromatic status signaling.
+     - The *Air Monitor* group hooks up a **DHT22/BME280** to track ambient comfort.
+     - The *Meeting / Availability Gauge* group adds a **Servo motor** for a physical indicator needle.
+- **Why `millis()` matters here:** In Phase B (Exercise 4 onwards), the object must run `ArduinoCloud.update()` continuously to keep its network connection alive. Any long `delay()` would freeze network packets and cause disconnects. Mastering non-blocking timing now guarantees the code is cloud-ready.
+- **Deliverable:** A working physical prototype, its state diagram, the Wokwi simulation link, and a one-page "Product Sheet" (target user, context of use, physical controls, and state transitions).
+- **Design reflection (key milestone):** Compile a list of everything your object **cannot** do because it is completely isolated. It cannot know if anyone is in the wider room, cannot be monitored remotely, cannot warn maintenance if a component degrades, and provides no usage history to the designer. This limitation list forms the direct motivation for Phase B (The Connected Object).
 - **Time:** 4 h.
 
 ---
