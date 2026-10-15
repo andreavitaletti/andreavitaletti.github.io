@@ -2244,17 +2244,17 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Wokwi</strong> (browser simulator)</td>
+<td><strong><a href="https://wokwi.com/">Wokwi</a></strong> (browser simulator)</td>
 <td>Sketching and trying behaviour, with no hardware and no risk</td>
-<td>None that matter for the course</td>
+<td>Limited number of simulations on the Free plan</td>
 </tr>
 <tr>
-<td><strong>Arduino IDE 2</strong> (desktop app)</td>
+<td><strong><a href="https://www.arduino.cc/en/software">Arduino IDE 2</a></strong> (desktop app)</td>
 <td>Free experimentation on the real board, Serial Plotter, unlimited uploads</td>
 <td>Does not create dashboards</td>
 </tr>
 <tr>
-<td><strong>Arduino Cloud</strong> (browser + phone app)</td>
+<td><strong><a href="https://cloud.arduino.cc">Arduino Cloud</a></strong> (browser + phone app)</td>
 <td>The connected object: cloud variables, dashboards, phone control, data, sharing</td>
 <td>Limited number of compilations per day on the Free plan</td>
 </tr>
@@ -2779,7 +2779,8 @@ sudo apt install python3-serial</code></p>
 </table>
 <hr />
 <h2 id="7-detailed-exercises">7. Detailed exercises</h2>
-<p>Each exercise uses the same format: <strong>Goal · New concepts · Tools · Material · Activities · Deliverable · Design reflection · Indicative time</strong>.</p>
+<p>Each exercise uses the same format: <strong>Goal · New concepts · Tools · Material · Activities · Design reflection · Validation · Indicative time</strong>.</p>
+<p>Every exercise requires an explicit form of <strong>validation</strong>. The goal is not merely to check whether code compiles, but to <strong>validate the design reflection</strong>: testing how people perceive the interaction, confirming that physical feedback is clear, verifying that the system behaves gracefully under failure, and checking whether data reflects real human experience.</p>
 <hr />
 <h3 id="phase-a-the-smart-object">Phase A — The smart object</h3>
 <p>In Phase A the object works alone, so <strong>Arduino Cloud is not used yet</strong>. Students become comfortable with code in the two unlimited environments, Wokwi and the Arduino IDE, using the <strong>Core Kit</strong> (LED, Button, Potentiometer).</p>
@@ -2817,8 +2818,8 @@ sudo apt install python3-serial</code></p>
 <li><strong>Arduino IDE 2:</strong> Install the IDE and the ESP32 board package (step-by-step sheet provided). Connect the ESP32 via USB, select the correct COM/serial port and board model, and upload the <em>Blink</em> sketch to the physical hardware.</li>
 <li><strong>Visual expression:</strong> Experiment with the rhythm and cadence of the LED to communicate distinct product "moods" (e.g. calm beacon, urgent warning, natural heartbeat pulse). Test in Wokwi first, then flash to the real board.</li>
 <li>Create an Arduino account and install the Arduino Cloud Agent, preparing the environment for Phase B.</li>
-<li><strong>Deliverable:</strong> A short video showing the physical LED expressing three distinct product states/moods, plus the link to the Wokwi simulation.</li>
 <li><strong>Design reflection:</strong> Even a single light emitter carries expressive semantics. Which blinking patterns are instantly understandable to a human user without instruction? What physical differences did you notice between the simulated LED on screen and the real LED in physical space?</li>
+<li><strong>Validation:</strong> Validate the visual communication: test the three mood rhythms with a peer without explaining them in advance. Can an observer unambiguously tell which pattern signals "calm", "alarm", or "heartbeat"? Validate that the physical LED's perceived brightness, viewing angle, and timing match the intended communication.</li>
 <li><strong>Time:</strong> 2 h.</li>
 </ul>
 <h4 id="exercise-1-the-tactile-switch-gpio-input-and-interaction">Exercise 1 — The Tactile Switch: GPIO Input and Interaction</h4>
@@ -2832,8 +2833,8 @@ sudo apt install python3-serial</code></p>
 <li><strong>Direct feedback (Momentary):</strong> Program the LED to illuminate only while the button is physically held down.</li>
 <li><strong>State memory (Toggle):</strong> Introduce a boolean state variable (<code>bool lampOn = false;</code>). Modify the code so that each button press toggles the lamp between ON and OFF.</li>
 <li><strong>The reality of hardware (Bouncing):</strong> Upload the toggle code to the real ESP32 board. Observe that occasionally one press causes the lamp to flicker or skip states — an artifact of mechanical metal contacts bouncing that does not appear in the simulator. Add a simple debounce delay (e.g. <code>delay(50)</code>) or edge-detection logic to stabilize the input.</li>
-<li><strong>Deliverable:</strong> Working breadboard prototype demonstrating a clean toggle switch, a screenshot of the Serial Monitor output, and the Wokwi project link.</li>
 <li><strong>Design reflection:</strong> Affordance and feedback in physical controls. What is the experiential difference between a momentary button (like a doorbell or camera shutter) and a toggle switch (like a table lamp)? How critical is instantaneous physical or visual feedback for user confidence?</li>
+<li><strong>Validation:</strong> Validate the interaction reliability and user feedback: confirm that the toggle mechanism responds reliably to 20 consecutive rapid presses without false triggers (contact bouncing), and validate with a user that the physical click and visual LED change provide unambiguous confirmation of the state transition.</li>
 <li><strong>Time:</strong> 2 h.</li>
 </ul>
 <h4 id="exercise-2-the-continuous-dial-analog-read-and-pwm-modulation">Exercise 2 — The Continuous Dial: Analog Read and PWM Modulation</h4>
@@ -2847,8 +2848,8 @@ sudo apt install python3-serial</code></p>
 <li><strong>PWM Dimming:</strong> Connect the LED to a PWM-capable pin. Explain how duty cycle (rapid switching) creates the optical illusion of brightness. Use <code>analogWrite(LED_PIN, value)</code> to dim the LED.</li>
 <li><strong>Range mapping:</strong> Use <code>map(potVal, 0, 4095, 0, 255)</code> to map the 12-bit input resolution directly to the 8-bit PWM brightness.</li>
 <li><strong>Modulating time vs. intensity:</strong> Modify the sketch so the potentiometer does not change brightness, but instead controls the <strong>frequency</strong> of the blinking LED (mapping 0–4095 to a time delay of 50 ms–1500 ms). Students experience how the exact same analog gesture can control either magnitude (light intensity) or temporal rhythm (pulse rate).</li>
-<li><strong>Deliverable:</strong> A short video showing the potentiometer smoothly dimming the LED and/or tuning its pulse tempo, accompanied by an annotated screenshot of the Serial Plotter curve.</li>
 <li><strong>Design reflection:</strong> Discrete versus continuous interaction. In what product scenarios is a continuous dial superior to a discrete button? How do friction, throw, and range of motion in an analog knob communicate fidelity and control to the user?</li>
+<li><strong>Validation:</strong> Validate continuous control fidelity: check on the Serial Plotter that the analog signal covers the full 0–4095 range smoothly without dead zones, and validate with a user whether they can dial in and hold a precise target brightness or blink rhythm purely by physical feel and visual feedback.</li>
 <li><strong>Time:</strong> 2 h.</li>
 </ul>
 <h4 id="exercise-3-the-isolated-smart-object-state-machines-non-blocking-timing-and-project-modules">Exercise 3 — The Isolated Smart Object: State Machines, Non-blocking Timing, and Project Modules</h4>
@@ -2874,8 +2875,8 @@ sudo apt install python3-serial</code></p>
 </ul>
 </li>
 <li><strong>Why <code>millis()</code> matters here:</strong> In Phase B (Exercise 4 onwards), the object must run <code>ArduinoCloud.update()</code> continuously to keep its network connection alive. Any long <code>delay()</code> would freeze network packets and cause disconnects. Mastering non-blocking timing now guarantees the code is cloud-ready.</li>
-<li><strong>Deliverable:</strong> A working physical prototype, its state diagram, the Wokwi simulation link, and a one-page "Product Sheet" (target user, context of use, physical controls, and state transitions).</li>
 <li><strong>Design reflection (key milestone):</strong> Compile a list of everything your object <strong>cannot</strong> do because it is completely isolated. It cannot know if anyone is in the wider room, cannot be monitored remotely, cannot warn maintenance if a component degrades, and provides no usage history to the designer. This limitation list forms the direct motivation for Phase B (The Connected Object).</li>
+<li><strong>Validation:</strong> Validate system responsiveness and state transitions: verify that inputs (buttons, dials, sensors) respond instantaneously without lag caused by blocking <code>delay()</code>, cycle through all operating states to verify that no dead-end states exist, and validate the list of "isolation limitations" by walking through a real scenario in the studio where the object fails to meet user needs because it is disconnected.</li>
 <li><strong>Time:</strong> 4 h.</li>
 </ul>
 <hr />
@@ -2913,8 +2914,8 @@ sudo apt install python3-serial</code></p>
     updateOutputs();             // your behaviour from Exercise 3
   }
   ```
-- <strong>Deliverable:</strong> A screenshot of the Thing (variables) and of the first dashboard with live data.
 - <strong>Design reflection:</strong> Your data is now visible to others. What does that imply for privacy? What should an object send to the cloud, and what should it keep to itself?
+- <strong>Validation:</strong> Validate cloud synchronisation and data privacy: verify that physical sensor updates appear on the dashboard within acceptable latency, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced from the live dashboard widgets.
 - <strong>Time:</strong> 3 h.</p>
 <h4 id="exercise-5-remote-control">Exercise 5 — Remote control</h4>
 <ul>
@@ -2937,8 +2938,8 @@ sudo apt install python3-serial</code></p>
     applyMode(mode);
   }
   ```
-- <strong>Deliverable:</strong> A video that controls the object from the phone and from its button, with the dashboard staying consistent.
 - <strong>Design reflection:</strong> The object now has two interfaces, one physical and one digital. How do you keep them consistent? Who "wins" in a conflict?
+- <strong>Validation:</strong> Validate bi-directional consistency and conflict handling: simultaneously actuate the physical button/dial and the mobile app slider/switch to validate that both interfaces converge to a consistent state without glitches, and evaluate whether the physical user or remote user experience is prioritized and preserved.
 - <strong>Time:</strong> 3 h.</p>
 <h4 id="exercise-6-the-object-as-a-service">Exercise 6 — The object as a service</h4>
 <ul>
@@ -2957,8 +2958,8 @@ sudo apt install python3-serial</code></p>
 <li>Open the Thing's sketch in the Arduino IDE 2, compile and upload it from there, and check that the dashboard still works.</li>
 <li>Redesign the dashboard for a specific user. Which information is shown first, and which is hidden? Use layout, widget choice, labels and the phone layout on purpose. Make separate desktop and phone versions if they serve different moments of use.</li>
 <li>Share the dashboard with the instructor and with another group.</li>
-<li><strong>Deliverable:</strong> The shared dashboard (desktop and phone screenshots), the product sheet of the variables (§5.2), and a short description of the "service" the object now offers.</li>
 <li><strong>Design reflection:</strong> The product is now a <em>physical object plus a digital service</em>. Which part is the product? Sketch the service blueprint. Is the dashboard designed for the end user, the owner of the space, or the maintainer?</li>
+<li><strong>Validation:</strong> Validate service usability and network resilience: test the redesigned dashboard with a peer representing the target persona (end-user vs. space manager) to validate that they can understand and operate the service in under 30 seconds without coaching; intentionally disconnect Wi-Fi to validate that the physical object signals its offline status gracefully and maintains baseline local function.</li>
 <li><strong>Time:</strong> 4 h.</li>
 </ul>
 <hr />
@@ -2978,8 +2979,8 @@ sudo apt install python3-serial</code></p>
 </li>
 <li>In each Thing, add the variable to listen to (with the <strong>same type</strong> as in the contract) and link it with <em>Sync with other Things</em>. Write the callback that reacts to it.</li>
 <li>Then swap partners. If the contract is respected, the objects must work with <em>new</em> partners without changing the code of the other group — often by only changing the synchronisation, without any new compilation.</li>
-<li><strong>Deliverable:</strong> A demo of two or more objects cooperating, plus a diagram of which variables each object produces and uses.</li>
 <li><strong>Design reflection:</strong> What made it easy or hard to connect to someone else's object? The contract is a design artefact, just like a physical connector standard.</li>
+<li><strong>Validation:</strong> Validate ecosystem interoperability: test variable synchronisation with one partner object, then swap to a different group's object without recompiling local firmware. Validate whether adhering to the shared variable contract makes multi-object cooperation truly plug-and-play or uncovers ambiguous edge cases in the data definition.</li>
 <li><strong>Time:</strong> 3 h.</li>
 </ul>
 <h4 id="exercise-8-who-is-there-presence-and-resilience">Exercise 8 — Who is there? Presence and resilience</h4>
@@ -2992,8 +2993,8 @@ sudo apt install python3-serial</code></p>
 <li>Objects that depend on a partner watch its heartbeat, synchronised as in Exercise 7. If it does not change for 3 minutes, they switch to a fallback, e.g. the lamp goes back to its local PIR when the door badge is offline.</li>
 <li>Unplug objects at random. The others must notice and adapt, and the user must be able to tell (e.g. a small "alone" colour).</li>
 <li>As a class, build a <strong>"studio map" dashboard</strong>: an image widget with the floor plan of the room, and next to it one status/LED widget per object, arranged like the objects in the room and labelled with their position. Each widget shows whether the object is alive. Add links (or notes) to each group's own dashboard.</li>
-<li><strong>Deliverable:</strong> The studio map dashboard showing all objects and their capabilities, plus a video of the ecosystem reacting to objects that are unplugged.</li>
 <li><strong>Design reflection:</strong> In an ecosystem, failures are normal. How should each object behave when its partners disappear? Can the user tell what is going on?</li>
+<li><strong>Validation:</strong> Validate graceful degradation and failure visibility: power down partner objects at random and verify that the remaining objects transition to local fallback behavior within the 3-minute heartbeat timeout; validate with an outside observer whether the studio map dashboard and physical status cues make it obvious that a partner is offline rather than simply broken.</li>
 <li><strong>Time:</strong> 3 h.</li>
 </ul>
 <h4 id="exercise-9-the-orchestrator-scenes-rules-and-external-services">Exercise 9 — The orchestrator: scenes, rules and external services</h4>
@@ -3013,8 +3014,8 @@ sudo apt install python3-serial</code></p>
 <li>Add a schedule that changes the scene automatically at given times.</li>
 <li>Bring in an external service: sync with the <em>Weather</em> Thing, so the lamp at the entrance turns blue when rain is expected ("take an umbrella").</li>
 <li><em>(Optional)</em> Use the IoT Remote app's "phone as a device" function: the phone becomes a Thing that shares, for example, its position or light sensor with the ecosystem.</li>
-<li><strong>Deliverable:</strong> A demo of a scene and a rule, plus a diagram showing where each rule lives (object, hub, trigger, schedule).</li>
 <li><strong>Design reflection:</strong> Which logic should live in the object (fast, works offline, private) and which in the cloud or in the hub (global view, easy to change)? What happens to the user experience if the internet goes down?</li>
+<li><strong>Validation:</strong> Validate ecosystem orchestration and internet-loss resilience: trigger studio scenes and multi-object rules to validate that all devices respond synchronously and accurately; temporarily disconnect the studio's internet uplink to validate which critical safety/comfort interactions survive at the edge versus which break down when cloud logic is unavailable.</li>
 <li><strong>Time:</strong> 4 h.</li>
 </ul>
 <h4 id="exercise-10-ecosystem-design-sprint">Exercise 10 — Ecosystem design sprint</h4>
@@ -3028,8 +3029,8 @@ sudo apt install python3-serial</code></p>
 <li>Find at least one <strong>emergent</strong> feature, a service that no single object can provide (e.g. an "occupancy and comfort" index of the room built from every object's data).</li>
 <li>Find and solve at least one <strong>conflict</strong> (e.g. the energy-saving rule turns the lamp off while someone is reading in a corner the PIR cannot see). Decide the priorities: what can the user always override?</li>
 <li>Implement the emergent feature in the hub Thing, save it as a variable (e.g. <code>comfortIndex</code>), and show it on a <strong>studio-level dashboard</strong>.</li>
-<li><strong>Deliverable:</strong> A system map poster, the tagged Things in Arduino Cloud, and a studio dashboard showing the emergent feature live.</li>
 <li><strong>Design reflection:</strong> Compare the list of limitations from Exercise 3 with what the ecosystem now does. What has the ecosystem added, and what new problems (complexity, privacy, dependency on one company's platform) has it introduced?</li>
+<li><strong>Validation:</strong> Validate emergent system behavior and conflict resolution: stage a scenario where contradictory rules trigger simultaneously (e.g., energy-saving shutdown vs. active work in a sensor blind spot) to validate that user overrides function as expected; validate that the emergent studio metric (e.g. comfort index) genuinely reflects the actual physical experience in the room.</li>
 <li><strong>Time:</strong> 4 h (workshop).</li>
 </ul>
 <hr />
@@ -3045,8 +3046,8 @@ sudo apt install python3-serial</code></p>
 <li>Add the event and counter variables to the Thing, and update them in the code. Prepare and test the changes in Wokwi first; then compile once in the Cloud (or in the IDE).</li>
 <li>Build a <strong>"usage" dashboard</strong>, separate from the live dashboard of Exercise 6, with charts over days and the counters. Give each widget the question it answers as its title.</li>
 <li>Download the historical data as CSV and open it in a spreadsheet. Make a first pivot table (e.g. events per hour of the day).</li>
-<li><strong>Deliverable:</strong> The instrumentation plan, the usage dashboard with at least 24 h of data, and a first spreadsheet chart.</li>
 <li><strong>Design reflection:</strong> Data only answers the questions you prepared for. What would you <em>like</em> to know that your object cannot measure? Which data should you <strong>not</strong> collect (data minimisation, GDPR)? Where is the data stored, and who can see it?</li>
+<li><strong>Validation:</strong> Validate telemetry completeness and data ethics: compare 24 hours of logged events and time-series charts against known physical interactions to validate that no critical usage events were lost or miscategorized; validate the dataset against the instrumentation plan to ensure no unnecessary personal or identifiable data is being gathered.</li>
 <li><strong>Time:</strong> 4 h.</li>
 </ul>
 <h4 id="exercise-12-how-is-it-really-used-use-and-design">Exercise 12 — How is it really used? (use and design)</h4>
@@ -3063,8 +3064,8 @@ sudo apt install python3-serial</code></p>
 </ul>
 </li>
 <li>Run 2–3 short interviews with users to explain what the data shows.</li>
-<li><strong>Deliverable:</strong> A "data-driven design review": 3 insights, each supported by a chart (dashboard or spreadsheet) and a user quote, and each followed by a redesign proposal.</li>
 <li><strong>Design reflection:</strong> Where did the data surprise you? Where would the data alone have misled you without talking to the users?</li>
+<li><strong>Validation:</strong> Validate quantitative data patterns against qualitative user reality: cross-validate behavioral anomalies found in the spreadsheet (e.g. repeated button presses, sudden overrides, unvisited modes) through user interviews to confirm whether the data reflects user friction or unexpected, creative workarounds.</li>
 <li><strong>Time:</strong> 1 week of deployment + 3 h of analysis.</li>
 </ul>
 <h4 id="exercise-13-keeping-it-alive-maintenance">Exercise 13 — Keeping it alive (maintenance)</h4>
@@ -3085,8 +3086,8 @@ sudo apt install python3-serial</code></p>
 <p>Implement the simple ones as triggers, and the complex ones on the object itself, which then sets an <code>alarmLevel</code> variable (0–3) that can itself fire a trigger.
   3. Build a <strong>"fleet health" dashboard</strong> for the maintainer: the studio map from Exercise 8 with each object's <code>alarmLevel</code>, RSSI and battery widgets, and charts of the wear counters.
   4. Optional: use the accelerometer to detect drops or vibration, or estimate when a battery will run out from its discharge trend.
-- <strong>Deliverable:</strong> The fleet health dashboard for all the class's objects, plus at least one alarm that actually fired during the deployment, with an explanation of its cause and how it was handled.
 - <strong>Design reflection:</strong> How would the maintenance data change the <em>physical</em> design of the next version (battery size, antenna position, component choice, access for repairs)? How does it change the service (support, warranty, replacement)?
+- <strong>Validation:</strong> Validate diagnostic triggers and predictive alarms: simulate hardware distress (e.g. low battery voltage, weak Wi-Fi signal, or simulated sensor freeze) to validate that maintenance notifications trigger at the correct severity level without false alarms; validate whether the physical diagnostic data would provide sufficient guidance for a field technician.
 - <strong>Time:</strong> 3 h.</p>
 </li>
 </ul>
@@ -3101,8 +3102,8 @@ sudo apt install python3-serial</code></p>
 <li>Choose one insight from Exercise 12 and create two variants (A and B), e.g. two auto-off timeouts or two feedback styles.</li>
 <li>Assign half of the objects to A and half to B (an <code>abGroup</code> variable), run the test for a few days, and compare the metrics side by side on an <strong>A/B dashboard</strong>, then in the spreadsheet.</li>
 <li>Push a firmware update <strong>over the air</strong> that includes the winning variant, and show the <code>firmwareVersion</code> of each object on the fleet health dashboard. Plan the OTA updates carefully: each one uses a compilation.</li>
-<li><strong>Deliverable:</strong> A short A/B test report (hypothesis, metric, result, decision) with the A/B dashboard, and a working OTA update.</li>
 <li><strong>Design reflection:</strong> The product is no longer "finished" when it leaves the factory. What does this mean for the design process, for the business model, and for the user's trust? What changes when the settings can be modified by someone who is not in the room?</li>
+<li><strong>Validation:</strong> Validate post-deployment iteration and remote updates: demonstrate that altering a cloud setting updates the deployed physical behavior with zero downtime or recompilation; execute an OTA update in the field and validate that the A/B metric discriminates which design variant delivers demonstrably better user experience.</li>
 <li><strong>Time:</strong> 4 h + a few days of testing.</li>
 </ul>
 <hr />
@@ -3116,13 +3117,11 @@ sudo apt install python3-serial</code></p>
 <li>provides at least one <strong>emergent feature</strong> that no single object could provide;</li>
 <li>has an <strong>instrumentation plan</strong> covering use and maintenance;</li>
 <li>is deployed for a short field test and goes through <strong>at least one data-driven iteration</strong> (a settings change or an OTA update) that is justified by the data.</li>
-<li><strong>Deliverables:</strong></li>
-<li>working prototypes and a live demo;</li>
-<li>Wokwi versions of the objects' behaviour (for documentation and for testing);</li>
-<li>a system map and the variable contract;</li>
-<li>Arduino Cloud dashboards: a live/control dashboard for the end user (desktop and phone), a usage dashboard for the designer, and a health dashboard with alarms for the maintainer. Each dashboard is designed for its audience;</li>
-<li>a design report of max 10 pages: concept, ecosystem, data plan, insights, iteration, ethics/privacy considerations;</li>
-<li>a 3-minute video.</li>
+<li><strong>Validation:</strong></li>
+<li><strong>Live ecosystem validation:</strong> demonstrate the multi-object ecosystem functioning reliably under real studio conditions with active user interactions.</li>
+<li><strong>Interoperability validation:</strong> verify that all objects exchange data strictly adhering to the variable contract without runtime type or timing conflicts.</li>
+<li><strong>Data-driven redesign validation:</strong> prove that field telemetry collected directly justifies the design iteration (settings change or OTA update), and validate with end-users that the iteration improved product experience.</li>
+<li><strong>Design reflection validation:</strong> evaluate the ecosystem against cross-cutting themes (ethics, privacy, graceful degradation when offline, and user trust).</li>
 <li><strong>Time:</strong> 3–4 weeks.</li>
 </ul>
 <hr />
