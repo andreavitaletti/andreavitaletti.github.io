@@ -26,6 +26,16 @@ If necessary reduce the upload speed ![](img/reduce_speed.png)
 
 ---
 
+## Agreement
+
+!!! warning "Course Agreement & Ground Rules"
+
+    * **Use of AI is perfectly fine**
+    * **At the end I want to see a physical product** made of real interconnected things
+    * **No validation is unacceptable and dangerous**
+    * **Validation needs measures**, not generic sentences
+
+
 ## 2. Running scenario: "The Connected Studio"
 
 To keep the exercises coherent, they all share one scenario: a **shared studio / co-working room** that the class progressively "brings to life".
