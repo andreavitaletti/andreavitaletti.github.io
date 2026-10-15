@@ -518,5 +518,5 @@ Throughout all phases, keep these strategic questions at the center of the desig
 
 <br>
 
-**[Read Full Course Document (intro.md)](intro.md)**  
+**[Read Full Course Document (intro.md)](../intro.md)**  
 Andrea Vitaletti — *IoT for Product Design*
