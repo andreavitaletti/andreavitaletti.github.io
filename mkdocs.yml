@@ -53,7 +53,6 @@ nav:
       - Scale on Sim: Iot_new/scale.md
   - IoTPD:
       - Outline: IoTPD/intro.md
-      - Slides: IoTPD/assets/slides.md
       - data-*: IoTPD/datadesign.md
   - links: links.md
   - thesis: thesis.md
