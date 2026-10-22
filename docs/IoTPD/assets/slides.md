@@ -134,12 +134,63 @@ To minimize tool friction while respecting cloud quotas on the free tier, studen
 All exercises contribute to a shared, living scenario: bringing a **co-working studio** to life.
 
 - Each student group designs and builds **one studio object**:
-  - *Desk Task Lamp*, *Focus Totem*, *Air Quality Monitor*, *Presence Badge*, *Plant Pot*, or *Noise Meter*.
+  - *Focus Lamp*, *Focus Totem*, *Air Quality Monitor*, *Door / Presence Badge*, *Plant Pot*, *Noise Meter*, *Meeting Gauge*, or *Coffee Counter*.
 - **Progressive Evolution:**
   1. **Phase A:** The object acts completely alone (**Smart Object**).
   2. **Phase B:** The object connects to the network and dashboards (**Connected Object**).
   3. **Phase C:** Objects cooperate directly through shared variables (**Ecosystem**).
   4. **Phase D:** Objects are deployed, gathering real telemetry to justify redesign (**Data-Driven Design**).
+
+---
+
+## 3.1 Studio Objects (1/2)
+
+| Object | Module(s) | States (Ex 3) | Writes | Reads |
+| --- | --- | --- | --- | --- |
+| **Focus Lamp** | LDR or PIR | `OFF` → `FOCUS` → `DO_NOT_DISTURB` | `lampMode` | `studioScene`, `co2` |
+| **Focus Totem** | NeoPixel ring | `AVAILABLE` → `BUSY` → `BREAK_SUGGESTED` | `totemMode` | `studioScene`, `noiseLevel` |
+| **Air Quality Monitor** | DHT22, buzzer, *pot = CO₂* | `GOOD` → `STUFFY` → `OPEN_WINDOW` | `co2` | `roomOccupied` |
+| **Door / Presence Badge** | PIR, buzzer | `EMPTY` → `SOMEONE_ARRIVED` → `OCCUPIED` | `someoneAtDoor`, `roomOccupied` | `studioScene` |
+
+<div class="box">
+
+Every object uses the **Core Kit** + 1–2 modules, has **≥ 3 states**, and **writes** at least one variable that **another object reads**.
+
+</div>
+
+---
+
+## 3.1 Studio Objects (2/2)
+
+| Object | Module(s) | States (Ex 3) | Writes | Reads |
+| --- | --- | --- | --- | --- |
+| **Plant Pot** | DHT22 (+ soil probe) or servo | `HAPPY` → `THIRSTY` → `CRITICAL` | `plantMode` | `studioScene` |
+| **Noise Meter** | Servo needle, *pot = microphone* | `QUIET` → `LIVELY` → `TOO_LOUD` | `noiseLevel` | `studioScene` |
+| **Meeting Gauge** | Servo | `FREE` → `IN_USE` → `ENDING_SOON` | `meetingMode` | `studioScene` |
+| **Coffee Counter** | NeoPixel ring or buzzer | `IDLE` → `BREWING` → `BREAK_TIME` | `coffeeCount` | `roomOccupied`, `totemMode` |
+
+<div class="highlight">
+
+Each object comes with a **design question**, e.g. *Noise Meter:* should a shared object judge people's behaviour? *Door Badge:* where does a greeting end and surveillance begin?
+
+</div>
+
+---
+
+## 3.2 Simulating CO₂ and Noise with a Potentiometer
+
+The kit has **no CO₂ sensor** (DHT22/BME280 measure only temperature & humidity) and **no microphone** → the Core Kit **potentiometer** plays the environment ("Wizard-of-Oz" sensor).
+
+```cpp
+int readCo2()        { return map(analogRead(POT_PIN), 0, 4095, 400, 2000); } // ppm
+int readNoiseLevel() { return map(analogRead(POT_PIN), 0, 4095, 0, 100);    } // 0–100
+```
+
+- **The sensor is not the design:** the *behaviour* when the room gets stuffy or loud is.
+- **Repeatable scenarios:** stage "the room fills up, then someone opens the window" in seconds → essential for **validation**.
+- **Works in Wokwi**, which has no CO₂ sensor or microphone.
+- **Invisible to the ecosystem:** other objects only see `co2` / `noiseLevel`.
+- **Swap later:** a real SCD40 or MAX4466 only changes `readCo2()` / `readNoiseLevel()`.
 
 ---
 
@@ -257,10 +308,34 @@ Goal $\rightarrow$ Concepts $\rightarrow$ Activities $\rightarrow$ **Design Refl
 - **Key Concepts:** Sense $\rightarrow$ Decide $\rightarrow$ Act loop, Finite-State Machines (`OFF`, `FOCUS`, `ALERT`), non-blocking timing with `millis()`, modular project hardware.
 - **Activities:**
   - Eliminate `delay()`: replace with non-blocking timestamp arithmetic.
-  - Implement a 3-state machine for the studio object (e.g. Focus Lamp).
-  - Integrate chosen Project Module (LDR, PIR, NeoPixel, Servo, or DHT22).
+  - Optional. Integrate chosen Project Module (LDR, PIR, NeoPixel, Servo, or DHT22).
 - **Design Reflection:** Compile the **Isolation Limitations List**: everything the object *cannot* do alone (know room occupancy, alert remotely, report wear).
-- **Validation:** Verify zero input lag during continuous LED fading; validate that state transitions are deterministic and cycle through a studio role-play scenario.
+- **Validation:** Verify zero input lag during continuous LED fading.
+
+---
+
+```c++
+for (int b = 0; b <= 255; b++) {   // fade up
+  analogWrite(LAMP_PIN, b);
+  delay(8);                          // 256 × 8 ms ≈ 2 s of blindness
+}
+```
+
+```c++
+unsigned long lastToggleAt = 0;
+const unsigned long INTERVAL_MS = 500;
+
+void loop() {
+  unsigned long now = millis();
+  if (now - lastToggleAt >= INTERVAL_MS) {   // has the interval elapsed?
+    lastToggleAt = now;
+    ledOn = !ledOn;
+    digitalWrite(LED_PIN, ledOn);
+  }
+  // ...everything else (button, pot) runs on every pass, thousands of times per second
+}
+
+```
 
 ---
 

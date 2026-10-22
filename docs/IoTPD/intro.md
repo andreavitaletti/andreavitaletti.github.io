@@ -39,7 +39,7 @@ If necessary reduce the upload speed ![](img/reduce_speed.png)
 
 To keep the exercises coherent, they all share one scenario: a **shared studio / co-working room** that the class progressively "brings to life".
 
-- Every group designs and builds **one object** for the studio, e.g. a desk lamp, a "focus" totem, a plant pot, a window/air-quality monitor, a doorbell/presence badge, a coffee corner counter, or a noise meter.
+- Every group designs and builds **one object** for the studio, e.g. a desk lamp, a "focus" totem, a plant pot, a window/air-quality monitor, a doorbell/presence badge, a coffee corner counter, or a noise meter. All objects are described in the **[Studio Object Catalogue](studio.md)**.
 - In the first exercises each object works **alone** (smart object).
 - Later the objects **talk to each other** through Arduino Cloud (ecosystem).
 - Finally the objects are **used for real** for sometimes, and the data they produce is used to **redesign** them (data-driven design).
@@ -106,6 +106,8 @@ Depending on the specific studio object each group designs (desk lamp, presence 
 | LiPo battery + charger (optional)                    | Autonomy, portable power monitoring                    | Ex 13           |
 
 All components above are available in **Wokwi**, so every circuit can be simulated before it is wired on the breadboard.
+
+**CO₂ and noise are simulated.** The kit has no CO₂ sensor (DHT22/BME280 do not measure CO₂) and no microphone. The `co2` and `noiseLevel` variables are therefore produced by turning the Core Kit **potentiometer**, which lets students stage repeatable scenarios, also in Wokwi. See [Simulating CO₂ and noise with a potentiometer](studio.md#simulating-co2-and-noise-with-a-potentiometer).
 
 ---
 
