@@ -14,7 +14,7 @@
         <link rel="prev" href="../../Iot_new/scale/">
       
       
-        <link rel="next" href="../datadesign/">
+        <link rel="next" href="../studio/">
       
       
         
@@ -1617,6 +1617,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Studio Objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../datadesign/" class="md-nav__link">
         
   
@@ -2280,7 +2308,7 @@ sudo apt install python3-serial</code></p>
 <h2 id="2-running-scenario-the-connected-studio">2. Running scenario: "The Connected Studio"</h2>
 <p>To keep the exercises coherent, they all share one scenario: a <strong>shared studio / co-working room</strong> that the class progressively "brings to life".</p>
 <ul>
-<li>Every group designs and builds <strong>one object</strong> for the studio, e.g. a desk lamp, a "focus" totem, a plant pot, a window/air-quality monitor, a doorbell/presence badge, a coffee corner counter, or a noise meter.</li>
+<li>Every group designs and builds <strong>one object</strong> for the studio, e.g. a desk lamp, a "focus" totem, a plant pot, a window/air-quality monitor, a doorbell/presence badge, a coffee corner counter, or a noise meter. All objects are described in the <strong><a href="../studio/">Studio Object Catalogue</a></strong>.</li>
 <li>In the first exercises each object works <strong>alone</strong> (smart object).</li>
 <li>Later the objects <strong>talk to each other</strong> through Arduino Cloud (ecosystem).</li>
 <li>Finally the objects are <strong>used for real</strong> for sometimes, and the data they produce is used to <strong>redesign</strong> them (data-driven design).</li>
@@ -2453,6 +2481,7 @@ sudo apt install python3-serial</code></p>
 </tbody>
 </table>
 <p>All components above are available in <strong>Wokwi</strong>, so every circuit can be simulated before it is wired on the breadboard.</p>
+<p><strong>CO₂ and noise are simulated.</strong> The kit has no CO₂ sensor (DHT22/BME280 do not measure CO₂) and no microphone. The <code>co2</code> and <code>noiseLevel</code> variables are therefore produced by turning the Core Kit <strong>potentiometer</strong>, which lets students stage repeatable scenarios, also in Wokwi. See <a href="../studio/#simulating-co2-and-noise-with-a-potentiometer">Simulating CO₂ and noise with a potentiometer</a>.</p>
 <hr />
 <h2 id="5-software-and-cloud-stack">5. Software and cloud stack</h2>
 <h3 id="51-one-platform-arduino-cloud">5.1 One platform: Arduino Cloud</h3>
