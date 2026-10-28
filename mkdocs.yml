@@ -56,7 +56,9 @@ nav:
       - Studio Objects: IoTPD/studio.md
       - data-*: IoTPD/datadesign.md
   - links: links.md
-  - thesis: thesis.md
+  - thesis:
+      - Proposals: Thesis/thesis.md
+      - How to write: Thesis/How_to_write.md
   - Grains of Insight: grain.md
 
 extra:
