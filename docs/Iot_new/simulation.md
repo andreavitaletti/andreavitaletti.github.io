@@ -245,6 +245,8 @@ In other words when the device publishes on the avitaletti/feeds/potentiometer t
 
 ### Build a simple backend with thingsboard [https://demo.thingsboard.io/login](https://demo.thingsboard.io/login)
 
+You need to copy the access token of your device
+
 ![](assets/images/2023-07-04-16-31-57.png)
 ![](assets/images/2023-07-04-16-33-07.png)
 
@@ -254,4 +256,10 @@ In other words when the device publishes on the avitaletti/feeds/potentiometer t
 mosquitto_pub -d -q 1 -h "$THINGSBOARD_HOST_NAME" -p "1883" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -m {"temperature":25}
 ```
 
-**NOTE:** for the sake of convenience, we will use WiFi connectivity, however it should be now clear WiFi is usually not appropriate for IoT applications due to the excessive energy demand. 
+Another multiplatform alternative is [MQTTX](https://mqttx.app/downloads).
+
+![](assets/images/mqttx_config.png)
+![](assets/images/mqttx_publish.png)
+
+!!! warning
+    for the sake of convenience, we will use WiFi connectivity, however it should be now clear WiFi is usually not appropriate for IoT applications due to the excessive energy demand.
