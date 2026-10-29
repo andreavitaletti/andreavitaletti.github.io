@@ -1866,12 +1866,19 @@ on Microcontrollers for Industrial Applications</a> demonstrates how to implemen
 <p><img alt="" src="../assets/images/dashboard.png" /></p>
 <p>In other words when the device publishes on the avitaletti/feeds/potentiometer topic a new entry is created in the line chart, while when you move the slider the corresponding value is published on avitaletti/feeds/threshold</p>
 <h3 id="build-a-simple-backend-with-thingsboard-httpsdemothingsboardiologin">Build a simple backend with thingsboard <a href="https://demo.thingsboard.io/login">https://demo.thingsboard.io/login</a></h3>
+<p>You need to copy the access token of your device</p>
 <p><img alt="" src="../assets/images/2023-07-04-16-31-57.png" />
 <img alt="" src="../assets/images/2023-07-04-16-33-07.png" /></p>
 <p><a href="https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux">https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux</a></p>
 <pre><code>mosquitto_pub -d -q 1 -h &quot;$THINGSBOARD_HOST_NAME&quot; -p &quot;1883&quot; -t &quot;v1/devices/me/telemetry&quot; -u &quot;$ACCESS_TOKEN&quot; -m {&quot;temperature&quot;:25}
 </code></pre>
-<p><strong>NOTE:</strong> for the sake of convenience, we will use WiFi connectivity, however it should be now clear WiFi is usually not appropriate for IoT applications due to the excessive energy demand. </p>
+<p>Another multiplatform alternative is <a href="https://mqttx.app/downloads">MQTTX</a>.</p>
+<p><img alt="" src="../assets/images/mqttx_config.png" />
+<img alt="" src="../assets/images/mqttx_publish.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>for the sake of convenience, we will use WiFi connectivity, however it should be now clear WiFi is usually not appropriate for IoT applications due to the excessive energy demand.</p>
+</div>
 
 
 
