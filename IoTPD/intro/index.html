@@ -3069,55 +3069,62 @@
 <h4 id="exercise-4-going-online">Exercise 4 — Going online</h4>
 <ul>
 <li><strong>Goal:</strong> Put the object on the network and let it "speak".</li>
-<li><strong>New concepts:</strong> Wi-Fi connection, the <strong>broker</strong> as a post office, <strong>publish/subscribe</strong>, <strong>topics</strong> (hierarchical names like <code>iotpd/studio/lamp/brightness</code>) and <strong>payloads</strong> (the content, here plain text), the <code>PubSubClient</code> library, <strong>client ID</strong>, <code>mqtt.loop()</code>. Watching the network with <strong>MQTTX</strong> and the wildcard <code>#</code>.</li>
-<li><strong>Tools:</strong> Wokwi and Arduino IDE 2 for the code, MQTTX to watch.</li>
+<li><strong>New concepts:</strong> Wi-Fi connection, <a href="https://andreavitaletti.github.io/Iot_new/simulation/#mqtt">MQTT</a>, the <strong>broker</strong> as a post office, <strong>publish/subscribe</strong>, <strong>topics</strong> (hierarchical names like <code>iotpd/studio/lamp/brightness</code>) and <strong>payloads</strong> (the content, here plain text), the <code>PubSubClient</code> library. Watching the network with <strong>MQTTX</strong> and the wildcard <code>#</code>.</li>
+<li><strong>Tools:</strong> Wokwi and Arduino IDE 2 for the code, <a href="https://mqttx.app/downloads">MQTTX</a> to watch. <a href="https://wokwi.com/projects/367405831605855233">Wokwi example on MQTT</a></li>
 <li><strong>Activities:</strong></li>
 <li>In MQTTX, connect to the class broker and subscribe to <code>iotpd/studio/#</code>. Keep this window open for the whole phase: it is your "X-ray" of the studio.</li>
 <li>Open the instructor's MQTT template in Wokwi. Add the functions from Exercise 3 and publish the sensor readings of your object under <code>iotpd/studio/&lt;object&gt;/...</code> (e.g. <code>iotpd/studio/airmonitor/temperature</code>). Watch them appear in MQTTX.</li>
 <li>Move the same sketch to the real board with the Arduino IDE (change only the Wi-Fi credentials in <code>secrets.h</code>).</li>
 <li>Look at the MQTTX window on the projector: the whole class is now online, and everybody can see everybody's messages.</li>
-<li><strong>Code skeleton:</strong>
-  ```cpp
-  #include <WiFi.h>
-  #include <PubSubClient.h>
-  #include "secrets.h"                 // WIFI_SSID, WIFI_PASS ("Wokwi-GUEST", "" in Wokwi)</li>
+<li><strong>Code skeleton:</strong></li>
 </ul>
-<p>const char* BROKER = "test.mosquitto.org";
-  const String ROOT  = "iotpd/studio/airmonitor/";   // class prefix + object name</p>
-<p>WiFiClient net;
-  PubSubClient mqtt(net);
-  unsigned long lastRead = 0;</p>
-<p>void connectMqtt() {
-    String clientId = "iotpd-" + String((uint32_t)ESP.getEfuseMac(), HEX);   // unique per board
-    while (!mqtt.connected()) {
-      if (!mqtt.connect(clientId.c_str())) delay(2000);   // retry while offline
-    }
-  }</p>
-<p>void publishValue(String name, float value) {
-    mqtt.publish((ROOT + name).c_str(), String(value).c_str());
-  }</p>
-<p>void setup() {
-    Serial.begin(115200);
-    setupSensors();                    // your code from Exercise 3
-    WiFi.begin(WIFI_SSID, WIFI_PASS);
-    while (WiFi.status() != WL_CONNECTED) delay(500);
-    mqtt.setServer(BROKER, 1883);
-  }</p>
-<p>void loop() {
-    if (!mqtt.connected()) connectMqtt();
-    mqtt.loop();                       // keeps the connection alive: never block it with delay()
-    if (millis() - lastRead &gt; 10000) { // every 10 s, without delay()
-      lastRead = millis();
-      publishValue("temperature", readTemperature());   // publishing = "posting a letter"
-      publishValue("humidity", readHumidity());
-    }
-    updateOutputs();                   // your behaviour from Exercise 3
-  }
-  <code>``
-- **Design reflection:** Your data is now visible to others — on a public broker, to *anyone in the world* who subscribes to</code>#`. What does that imply for privacy? What should an object send over the network, and what should it keep to itself?
-- <strong>Validation:</strong> Validate connectivity and data privacy: measure with MQTTX the delay between a physical change (e.g. covering the LDR) and the arrival of the message, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced by simply listening to your topics.
-- <strong>Reference:</strong> <a href="../../Iot_new/simulation/#mqtt">MQTT</a> · <a href="../../Iot_new/simulation/#its-time-to-be-connected-by-mqtt">Connected by MQTT (Wokwi example)</a> · <a href="../../Iot_new/wireless/">Wireless connectivity</a>
-- <strong>Time:</strong> 3 h.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;WiFi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;PubSubClient.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"secrets.h"</span><span class="w">                 </span><span class="c1">// WIFI_SSID, WIFI_PASS ("Wokwi-GUEST", "" in Wokwi)</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">BROKER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"test.mosquitto.org"</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ROOT</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">"iotpd/studio/airmonitor/"</span><span class="p">;</span><span class="w">   </span><span class="c1">// class prefix + object name</span>
+
+<span class="n">WiFiClient</span><span class="w"> </span><span class="n">net</span><span class="p">;</span>
+<span class="n">PubSubClient</span><span class="w"> </span><span class="nf">mqtt</span><span class="p">(</span><span class="n">net</span><span class="p">);</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">lastRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">connectMqtt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"iotpd-"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">((</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">ESP</span><span class="p">.</span><span class="n">getEfuseMac</span><span class="p">(),</span><span class="w"> </span><span class="n">HEX</span><span class="p">);</span><span class="w">   </span><span class="c1">// unique per board</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mqtt</span><span class="p">.</span><span class="n">connected</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mqtt</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clientId</span><span class="p">.</span><span class="n">c_str</span><span class="p">()))</span><span class="w"> </span><span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span><span class="w">   </span><span class="c1">// retry while offline</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">publishValue</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">mqtt</span><span class="p">.</span><span class="n">publish</span><span class="p">((</span><span class="n">ROOT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">).</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="n">setupSensors</span><span class="p">();</span><span class="w">                    </span><span class="c1">// your code from Exercise 3</span>
+<span class="w">  </span><span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">WIFI_SSID</span><span class="p">,</span><span class="w"> </span><span class="n">WIFI_PASS</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">WL_CONNECTED</span><span class="p">)</span><span class="w"> </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="n">mqtt</span><span class="p">.</span><span class="n">setServer</span><span class="p">(</span><span class="n">BROKER</span><span class="p">,</span><span class="w"> </span><span class="mi">1883</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mqtt</span><span class="p">.</span><span class="n">connected</span><span class="p">())</span><span class="w"> </span><span class="n">connectMqtt</span><span class="p">();</span>
+<span class="w">  </span><span class="n">mqtt</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span><span class="w">                       </span><span class="c1">// keeps the connection alive: never block it with delay()</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastRead</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// every 10 s, without delay()</span>
+<span class="w">    </span><span class="n">lastRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span>
+<span class="w">    </span><span class="n">publishValue</span><span class="p">(</span><span class="s">"temperature"</span><span class="p">,</span><span class="w"> </span><span class="n">readTemperature</span><span class="p">());</span><span class="w">   </span><span class="c1">// publishing = "posting a letter"</span>
+<span class="w">    </span><span class="n">publishValue</span><span class="p">(</span><span class="s">"humidity"</span><span class="p">,</span><span class="w"> </span><span class="n">readHumidity</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">updateOutputs</span><span class="p">();</span><span class="w">                   </span><span class="c1">// your behaviour from Exercise 3</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>Design reflection:</strong> Your data is now visible to others — on a public broker, to <em>anyone in the world</em> who subscribes to <code>#</code>. What does that imply for privacy? What should an object send over the network, and what should it keep to itself?</li>
+<li><strong>Validation:</strong> Validate connectivity and data privacy: measure with MQTTX the delay between a physical change (e.g. covering the LDR) and the arrival of the message, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced by simply listening to your topics.</li>
+<li><strong>Reference:</strong> <a href="../../Iot_new/simulation/#mqtt">MQTT</a> · <a href="../../Iot_new/simulation/#its-time-to-be-connected-by-mqtt">Connected by MQTT (Wokwi example)</a> · <a href="../../Iot_new/wireless/">Wireless connectivity</a></li>
+<li><strong>Time:</strong> 3 h.</li>
+</ul>
 <h4 id="exercise-5-remote-control">Exercise 5 — Remote control</h4>
 <ul>
 <li><strong>Goal:</strong> Let the network change the object's behaviour.</li>
@@ -3128,32 +3135,32 @@
 <li>After obeying a command, the object publishes its <strong>new state</strong> on the state topic, <strong>retained</strong> (e.g. <code>iotpd/studio/lamp/brightness</code> → <code>180</code>).</li>
 <li>Build a control panel on the phone: a slider that publishes on <code>set/brightness</code>, a gauge or text that shows the state topic.</li>
 <li>Keep the physical controls working. When the user presses the object's own button, the code must also publish the new state, so that every panel always shows the truth.</li>
-<li>
-<p><strong>Code example:</strong>
-  ```cpp
-  void onMessage(char* topic, byte* payload, unsigned int length) {
-    String t = topic;
-    String msg = "";
-    for (unsigned int i = 0; i &lt; length; i++) msg += (char)payload[i];</p>
-<p>if (t == ROOT + "set/brightness") {          // someone wants a new brightness
-  setLampBrightness(msg.toInt());
-  mqtt.publish((ROOT + "brightness").c_str(), msg.c_str(), true);   // retained state
-}
-  }</p>
-</li>
+<li><strong>Code example:</strong>
+  <div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">onMessage</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">*</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic</span><span class="p">;</span>
+<span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ROOT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"set/brightness"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">          </span><span class="c1">// someone wants a new brightness</span>
+<span class="w">    </span><span class="n">setLampBrightness</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">toInt</span><span class="p">());</span>
+<span class="w">    </span><span class="n">mqtt</span><span class="p">.</span><span class="n">publish</span><span class="p">((</span><span class="n">ROOT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"brightness"</span><span class="p">).</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w">   </span><span class="c1">// retained state</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">onButtonPressed</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">                       </span><span class="c1">// physical control</span>
+<span class="w">  </span><span class="n">applyMode</span><span class="p">(</span><span class="s">"focus"</span><span class="p">);</span>
+<span class="w">  </span><span class="n">mqtt</span><span class="p">.</span><span class="n">publish</span><span class="p">((</span><span class="n">ROOT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"mode"</span><span class="p">).</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="s">"focus"</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w">   </span><span class="c1">// panels will show "focus" too</span>
+<span class="p">}</span>
+
+<span class="c1">// in setup():        mqtt.setCallback(onMessage);</span>
+<span class="c1">// in connectMqtt():  after mqtt.connect(...) succeeds:</span>
+<span class="c1">//                    mqtt.subscribe((ROOT + "set/#").c_str());   // re-subscribe after every reconnect</span>
+</code></pre></div></li>
+<li><strong>Design reflection:</strong> The object now has two interfaces, one physical and one digital. How do you keep them consistent? Who "wins" in a conflict? And on a public broker, anyone can publish on your <code>set/</code> topics: what should your object refuse to do?</li>
+<li><strong>Validation:</strong> Validate bi-directional consistency and conflict handling: simultaneously actuate the physical button/dial and the phone slider/switch to validate that both interfaces converge to a consistent state without glitches or message loops, and evaluate whether the physical user or remote user experience is prioritized and preserved.</li>
+<li><strong>Reference:</strong> <a href="../../Iot_new/backend/#how-to-receive-a-command-on-the-node">How to receive a command on the node</a></li>
+<li><strong>Time:</strong> 3 h.</li>
 </ul>
-<p>void onButtonPressed() {                       // physical control
-    applyMode("focus");
-    mqtt.publish((ROOT + "mode").c_str(), "focus", true);   // panels will show "focus" too
-  }</p>
-<p>// in setup():        mqtt.setCallback(onMessage);
-  // in connectMqtt():  after mqtt.connect(...) succeeds:
-  //                    mqtt.subscribe((ROOT + "set/#").c_str());   // re-subscribe after every reconnect
-  <code>``
-- **Design reflection:** The object now has two interfaces, one physical and one digital. How do you keep them consistent? Who "wins" in a conflict? And on a public broker, anyone can publish on your</code>set/` topics: what should your object refuse to do?
-- <strong>Validation:</strong> Validate bi-directional consistency and conflict handling: simultaneously actuate the physical button/dial and the phone slider/switch to validate that both interfaces converge to a consistent state without glitches or message loops, and evaluate whether the physical user or remote user experience is prioritized and preserved.
-- <strong>Reference:</strong> <a href="../../Iot_new/backend/#how-to-receive-a-command-on-the-node">How to receive a command on the node</a>
-- <strong>Time:</strong> 3 h.</p>
 <h4 id="exercise-6-the-object-as-a-service">Exercise 6 — The object as a service</h4>
 <ul>
 <li><strong>Goal:</strong> Turn the object into a small <strong>service</strong> with a designed dashboard, and make it robust and secure.</li>
@@ -3161,7 +3168,7 @@
 <li><strong>Publish policies:</strong> <em>on change</em> (with a threshold) versus <em>periodically</em> — how often the object talks, and why it matters for energy (<a href="../../Iot_new/energy/#duty-cycle">duty cycle</a>), data and clarity. <strong>QoS</strong> levels 0 and 1 (fire-and-forget versus "at least once").</li>
 <li><strong>Last Will and Testament (LWT):</strong> when connecting, the object leaves a "will" with the broker (<code>&lt;object&gt;/status</code> → <code>offline</code>, retained); if the object disappears, the broker publishes it. On connection the object publishes <code>online</code> itself. What the object shows to the user while it is connecting or offline, and non-blocking reconnection.</li>
 <li><strong>Security:</strong> Wi-Fi passwords and access tokens live in <code>secrets.h</code> and are never shared; a public broker has no access control (anyone can read and write), which is why real products use authentication and <strong>TLS</strong> (port 8883).</li>
-<li><strong>ThingsBoard</strong>: when the object must serve people who are not its programmers. A <strong>device</strong> with its <strong>access token</strong>, sending <strong>telemetry</strong> as JSON on <code>v1/devices/me/telemetry</code>; a <strong>dashboard</strong> designed for a specific user; <strong>sharing</strong> a dashboard (public link or customer user).</li>
+<li><strong><a href="https://thingsboard.io/">ThingsBoard</a></strong>: when the object must serve people who are not its programmers. A <strong>device</strong> with its <strong>access token</strong>, sending <strong>telemetry</strong> as JSON on <code>v1/devices/me/telemetry</code>; a <strong>dashboard</strong> designed for a specific user; <strong>sharing</strong> a dashboard (public link or customer user).</li>
 <li><strong>Tools:</strong> Arduino IDE 2, MQTTX, ThingsBoard (<code>demo.thingsboard.io</code>).</li>
 <li><strong>Activities:</strong></li>
 <li>Set a sensible publish policy for each value and justify it (e.g. temperature on change with a 0.5 °C threshold; light every 60 s).</li>
@@ -3170,24 +3177,26 @@
 <li>Design a ThingsBoard <strong>dashboard</strong> for a specific user. Which information is shown first, and which is hidden? Use layout, widget choice and labels on purpose; check how it looks on a phone.</li>
 <li>Share the dashboard with the instructor and with another group.</li>
 <li><strong>Code example</strong> (second connection, towards ThingsBoard):
-  ```cpp
-  WiFiClient tbNet;
-  PubSubClient tb(tbNet);                         // a second, independent client</li>
+  <div class="highlight"><pre><span></span><code><span class="n">WiFiClient</span><span class="w"> </span><span class="n">tbNet</span><span class="p">;</span>
+<span class="n">PubSubClient</span><span class="w"> </span><span class="nf">tb</span><span class="p">(</span><span class="n">tbNet</span><span class="p">);</span><span class="w">                         </span><span class="c1">// a second, independent client</span>
+
+<span class="c1">// in setup():</span>
+<span class="n">tb</span><span class="p">.</span><span class="n">setServer</span><span class="p">(</span><span class="s">"demo.thingsboard.io"</span><span class="p">,</span><span class="w"> </span><span class="mi">1883</span><span class="p">);</span>
+<span class="n">tb</span><span class="p">.</span><span class="n">setBufferSize</span><span class="p">(</span><span class="mi">512</span><span class="p">);</span><span class="w">                          </span><span class="c1">// JSON messages can be longer than the default 256 bytes</span>
+
+<span class="c1">// in loop(), next to mqtt.loop():</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">tb</span><span class="p">.</span><span class="n">connected</span><span class="p">())</span><span class="w"> </span><span class="n">tb</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"airmonitor"</span><span class="p">,</span><span class="w"> </span><span class="n">TB_TOKEN</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w">   </span><span class="c1">// the token is the username</span>
+<span class="n">tb</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span>
+
+<span class="c1">// when sending:</span>
+<span class="n">String</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"{</span><span class="se">\"</span><span class="s">co2</span><span class="se">\"</span><span class="s">:"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">readCo2</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">",</span><span class="se">\"</span><span class="s">temperature</span><span class="se">\"</span><span class="s">:"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">readTemperature</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"}"</span><span class="p">;</span>
+<span class="n">tb</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"v1/devices/me/telemetry"</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+</code></pre></div></li>
+<li><strong>Design reflection:</strong> The product is now a <em>physical object plus a digital service</em>. Which part is the product? Sketch the service blueprint. Is the dashboard designed for the end user, the owner of the space, or the maintainer? Why do the object's peers and its people use two different channels?</li>
+<li><strong>Validation:</strong> Validate service usability and network resilience: test the redesigned dashboard with a peer representing the target persona (end-user vs. space manager) to validate that they can understand and operate the service in under 30 seconds without coaching; intentionally disconnect Wi-Fi to validate that the physical object signals its offline status gracefully, that <code>status</code> becomes <code>offline</code> for the others, and that the object maintains baseline local function.</li>
+<li><strong>Reference:</strong> <a href="../../Iot_new/backend/">Backend: ThingsBoard</a> · <a href="../../Iot_new/security/#secure-communication-tlsssl">Secure communication (TLS)</a> · <a href="../../Iot_new/security/#identity-and-secret-management">Identity and secret management</a></li>
+<li><strong>Time:</strong> 4 h.</li>
 </ul>
-<p>// in setup():
-  tb.setServer("demo.thingsboard.io", 1883);
-  tb.setBufferSize(512);                          // JSON messages can be longer than the default 256 bytes</p>
-<p>// in loop(), next to mqtt.loop():
-  if (!tb.connected()) tb.connect("airmonitor", TB_TOKEN, NULL);   // the token is the username
-  tb.loop();</p>
-<p>// when sending:
-  String json = "{\"co2\":" + String(readCo2()) + ",\"temperature\":" + String(readTemperature()) + "}";
-  tb.publish("v1/devices/me/telemetry", json.c_str());
-  <code>``
-- **Design reflection:** The product is now a *physical object plus a digital service*. Which part is the product? Sketch the service blueprint. Is the dashboard designed for the end user, the owner of the space, or the maintainer? Why do the object's peers and its people use two different channels?
-- **Validation:** Validate service usability and network resilience: test the redesigned dashboard with a peer representing the target persona (end-user vs. space manager) to validate that they can understand and operate the service in under 30 seconds without coaching; intentionally disconnect Wi-Fi to validate that the physical object signals its offline status gracefully, that</code>status<code>becomes</code>offline` for the others, and that the object maintains baseline local function.
-- <strong>Reference:</strong> <a href="../../Iot_new/backend/">Backend: ThingsBoard</a> · <a href="../../Iot_new/security/#secure-communication-tlsssl">Secure communication (TLS)</a> · <a href="../../Iot_new/security/#identity-and-secret-management">Identity and secret management</a>
-- <strong>Time:</strong> 4 h.</p>
 <hr />
 <h3 id="phase-c-the-ecosystem-goal-1">Phase C — The ecosystem (Goal 1)</h3>
 <p>Phase C needs all the objects of the class to talk on the <strong>same broker</strong> with the <strong>same class prefix</strong>, following the topic contract (§5.2). Nothing else is required: on MQTT every object can already hear every other.</p>

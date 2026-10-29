@@ -1928,18 +1928,18 @@
 </ul>
 <h3 id="how-to-do-it">How to do it</h3>
 <p>Wire the potentiometer as in <a href="../../Iot_new/simulation/#a-bit-more-interesting-analog-sensor-namely-a-potentiometer">the Wokwi potentiometer example</a>. Map the raw reading (0–4095) to a realistic range, and keep the mapping inside <strong>one function</strong>. If a real sensor is added later, only that function changes.</p>
-<pre><code class="language-cpp">const int POT_PIN = 34;   // ADC-capable pin
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">POT_PIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">34</span><span class="p">;</span><span class="w">   </span><span class="c1">// ADC-capable pin</span>
 
-// Simulated CO2 sensor: knob fully left = fresh outdoor air, fully right = very stuffy room
-int readCo2() {
-  return map(analogRead(POT_PIN), 0, 4095, 400, 2000);   // ppm
-}
+<span class="c1">// Simulated CO2 sensor: knob fully left = fresh outdoor air, fully right = very stuffy room</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">readCo2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">POT_PIN</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4095</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span><span class="w">   </span><span class="c1">// ppm</span>
+<span class="p">}</span>
 
-// Simulated microphone: knob fully left = silence, fully right = very loud
-int readNoiseLevel() {
-  return map(analogRead(POT_PIN), 0, 4095, 0, 100);      // 0–100
-}
-</code></pre>
+<span class="c1">// Simulated microphone: knob fully left = silence, fully right = very loud</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">readNoiseLevel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">POT_PIN</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4095</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w">      </span><span class="c1">// 0–100</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Reference values for CO₂ (useful to choose thresholds):</p>
 <table>
 <thead>
@@ -1977,7 +1977,7 @@ int readNoiseLevel() {
 </div>
 <hr />
 <h2 id="how-the-objects-form-an-ecosystem">How the objects form an ecosystem</h2>
-<pre><code>               studioScene (scene dashboard / hub)
+<div class="highlight"><pre><span></span><code>               studioScene (scene dashboard / hub)
                       │
      ┌────────────────┼──────────────────────────────┐
      ▼                ▼                              ▼
@@ -1988,7 +1988,7 @@ int readNoiseLevel() {
  Air Monitor     Noise Meter                  Door Badge
      ▲                                               │
      └──────────────── roomOccupied ─────────────────┘
-</code></pre>
+</code></pre></div>
 <p>The catalogue is designed so that <strong>every object produces a signal that another object consumes</strong>. This keeps the ecosystem exercises (7–10) from being one-directional, and it makes failures interesting: when the Door Badge goes offline (its <code>door/status</code> turns <code>offline</code>), the Air Monitor and the Coffee Counter must decide what to do without fresh <code>roomOccupied</code> messages (graceful degradation, Exercise 8).</p>
 <p>All arrows in the diagram are MQTT topics: one object publishes, the others subscribe. See <a href="../../Iot_new/simulation/#mqtt">MQTT</a> and <a href="../../Iot_new/backend/#take-advantage-of-an-ecosystem-of-objects">devices talking to each other via publish/subscribe</a>.</p>
 

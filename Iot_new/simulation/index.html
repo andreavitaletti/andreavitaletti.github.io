@@ -1689,18 +1689,18 @@
 <h2 id="lets-start">Let's start</h2>
 <p>On <a href="https://docs.wokwi.com/">Wokwi</a> open a new project, select ESP32 as the platform and the Arduino template. </p>
 <p>If you now open the diagram.json tab you have something like the following in the parts entry</p>
-<pre><code>&quot;parts&quot;: [ { &quot;type&quot;: &quot;board-esp32-devkit-c-v4&quot;, &quot;id&quot;: &quot;esp&quot;, ...} ],
-</code></pre>
+<div class="highlight"><pre><span></span><code>"parts": [ { "type": "board-esp32-devkit-c-v4", "id": "esp", ...} ],
+</code></pre></div>
 <p>This implies that the pinout is the one in the <a href="https://mischianti.org/esp32-devkitc-v4-high-resolution-pinout-and-specs/">devkit v4</a>. 
 To get the same pinout as the one in the picture above you need a V1 devkit, so you have to modify the entry as in the following</p>
-<pre><code>&quot;parts&quot;: [ { &quot;type&quot;: &quot;board-esp32-devkit-v1&quot;, &quot;id&quot;: &quot;esp&quot;, ...} ],
-</code></pre>
+<div class="highlight"><pre><span></span><code>"parts": [ { "type": "board-esp32-devkit-v1", "id": "esp", ...} ],
+</code></pre></div>
 <p>To make running the serial interface be sure that under connection you have th following settings</p>
-<pre><code>&quot;connections&quot;: [
-    [ &quot;esp:TX0&quot;, &quot;$serialMonitor:RX&quot;, &quot;&quot;, [] ],
-    [ &quot;esp:RX0&quot;, &quot;$serialMonitor:TX&quot;, &quot;&quot;, [] ],
+<div class="highlight"><pre><span></span><code>"connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
     .....
-</code></pre>
+</code></pre></div>
 <ul>
 <li>The simplest actuator, namely a <a href="https://wokwi.com/projects/367336864678247425">led</a></li>
 </ul>
@@ -1708,50 +1708,46 @@ To get the same pinout as the one in the picture above you need a V1 devkit, so 
 <p><img alt="" src="../assets/images/breadboard.png" /></p>
 <h2 id="the-simplest-digital-sensor-namely-a-button">The Simplest digital sensor, namely a <a href="https://wokwi.com/projects/367336996835545089">button</a></h2>
 <p><img alt="" src="../assets/images/2024-12-16-11-00-26.png" /></p>
-<pre><code class="language-C">
-#define LED 5
-#define BUTTON 4
+<div class="highlight"><pre><span></span><code><span class="cp">#define LED 5</span>
+<span class="cp">#define BUTTON 4</span>
 
-int buttonState = 0; 
+<span class="kt">int</span><span class="w"> </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
 
-void setup() {
-  pinMode(LED, OUTPUT);
-  pinMode(BUTTON, INPUT);
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">BUTTON</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span>
+<span class="p">}</span>
 
-void loop() {
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-  buttonState = digitalRead(BUTTON);
+<span class="w">  </span><span class="n">buttonState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">digitalRead</span><span class="p">(</span><span class="n">BUTTON</span><span class="p">);</span>
 
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-  if (buttonState == HIGH) {
-    // turn LED on:
-    digitalWrite(LED, HIGH);
-  } else {
-    // turn LED off:
-    digitalWrite(LED, LOW);
-  }
-}
-
-</code></pre>
+<span class="w">  </span><span class="c1">// check if the pushbutton is pressed. If it is, the buttonState is HIGH:</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">buttonState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HIGH</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// turn LED on:</span>
+<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// turn LED off:</span>
+<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="a-bit-more-interesting-analog-sensor-namely-a-potentiometer">A bit more interesting analog sensor, namely a <a href="https://wokwi.com/projects/367338868313181185">potentiometer</a></h2>
 <p><img alt="" src="../assets/images/2024-12-16-11-02-14.png" /></p>
-<pre><code class="language-c">
-int analogPin = 12; // potentiometer wiper (middle terminal) connected to analog pin
-                    // outside leads to ground and +5V
-int val = 0;  // variable to store the value read
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">analogPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="c1">// potentiometer wiper (middle terminal) connected to analog pin</span>
+<span class="w">                    </span><span class="c1">// outside leads to ground and +5V</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// variable to store the value read</span>
 
-void setup() {
-  Serial.begin(9600);           //  setup serial
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w">           </span><span class="c1">//  setup serial</span>
+<span class="p">}</span>
 
-void loop() {
-  val = analogRead(analogPin);  // read the input pin
-  Serial.println(val);          // debug value
-  delay(1000);
-}
-
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="n">analogPin</span><span class="p">);</span><span class="w">  </span><span class="c1">// read the input pin</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w">          </span><span class="c1">// debug value</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <!--
 * A simple example with [SR04 Ultrasonic Sensor](https://wokwi.com/projects/367320442567677953). The width is measured by the function [pulseIn()](https://www.arduino.cc/reference/en/language/functions/advanced-io/pulsein/).
 
@@ -1763,45 +1759,43 @@ void loop() {
 <p><img alt="" src="../assets/images/com.gif" /></p>
 <h2 id="an-i2c-sensor-the-mpu6050-accelerometer">An I2C sensor, the <a href="https://wokwi.com/projects/417422405654800385">MPU6050 Accelerometer</a></h2>
 <p><img alt="" src="../assets/images/2024-12-16-11-13-37.png" /></p>
-<pre><code class="language-C">
-#include &lt;Adafruit_MPU6050.h&gt;
-#include &lt;Adafruit_Sensor.h&gt;
-#include &lt;Wire.h&gt;
-Adafruit_MPU6050 m_p_u;
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  while(!Serial)
-  delay(20);
-  if(!m_p_u.begin()){
-    while(1){
-      delay(20);
-    }
-  }
-}
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_MPU6050.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_Sensor.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Wire.h&gt;</span>
+<span class="n">Adafruit_MPU6050</span><span class="w"> </span><span class="n">m_p_u</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// put your setup code here, to run once:</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_p_u</span><span class="p">.</span><span class="n">begin</span><span class="p">()){</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">      </span><span class="n">delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-void loop() {
-sensors_event_t acc, gcc, temp;
-m_p_u.getEvent(&amp;acc, &amp;gcc, &amp;temp);
-Serial.println(&quot;Acceleration on x axes&quot;);
-Serial.println(acc.acceleration.x);
-  delay(1000); // this speeds up the simulation
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="n">sensors_event_t</span><span class="w"> </span><span class="n">acc</span><span class="p">,</span><span class="w"> </span><span class="n">gcc</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="n">m_p_u</span><span class="p">.</span><span class="n">getEvent</span><span class="p">(</span><span class="o">&amp;</span><span class="n">acc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gcc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">temp</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Acceleration on x axes"</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">acc</span><span class="p">.</span><span class="n">acceleration</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// this speeds up the simulation</span>
 
-Serial.println(&quot;Acceleration on y axes&quot;);
-Serial.println(acc.acceleration.y);
-  delay(1000);
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Acceleration on y axes"</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">acc</span><span class="p">.</span><span class="n">acceleration</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
 
-Serial.println(&quot;Acceleration on z axes&quot;);
-Serial.println(acc.acceleration.z);
-  delay(1000);
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Acceleration on z axes"</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">acc</span><span class="p">.</span><span class="n">acceleration</span><span class="p">.</span><span class="n">z</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
 
-Serial.println(&quot;Rotation of x axes: &quot;);
-Serial.println((gcc.gyro.x)*180/3.14);
-  delay(1000);
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Rotation of x axes: "</span><span class="p">);</span>
+<span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">((</span><span class="n">gcc</span><span class="p">.</span><span class="n">gyro</span><span class="p">.</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="mf">3.14</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
 
-}
-
-</code></pre>
+<span class="p">}</span>
+</code></pre></div>
 <p>Some more details on the <a href="https://randomnerdtutorials.com/esp32-mpu-6050-accelerometer-gyroscope-arduino/">MPU6050</a> accelerometer and gyroscope. This device can be used for <a href="https://www.ijnrd.org/papers/IJNRD2404282.pdf">Predictive Maintenance of Motors using Machine Learning</a> or <a href="https://doi.org/10.1109/ICOSICA4https://www.ijnrd.org/papers/IJNRD2404282.pdf9951.2020.9243180">Ensemble Learning for Predictive Maintenance on Wafer Stick Machine Using IoT Sensor Data</a>.</p>
 <p>A very interesting paper <a href="https://dl.acm.org/doi/pdf/10.1145/3694875.3694883">Real-Time Anomaly Detection with LSTM-Autoencoder Network
 on Microcontrollers for Industrial Applications</a> demonstrates how to implement anomaly detection spending as less as $20.</p>
@@ -1830,10 +1824,10 @@ on Microcontrollers for Industrial Applications</a> demonstrates how to implemen
 <p>A simulation of an MQTT connection is available <a href="https://wokwi.com/projects/367405831605855233">here</a> on Wokwi.</p>
 <p>The most convenient way to run on a real device is to use your mobile as an Access Point and configure SSID and password consequently.</p>
 <p>Note that the topics names are assigned to be consistent with the adafruit dashboard (see example below), but you are free to use any name you like.</p>
-<pre><code>mosquitto_pub -h test.mosquitto.org -t &quot;avitaletti/feeds/threshold&quot; -m 2345
-</code></pre>
-<pre><code>mosquitto_sub -h test.mosquitto.org -t &quot;avitaletti/feeds/potentiometer&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -h test.mosquitto.org -t "avitaletti/feeds/threshold" -m 2345
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mosquitto_sub -h test.mosquitto.org -t "avitaletti/feeds/potentiometer"
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <ul>
@@ -1847,19 +1841,17 @@ on Microcontrollers for Industrial Applications</a> demonstrates how to implemen
 <li>Create an account on io.adafruit.com, in my case the username is avitaletti.</li>
 <li>Click on the yellow key to get yor credentials to publish data</li>
 </ul>
-<pre><code>#define IO_USERNAME  &quot;avitaletti&quot;
-#define IO_KEY       &quot;xxxxxxxxxxxxxxxxxxxx&quot;
-</code></pre>
-<ul>
-<li>Create two feeds named threshold and potentiometer with the corresponding topics avitaletti/feeds/threshold  and avitaletti/feeds/potentiometer</li>
-</ul>
+<p><div class="highlight"><pre><span></span><code>#define IO_USERNAME  "avitaletti"
+#define IO_KEY       "xxxxxxxxxxxxxxxxxxxx"
+</code></pre></div>
+* Create two feeds named threshold and potentiometer with the corresponding topics avitaletti/feeds/threshold  and avitaletti/feeds/potentiometer</p>
 <p><img alt="" src="../assets/images/feeds.png" /></p>
 <p>The following code will publish the message 33 on the topic avitaletti/feeds/potentiometer and it is used by the IoT device to send the data acquired by the ADC</p>
-<pre><code>mosquitto_pub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/potentiometer -m 33
-</code></pre>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/potentiometer -m 33
+</code></pre></div>
 <p>The node can subscribe to avitaletti/feeds/threshold  to get the commands from the backend</p>
-<pre><code>mosquitto_sub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/threshold
-</code></pre>
+<div class="highlight"><pre><span></span><code>mosquitto_sub -h io.adafruit.com -u avitaletti -P xxxxxxxxxxxxxxxxxxxx -t avitaletti/feeds/threshold
+</code></pre></div>
 <ul>
 <li>The dashboard link the components to the feeds and corresponding topics</li>
 </ul>
@@ -1870,8 +1862,8 @@ on Microcontrollers for Industrial Applications</a> demonstrates how to implemen
 <p><img alt="" src="../assets/images/2023-07-04-16-31-57.png" />
 <img alt="" src="../assets/images/2023-07-04-16-33-07.png" /></p>
 <p><a href="https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux">https://thingsboard.io/docs/getting-started-guides/helloworld/?connectdevice=mqtt-linux</a></p>
-<pre><code>mosquitto_pub -d -q 1 -h &quot;$THINGSBOARD_HOST_NAME&quot; -p &quot;1883&quot; -t &quot;v1/devices/me/telemetry&quot; -u &quot;$ACCESS_TOKEN&quot; -m {&quot;temperature&quot;:25}
-</code></pre>
+<div class="highlight"><pre><span></span><code>mosquitto_pub -d -q 1 -h "$THINGSBOARD_HOST_NAME" -p "1883" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -m {"temperature":25}
+</code></pre></div>
 <p>Another multiplatform alternative is <a href="https://mqttx.app/downloads">MQTTX</a>.</p>
 <p><img alt="" src="../assets/images/mqttx_config.png" />
 <img alt="" src="../assets/images/mqttx_publish.png" /></p>

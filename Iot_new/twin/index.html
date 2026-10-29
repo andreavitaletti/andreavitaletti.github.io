@@ -1918,58 +1918,58 @@
 <h3 id="esp32-code-c">ESP32 Code (C++)</h3>
 <p>:fontawesome-brands-github: <a href="https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin">https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin</a></p>
 <p>We add a <code>SET_PHASE</code> command to set the initial "Wall Clock" time.</p>
-<pre><code class="language-c++">#include &lt;Arduino.h&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
 
-double drift_multiplier = 1.0;
-uint64_t last_raw_micros = 0;
-double base_wall_time_s = 0; // The Wall Clock time in seconds (Epoch)
+<span class="kt">double</span><span class="w"> </span><span class="n">drift_multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">last_raw_micros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// The Wall Clock time in seconds (Epoch)</span>
 
-double get_wall_clock() {
-    uint64_t current_raw = micros();
-    uint64_t elapsed_raw = current_raw - last_raw_micros;
+<span class="kt">double</span><span class="w"> </span><span class="nf">get_wall_clock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">current_raw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">elapsed_raw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_raw</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_raw_micros</span><span class="p">;</span>
 
-    // Convert elapsed microseconds to adjusted seconds
-    double elapsed_adjusted_s = (elapsed_raw * drift_multiplier) / 1000000.0;
-    return base_wall_time_s + elapsed_adjusted_s;
-}
+<span class="w">    </span><span class="c1">// Convert elapsed microseconds to adjusted seconds</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">elapsed_adjusted_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">elapsed_raw</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">drift_multiplier</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000000.0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">elapsed_adjusted_s</span><span class="p">;</span>
+<span class="p">}</span>
 
-void setup() {
-    Serial.begin(115200);
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="p">}</span>
 
-void loop() {
-    // 1. Send heartbeat to Twin
-    static uint32_t last_report = 0;
-    if (millis() - last_report &gt; 5000) {
-        last_report = millis();
-        Serial.print(&quot;RAW_MICROS:&quot;);
-        Serial.print(micros());
-        Serial.print(&quot;,CUR_WALL:&quot;);
-        Serial.println(get_wall_clock(), 3); // Tell the twin what we THINK the time is
-    }
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. Send heartbeat to Twin</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">last_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_report</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">last_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"RAW_MICROS:"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">micros</span><span class="p">());</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">",CUR_WALL:"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">get_wall_clock</span><span class="p">(),</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// Tell the twin what we THINK the time is</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 2. Handle Commands
-    if (Serial.available() &gt; 0) {
-        String data = Serial.readStringUntil('\n');
+<span class="w">    </span><span class="c1">// 2. Handle Commands</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">readStringUntil</span><span class="p">(</span><span class="sc">'\n'</span><span class="p">);</span>
 
-        // Set the &quot;Starting Line&quot; (Phase)
-        if (data.startsWith(&quot;SET_PHASE:&quot;)) {
-            base_wall_time_s = data.substring(10).toDouble();
-            last_raw_micros = micros();
-            Serial.println(&quot;ACK: Phase (Wall Clock) Initialized.&quot;);
-        }
+<span class="w">        </span><span class="c1">// Set the "Starting Line" (Phase)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s">"SET_PHASE:"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="n">toDouble</span><span class="p">();</span>
+<span class="w">            </span><span class="n">last_raw_micros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="w">            </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"ACK: Phase (Wall Clock) Initialized."</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // Adjust the &quot;Speed&quot; (Frequency)
-        if (data.startsWith(&quot;SET_MULT:&quot;)) {
-            // Anchor the time before changing the rate
-            base_wall_time_s = get_wall_clock();
-            last_raw_micros = micros();
-            drift_multiplier = data.substring(9).toDouble();
-            Serial.println(&quot;ACK: Rate Adjusted.&quot;);
-        }
-    }
-}
-</code></pre>
+<span class="w">        </span><span class="c1">// Adjust the "Speed" (Frequency)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s">"SET_MULT:"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Anchor the time before changing the rate</span>
+<span class="w">            </span><span class="n">base_wall_time_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_wall_clock</span><span class="p">();</span>
+<span class="w">            </span><span class="n">last_raw_micros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="w">            </span><span class="n">drift_multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">9</span><span class="p">).</span><span class="n">toDouble</span><span class="p">();</span>
+<span class="w">            </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"ACK: Rate Adjusted."</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <hr />
 <h3 id="digital-twin-python">Digital Twin (Python)</h3>
 <p>The Python script now performs two steps:</p>
@@ -1978,72 +1978,72 @@ void loop() {
 <li><strong>Sync Frequency:</strong> Continues to calculate and send the drift multiplier.</li>
 </ol>
 <p>Python - only relevant parts, full code available at  :fontawesome-brands-github: <a href="https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin">https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/Digital_twin</a></p>
-<pre><code class="language-python">import serial
-import time
-from sklearn.linear_model import LinearRegression
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">serial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
 
-class ClockDigitalTwin:
-    def add_sample(self, esp_micros):
-        # Record the &quot;Gold Standard&quot; time from the PC
-        now_pc = time.time()
+<span class="k">class</span><span class="w"> </span><span class="nc">ClockDigitalTwin</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">esp_micros</span><span class="p">):</span>
+        <span class="c1"># Record the "Gold Standard" time from the PC</span>
+        <span class="n">now_pc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-        self.esp_raw_micros.append([esp_micros])
-        self.pc_ref_seconds.append(now_pc)
+        <span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">esp_micros</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pc_ref_seconds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">now_pc</span><span class="p">)</span>
 
-        # Keep only the most recent samples to adapt to temperature changes
-        if len(self.esp_raw_micros) &gt; WINDOW_SIZE:
-            self.esp_raw_micros.pop(0)
-            self.pc_ref_seconds.pop(0)
-    def calculate_multiplier(self):
-        if len(self.esp_raw_micros) &lt; 5:
-            return None # Not enough data yet
+        <span class="c1"># Keep only the most recent samples to adapt to temperature changes</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">WINDOW_SIZE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pc_ref_seconds</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span> <span class="c1"># Not enough data yet</span>
 
-        # Fit model: PC_Time = (m * ESP_Micros) + c
-        self.model.fit(self.esp_raw_micros, self.pc_ref_seconds)
+        <span class="c1"># Fit model: PC_Time = (m * ESP_Micros) + c</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">esp_raw_micros</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc_ref_seconds</span><span class="p">)</span>
 
-        # The slope 'm' tells us how many PC seconds pass per 1 ESP32 microsecond
-        # We multiply by 1,000,000 because the ESP32 works in microseconds
-        multiplier = self.model.coef_[0] * 1_000_000
-        return multiplier
+        <span class="c1"># The slope 'm' tells us how many PC seconds pass per 1 ESP32 microsecond</span>
+        <span class="c1"># We multiply by 1,000,000 because the ESP32 works in microseconds</span>
+        <span class="n">multiplier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1_000_000</span>
+        <span class="k">return</span> <span class="n">multiplier</span>
 
-with serial.Serial(...) as ser:
-            time.sleep(2) # Wait for ESP32 reboot
-            ser.reset_input_buffer() # Clear old data
+<span class="k">with</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">as</span> <span class="n">ser</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Wait for ESP32 reboot</span>
+            <span class="n">ser</span><span class="o">.</span><span class="n">reset_input_buffer</span><span class="p">()</span> <span class="c1"># Clear old data</span>
 
-            while True:
-                # 1. INITIAL PHASE SYNC
-                if not phase_synced:
-                    now = time.time()
-                    ser.write(f&quot;SET_PHASE:{now:.3f}\n&quot;.encode())
-                    phase_synced = True
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># 1. INITIAL PHASE SYNC</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">phase_synced</span><span class="p">:</span>
+                    <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                    <span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SET_PHASE:</span><span class="si">{</span><span class="n">now</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+                    <span class="n">phase_synced</span> <span class="o">=</span> <span class="kc">True</span>
 
-                line = ser.readline().decode('utf-8', errors='ignore').strip()
-                if not line:
-                    continue
+                <span class="n">line</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">continue</span>
 
-                if &quot;ACK&quot; in line:
-                    print(f&quot;ESP32: {line}&quot;)
+                <span class="k">if</span> <span class="s2">"ACK"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ESP32: </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-                if &quot;RAW_MICROS&quot; in line:
-                    try:
-                        # Parse: RAW_MICROS:12345,CUR_WALL:17000.123
-                        parts = line.split(&quot;,&quot;)
-                        raw_micros = int(parts[0].split(&quot;:&quot;)[1])
-                        esp_thinks_wall = float(parts[1].split(&quot;:&quot;)[1])
+                <span class="k">if</span> <span class="s2">"RAW_MICROS"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="c1"># Parse: RAW_MICROS:12345,CUR_WALL:17000.123</span>
+                        <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+                        <span class="n">raw_micros</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">esp_thinks_wall</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
 
-                        twin.add_sample(raw_micros)
+                        <span class="n">twin</span><span class="o">.</span><span class="n">add_sample</span><span class="p">(</span><span class="n">raw_micros</span><span class="p">)</span>
 
-                        # 2. FREQUENCY ADJUSTMENT
-                        mult = twin.calculate_multiplier()
-                        if mult:
-                            ser.write(f&quot;SET_MULT:{mult:.8f}\n&quot;.encode())
-                            error = time.time() - esp_thinks_wall
-                            print(f&quot;[PC] Time: {time.time():.3f} | [ESP] Thinks: {esp_thinks_wall:.3f} | Error: {error*1000:.2f}ms | Mult: {mult:.8f}&quot;)
-</code></pre>
-<pre><code>[PC] Time: 1773932593.460 | [ESP] Thinks: 1773932593.483 | Error: -22.51ms | Mult: 0.99999873
+                        <span class="c1"># 2. FREQUENCY ADJUSTMENT</span>
+                        <span class="n">mult</span> <span class="o">=</span> <span class="n">twin</span><span class="o">.</span><span class="n">calculate_multiplier</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">mult</span><span class="p">:</span>
+                            <span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SET_MULT:</span><span class="si">{</span><span class="n">mult</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+                            <span class="n">error</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">esp_thinks_wall</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[PC] Time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | [ESP] Thinks: </span><span class="si">{</span><span class="n">esp_thinks_wall</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | Error: </span><span class="si">{</span><span class="n">error</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">ms | Mult: </span><span class="si">{</span><span class="n">mult</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[PC] Time: 1773932593.460 | [ESP] Thinks: 1773932593.483 | Error: -22.51ms | Mult: 0.99999873
 ESP32: ACK: Rate Adjusted.
 [PC] Time: 1773932598.463 | [ESP] Thinks: 1773932598.484 | Error: -20.65ms | Mult: 0.99999029
-</code></pre>
+</code></pre></div>
 <ol>
 <li><strong>The Phase Correction (<code>SET_PHASE</code>)</strong>: This is like setting a watch. It happens once (or rarely) to align the two clocks to the same "zero" point.</li>
 <li><strong>The Frequency Correction (<code>SET_MULT</code>)</strong>: This is like adjusting the watch's internal gears. It happens continuously to ensure that as the ESP32 gets hot or cold, the Digital Twin keeps the "Virtual Clock" perfectly aligned with the PC.</li>
@@ -2091,53 +2091,53 @@ ESP32: ACK: Rate Adjusted.
 <p>We can run epanet-js on nodejs and specifically run a bridge interfacing the EPANET model, in the following '01-uk-style.inp',  with the ESP32 via the serial interface. </p>
 <p>In other words we can use the ESP32 as a sensor of a simulated water distribution network</p>
 <p>The bridge code, tunning on node </p>
-<pre><code class="language-js">const { Project, Workspace } = require('epanet-js');
-const { SerialPort } = require('serialport');
-const path = require('path');
-const fs = require('fs');
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Project</span><span class="p">,</span><span class="w"> </span><span class="nx">Workspace</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'epanet-js'</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">SerialPort</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'serialport'</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
 
-// Serial port — adjust to your port (Linux: /dev/ttyACM0, Windows: COM3)
-const port = new SerialPort({ path: '/dev/ttyACM0', baudRate: 9600 }, (err) =&gt; {
-    if (err) console.error('Serial Port Error:', err.message);
-});
+<span class="c1">// Serial port — adjust to your port (Linux: /dev/ttyACM0, Windows: COM3)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SerialPort</span><span class="p">({</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'/dev/ttyACM0'</span><span class="p">,</span><span class="w"> </span><span class="nx">baudRate</span><span class="o">:</span><span class="w"> </span><span class="mf">9600</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Serial Port Error:'</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
 
-const inpPath = path.join(__dirname, '01-uk-style.inp');
-if (!fs.existsSync(inpPath)) {
-    console.error(`ERROR: network.inp not found at ${inpPath}`);
-    process.exit(1);
-}
+<span class="kd">const</span><span class="w"> </span><span class="nx">inpPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s1">'01-uk-style.inp'</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">inpPath</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`ERROR: network.inp not found at </span><span class="si">${</span><span class="nx">inpPath</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="p">}</span>
 
-const ws = new Workspace();
-const model = new Project(ws);
+<span class="kd">const</span><span class="w"> </span><span class="nx">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Workspace</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Project</span><span class="p">(</span><span class="nx">ws</span><span class="p">);</span>
 
-ws.writeFile('net.inp', fs.readFileSync(inpPath));
-model.open('net.inp', 'report.rpt', 'out.bin');
+<span class="nx">ws</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="s1">'net.inp'</span><span class="p">,</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">inpPath</span><span class="p">));</span>
+<span class="nx">model</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'net.inp'</span><span class="p">,</span><span class="w"> </span><span class="s1">'report.rpt'</span><span class="p">,</span><span class="w"> </span><span class="s1">'out.bin'</span><span class="p">);</span>
 
-// Resolve named IDs to indices once at startup
-// Pipe P1 connects J43 → J27
-// Junction J1 is the first junction in the network
-const idxP1 = model.getLinkIndex('P1');
-const idxJ1 = model.getNodeIndex('J1');
+<span class="c1">// Resolve named IDs to indices once at startup</span>
+<span class="c1">// Pipe P1 connects J43 → J27</span>
+<span class="c1">// Junction J1 is the first junction in the network</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">idxP1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getLinkIndex</span><span class="p">(</span><span class="s1">'P1'</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">idxJ1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getNodeIndex</span><span class="p">(</span><span class="s1">'J1'</span><span class="p">);</span>
 
-console.log(`[EPANET] Network loaded — P1 index: ${idxP1}, J1 index: ${idxJ1}`);
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[EPANET] Network loaded — P1 index: </span><span class="si">${</span><span class="nx">idxP1</span><span class="si">}</span><span class="sb">, J1 index: </span><span class="si">${</span><span class="nx">idxJ1</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 
-function runSimulation() {
-    model.solveH();
+<span class="kd">function</span><span class="w"> </span><span class="nx">runSimulation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">model</span><span class="p">.</span><span class="nx">solveH</span><span class="p">();</span>
 
-    const flow     = model.getLinkValue(idxP1, 8).toFixed(4);  // EN_FLOW (L/s)
-    const velocity = model.getLinkValue(idxP1, 9).toFixed(4);  // EN_VELOCITY (m/s)
-    const pressure = model.getNodeValue(idxJ1, 11).toFixed(4); // EN_PRESSURE (m)
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">flow</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getLinkValue</span><span class="p">(</span><span class="nx">idxP1</span><span class="p">,</span><span class="w"> </span><span class="mf">8</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span><span class="w">  </span><span class="c1">// EN_FLOW (L/s)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getLinkValue</span><span class="p">(</span><span class="nx">idxP1</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span><span class="w">  </span><span class="c1">// EN_VELOCITY (m/s)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">pressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">getNodeValue</span><span class="p">(</span><span class="nx">idxJ1</span><span class="p">,</span><span class="w"> </span><span class="mf">11</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// EN_PRESSURE (m)</span>
 
-    const message = `PIPE,P1,${flow},${velocity},${pressure}\n`;
-    console.log(`[EPANET] ${message.trim()} -&gt; Sending to Arduino`);
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`PIPE,P1,</span><span class="si">${</span><span class="nx">flow</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">velocity</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">pressure</span><span class="si">}</span><span class="sb">\n`</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[EPANET] </span><span class="si">${</span><span class="nx">message</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span><span class="si">}</span><span class="sb"> -&gt; Sending to Arduino`</span><span class="p">);</span>
 
-    port.write(message, (err) =&gt; {
-        if (err) console.error('Write error:', err.message);
-    });
-}
+<span class="w">    </span><span class="nx">port</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Write error:'</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
 
-setInterval(runSimulation, 3000);
-</code></pre>
+<span class="nx">setInterval</span><span class="p">(</span><span class="nx">runSimulation</span><span class="p">,</span><span class="w"> </span><span class="mf">3000</span><span class="p">);</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>A similar approach can be exploited to interface multiple simulators, however in many case a convenient WASM implementation (i.e. epanet.js), as for EPANET, does not exixt. </p>

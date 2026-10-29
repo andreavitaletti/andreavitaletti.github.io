@@ -2022,63 +2022,63 @@ if the battery does not exceed 3.6V as in the LiFePO4, you can connect the batte
 <li><strong>Task 2:</strong> Performs the "Monitoring Activity" (e.g., reading a sensor).</li>
 <li><strong>Back to Sleep:</strong> Once the tasks finish their job, they call for deep sleep again.</li>
 </ol>
-<pre><code class="language-c++">#include &lt;Arduino.h&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
 
-#define BUTTON_PIN GPIO_NUM_27 
+<span class="cp">#define BUTTON_PIN GPIO_NUM_27 </span>
 
-// This variable survives deep sleep
-RTC_DATA_ATTR bool should_monitor = false;
+<span class="c1">// This variable survives deep sleep</span>
+<span class="n">RTC_DATA_ATTR</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">should_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 
-// Task 2: The Monitor
-void taskMonitor(void *pvParameters) {
-  if (should_monitor) {
-    Serial.println(&quot;[Task 2] Monitoring activity started...&quot;);
-    // Simulate sensor reading or WiFi upload
-    delay(2000); 
-    Serial.println(&quot;[Task 2] Monitoring complete.&quot;);
-  }
+<span class="c1">// Task 2: The Monitor</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">taskMonitor</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">should_monitor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"[Task 2] Monitoring activity started..."</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Simulate sensor reading or WiFi upload</span>
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"[Task 2] Monitoring complete."</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-  Serial.println(&quot;Mission accomplished. Going back to deep sleep in 1 second.&quot;);
-  delay(1000);
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Mission accomplished. Going back to deep sleep in 1 second."</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
 
-  // Prepare for next sleep
-  esp_sleep_enable_ext0_wakeup(BUTTON_PIN, 0); // Wake when button is LOW (pressed)
-  esp_deep_sleep_start();
-}
+<span class="w">  </span><span class="c1">// Prepare for next sleep</span>
+<span class="w">  </span><span class="n">esp_sleep_enable_ext0_wakeup</span><span class="p">(</span><span class="n">BUTTON_PIN</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Wake when button is LOW (pressed)</span>
+<span class="w">  </span><span class="n">esp_deep_sleep_start</span><span class="p">();</span>
+<span class="p">}</span>
 
-// Task 1: The Coordinator
-void taskCoordinator(void *pvParameters) {
-  Serial.println(&quot;[Task 1] Checking wake-up reason...&quot;);
+<span class="c1">// Task 1: The Coordinator</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">taskCoordinator</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"[Task 1] Checking wake-up reason..."</span><span class="p">);</span>
 
-  esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
+<span class="w">  </span><span class="n">esp_sleep_wakeup_cause_t</span><span class="w"> </span><span class="n">wakeup_reason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_sleep_get_wakeup_cause</span><span class="p">();</span>
 
-  if (wakeup_reason == ESP_SLEEP_WAKEUP_EXT0) {
-    Serial.println(&quot;[Task 1] Woke up by Button! Signaling Task 2.&quot;);
-    should_monitor = true;
-  } else {
-    Serial.println(&quot;[Task 1] Normal boot or other wake source.&quot;);
-    should_monitor = false;
-  }
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">wakeup_reason</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ESP_SLEEP_WAKEUP_EXT0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"[Task 1] Woke up by Button! Signaling Task 2."</span><span class="p">);</span>
+<span class="w">    </span><span class="n">should_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"[Task 1] Normal boot or other wake source."</span><span class="p">);</span>
+<span class="w">    </span><span class="n">should_monitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 
-  // Task 1 can now delete itself or wait
-  vTaskDelete(NULL);
-}
+<span class="w">  </span><span class="c1">// Task 1 can now delete itself or wait</span>
+<span class="w">  </span><span class="n">vTaskDelete</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
 
-void setup() {
-  Serial.begin(115200);
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">BUTTON_PIN</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT_PULLUP</span><span class="p">);</span>
 
-  // Create Task 1: Check why we woke up
-  xTaskCreate(taskCoordinator, &quot;Coordinator&quot;, 2048, NULL, 2, NULL);
+<span class="w">  </span><span class="c1">// Create Task 1: Check why we woke up</span>
+<span class="w">  </span><span class="n">xTaskCreate</span><span class="p">(</span><span class="n">taskCoordinator</span><span class="p">,</span><span class="w"> </span><span class="s">"Coordinator"</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 
-  // Create Task 2: Perform monitoring if needed
-  xTaskCreate(taskMonitor, &quot;Monitor&quot;, 2048, NULL, 1, NULL);
-}
+<span class="w">  </span><span class="c1">// Create Task 2: Perform monitoring if needed</span>
+<span class="w">  </span><span class="n">xTaskCreate</span><span class="p">(</span><span class="n">taskMonitor</span><span class="p">,</span><span class="w"> </span><span class="s">"Monitor"</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
 
-void loop() {
-  // Empty. Everything happens in tasks and then deep sleep.
-}
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Empty. Everything happens in tasks and then deep sleep.</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="ensuring-task-completion">Ensuring Task Completion</h3>
 <p>If you put the sleep command in <code>setup()</code>, the ESP32 might go to sleep before the FreeRTOS scheduler even has a chance to start your tasks.</p>
 <ul>
@@ -2241,74 +2241,71 @@ In the following example, the LOAD is our ESP32 and we use the [INA219](https://
 
 <p><a href="https://github.com/ShotokuTech/HeltecLoRa32v3_I2C/tree/main">Note on Heltec V3</a></p>
 <p><img alt="" src="../assets/images/INA219.drawio.png" /></p>
-<pre><code class="language-c">
-// use https://github.com/nathandunk/BetterSerialPlotter to visualize the data
+<div class="highlight"><pre><span></span><code><span class="c1">// use https://github.com/nathandunk/BetterSerialPlotter to visualize the data</span>
 
-#include &lt;Arduino.h&gt;
-#include &lt;Wire.h&gt;
-#include &lt;Adafruit_INA219.h&gt;
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Wire.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Adafruit_INA219.h&gt;</span>
 
-Adafruit_INA219 ina219;
+<span class="n">Adafruit_INA219</span><span class="w"> </span><span class="n">ina219</span><span class="p">;</span>
 
-void setup(void) 
-{
-  Serial.begin(115200);
-  while (!Serial) {
-      // will pause Zero, Leonardo, etc until serial console opens
-      delay(1);
-  }
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Serial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// will pause Zero, Leonardo, etc until serial console opens</span>
+<span class="w">      </span><span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-  uint32_t currentFrequency;
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">currentFrequency</span><span class="p">;</span>
 
-  // Initialize the INA219.
-  // By default the initialization will use the largest range (32V, 2A).  However
-  // you can call a setCalibration function to change this range (see comments).
-  if (! ina219.begin()) {
-    Serial.println(&quot;Failed to find INA219 chip&quot;);
-    while (1) { delay(10); }
-  }
-  // To use a slightly lower 32V, 1A range (higher precision on amps):
-  //ina219.setCalibration_32V_1A();
-  // Or to use a lower 16V, 400mA range (higher precision on volts and amps):
-  //ina219.setCalibration_16V_400mA();
-  Serial.println(&quot;Measuring voltage and current with INA219 ...&quot;);
-}
+<span class="w">  </span><span class="c1">// Initialize the INA219.</span>
+<span class="w">  </span><span class="c1">// By default the initialization will use the largest range (32V, 2A).  However</span>
+<span class="w">  </span><span class="c1">// you can call a setCalibration function to change this range (see comments).</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Failed to find INA219 chip"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// To use a slightly lower 32V, 1A range (higher precision on amps):</span>
+<span class="w">  </span><span class="c1">//ina219.setCalibration_32V_1A();</span>
+<span class="w">  </span><span class="c1">// Or to use a lower 16V, 400mA range (higher precision on volts and amps):</span>
+<span class="w">  </span><span class="c1">//ina219.setCalibration_16V_400mA();</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Measuring voltage and current with INA219 ..."</span><span class="p">);</span>
+<span class="p">}</span>
 
-void loop(void) 
-{
-  float shuntvoltage = 0;
-  float busvoltage = 0;
-  float current_mA = 0;
-  float loadvoltage = 0;
-  float power_mW = 0;
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">current_mA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">loadvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">power_mW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-  shuntvoltage = ina219.getShuntVoltage_mV();
-  busvoltage = ina219.getBusVoltage_V();
-  current_mA = ina219.getCurrent_mA();
-  power_mW = ina219.getPower_mW();
-  loadvoltage = busvoltage + (shuntvoltage / 1000);
+<span class="w">  </span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getShuntVoltage_mV</span><span class="p">();</span>
+<span class="w">  </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getBusVoltage_V</span><span class="p">();</span>
+<span class="w">  </span><span class="n">current_mA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getCurrent_mA</span><span class="p">();</span>
+<span class="w">  </span><span class="n">power_mW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ina219</span><span class="p">.</span><span class="n">getPower_mW</span><span class="p">();</span>
+<span class="w">  </span><span class="n">loadvoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">busvoltage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">shuntvoltage</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
 
-  Serial.print(busvoltage);
-  //Serial.print(&quot;,&quot;);
-  Serial.print(&quot;\t&quot;);
-  Serial.print(shuntvoltage);
-  //Serial.print(&quot;,&quot;);
-  Serial.print(&quot;\t&quot;);
-  Serial.print(loadvoltage);
-  //Serial.print(&quot;,&quot;);
-  Serial.print(&quot;\t&quot;);
-  Serial.print(current_mA);
-  //Serial.print(&quot;,&quot;);
-  Serial.print(&quot;\t&quot;);
-  Serial.println(power_mW);
-  //Serial.println(&quot;&quot;);
-  /*
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">busvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(",");</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">shuntvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(",");</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">loadvoltage</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(",");</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">current_mA</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.print(",");</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">power_mW</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Serial.println("");</span>
+<span class="w">  </span><span class="cm">/*</span>
 
-  delay(50);
-}
-
-
-</code></pre>
+<span class="cm">  delay(50);</span>
+<span class="cm">}</span>
+</code></pre></div>
 <p><img alt="energy-20260327-085242.png" src="../assets/images/energy-20260327-085242.png" /></p>
 <ol>
 <li><code>getShuntVoltage_mV()</code> Voltage drop across the small <span class="arithmatex">\(0.1 \Omega\)</span> shunt resistor on the board. This is the raw data used to determine how much current is flowing (see <code>getCurrent_mA()</code>).</li>
@@ -2317,40 +2314,38 @@ void loop(void)
 <li><code>getPower_mW()</code> A simple multiplication of the bus voltage and the current. <span class="arithmatex">\(P = V_{bus} \times I\)</span></li>
 <li><code>loadvoltage = busvoltage + (shuntvoltage / 1000)</code>This line calculates the total voltage at the source. Since there is a tiny drop across the sensor itself, the "true" source voltage is the voltage at the load plus what was lost across the shunt. Note that we divide shuntvoltage by 1000 to convert millivolts into volts so the units match.</li>
 </ol>
-<pre><code class="language-c">
-/*
-  ESP32 Deep Sleep Mode Timer Wake UP
- http:://www.electronicwings.com
-*/ 
+<div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm">  ESP32 Deep Sleep Mode Timer Wake UP</span>
+<span class="cm"> http:://www.electronicwings.com</span>
+<span class="cm">*/</span><span class="w"> </span>
 
 
-#define Time_To_Sleep 5   //Time ESP32 will go to sleep (in seconds)
-#define S_To_uS_Factor 1000000ULL      //Conversion factor for micro seconds to seconds 
+<span class="cp">#define Time_To_Sleep 5   </span><span class="c1">//Time ESP32 will go to sleep (in seconds)</span>
+<span class="cp">#define S_To_uS_Factor 1000000ULL      </span><span class="c1">//Conversion factor for micro seconds to seconds </span>
 
-RTC_DATA_ATTR int bootCount= 0;
+<span class="n">RTC_DATA_ATTR</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bootCount</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-void setup() {
-  Serial.begin(115200);
-  delay(1000); //Take some time to open up the Serial Monitor
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">//Take some time to open up the Serial Monitor</span>
 
-  //Increment boot number and print it every reboot
-  ++bootCount;
-  Serial.println(&quot;Boot number: &quot; + String(bootCount));
+<span class="w">  </span><span class="c1">//Increment boot number and print it every reboot</span>
+<span class="w">  </span><span class="o">++</span><span class="n">bootCount</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Boot number: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">bootCount</span><span class="p">));</span>
 
-  //Set timer to 5 seconds
- esp_sleep_enable_timer_wakeup(Time_To_Sleep * S_To_uS_Factor);
-  Serial.println(&quot;Setup ESP32 to sleep for every &quot; + String(Time_To_Sleep) +
-  &quot; Seconds&quot;);
+<span class="w">  </span><span class="c1">//Set timer to 5 seconds</span>
+<span class="w"> </span><span class="n">esp_sleep_enable_timer_wakeup</span><span class="p">(</span><span class="n">Time_To_Sleep</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">S_To_uS_Factor</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Setup ESP32 to sleep for every "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">Time_To_Sleep</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="s">" Seconds"</span><span class="p">);</span>
 
-  //Go to sleep now
-  esp_deep_sleep_start();
+<span class="w">  </span><span class="c1">//Go to sleep now</span>
+<span class="w">  </span><span class="n">esp_deep_sleep_start</span><span class="p">();</span>
 
-  Serial.println(&quot;This will not print!!&quot;); // This will not get print,as ESP32 goes in Sleep mode.
-}
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"This will not print!!"</span><span class="p">);</span><span class="w"> </span><span class="c1">// This will not get print,as ESP32 goes in Sleep mode.</span>
+<span class="p">}</span>
 
-void loop() {} // We don't need loop as ESP32 will initilize each time.
-
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// We don't need loop as ESP32 will initilize each time.</span>
+</code></pre></div>
 <p>We use <a href="https://github.com/nathandunk/BetterSerialPlotter">Better Serial Plotter</a> to visualize the data.</p>
 <p><img alt="" src="../assets/images/2025-04-11-10-45-59.png" /></p>
 <p>A powerful alternative is <a href="https://github.com/Serial-Studio/Serial-Studio?tab=readme-ov-file">Serial-Studio</a></p>

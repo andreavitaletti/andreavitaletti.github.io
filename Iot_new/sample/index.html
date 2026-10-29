@@ -1800,68 +1800,66 @@ The node on the right sample the generated signal by the <a href="https://www.el
 </table>
 <h3 id="esp32-a-the-generator-sender">ESP32 A: The Generator (Sender)</h3>
 <p>The straightforward implementation </p>
-<pre><code class="language-c++">
-#include &lt;Arduino.h&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
 
-// Define the DAC and ADC pins
-const int dacPin = 25;   // DAC1 (GPIO 25) for sinusoid output
+<span class="c1">// Define the DAC and ADC pins</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dacPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="w">   </span><span class="c1">// DAC1 (GPIO 25) for sinusoid output</span>
 
 
-// Parameters for the sine wave
-const int amplitude = 100;   // Amplitude of the sine wave (max 255 for 8-bit DAC)
-const int offset = 128;      // DC offset (middle of the DAC range)
-const float signalFrequency = 5.0;  // Frequency of the sine wave in Hz
-int samplingFrequencyDAC = 1000; // sampling theorem should be at least 2*frequency
-
+<span class="c1">// Parameters for the sine wave</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">amplitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w">   </span><span class="c1">// Amplitude of the sine wave (max 255 for 8-bit DAC)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span><span class="w">      </span><span class="c1">// DC offset (middle of the DAC range)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">signalFrequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0</span><span class="p">;</span><span class="w">  </span><span class="c1">// Frequency of the sine wave in Hz</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">samplingFrequencyDAC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="c1">// sampling theorem should be at least 2*frequency</span>
 
 
 
-void setup() {
-  Serial.begin(115200);
 
-  // Initialize DAC pin (GPIO 25)
-  dacWrite(dacPin, 0);  // Initialize DAC with a low value
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
 
-}
+<span class="w">  </span><span class="c1">// Initialize DAC pin (GPIO 25)</span>
+<span class="w">  </span><span class="n">dacWrite</span><span class="p">(</span><span class="n">dacPin</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Initialize DAC with a low value</span>
 
-void loop() {
-      for (int i = 0; i &lt; samplingFrequencyDAC; i++) {
-      int sineValue = (int)(amplitude * sin(2.0 * PI * signalFrequency * i / samplingFrequencyDAC) + offset);
-      dacWrite(dacPin, sineValue);  // Write to DAC (8-bit value)
-      /*
-      Serial.print(&quot;&gt;&quot;);
-      Serial.print(&quot;dac:&quot;);    
-      Serial.println(sineValue);
-      */
-      delay(round(1.0/samplingFrequencyDAC*1000)); // in milliseconds
-      } 
+<span class="p">}</span>
 
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">samplingFrequencyDAC</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">sineValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">amplitude</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mf">2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">signalFrequency</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">samplingFrequencyDAC</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+<span class="w">      </span><span class="n">dacWrite</span><span class="p">(</span><span class="n">dacPin</span><span class="p">,</span><span class="w"> </span><span class="n">sineValue</span><span class="p">);</span><span class="w">  </span><span class="c1">// Write to DAC (8-bit value)</span>
+<span class="w">      </span><span class="cm">/*</span>
+<span class="cm">      Serial.print("&gt;");</span>
+<span class="cm">      Serial.print("dac:");    </span>
+<span class="cm">      Serial.println(sineValue);</span>
+<span class="cm">      */</span>
+<span class="w">      </span><span class="n">delay</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">samplingFrequencyDAC</span><span class="o">*</span><span class="mi">1000</span><span class="p">));</span><span class="w"> </span><span class="c1">// in milliseconds</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span>
 
-</code></pre>
+<span class="p">}</span>
+</code></pre></div>
 <p>The following code uses a pre-calculated lookup table to store sine values. This is  more efficient than calculating <code>sin()</code> on the fly, allowing for a smoother signal.</p>
-<pre><code class="language-C++">// ESP32 SENDER CODE
-#include &lt;Arduino.h&gt;
+<div class="highlight"><pre><span></span><code><span class="c1">// ESP32 SENDER CODE</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
 
-#define DAC_PIN 25 // Uses DAC Channel 1
-const int tableSize = 256;
-uint8_t sineTable[tableSize];
+<span class="cp">#define DAC_PIN 25 </span><span class="c1">// Uses DAC Channel 1</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tableSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">sineTable</span><span class="p">[</span><span class="n">tableSize</span><span class="p">];</span>
 
-void setup() {
-  // Generate a sine lookup table (0 to 255)
-  // We scale it slightly (20-230) to stay in the DAC's linear range
-  for (int i = 0; i &lt; tableSize; i++) {
-    sineTable[i] = (uint8_t)(127 + 100 * sin(2 * PI * i / tableSize));
-  }
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Generate a sine lookup table (0 to 255)</span>
+<span class="w">  </span><span class="c1">// We scale it slightly (20-230) to stay in the DAC's linear range</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tableSize</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sineTable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)(</span><span class="mi">127</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">tableSize</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-void loop() {
-  for (int i = 0; i &lt; tableSize; i++) {
-    dacWrite(DAC_PIN, sineTable[i]);
-    delayMicroseconds(100); // Adjust this to change frequency
-  }
-}
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tableSize</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">dacWrite</span><span class="p">(</span><span class="n">DAC_PIN</span><span class="p">,</span><span class="w"> </span><span class="n">sineTable</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// Adjust this to change frequency</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>The frequency is calculated by how long it takes to step through all <strong>256 points</strong> of the lookup table.</p>
 <ul>
 <li><strong>Delay per step:</strong> <code>100 microseconds</code> (<span class="arithmatex">\(\mu s\)</span>)</li>
@@ -1877,24 +1875,24 @@ void loop() {
 <hr />
 <h3 id="esp32-b-the-receiver-sampler">ESP32 B: The Receiver (Sampler)</h3>
 <p>This code reads the signal and prints it to the Serial interface. Note the use of <code>analogReadAttenuation</code>, which sets the voltage range to approximately 0V–3.1V to better match the DAC output.</p>
-<pre><code class="language-c++">// ESP32 RECEIVER CODE
-#include &lt;Arduino.h&gt;
+<div class="highlight"><pre><span></span><code><span class="c1">// ESP32 RECEIVER CODE</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span>
 
-#define ADC_PIN 34 // ADC1_CH6
+<span class="cp">#define ADC_PIN 34 </span><span class="c1">// ADC1_CH6</span>
 
-void setup() {
-  Serial.begin(115200);
-  // Set attenuation to 11dB (allows 0V - 3.1V range)
-  analogSetAttenuation(ADC_11db); 
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// Set attenuation to 11dB (allows 0V - 3.1V range)</span>
+<span class="w">  </span><span class="n">analogSetAttenuation</span><span class="p">(</span><span class="n">ADC_11db</span><span class="p">);</span><span class="w"> </span>
+<span class="p">}</span>
 
-void loop() {
-  int rawValue = analogRead(ADC_PIN); // from 0 to 4095  
-  // Print to Serial 
-  Serial.println(rawValue);
-  delayMicroseconds(500); // Sample rate control
-}
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">rawValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="n">ADC_PIN</span><span class="p">);</span><span class="w"> </span><span class="c1">// from 0 to 4095  </span>
+<span class="w">  </span><span class="c1">// Print to Serial </span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">rawValue</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"> </span><span class="c1">// Sample rate control</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>The ESP32's <code>analogRead()</code> takes about <strong>10µs to 20µs</strong>. If you find the wave looks "steppy" or jagged, it’s usually due to electrical noise or the sampling interval. If you want to go faster (into the kHz range), the <code>dacWrite</code> method used here will eventually hit a bottleneck.</p>
 <p>The sampling frequency (<span class="arithmatex">\(f_s\)</span>) is how many times per second the ADC "looks" at the incoming voltage.</p>
 <ul>
@@ -1925,105 +1923,101 @@ void loop() {
 <p><img alt="" src="../assets/images/2024-12-17-04-23-56.png" /></p>
 <p><a href="https://forum.arduino.cc/t/how-to-read-data-from-audio-jack/458301/3">ref</a></p>
 <p><code>python3 -m pip install sounddevice</code></p>
-<pre><code class="language-python">
-# Use the sounddevice module
-# http://python-sounddevice.readthedocs.io/en/0.3.10/
+<div class="highlight"><pre><span></span><code><span class="c1"># Use the sounddevice module</span>
+<span class="c1"># http://python-sounddevice.readthedocs.io/en/0.3.10/</span>
 
-import numpy as np
-import sounddevice as sd
-import time
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sounddevice</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-# Samples per second
-sps = 44100
+<span class="c1"># Samples per second</span>
+<span class="n">sps</span> <span class="o">=</span> <span class="mi">44100</span>
 
-# Frequency / pitch
-freq_hz = 2
+<span class="c1"># Frequency / pitch</span>
+<span class="n">freq_hz</span> <span class="o">=</span> <span class="mi">2</span>
 
-# Duration
-duration_s = 5.0
+<span class="c1"># Duration</span>
+<span class="n">duration_s</span> <span class="o">=</span> <span class="mf">5.0</span>
 
-# Attenuation so the sound is reasonable
-atten = 1.0 # 0.3
+<span class="c1"># Attenuation so the sound is reasonable</span>
+<span class="n">atten</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># 0.3</span>
 
-# NumpPy magic to calculate the waveform
-each_sample_number = np.arange(duration_s * sps)
-waveform = np.sin(2 * np.pi * each_sample_number * freq_hz / sps)
-waveform_quiet = waveform * atten
+<span class="c1"># NumpPy magic to calculate the waveform</span>
+<span class="n">each_sample_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">duration_s</span> <span class="o">*</span> <span class="n">sps</span><span class="p">)</span>
+<span class="n">waveform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">each_sample_number</span> <span class="o">*</span> <span class="n">freq_hz</span> <span class="o">/</span> <span class="n">sps</span><span class="p">)</span>
+<span class="n">waveform_quiet</span> <span class="o">=</span> <span class="n">waveform</span> <span class="o">*</span> <span class="n">atten</span>
 
-# Play the waveform out the speakers
-sd.play(waveform_quiet, sps)
-time.sleep(duration_s)
-sd.stop()
-
-</code></pre>
+<span class="c1"># Play the waveform out the speakers</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">waveform_quiet</span><span class="p">,</span> <span class="n">sps</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">duration_s</span><span class="p">)</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div>
 <p><a href="https://onlinetonegenerator.com/">Online Tone Generator</a></p>
 <h2 id="the-sampler-in-freertos">The Sampler in  FreeRTOS</h2>
 <p>:fontawesome-brands-github:  <a href="https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/FFT">https://github.com/andreavitaletti/PlatformIO/tree/main/Projects/FFT</a></p>
 <p>Two tasks, one samples the environment the other performs a computation on the samples, specifically the FFT</p>
-<pre><code class="language-c++">
-#include &lt;arduinoFFT.h&gt;
-#include &lt;math.h&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;arduinoFFT.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
 
-#define SAMPLES 1024
-#define SAMPLING_FREQUENCY 1000 // Reduced for stability during testing
+<span class="cp">#define SAMPLES 1024</span>
+<span class="cp">#define SAMPLING_FREQUENCY 1000 </span><span class="c1">// Reduced for stability during testing</span>
 
-double vReal[SAMPLES];
-double vImag[SAMPLES];
-TaskHandle_t FFTTaskHandle = NULL;
-ArduinoFFT&lt;double&gt; FFT = ArduinoFFT&lt;double&gt;(vReal, vImag, SAMPLES, SAMPLING_FREQUENCY);
+<span class="kt">double</span><span class="w"> </span><span class="n">vReal</span><span class="p">[</span><span class="n">SAMPLES</span><span class="p">];</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">vImag</span><span class="p">[</span><span class="n">SAMPLES</span><span class="p">];</span>
+<span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">FFTTaskHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">ArduinoFFT</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">FFT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ArduinoFFT</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">vReal</span><span class="p">,</span><span class="w"> </span><span class="n">vImag</span><span class="p">,</span><span class="w"> </span><span class="n">SAMPLES</span><span class="p">,</span><span class="w"> </span><span class="n">SAMPLING_FREQUENCY</span><span class="p">);</span>
 
 
-void TaskSample(void *pvParameters) {
-  // Use a lower priority or ensure we don't starve the IDLE task
-  const double TARGET_FREQ = 100.0;
-  const double AMPLITUDE = 50.0;
+<span class="kt">void</span><span class="w"> </span><span class="nf">TaskSample</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Use a lower priority or ensure we don't starve the IDLE task</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">TARGET_FREQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100.0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">AMPLITUDE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50.0</span><span class="p">;</span>
 
-  while (1) {
-    for (int i = 0; i &lt; SAMPLES; i++) {
-      // Calculate synthetic sine
-      float time = (float)i / (float)SAMPLING_FREQUENCY;
-      vReal[i] = AMPLITUDE * sin(2.0 * M_PI * TARGET_FREQ * time);
-      // vReal[i] = analogRead(34); // Read from GPIO 34
-      vImag[i] = 0;
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SAMPLES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Calculate synthetic sine</span>
+<span class="w">      </span><span class="kt">float</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">SAMPLING_FREQUENCY</span><span class="p">;</span>
+<span class="w">      </span><span class="n">vReal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AMPLITUDE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mf">2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TARGET_FREQ</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time</span><span class="p">);</span>
+<span class="w">      </span><span class="c1">// vReal[i] = analogRead(34); // Read from GPIO 34</span>
+<span class="w">      </span><span class="n">vImag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-      // CRITICAL: Small delay to prevent Watchdog Trigger
-      // If SAMPLING_FREQUENCY is low, this works fine.
-      vTaskDelay(pdMS_TO_TICKS(1)); 
-    }
+<span class="w">      </span><span class="c1">// CRITICAL: Small delay to prevent Watchdog Trigger</span>
+<span class="w">      </span><span class="c1">// If SAMPLING_FREQUENCY is low, this works fine.</span>
+<span class="w">      </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span>
 
-    xTaskNotifyGive(FFTTaskHandle);
+<span class="w">    </span><span class="n">xTaskNotifyGive</span><span class="p">(</span><span class="n">FFTTaskHandle</span><span class="p">);</span>
 
-    // Give the CPU a breather between buffers
-    vTaskDelay(pdMS_TO_TICKS(10));
-  }
-}
+<span class="w">    </span><span class="c1">// Give the CPU a breather between buffers</span>
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-void TaskFFT(void *pvParameters) {
-  while (1) {
-    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+<span class="kt">void</span><span class="w"> </span><span class="nf">TaskFFT</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ulTaskNotifyTake</span><span class="p">(</span><span class="n">pdTRUE</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span>
 
-    FFT.windowing(FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-    FFT.compute(FFT_FORWARD);
-    FFT.complexToMagnitude();
+<span class="w">    </span><span class="n">FFT</span><span class="p">.</span><span class="n">windowing</span><span class="p">(</span><span class="n">FFT_WIN_TYP_HAMMING</span><span class="p">,</span><span class="w"> </span><span class="n">FFT_FORWARD</span><span class="p">);</span>
+<span class="w">    </span><span class="n">FFT</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">FFT_FORWARD</span><span class="p">);</span>
+<span class="w">    </span><span class="n">FFT</span><span class="p">.</span><span class="n">complexToMagnitude</span><span class="p">();</span>
 
-    Serial.printf(&quot;Peak: %.2f Hz\n&quot;, FFT.majorPeak());
-  }
-}
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"Peak: %.2f Hz</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">FFT</span><span class="p">.</span><span class="n">majorPeak</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-void setup() {
-  Serial.begin(115200);
-  delay(1000); // Give serial time to start
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// Give serial time to start</span>
 
-  // Increased stack size to 8192 to prevent Stack Overflow
-  xTaskCreatePinnedToCore(TaskSample, &quot;Sampler&quot;, 8192, NULL, 1, NULL, 1);
-  xTaskCreatePinnedToCore(TaskFFT, &quot;FFT_Proc&quot;, 8192, NULL, 1, &amp;FFTTaskHandle, 0);
-}
+<span class="w">  </span><span class="c1">// Increased stack size to 8192 to prevent Stack Overflow</span>
+<span class="w">  </span><span class="n">xTaskCreatePinnedToCore</span><span class="p">(</span><span class="n">TaskSample</span><span class="p">,</span><span class="w"> </span><span class="s">"Sampler"</span><span class="p">,</span><span class="w"> </span><span class="mi">8192</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">xTaskCreatePinnedToCore</span><span class="p">(</span><span class="n">TaskFFT</span><span class="p">,</span><span class="w"> </span><span class="s">"FFT_Proc"</span><span class="p">,</span><span class="w"> </span><span class="mi">8192</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">FFTTaskHandle</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
 
-void loop() {
-  vTaskDelete(NULL);
-}
-
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">vTaskDelete</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>FFT.majorPeak() is not what you need to find out the max frequency</p>
@@ -2039,85 +2033,85 @@ void loop() {
 <hr />
 <h3 id="the-high-speed-generator-sender">The High-Speed Generator (Sender)</h3>
 <p>This code configures I2S to "pump" a sine wave out of the DAC at a high sample rate. Note that for I2S to DAC, we use a 16-bit buffer even though the DAC is 8-bit (the hardware expects it this way).</p>
-<pre><code class="language-c++">#include &quot;driver/i2s.h&quot;
-#include &lt;math.h&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/i2s.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
 
-#define SAMPLE_RATE     44100 // 44.1 kHz (CD Quality)
-#define SINE_FREQ       440.0 // Standard A4 note
-#define I2S_NUM         I2S_NUM_0
+<span class="cp">#define SAMPLE_RATE     44100 </span><span class="c1">// 44.1 kHz (CD Quality)</span>
+<span class="cp">#define SINE_FREQ       440.0 </span><span class="c1">// Standard A4 note</span>
+<span class="cp">#define I2S_NUM         I2S_NUM_0</span>
 
-void setup() {
-  i2s_config_t i2s_config = {
-    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
-    .sample_rate = SAMPLE_RATE,
-    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
-    .channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT,
-    .communication_format = I2S_COMM_FORMAT_STAND_I2S,
-    .intr_alloc_flags = 0,
-    .dma_buf_count = 8,
-    .dma_buf_len = 64,
-    .use_apll = false
-  };
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">i2s_config_t</span><span class="w"> </span><span class="n">i2s_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i2s_mode_t</span><span class="p">)(</span><span class="n">I2S_MODE_MASTER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">I2S_MODE_TX</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">I2S_MODE_DAC_BUILT_IN</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">sample_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMPLE_RATE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">bits_per_sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I2S_BITS_PER_SAMPLE_16BIT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">channel_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I2S_CHANNEL_FMT_ONLY_RIGHT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">communication_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I2S_COMM_FORMAT_STAND_I2S</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">intr_alloc_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dma_buf_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dma_buf_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">use_apll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">  </span><span class="p">};</span>
 
-  i2s_driver_install(I2S_NUM, &amp;i2s_config, 0, NULL);
-  i2s_set_dac_mode(I2S_DAC_CHANNEL_BOTH_EN); // Enables GPIO25 and 26
-}
+<span class="w">  </span><span class="n">i2s_driver_install</span><span class="p">(</span><span class="n">I2S_NUM</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i2s_config</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">  </span><span class="n">i2s_set_dac_mode</span><span class="p">(</span><span class="n">I2S_DAC_CHANNEL_BOTH_EN</span><span class="p">);</span><span class="w"> </span><span class="c1">// Enables GPIO25 and 26</span>
+<span class="p">}</span>
 
-void loop() {
-  static float phase = 0;
-  uint16_t sample;
-  size_t bytes_written;
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">sample</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes_written</span><span class="p">;</span>
 
-  // Generate 1 sample of sine wave
-  float val = sin(phase);
-  sample = (uint16_t)((val + 1.0) * 127); // Scale -1.0..1.0 to 0..254
-  sample &lt;&lt;= 8; // I2S DAC expects high byte
+<span class="w">  </span><span class="c1">// Generate 1 sample of sine wave</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">phase</span><span class="p">);</span>
+<span class="w">  </span><span class="n">sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)((</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">127</span><span class="p">);</span><span class="w"> </span><span class="c1">// Scale -1.0..1.0 to 0..254</span>
+<span class="w">  </span><span class="n">sample</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="c1">// I2S DAC expects high byte</span>
 
-  i2s_write(I2S_NUM, &amp;sample, sizeof(sample), &amp;bytes_written, portMAX_DELAY);
+<span class="w">  </span><span class="n">i2s_write</span><span class="p">(</span><span class="n">I2S_NUM</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sample</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">sample</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytes_written</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span>
 
-  phase += 2 * PI * SINE_FREQ / SAMPLE_RATE;
-  if (phase &gt;= 2 * PI) phase -= 2 * PI;
-}
-</code></pre>
+<span class="w">  </span><span class="n">phase</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">SINE_FREQ</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">SAMPLE_RATE</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="p">)</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PI</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <hr />
 <h3 id="the-high-speed-sampler-receiver">The High-Speed Sampler (Receiver)</h3>
 <p>The receiver uses I2S to read from the ADC. This is much faster than <code>analogRead()</code>.</p>
-<pre><code class="language-c++">#include &quot;driver/i2s.h&quot;
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/i2s.h"</span>
 
-#define SAMPLE_RATE 44100
-#define I2S_NUM     I2S_NUM_0
+<span class="cp">#define SAMPLE_RATE 44100</span>
+<span class="cp">#define I2S_NUM     I2S_NUM_0</span>
 
-void setup() {
-  Serial.begin(115200);
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
 
-  i2s_config_t i2s_config = {
-    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN),
-    .sample_rate = SAMPLE_RATE,
-    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
-    .channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT,
-    .communication_format = I2S_COMM_FORMAT_STAND_I2S,
-    .intr_alloc_flags = 0,
-    .dma_buf_count = 8,
-    .dma_buf_len = 64,
-    .use_apll = false
-  };
+<span class="w">  </span><span class="n">i2s_config_t</span><span class="w"> </span><span class="n">i2s_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i2s_mode_t</span><span class="p">)(</span><span class="n">I2S_MODE_MASTER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">I2S_MODE_RX</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">I2S_MODE_ADC_BUILT_IN</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">sample_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMPLE_RATE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">bits_per_sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I2S_BITS_PER_SAMPLE_16BIT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">channel_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I2S_CHANNEL_FMT_ONLY_RIGHT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">communication_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I2S_COMM_FORMAT_STAND_I2S</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">intr_alloc_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dma_buf_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dma_buf_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">use_apll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">  </span><span class="p">};</span>
 
-  i2s_driver_install(I2S_NUM, &amp;i2s_config, 0, NULL);
-  i2s_set_adc_mode(ADC_UNIT_1, ADC1_CHANNEL_6); // GPIO34
-  i2s_adc_enable(I2S_NUM);
-}
+<span class="w">  </span><span class="n">i2s_driver_install</span><span class="p">(</span><span class="n">I2S_NUM</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i2s_config</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">  </span><span class="n">i2s_set_adc_mode</span><span class="p">(</span><span class="n">ADC_UNIT_1</span><span class="p">,</span><span class="w"> </span><span class="n">ADC1_CHANNEL_6</span><span class="p">);</span><span class="w"> </span><span class="c1">// GPIO34</span>
+<span class="w">  </span><span class="n">i2s_adc_enable</span><span class="p">(</span><span class="n">I2S_NUM</span><span class="p">);</span>
+<span class="p">}</span>
 
-void loop() {
-  uint16_t buffer[64];
-  size_t bytes_read;
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes_read</span><span class="p">;</span>
 
-  // Read a block of samples from the DMA buffer
-  i2s_read(I2S_NUM, &amp;buffer, sizeof(buffer), &amp;bytes_read, portMAX_DELAY);
+<span class="w">  </span><span class="c1">// Read a block of samples from the DMA buffer</span>
+<span class="w">  </span><span class="n">i2s_read</span><span class="p">(</span><span class="n">I2S_NUM</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytes_read</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span>
 
-  // Print just the first sample of each block to Serial  (to avoid flooding)
-  Serial.println(buffer[0] &amp; 0x0FFF); // Mask 12 bits for ADC
-}
-</code></pre>
+<span class="w">  </span><span class="c1">// Print just the first sample of each block to Serial  (to avoid flooding)</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x0FFF</span><span class="p">);</span><span class="w"> </span><span class="c1">// Mask 12 bits for ADC</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="why-this-is-better">Why this is better</h3>
 <ol>
 <li>

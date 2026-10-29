@@ -2058,9 +2058,9 @@ Each object comes with a **design question**, e.g. *Noise Meter:* should a share
 <hr />
 <h2 id="32-simulating-co2-and-noise-with-a-potentiometer">3.2 Simulating CO₂ and Noise with a Potentiometer</h2>
 <p>The kit has <strong>no CO₂ sensor</strong> (DHT22/BME280 measure only temperature &amp; humidity) and <strong>no microphone</strong> → the Core Kit <strong>potentiometer</strong> plays the environment ("Wizard-of-Oz" sensor).</p>
-<pre><code class="language-cpp">int readCo2()        { return map(analogRead(POT_PIN), 0, 4095, 400, 2000); } // ppm
-int readNoiseLevel() { return map(analogRead(POT_PIN), 0, 4095, 0, 100);    } // 0–100
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">readCo2</span><span class="p">()</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">POT_PIN</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4095</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// ppm</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">readNoiseLevel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">POT_PIN</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4095</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// 0–100</span>
+</code></pre></div>
 <ul>
 <li><strong>The sensor is not the design:</strong> the <em>behaviour</em> when the room gets stuffy or loud is.</li>
 <li><strong>Repeatable scenarios:</strong> stage "the room fills up, then someone opens the window" in seconds → essential for <strong>validation</strong>.</li>
@@ -2233,25 +2233,24 @@ Goal $\rightarrow$ Concepts $\rightarrow$ Activities $\rightarrow$ **Design Refl
 </ul>
 <p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#quick-overview-of-more-advanced-way-to-interact-with-sensors">More advanced sensors</a> · <a href="https://andreavitaletti.github.io/Iot_new/os/">OS is better</a></p>
 <hr />
-<pre><code class="language-c++">for (int b = 0; b &lt;= 255; b++) {   // fade up
-  analogWrite(LAMP_PIN, b);
-  delay(8);                          // 256 × 8 ms ≈ 2 s of blindness
-}
-</code></pre>
-<pre><code class="language-c++">unsigned long lastToggleAt = 0;
-const unsigned long INTERVAL_MS = 500;
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// fade up</span>
+<span class="w">  </span><span class="n">analogWrite</span><span class="p">(</span><span class="n">LAMP_PIN</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span><span class="w">                          </span><span class="c1">// 256 × 8 ms ≈ 2 s of blindness</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">lastToggleAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">INTERVAL_MS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
 
-void loop() {
-  unsigned long now = millis();
-  if (now - lastToggleAt &gt;= INTERVAL_MS) {   // has the interval elapsed?
-    lastToggleAt = now;
-    ledOn = !ledOn;
-    digitalWrite(LED_PIN, ledOn);
-  }
-  // ...everything else (button, pot) runs on every pass, thousands of times per second
-}
-
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastToggleAt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">INTERVAL_MS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// has the interval elapsed?</span>
+<span class="w">    </span><span class="n">lastToggleAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ledOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">ledOn</span><span class="p">;</span>
+<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_PIN</span><span class="p">,</span><span class="w"> </span><span class="n">ledOn</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// ...everything else (button, pot) runs on every pass, thousands of times per second</span>
+<span class="p">}</span>
+</code></pre></div>
 <hr />
 <!-- _class: lead -->
 
@@ -2290,29 +2289,29 @@ void loop() {
 <p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#its-time-to-be-connected-by-mqtt">Connected by MQTT — Wokwi example</a></p>
 <hr />
 <h2 id="ex-4-code-skeleton">Ex 4 — Code Skeleton</h2>
-<pre><code class="language-c++">#include &lt;WiFi.h&gt;
-#include &lt;PubSubClient.h&gt;
-#include &quot;secrets.h&quot;                         // WIFI_SSID, WIFI_PASS
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;WiFi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;PubSubClient.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"secrets.h"</span><span class="w">                         </span><span class="c1">// WIFI_SSID, WIFI_PASS</span>
 
-const String ROOT = &quot;iotpd/studio/airmonitor/&quot;;
-WiFiClient net;  PubSubClient mqtt(net);
+<span class="k">const</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ROOT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"iotpd/studio/airmonitor/"</span><span class="p">;</span>
+<span class="n">WiFiClient</span><span class="w"> </span><span class="n">net</span><span class="p">;</span><span class="w">  </span><span class="n">PubSubClient</span><span class="w"> </span><span class="nf">mqtt</span><span class="p">(</span><span class="n">net</span><span class="p">);</span>
 
-void setup() {
-  WiFi.begin(WIFI_SSID, WIFI_PASS);
-  while (WiFi.status() != WL_CONNECTED) delay(500);
-  mqtt.setServer(&quot;test.mosquitto.org&quot;, 1883);
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">WIFI_SSID</span><span class="p">,</span><span class="w"> </span><span class="n">WIFI_PASS</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">WL_CONNECTED</span><span class="p">)</span><span class="w"> </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">  </span><span class="n">mqtt</span><span class="p">.</span><span class="n">setServer</span><span class="p">(</span><span class="s">"test.mosquitto.org"</span><span class="p">,</span><span class="w"> </span><span class="mi">1883</span><span class="p">);</span>
+<span class="p">}</span>
 
-void loop() {
-  if (!mqtt.connected()) connectMqtt();      // unique client ID per board
-  mqtt.loop();                               // never block it with delay()
-  if (millis() - lastRead &gt; 10000) {
-    lastRead = millis();
-    mqtt.publish((ROOT + &quot;temperature&quot;).c_str(), String(readTemperature()).c_str());
-  }
-  updateOutputs();                           // your behaviour from Exercise 3
-}
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mqtt</span><span class="p">.</span><span class="n">connected</span><span class="p">())</span><span class="w"> </span><span class="n">connectMqtt</span><span class="p">();</span><span class="w">      </span><span class="c1">// unique client ID per board</span>
+<span class="w">  </span><span class="n">mqtt</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span><span class="w">                               </span><span class="c1">// never block it with delay()</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastRead</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lastRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span>
+<span class="w">    </span><span class="n">mqtt</span><span class="p">.</span><span class="n">publish</span><span class="p">((</span><span class="n">ROOT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"temperature"</span><span class="p">).</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">readTemperature</span><span class="p">()).</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">updateOutputs</span><span class="p">();</span><span class="w">                           </span><span class="c1">// your behaviour from Exercise 3</span>
+<span class="p">}</span>
+</code></pre></div>
 <hr />
 <h2 id="ex-5-remote-control-commands-state-the-phone">Ex 5 — Remote Control: Commands, State &amp; the Phone</h2>
 <ul>

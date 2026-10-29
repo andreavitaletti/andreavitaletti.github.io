@@ -1752,20 +1752,18 @@ Many devices create an open Access Point (AP) to take credentials. If an attacke
 <p>Even with encryption, a physical attacker can connect a debugger (JTAG) to the pins and "step through" your code while it's running to see the decrypted data in RAM. You must burn eFuses to permanently disable JTAG and the UART ROM Download mode. Once you do this, the "debug" doors are welded shut.</p>
 <h2 id="firmware-dumping">Firmware dumping</h2>
 <p>Assume you have the followng code upladed on the ESP32</p>
-<pre><code class="language-c">
-const char* key = &quot;SECRET_12345&quot;;
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SECRET_12345"</span><span class="p">;</span>
 
-void setup() {
-  Serial.begin(115200);
-  // If you do not use the constant key the compiler remove it
-  Serial.println(key); // Force the compiler to keep the string
-}
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// If you do not use the constant key the compiler remove it</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">key</span><span class="p">);</span><span class="w"> </span><span class="c1">// Force the compiler to keep the string</span>
+<span class="p">}</span>
 
-void loop() {
-  // Key is just sitting in memory
-}
-
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Key is just sitting in memory</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="extracting-the-firmware-dumping">Extracting the Firmware (Dumping)</h3>
 <p>To get the data off the chip, you use the 'esptool.py' utility, which is the same tool Platformi or the Arduino IDE uses to upload code. Instead of writing, we will read.</p>
 <ul>
