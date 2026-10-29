@@ -338,15 +338,17 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
 #### Exercise 4 — Going online
 
 - **Goal:** Put the object on the network and let it "speak".
-- **New concepts:** Wi-Fi connection, the **broker** as a post office, **publish/subscribe**, **topics** (hierarchical names like `iotpd/studio/lamp/brightness`) and **payloads** (the content, here plain text), the `PubSubClient` library, **client ID**, `mqtt.loop()`. Watching the network with **MQTTX** and the wildcard `#`.
-- **Tools:** Wokwi and Arduino IDE 2 for the code, MQTTX to watch.
+- **New concepts:** Wi-Fi connection, [MQTT](https://andreavitaletti.github.io/Iot_new/simulation/#mqtt), the **broker** as a post office, **publish/subscribe**, **topics** (hierarchical names like `iotpd/studio/lamp/brightness`) and **payloads** (the content, here plain text), the `PubSubClient` library. Watching the network with **MQTTX** and the wildcard `#`.
+- **Tools:** Wokwi and Arduino IDE 2 for the code, [MQTTX](https://mqttx.app/downloads) to watch. [Wokwi example on MQTT](https://wokwi.com/projects/367405831605855233)
 - **Activities:**
   1. In MQTTX, connect to the class broker and subscribe to `iotpd/studio/#`. Keep this window open for the whole phase: it is your "X-ray" of the studio.
   2. Open the instructor's MQTT template in Wokwi. Add the functions from Exercise 3 and publish the sensor readings of your object under `iotpd/studio/<object>/...` (e.g. `iotpd/studio/airmonitor/temperature`). Watch them appear in MQTTX.
   3. Move the same sketch to the real board with the Arduino IDE (change only the Wi-Fi credentials in `secrets.h`).
   4. Look at the MQTTX window on the projector: the whole class is now online, and everybody can see everybody's messages.
 - **Code skeleton:**
+
   ```cpp
+
   #include <WiFi.h>
   #include <PubSubClient.h>
   #include "secrets.h"                 // WIFI_SSID, WIFI_PASS ("Wokwi-GUEST", "" in Wokwi)
@@ -388,6 +390,7 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
     updateOutputs();                   // your behaviour from Exercise 3
   }
   ```
+
 - **Design reflection:** Your data is now visible to others — on a public broker, to *anyone in the world* who subscribes to `#`. What does that imply for privacy? What should an object send over the network, and what should it keep to itself?
 - **Validation:** Validate connectivity and data privacy: measure with MQTTX the delay between a physical change (e.g. covering the LDR) and the arrival of the message, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced by simply listening to your topics.
 - **Reference:** [MQTT](../Iot_new/simulation.md#mqtt) · [Connected by MQTT (Wokwi example)](../Iot_new/simulation.md#its-time-to-be-connected-by-mqtt) · [Wireless connectivity](../Iot_new/wireless.md)
@@ -437,7 +440,7 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
   - **Publish policies:** *on change* (with a threshold) versus *periodically* — how often the object talks, and why it matters for energy ([duty cycle](../Iot_new/energy.md#duty-cycle)), data and clarity. **QoS** levels 0 and 1 (fire-and-forget versus "at least once").
   - **Last Will and Testament (LWT):** when connecting, the object leaves a "will" with the broker (`<object>/status` → `offline`, retained); if the object disappears, the broker publishes it. On connection the object publishes `online` itself. What the object shows to the user while it is connecting or offline, and non-blocking reconnection.
   - **Security:** Wi-Fi passwords and access tokens live in `secrets.h` and are never shared; a public broker has no access control (anyone can read and write), which is why real products use authentication and **TLS** (port 8883).
-  - **ThingsBoard**: when the object must serve people who are not its programmers. A **device** with its **access token**, sending **telemetry** as JSON on `v1/devices/me/telemetry`; a **dashboard** designed for a specific user; **sharing** a dashboard (public link or customer user).
+  - **[ThingsBoard](https://thingsboard.io/)**: when the object must serve people who are not its programmers. A **device** with its **access token**, sending **telemetry** as JSON on `v1/devices/me/telemetry`; a **dashboard** designed for a specific user; **sharing** a dashboard (public link or customer user).
 - **Tools:** Arduino IDE 2, MQTTX, ThingsBoard (`demo.thingsboard.io`).
 - **Activities:**
   1. Set a sensible publish policy for each value and justify it (e.g. temperature on change with a 0.5 °C threshold; light every 60 s).
