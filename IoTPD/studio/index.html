@@ -1709,10 +1709,11 @@
 <ul>
 <li>uses only the <strong>Core Kit</strong> (button, potentiometer, LEDs) plus <strong>one or two Specialized Project Modules</strong> (<a href="../intro/#42-specialized-project-modules-introduced-from-exercise-3">§4.2</a>);</li>
 <li>has at least <strong>three states</strong>, ready for the state machine of <strong>Exercise 3</strong>;</li>
-<li><strong>produces</strong> at least one variable from the shared <strong>variable contract</strong> (<a href="../intro/#52-shared-conventions-the-variable-contract">§5.2</a>) and <strong>consumes</strong> at least one produced by another object, so that from Exercise 7 every object has someone to talk to;</li>
+<li><strong>publishes</strong> at least one topic of the shared <strong>topic contract</strong> (<a href="../intro/#52-shared-conventions-the-topic-contract">§5.2</a>) and <strong>subscribes</strong> to at least one published by another object, so that from Exercise 7 every object has someone to talk to;</li>
 <li>comes with a <strong>design question</strong> to drive the design reflections.</li>
 </ul>
-<p>The descriptions are starting points, not specifications. Groups are expected to change states, outputs and behaviours, as long as they keep the variables of the contract.</p>
+<p>Technical background for the sensors, the network and the backend is in the <a href="../../Iot_new/">IoT course notes</a>, e.g. <a href="../../Iot_new/simulation/">Simulating a node</a>, <a href="../../Iot_new/simulation/#mqtt">MQTT</a> and <a href="../../Iot_new/backend/">ThingsBoard</a>.</p>
+<p>The descriptions are starting points, not specifications. Groups are expected to change states, outputs and behaviours, as long as they keep the topics of the contract.</p>
 <hr />
 <h2 id="overview">Overview</h2>
 <table>
@@ -1722,8 +1723,8 @@
 <th>Object</th>
 <th>Core Kit use</th>
 <th>Specialized module(s)</th>
-<th>Writes</th>
-<th>Reads</th>
+<th>Publishes</th>
+<th>Subscribes to</th>
 </tr>
 </thead>
 <tbody>
@@ -1732,7 +1733,7 @@
 <td><a href="#1-focus-lamp">Focus Lamp</a></td>
 <td>Button, pot, PWM LED</td>
 <td>LDR or PIR</td>
-<td><code>lampMode</code></td>
+<td><code>lamp/mode</code></td>
 <td><code>studioScene</code>, <code>co2</code></td>
 </tr>
 <tr>
@@ -1740,7 +1741,7 @@
 <td><a href="#2-focus-totem">Focus Totem</a></td>
 <td>Button, pot</td>
 <td>NeoPixel ring</td>
-<td><code>totemMode</code></td>
+<td><code>totem/mode</code></td>
 <td><code>studioScene</code>, <code>noiseLevel</code></td>
 </tr>
 <tr>
@@ -1764,7 +1765,7 @@
 <td><a href="#5-plant-pot">Plant Pot</a></td>
 <td>Pot, PWM LED</td>
 <td>DHT22 (+ soil probe) or servo</td>
-<td><code>plantMode</code></td>
+<td><code>plant/mode</code></td>
 <td><code>studioScene</code></td>
 </tr>
 <tr>
@@ -1780,7 +1781,7 @@
 <td><a href="#7-meeting-availability-gauge">Meeting / Availability Gauge</a></td>
 <td>Button, pot</td>
 <td>Servo</td>
-<td><code>meetingMode</code></td>
+<td><code>meeting/mode</code></td>
 <td><code>studioScene</code></td>
 </tr>
 <tr>
@@ -1788,12 +1789,12 @@
 <td><a href="#8-coffee-corner-counter">Coffee Corner Counter</a></td>
 <td>Button, LED</td>
 <td>NeoPixel ring or buzzer</td>
-<td><code>coffeeCount</code></td>
-<td><code>roomOccupied</code>, <code>totemMode</code></td>
+<td><code>coffee/count</code></td>
+<td><code>roomOccupied</code>, <code>totem/mode</code></td>
 </tr>
 </tbody>
 </table>
-<p>Every object also writes its own <code>&lt;object&gt;Heartbeat</code> (Exercise 8).</p>
+<p>Topics are written without the class prefix: <code>co2</code> means <code>iotpd/studio/co2</code>, <code>lamp/mode</code> means <code>iotpd/studio/lamp/mode</code> (see the <a href="../intro/#52-shared-conventions-the-topic-contract">topic contract</a>). Every object also publishes its own <code>&lt;object&gt;/status</code> (online/offline, with Last Will, Exercise 6) and <code>&lt;object&gt;/heartbeat</code> (Exercise 8).</p>
 <hr />
 <h2 id="1-focus-lamp">1. Focus Lamp</h2>
 <p><em>A desk lamp that shows when you are concentrating.</em></p>
@@ -1806,8 +1807,8 @@
 <li><code>DO_NOT_DISTURB</code> — slow "breathing" pulse; returns to <code>FOCUS</code> after a timeout.</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>lampMode</code>.</li>
-<li><strong>Reads:</strong> <code>studioScene</code> (<em>Presentation</em> → dim), <code>co2</code> (a short flicker suggests opening the window).</li>
+<li><strong>Publishes:</strong> <code>lamp/mode</code> (<code>off</code> · <code>focus</code> · <code>dnd</code>).</li>
+<li><strong>Subscribes to:</strong> <code>studioScene</code> (<code>presentation</code> → dim), <code>co2</code> (a short flicker suggests opening the window).</li>
 <li><strong>Design question:</strong> how do you signal "do not disturb me" to others without disturbing <em>yourself</em>?</li>
 </ul>
 <h2 id="2-focus-totem">2. Focus Totem</h2>
@@ -1821,8 +1822,8 @@
 <li><code>BREAK_SUGGESTED</code> — amber pulse when the session ends.</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>totemMode</code>.</li>
-<li><strong>Reads:</strong> <code>studioScene</code> (<em>Focus</em> → every totem turns red; <em>Presentation</em> → blue), <code>noiseLevel</code>.</li>
+<li><strong>Publishes:</strong> <code>totem/mode</code> (<code>available</code> · <code>busy</code> · <code>break</code>).</li>
+<li><strong>Subscribes to:</strong> <code>studioScene</code> (<code>focus</code> → every totem turns red; <code>presentation</code> → blue), <code>noiseLevel</code>.</li>
 <li><strong>Design question:</strong> a light seen from across the room versus a light seen from your own seat — who is the totem for?</li>
 </ul>
 <h2 id="3-air-quality-window-monitor">3. Air Quality / Window Monitor</h2>
@@ -1836,8 +1837,8 @@
 <li><code>OPEN_WINDOW</code> — fast blink and a short chirp (e.g. <code>co2</code> &gt; 1400 ppm); the button acknowledges and starts a cool-down period.</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>co2</code> (plus temperature and humidity for the object's own dashboard).</li>
-<li><strong>Reads:</strong> <code>roomOccupied</code> (no alerts in an empty room).</li>
+<li><strong>Publishes:</strong> <code>co2</code> (plus <code>airmonitor/temperature</code> and <code>airmonitor/humidity</code> for the object's own dashboard).</li>
+<li><strong>Subscribes to:</strong> <code>roomOccupied</code> (no alerts in an empty room).</li>
 <li><strong>Design question:</strong> how many alerts before people start ignoring them (<em>alarm fatigue</em>)?</li>
 </ul>
 <h2 id="4-door-presence-badge">4. Door / Presence Badge</h2>
@@ -1851,8 +1852,8 @@
 <li><code>OCCUPIED</code> — returns to <code>EMPTY</code> after N minutes without motion.</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>someoneAtDoor</code>, <code>roomOccupied</code>.</li>
-<li><strong>Reads:</strong> <code>studioScene</code> (<em>Closed</em> → "come back later" signal; <em>Presentation</em> → silent).</li>
+<li><strong>Publishes:</strong> <code>someoneAtDoor</code> (event, not retained), <code>roomOccupied</code> (retained).</li>
+<li><strong>Subscribes to:</strong> <code>studioScene</code> (<code>closed</code> → "come back later" signal; <code>presentation</code> → silent).</li>
 <li><strong>Design question:</strong> where is the line between a polite greeting and surveillance?</li>
 </ul>
 <h2 id="5-plant-pot">5. Plant Pot</h2>
@@ -1866,8 +1867,8 @@
 <li><code>CRITICAL</code> — leaf fully down, LED pulses.</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>plantMode</code> (and soil moisture for its own dashboard).</li>
-<li><strong>Reads:</strong> <code>studioScene</code> (<em>Closed</em> → no alerts at night).</li>
+<li><strong>Publishes:</strong> <code>plant/mode</code> (<code>happy</code> · <code>thirsty</code> · <code>critical</code>) and <code>plant/soilMoisture</code> for its own dashboard.</li>
+<li><strong>Subscribes to:</strong> <code>studioScene</code> (<code>closed</code> → no alerts at night).</li>
 <li><strong>Design question:</strong> expressive anthropomorphism versus plain information — which one makes people actually water the plant?</li>
 </ul>
 <h2 id="6-noise-meter-library-mode-gauge">6. Noise Meter / "Library Mode" Gauge</h2>
@@ -1878,11 +1879,11 @@
 <li><strong>States (Ex 3):</strong><ul>
 <li><code>QUIET</code> — green.</li>
 <li><code>LIVELY</code> — yellow.</li>
-<li><code>TOO_LOUD</code> — red and a gentle needle wave. Use <strong>hysteresis</strong> (different thresholds to enter and leave a state) so the gauge does not flicker at the boundary.</li>
+<li><code>TOO_LOUD</code> — red and a gentle needle wave. Use <strong>hysteresis</strong> (different thresholds to enter and leave a state) so the gauge does not flicker at the boundary; smoothing the signal first helps too (see <a href="../../Iot_new/filters/">Filters</a>).</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>noiseLevel</code> (0–100).</li>
-<li><strong>Reads:</strong> <code>studioScene</code> (<em>Focus</em> → lower thresholds).</li>
+<li><strong>Publishes:</strong> <code>noiseLevel</code> (0–100).</li>
+<li><strong>Subscribes to:</strong> <code>studioScene</code> (<code>focus</code> → lower thresholds).</li>
 <li><strong>Design question:</strong> should a shared object judge people's behaviour? How do you avoid it feeling like policing?</li>
 </ul>
 <h2 id="7-meeting-availability-gauge">7. Meeting / Availability Gauge</h2>
@@ -1896,8 +1897,8 @@
 <li><code>ENDING_SOON</code> — needle wiggles during the last 5 minutes, then back to <code>FREE</code>.</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>meetingMode</code>.</li>
-<li><strong>Reads:</strong> <code>studioScene</code> (<em>Presentation</em> → automatically <code>IN_USE</code>).</li>
+<li><strong>Publishes:</strong> <code>meeting/mode</code> (<code>free</code> · <code>inUse</code> · <code>endingSoon</code>).</li>
+<li><strong>Subscribes to:</strong> <code>studioScene</code> (<code>presentation</code> → automatically <code>IN_USE</code>).</li>
 <li><strong>Design question:</strong> physical motion versus light — which one attracts attention without being annoying?</li>
 </ul>
 <h2 id="8-coffee-corner-counter">8. Coffee Corner Counter</h2>
@@ -1911,22 +1912,22 @@
 <li><code>BREAK_TIME</code> — invites a group break when several people are in the room.</li>
 </ul>
 </li>
-<li><strong>Writes:</strong> <code>coffeeCount</code> (an event counter, useful for the data-driven design exercises 12–13).</li>
-<li><strong>Reads:</strong> <code>roomOccupied</code>, <code>totemMode</code> (no break invitation to people in <code>BUSY</code>).</li>
+<li><strong>Publishes:</strong> <code>coffee/count</code> (an event counter, useful for the data-driven design exercises 11–12).</li>
+<li><strong>Subscribes to:</strong> <code>roomOccupied</code>, <code>totem/mode</code> (no break invitation to people in <code>busy</code>).</li>
 <li><strong>Design question:</strong> what does a number of coffees <em>mean</em> — productivity, stress, or social life?</li>
 </ul>
 <hr />
 <h2 id="simulating-co2-and-noise-with-a-potentiometer">Simulating CO₂ and noise with a potentiometer</h2>
-<p>Two variables of the contract, <code>co2</code> and <code>noiseLevel</code>, need sensors that are <strong>not</strong> in the kit: the DHT22 / BME280 measure temperature and humidity but <strong>not CO₂</strong>, and there is no microphone module. Both are replaced by the <strong>potentiometer</strong> of the Core Kit.</p>
+<p>Two topics of the contract, <code>co2</code> and <code>noiseLevel</code>, need sensors that are <strong>not</strong> in the kit: the DHT22 / BME280 measure temperature and humidity but <strong>not CO₂</strong>, and there is no microphone module. Both are replaced by the <strong>potentiometer</strong> of the Core Kit.</p>
 <p>This is not just a workaround; it is good practice in prototyping:</p>
 <ul>
 <li><strong>The sensor is not the design.</strong> What matters is the <em>behaviour</em> of the object when the air gets stuffy or the room gets loud. A potentiometer is a "Wizard-of-Oz" sensor: by turning the knob you play the role of the environment.</li>
 <li><strong>Scenarios become repeatable.</strong> Real CO₂ takes tens of minutes to rise; real noise is unpredictable. With the knob you can stage a scenario ("the room slowly fills up, then someone opens the window") in a few seconds, as many times as needed for <strong>validation</strong>.</li>
 <li><strong>It works in Wokwi.</strong> Wokwi has a potentiometer but no CO₂ sensor or microphone, so the whole object can be designed and tested in the simulator.</li>
-<li><strong>The rest of the ecosystem cannot tell the difference.</strong> Other objects only see the cloud variable <code>co2</code> or <code>noiseLevel</code>; they do not know (and do not need to know) where the number comes from.</li>
+<li><strong>The rest of the ecosystem cannot tell the difference.</strong> Other objects only see the messages on <code>co2</code> or <code>noiseLevel</code>; they do not know (and do not need to know) where the number comes from.</li>
 </ul>
 <h3 id="how-to-do-it">How to do it</h3>
-<p>Map the raw reading (0–4095) to a realistic range, and keep the mapping inside <strong>one function</strong>. If a real sensor is added later, only that function changes.</p>
+<p>Wire the potentiometer as in <a href="../../Iot_new/simulation/#a-bit-more-interesting-analog-sensor-namely-a-potentiometer">the Wokwi potentiometer example</a>. Map the raw reading (0–4095) to a realistic range, and keep the mapping inside <strong>one function</strong>. If a real sensor is added later, only that function changes.</p>
 <pre><code class="language-cpp">const int POT_PIN = 34;   // ADC-capable pin
 
 // Simulated CO2 sensor: knob fully left = fresh outdoor air, fully right = very stuffy room
@@ -1968,11 +1969,11 @@ int readNoiseLevel() {
 </table>
 <div class="admonition tip">
 <p class="admonition-title">Make the simulation believable</p>
-<p>Real signals are not perfectly still. To make the simulation closer to reality you can add a little random noise (<code>+ random(-20, 20)</code>), or smooth the reading over time so it rises slowly like real CO₂. Both are good exercises in non-blocking timing with <code>millis()</code>.</p>
+<p>Real signals are not perfectly still. To make the simulation closer to reality you can add a little random noise (<code>+ random(-20, 20)</code>), or smooth the reading over time so it rises slowly like real CO₂ (e.g. a <a href="../../Iot_new/filters/#moving-average">moving average</a>). Both are good exercises in non-blocking timing with <code>millis()</code>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Using real sensors (optional)</p>
-<p>Groups who want real measurements can add an <strong>SCD40 / SCD41</strong> (true CO₂, I²C) or an <strong>SGP30 / CCS811</strong> (estimated eCO₂) for the Air Monitor, and an analog microphone module (<strong>MAX4466</strong> or <strong>KY-038</strong>) for the Noise Meter. Thanks to the <code>readCo2()</code> / <code>readNoiseLevel()</code> functions, switching from the potentiometer to the real sensor does not change the rest of the code.</p>
+<p>Groups who want real measurements can add an <strong>SCD40 / SCD41</strong> (true CO₂, I²C) or an <strong>SGP30 / CCS811</strong> (estimated eCO₂) for the Air Monitor, and an analog microphone module (<strong>MAX4466</strong> or <strong>KY-038</strong>) for the Noise Meter. Thanks to the <code>readCo2()</code> / <code>readNoiseLevel()</code> functions, switching from the potentiometer to the real sensor does not change the rest of the code. See <a href="../../Iot_new/simulation/#an-i2c-sensor-the-mpu6050-accelerometer">an I²C sensor example</a> for wiring and libraries, and <a href="../../Iot_new/sample/">Sampling</a> for how often a microphone must be read.</p>
 </div>
 <hr />
 <h2 id="how-the-objects-form-an-ecosystem">How the objects form an ecosystem</h2>
@@ -1980,7 +1981,7 @@ int readNoiseLevel() {
                       │
      ┌────────────────┼──────────────────────────────┐
      ▼                ▼                              ▼
- Focus Lamp      Focus Totem ──totemMode──▶ Coffee Counter
+ Focus Lamp      Focus Totem ──totem/mode─▶ Coffee Counter
      ▲                ▲                              ▲
      │ co2            │ noiseLevel                   │ roomOccupied
      │                │                              │
@@ -1988,7 +1989,8 @@ int readNoiseLevel() {
      ▲                                               │
      └──────────────── roomOccupied ─────────────────┘
 </code></pre>
-<p>The catalogue is designed so that <strong>every object produces a signal that another object consumes</strong>. This keeps the ecosystem exercises (7–10) from being one-directional, and it makes failures interesting: when the Door Badge goes offline, the Air Monitor and the Coffee Counter must decide what to do without <code>roomOccupied</code> (graceful degradation, Exercise 8).</p>
+<p>The catalogue is designed so that <strong>every object produces a signal that another object consumes</strong>. This keeps the ecosystem exercises (7–10) from being one-directional, and it makes failures interesting: when the Door Badge goes offline (its <code>door/status</code> turns <code>offline</code>), the Air Monitor and the Coffee Counter must decide what to do without fresh <code>roomOccupied</code> messages (graceful degradation, Exercise 8).</p>
+<p>All arrows in the diagram are MQTT topics: one object publishes, the others subscribe. See <a href="../../Iot_new/simulation/#mqtt">MQTT</a> and <a href="../../Iot_new/backend/#take-advantage-of-an-ecosystem-of-objects">devices talking to each other via publish/subscribe</a>.</p>
 
 
 

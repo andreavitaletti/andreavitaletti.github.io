@@ -1375,10 +1375,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-prototyping-strategy-three-workspaces" class="md-nav__link">
+  <a href="#2-prototyping-strategy-four-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Prototyping Strategy: Three Workspaces
+        2. Prototyping Strategy: Four Tools
       
     </span>
   </a>
@@ -1586,10 +1586,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-mental-model-of-arduino-cloud" class="md-nav__link">
+  <a href="#the-mental-model-of-mqtt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Mental Model of Arduino Cloud
+        The Mental Model of MQTT
       
     </span>
   </a>
@@ -1597,10 +1597,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ex-4-going-online-device-thing-first-dashboard" class="md-nav__link">
+  <a href="#ex-4-going-online-publish-watch" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ex 4 — Going Online: Device, Thing &amp; First Dashboard
+        Ex 4 — Going Online: Publish &amp; Watch
       
     </span>
   </a>
@@ -1608,10 +1608,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ex-5-remote-control-mobile-app-consistency" class="md-nav__link">
+  <a href="#ex-4-code-skeleton" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ex 5 — Remote Control: Mobile App &amp; Consistency
+        Ex 4 — Code Skeleton
       
     </span>
   </a>
@@ -1619,10 +1619,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ex-6-the-object-as-a-service-policies-resilience" class="md-nav__link">
+  <a href="#ex-5-remote-control-commands-state-the-phone" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ex 6 — The Object as a Service: Policies &amp; Resilience
+        Ex 5 — Remote Control: Commands, State &amp; the Phone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ex-6-the-object-as-a-service-policies-resilience-thingsboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ex 6 — The Object as a Service: Policies, Resilience &amp; ThingsBoard
       
     </span>
   </a>
@@ -1658,10 +1669,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-shared-variable-contract" class="md-nav__link">
+  <a href="#the-shared-topic-contract" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Shared Variable Contract
+        The Shared Topic Contract
       
     </span>
   </a>
@@ -1669,10 +1680,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ex-7-objects-talking-to-objects-variable-sync" class="md-nav__link">
+  <a href="#ex-7-objects-talking-to-objects-shared-topics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ex 7 — Objects Talking to Objects: Variable Sync
+        Ex 7 — Objects Talking to Objects: Shared Topics
       
     </span>
   </a>
@@ -1680,10 +1691,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ex-8-who-is-there-heartbeats-resilience" class="md-nav__link">
+  <a href="#ex-8-who-is-there-status-heartbeats-resilience" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ex 8 — Who is There? Heartbeats &amp; Resilience
+        Ex 8 — Who is There? Status, Heartbeats &amp; Resilience
       
     </span>
   </a>
@@ -1879,11 +1890,11 @@ Andrea Vitaletti — Sapienza University of Rome</p>
 
 <hr />
 <h2 id="1-course-purpose-vision">1. Course Purpose &amp; Vision</h2>
-<p>The course introduces product design students to physical computing and IoT using <strong>ESP32</strong> and <strong>Arduino Cloud</strong>, driven by two central goals:</p>
+<p>The course introduces product design students to physical computing and IoT using <strong>ESP32</strong> and the open standard <strong>MQTT</strong> (with <strong>ThingsBoard</strong> when needed), driven by two central goals:</p>
 <div class="box">
 
 1. **From Smart Objects to Ecosystems:**  
-   Value emerges from the *relationships* between objects, users, and cloud services — not from isolated gadgets.
+   Value emerges from the *relationships* between objects, users, and services — not from isolated gadgets.
 2. **From Data to Better Products:**  
    Sensor data collected in the field informs iterative redesign, maintenance, and user understanding (closing the loop).
 
@@ -1892,10 +1903,10 @@ Andrea Vitaletti — Sapienza University of Rome</p>
 <ul>
 <li><strong>Target Audience:</strong> Designers with no prior coding experience.</li>
 <li><strong>Pedagogy:</strong> Step-by-step progression; every technical step ends with a <strong>Design Reflection</strong> and an empirical <strong>Validation</strong>.</li>
+<li><strong>Going deeper:</strong> technical background in the <a href="https://andreavitaletti.github.io/Iot_new/">IoT course notes</a>.</li>
 </ul>
 <hr />
-<h2 id="2-prototyping-strategy-three-workspaces">2. Prototyping Strategy: Three Workspaces</h2>
-<p>To minimize tool friction while respecting cloud quotas on the free tier, students use three complementary workspaces:</p>
+<h2 id="2-prototyping-strategy-four-tools">2. Prototyping Strategy: Four Tools</h2>
 <table>
 <thead>
 <tr>
@@ -1908,26 +1919,32 @@ Andrea Vitaletti — Sapienza University of Rome</p>
 <tr>
 <td><strong><a href="https://wokwi.com/">Wokwi</a></strong></td>
 <td>Browser simulator</td>
-<td>Sketching behavior and wiring with zero risk and instant feedback</td>
+<td>Sketching behaviour and wiring with zero risk — <strong>including Wi-Fi &amp; MQTT</strong></td>
 </tr>
 <tr>
 <td><strong><a href="https://www.arduino.cc/en/software">Arduino IDE 2</a></strong></td>
 <td>Desktop environment</td>
-<td>Unlimited local uploads, physical testing, Serial Monitor/Plotter</td>
+<td>Unlimited uploads, physical testing, Serial Monitor/Plotter</td>
 </tr>
 <tr>
-<td><strong><a href="https://cloud.arduino.cc">Arduino Cloud</a></strong></td>
-<td>Connected IoT platform</td>
-<td>Cloud variables, mobile control, shared dashboards, data storage</td>
+<td><strong><a href="https://mqttx.app/">MQTTX</a></strong></td>
+<td>MQTT client (desktop / web)</td>
+<td>X-ray of the studio: see every message, impersonate other objects</td>
+</tr>
+<tr>
+<td><strong><a href="https://demo.thingsboard.io/">ThingsBoard</a></strong></td>
+<td>IoT platform (demo server)</td>
+<td><em>Only when necessary:</em> dashboards for others, history, alarms, settings, OTA</td>
 </tr>
 </tbody>
 </table>
 <div class="highlight">
 
-**The Golden Rule:** Try and debug cheaply in **Wokwi** and the **IDE** first; use **Arduino Cloud** only for the connected milestone.
+**The Golden Rule:** Sketch & simulate in **Wokwi** → try on the real board with the **IDE** → use **ThingsBoard** only when the object must serve people who are not its programmers.
 
 </div>
 
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/">Simulating a node</a> · <a href="https://andreavitaletti.github.io/Iot_new/real/">A real node</a></p>
 <hr />
 <h2 id="3-the-running-scenario-the-connected-studio">3. The Running Scenario: "The Connected Studio"</h2>
 <p>All exercises contribute to a shared, living scenario: bringing a <strong>co-working studio</strong> to life.</p>
@@ -1936,8 +1953,8 @@ Andrea Vitaletti — Sapienza University of Rome</p>
 <li><em>Focus Lamp</em>, <em>Focus Totem</em>, <em>Air Quality Monitor</em>, <em>Door / Presence Badge</em>, <em>Plant Pot</em>, <em>Noise Meter</em>, <em>Meeting Gauge</em>, or <em>Coffee Counter</em>.</li>
 <li><strong>Progressive Evolution:</strong></li>
 <li><strong>Phase A:</strong> The object acts completely alone (<strong>Smart Object</strong>).</li>
-<li><strong>Phase B:</strong> The object connects to the network and dashboards (<strong>Connected Object</strong>).</li>
-<li><strong>Phase C:</strong> Objects cooperate directly through shared variables (<strong>Ecosystem</strong>).</li>
+<li><strong>Phase B:</strong> The object talks MQTT and gets a dashboard (<strong>Connected Object</strong>).</li>
+<li><strong>Phase C:</strong> Objects cooperate directly through shared topics (<strong>Ecosystem</strong>).</li>
 <li><strong>Phase D:</strong> Objects are deployed, gathering real telemetry to justify redesign (<strong>Data-Driven Design</strong>).</li>
 </ul>
 <hr />
@@ -1948,8 +1965,8 @@ Andrea Vitaletti — Sapienza University of Rome</p>
 <th>Object</th>
 <th>Module(s)</th>
 <th>States (Ex 3)</th>
-<th>Writes</th>
-<th>Reads</th>
+<th>Publishes</th>
+<th>Subscribes to</th>
 </tr>
 </thead>
 <tbody>
@@ -1957,14 +1974,14 @@ Andrea Vitaletti — Sapienza University of Rome</p>
 <td><strong>Focus Lamp</strong></td>
 <td>LDR or PIR</td>
 <td><code>OFF</code> → <code>FOCUS</code> → <code>DO_NOT_DISTURB</code></td>
-<td><code>lampMode</code></td>
+<td><code>lamp/mode</code></td>
 <td><code>studioScene</code>, <code>co2</code></td>
 </tr>
 <tr>
 <td><strong>Focus Totem</strong></td>
 <td>NeoPixel ring</td>
 <td><code>AVAILABLE</code> → <code>BUSY</code> → <code>BREAK_SUGGESTED</code></td>
-<td><code>totemMode</code></td>
+<td><code>totem/mode</code></td>
 <td><code>studioScene</code>, <code>noiseLevel</code></td>
 </tr>
 <tr>
@@ -1985,7 +2002,7 @@ Andrea Vitaletti — Sapienza University of Rome</p>
 </table>
 <div class="box">
 
-Every object uses the **Core Kit** + 1–2 modules, has **≥ 3 states**, and **writes** at least one variable that **another object reads**.
+Every object uses the **Core Kit** + 1–2 modules, has **≥ 3 states**, and **publishes** at least one topic that **another object subscribes to**. Topics are written without the class prefix `iotpd/studio/`.
 
 </div>
 
@@ -1997,8 +2014,8 @@ Every object uses the **Core Kit** + 1–2 modules, has **≥ 3 states**, and **
 <th>Object</th>
 <th>Module(s)</th>
 <th>States (Ex 3)</th>
-<th>Writes</th>
-<th>Reads</th>
+<th>Publishes</th>
+<th>Subscribes to</th>
 </tr>
 </thead>
 <tbody>
@@ -2006,7 +2023,7 @@ Every object uses the **Core Kit** + 1–2 modules, has **≥ 3 states**, and **
 <td><strong>Plant Pot</strong></td>
 <td>DHT22 (+ soil probe) or servo</td>
 <td><code>HAPPY</code> → <code>THIRSTY</code> → <code>CRITICAL</code></td>
-<td><code>plantMode</code></td>
+<td><code>plant/mode</code></td>
 <td><code>studioScene</code></td>
 </tr>
 <tr>
@@ -2020,15 +2037,15 @@ Every object uses the **Core Kit** + 1–2 modules, has **≥ 3 states**, and **
 <td><strong>Meeting Gauge</strong></td>
 <td>Servo</td>
 <td><code>FREE</code> → <code>IN_USE</code> → <code>ENDING_SOON</code></td>
-<td><code>meetingMode</code></td>
+<td><code>meeting/mode</code></td>
 <td><code>studioScene</code></td>
 </tr>
 <tr>
 <td><strong>Coffee Counter</strong></td>
 <td>NeoPixel ring or buzzer</td>
 <td><code>IDLE</code> → <code>BREWING</code> → <code>BREAK_TIME</code></td>
-<td><code>coffeeCount</code></td>
-<td><code>roomOccupied</code>, <code>totemMode</code></td>
+<td><code>coffee/count</code></td>
+<td><code>roomOccupied</code>, <code>totem/mode</code></td>
 </tr>
 </tbody>
 </table>
@@ -2048,7 +2065,7 @@ int readNoiseLevel() { return map(analogRead(POT_PIN), 0, 4095, 0, 100);    } //
 <li><strong>The sensor is not the design:</strong> the <em>behaviour</em> when the room gets stuffy or loud is.</li>
 <li><strong>Repeatable scenarios:</strong> stage "the room fills up, then someone opens the window" in seconds → essential for <strong>validation</strong>.</li>
 <li><strong>Works in Wokwi</strong>, which has no CO₂ sensor or microphone.</li>
-<li><strong>Invisible to the ecosystem:</strong> other objects only see <code>co2</code> / <code>noiseLevel</code>.</li>
+<li><strong>Invisible to the ecosystem:</strong> other objects only see messages on <code>co2</code> / <code>noiseLevel</code>.</li>
 <li><strong>Swap later:</strong> a real SCD40 or MAX4466 only changes <code>readCo2()</code> / <code>readNoiseLevel()</code>.</li>
 </ul>
 <hr />
@@ -2077,11 +2094,11 @@ int readNoiseLevel() { return map(analogRead(POT_PIN), 0, 4095, 0, 100);    } //
 </table>
 <div class="box">
 
-**1:1 Bridge to Arduino Cloud Widgets:**
-- Physical Button $\longleftrightarrow$ Cloud Switch / Push Widget
-- Physical LED $\longleftrightarrow$ Cloud Status Light Widget
-- Physical Potentiometer $\longleftrightarrow$ Cloud Gauge / Percentage Widget
-- Physical PWM Dimmer $\longleftrightarrow$ Cloud Slider / Dimmer Widget
+**1:1 Bridge to Phone Panels & ThingsBoard Widgets:**
+- Physical Button $\longleftrightarrow$ Panel Button / Switch (publishes a command)
+- Physical LED $\longleftrightarrow$ LED / Status Indicator
+- Physical Potentiometer $\longleftrightarrow$ Gauge / Chart
+- Physical PWM Dimmer $\longleftrightarrow$ Slider (publishes a value)
 
 </div>
 
@@ -2125,19 +2142,19 @@ int readNoiseLevel() { return map(analogRead(POT_PIN), 0, 4095, 0, 100);    } //
 <td><strong>Phase B</strong> (Ex 4–6)</td>
 <td><strong>The Connected Object</strong></td>
 <td>What changes when an object is on the network?</td>
-<td>Arduino Cloud</td>
+<td>MQTT, MQTTX, ThingsBoard</td>
 </tr>
 <tr>
 <td><strong>Phase C</strong> (Ex 7–10)</td>
 <td><strong>The Ecosystem</strong></td>
 <td>What emerges when objects cooperate?</td>
-<td>Shared Cloud</td>
+<td>Shared MQTT topics</td>
 </tr>
 <tr>
 <td><strong>Phase D</strong> (Ex 11–14)</td>
 <td><strong>Data-Driven Design</strong></td>
 <td>How can field data improve product and service?</td>
-<td>Cloud, Sheets</td>
+<td>ThingsBoard, Sheets</td>
 </tr>
 <tr>
 <td><strong>Final Project</strong> (Ex 15)</td>
@@ -2169,9 +2186,11 @@ Goal $\rightarrow$ Concepts $\rightarrow$ Activities $\rightarrow$ **Design Refl
 <li>Run Blink in Wokwi, change rhythm, add a second alternating LED.</li>
 <li>Upload sketch to physical ESP32 board.</li>
 <li>Program distinct product "moods" (calm pulse, alarm, heartbeat).</li>
+<li>Install the PubSubClient library and MQTTX for Phase B.</li>
 <li><strong>Design Reflection:</strong> Which blinking patterns are unambiguous to a user without instructions? What differs between simulated and real physical light?</li>
 <li><strong>Validation:</strong> Test the three mood rhythms with a peer without advance explanation. Can the observer immediately identify which is "calm", "alarm", or "heartbeat"?</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#lets-start">Simulating a node</a> · <a href="https://andreavitaletti.github.io/Iot_new/real/#from-wokwi-to-a-real-device">From Wokwi to a real device</a></p>
 <hr />
 <h2 id="ex-1-the-tactile-switch-gpio-input-interaction">Ex 1 — The Tactile Switch: GPIO Input &amp; Interaction</h2>
 <ul>
@@ -2185,6 +2204,7 @@ Goal $\rightarrow$ Concepts $\rightarrow$ Activities $\rightarrow$ **Design Refl
 <li><strong>Design Reflection:</strong> Momentary (doorbell) vs. toggle (table lamp) affordances. How critical is instantaneous visual feedback for user confidence?</li>
 <li><strong>Validation:</strong> Confirm toggle reliability across 20 rapid presses with zero bounce glitches; validate that the physical tactile sensation matches user expectations.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#the-simplest-digital-sensor-namely-a-button">The simplest digital sensor: a button</a></p>
 <hr />
 <h2 id="ex-2-the-continuous-dial-analog-read-pwm">Ex 2 — The Continuous Dial: Analog Read &amp; PWM</h2>
 <ul>
@@ -2198,6 +2218,7 @@ Goal $\rightarrow$ Concepts $\rightarrow$ Activities $\rightarrow$ **Design Refl
 <li><strong>Design Reflection:</strong> When is a continuous dial superior to a discrete button? How do friction, throw, and knob resistance communicate product quality?</li>
 <li><strong>Validation:</strong> Check Serial Plotter for full-range ADC linearity without dead zones; validate with a user if they can dial in a target light level by physical feel alone.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#a-bit-more-interesting-analog-sensor-namely-a-potentiometer">An analog sensor: the potentiometer</a> · <a href="https://andreavitaletti.github.io/Iot_new/sample/">Sampling</a> · <a href="https://andreavitaletti.github.io/Iot_new/filters/">Filters</a></p>
 <hr />
 <h2 id="ex-3-the-isolated-smart-object-state-non-blocking">Ex 3 — The Isolated Smart Object: State &amp; Non-blocking</h2>
 <ul>
@@ -2206,9 +2227,11 @@ Goal $\rightarrow$ Concepts $\rightarrow$ Activities $\rightarrow$ **Design Refl
 <li><strong>Activities:</strong></li>
 <li>Eliminate <code>delay()</code>: replace with non-blocking timestamp arithmetic.</li>
 <li>Optional. Integrate chosen Project Module (LDR, PIR, NeoPixel, Servo, or DHT22).</li>
+<li><strong>Why it matters:</strong> from Ex 4 the object must call <code>mqtt.loop()</code> continuously — a long <code>delay()</code> makes it deaf to the network.</li>
 <li><strong>Design Reflection:</strong> Compile the <strong>Isolation Limitations List</strong>: everything the object <em>cannot</em> do alone (know room occupancy, alert remotely, report wear).</li>
 <li><strong>Validation:</strong> Verify zero input lag during continuous LED fading.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#quick-overview-of-more-advanced-way-to-interact-with-sensors">More advanced sensors</a> · <a href="https://andreavitaletti.github.io/Iot_new/os/">OS is better</a></p>
 <hr />
 <pre><code class="language-c++">for (int b = 0; b &lt;= 255; b++) {   // fade up
   analogWrite(LAMP_PIN, b);
@@ -2234,174 +2257,221 @@ void loop() {
 
 <h1 id="phase-b-the-connected-object">Phase B: The Connected Object</h1>
 <h3 id="exercises-4-6">Exercises 4 – 6</h3>
-<p><em>Putting the object online, binding to cloud variables, and designing remote services</em></p>
+<p><em>Putting the object online with MQTT, remote control, and designing a service</em></p>
 <hr />
-<h2 id="the-mental-model-of-arduino-cloud">The Mental Model of Arduino Cloud</h2>
+<h2 id="the-mental-model-of-mqtt">The Mental Model of MQTT</h2>
 <div class="box">
 
-> **"A cloud variable is a variable that exists in two places at the same time — on the board and in the cloud — and Arduino Cloud keeps them in sync."**
+> **"The broker is a post office with labelled mailboxes (topics). An object *publishes* a message to a topic; every object that has *subscribed* to that topic receives a copy. Publishers and subscribers never need to know each other."**
 
 </div>
 
 <ul>
-<li><strong>Device:</strong> The physical ESP32 registered with Device ID &amp; Secret Key.</li>
-<li><strong>Thing:</strong> The digital twin containing cloud variables and network credentials.</li>
-<li><strong>Cloud Variables:</strong> Defined by name, type, update policy, and permission (<em>Read only</em> for telemetry; <em>Read &amp; Write</em> for remote control).</li>
-<li><strong>Auto-generated Skeleton:</strong> Handles Wi-Fi connection and sync in <code>ArduinoCloud.update()</code>.</li>
+<li><strong>Broker:</strong> a public server, e.g. <code>test.mosquitto.org</code> — no account, no quota, reachable from Wokwi too.</li>
+<li><strong>Topic:</strong> a hierarchical name, e.g. <code>iotpd/studio/lamp/brightness</code>; wildcards <code>+</code> and <code>#</code> to listen to many.</li>
+<li><strong>Payload:</strong> the content — plain text here (<code>180</code>, <code>1</code>, <code>focus</code>), JSON towards ThingsBoard.</li>
+<li><strong>Retained message:</strong> the broker keeps the last value for whoever subscribes later.</li>
+<li><strong>Last Will (LWT):</strong> the broker announces <code>offline</code> on behalf of an object that disappears.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#mqtt">MQTT</a> · <a href="https://andreavitaletti.github.io/Iot_new/wireless/">Wireless connectivity</a></p>
 <hr />
-<h2 id="ex-4-going-online-device-thing-first-dashboard">Ex 4 — Going Online: Device, Thing &amp; First Dashboard</h2>
+<h2 id="ex-4-going-online-publish-watch">Ex 4 — Going Online: Publish &amp; Watch</h2>
 <ul>
-<li><strong>Goal:</strong> Connect the physical prototype to the cloud and stream live sensor data.</li>
-<li><strong>Key Concepts:</strong> Provisioning third-party devices, cloud variables (<em>Read only</em>), <code>thingProperties.h</code>, <code>ArduinoCloud.update()</code>, live dashboard widgets.</li>
+<li><strong>Goal:</strong> Put the object on the network and let it "speak".</li>
+<li><strong>Key Concepts:</strong> Wi-Fi, broker, publish/subscribe, topics &amp; payloads, <code>PubSubClient</code>, unique client ID, <code>mqtt.loop()</code>, MQTTX with <code>iotpd/studio/#</code>.</li>
 <li><strong>Activities:</strong></li>
-<li>Register ESP32 in Arduino Cloud; configure Thing and Wi-Fi credentials.</li>
-<li>Add sensor variables (e.g. <code>light</code>, <code>temperature</code>, <code>status</code>).</li>
-<li>Merge Exercise 3 logic into the cloud sketch and upload.</li>
-<li>Build a live monitoring dashboard with value, gauge, and status widgets.</li>
-<li><strong>Design Reflection:</strong> Your data is now visible to the internet. What are the privacy implications? What should stay local at the edge vs. sent to the cloud?</li>
-<li><strong>Validation:</strong> Measure latency between physical sensor changes and dashboard updates; conduct a peer privacy audit on data visible on screen.</li>
+<li>Subscribe in MQTTX to <code>iotpd/studio/#</code>: your "X-ray" of the studio.</li>
+<li>In Wokwi (<code>Wokwi-GUEST</code>), merge Exercise 3 logic into the MQTT template; publish sensor values under <code>iotpd/studio/&lt;object&gt;/...</code>.</li>
+<li>Move the same sketch to the real board (only <code>secrets.h</code> changes).</li>
+<li>Watch the whole class come online on the projector.</li>
+<li><strong>Design Reflection:</strong> On a public broker your data is visible to <em>anyone in the world</em>. What should an object send, and what should it keep to itself?</li>
+<li><strong>Validation:</strong> Measure latency between a physical change and the message in MQTTX; run a peer privacy audit of what can be deduced by listening to your topics.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/simulation/#its-time-to-be-connected-by-mqtt">Connected by MQTT — Wokwi example</a></p>
 <hr />
-<h2 id="ex-5-remote-control-mobile-app-consistency">Ex 5 — Remote Control: Mobile App &amp; Consistency</h2>
-<ul>
-<li><strong>Goal:</strong> Enable remote actuation while keeping physical and digital controls consistent.</li>
-<li><strong>Key Concepts:</strong> <em>Read &amp; Write</em> variables, <code>onXxxChange()</code> callbacks, control widgets (switches, sliders, color pickers), <strong>Arduino IoT Remote</strong> mobile app.</li>
-<li><strong>Activities:</strong></li>
-<li>Add controllable variables (e.g. <code>brightness</code>, <code>mode</code>, <code>lampColor</code>).</li>
-<li>Implement callbacks to actuate LEDs/servos when cloud values change.</li>
-<li>Synchronize physical inputs: pressing the hardware button updates the cloud.</li>
-<li>Optimize the dashboard layout for mobile smartphones.</li>
-<li><strong>Design Reflection:</strong> The object has two simultaneous interfaces (physical &amp; digital). Who "wins" when both are operated at once? How do you prevent confusion?</li>
-<li><strong>Validation:</strong> Concurrently actuate the physical knob and cloud slider; validate that both converge without feedback loops or desynchronization.</li>
-</ul>
+<h2 id="ex-4-code-skeleton">Ex 4 — Code Skeleton</h2>
+<pre><code class="language-c++">#include &lt;WiFi.h&gt;
+#include &lt;PubSubClient.h&gt;
+#include &quot;secrets.h&quot;                         // WIFI_SSID, WIFI_PASS
+
+const String ROOT = &quot;iotpd/studio/airmonitor/&quot;;
+WiFiClient net;  PubSubClient mqtt(net);
+
+void setup() {
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  while (WiFi.status() != WL_CONNECTED) delay(500);
+  mqtt.setServer(&quot;test.mosquitto.org&quot;, 1883);
+}
+
+void loop() {
+  if (!mqtt.connected()) connectMqtt();      // unique client ID per board
+  mqtt.loop();                               // never block it with delay()
+  if (millis() - lastRead &gt; 10000) {
+    lastRead = millis();
+    mqtt.publish((ROOT + &quot;temperature&quot;).c_str(), String(readTemperature()).c_str());
+  }
+  updateOutputs();                           // your behaviour from Exercise 3
+}
+</code></pre>
 <hr />
-<h2 id="ex-6-the-object-as-a-service-policies-resilience">Ex 6 — The Object as a Service: Policies &amp; Resilience</h2>
+<h2 id="ex-5-remote-control-commands-state-the-phone">Ex 5 — Remote Control: Commands, State &amp; the Phone</h2>
 <ul>
-<li><strong>Goal:</strong> Package the prototype into a reliable, secured, and well-designed service.</li>
-<li><strong>Key Concepts:</strong> Update policies (<em>on change</em> with delta threshold vs. <em>periodic</em>), specialized variable types, connection callbacks, security of secret keys.</li>
+<li><strong>Goal:</strong> Let the network change the object's behaviour, keeping physical and digital controls consistent.</li>
+<li><strong>Key Concepts:</strong> Subscribing, the message callback, <strong>command</strong> topics (<code>lamp/set/brightness</code>) vs. <strong>state</strong> topics (<code>lamp/brightness</code>, retained), phone MQTT panel (e.g. IoT MQTT Panel).</li>
 <li><strong>Activities:</strong></li>
-<li>Tune update policies to minimize energy and cloud traffic.</li>
-<li>Implement offline signaling on the board (e.g. slow pulse while connecting).</li>
-<li>Redesign dashboards specifically tailored to distinct user personas.</li>
-<li>Compile the Cloud sketch locally in Arduino IDE 2 to bypass daily quotas.</li>
-<li><strong>Design Reflection:</strong> Which part is the product: the physical object or the digital service? Sketch the end-to-end service blueprint.</li>
-<li><strong>Validation:</strong> Test dashboard usability with a target persona (under 30s comprehension); disconnect Wi-Fi to validate graceful offline behavior.</li>
+<li>Subscribe to <code>&lt;object&gt;/set/#</code>; test commands by hand from MQTTX.</li>
+<li>After obeying a command, publish the new state (retained).</li>
+<li>Build a phone panel: slider → <code>set/brightness</code>, gauge ← <code>brightness</code>.</li>
+<li>Pressing the hardware button also publishes the new state.</li>
+<li><strong>Design Reflection:</strong> Two interfaces, physical &amp; digital: who "wins"? And on a public broker, anyone can publish on your <code>set/</code> topics — what should your object refuse?</li>
+<li><strong>Validation:</strong> Operate knob and phone slider at the same time; validate that both converge without message loops or desynchronization.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/backend/#how-to-receive-a-command-on-the-node">How to receive a command on the node</a></p>
+<hr />
+<h2 id="ex-6-the-object-as-a-service-policies-resilience-thingsboard">Ex 6 — The Object as a Service: Policies, Resilience &amp; ThingsBoard</h2>
+<ul>
+<li><strong>Goal:</strong> Package the prototype into a reliable, secured, well-designed service.</li>
+<li><strong>Key Concepts:</strong> Publish policies (<em>on change</em> with threshold vs. <em>periodic</em>), QoS 0/1, <strong>Last Will</strong> (<code>&lt;object&gt;/status</code> online/offline), secrets &amp; TLS, <strong>first ThingsBoard device</strong> (access token, <code>v1/devices/me/telemetry</code>) and <strong>dashboard</strong>.</li>
+<li><strong>Activities:</strong></li>
+<li>Tune publish policies to minimize energy and traffic.</li>
+<li>Add LWT; signal "connecting / offline" on the object itself.</li>
+<li>Add a second MQTT connection to <code>demo.thingsboard.io</code> and send the main values.</li>
+<li>Design a ThingsBoard dashboard for a specific persona; share it.</li>
+<li><strong>Design Reflection:</strong> Which part is the product: the object or the service? Why do peers (broker) and people (ThingsBoard) use different channels?</li>
+<li><strong>Validation:</strong> Persona understands the dashboard in &lt; 30 s; with Wi-Fi off, <code>status</code> turns <code>offline</code> and the object keeps its local function.</li>
+</ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/backend/">Backend: ThingsBoard</a> · <a href="https://andreavitaletti.github.io/Iot_new/security/#secure-communication-tlsssl">Secure communication</a></p>
 <hr />
 <!-- _class: lead -->
 
 <h1 id="phase-c-the-ecosystem">Phase C: The Ecosystem</h1>
 <h3 id="exercises-7-10">Exercises 7 – 10</h3>
-<p><em>Loose coupling, variable synchronization, orchestration, and emergent behavior</em></p>
+<p><em>Loose coupling, shared topics, orchestration, and emergent behavior</em></p>
 <hr />
-<h2 id="the-shared-variable-contract">The Shared Variable Contract</h2>
-<p>For objects built by different teams to interoperate, they must share a common schema:</p>
+<h2 id="the-shared-topic-contract">The Shared Topic Contract</h2>
+<p>All topics start with the class prefix <code>iotpd/studio/</code>. Payloads are plain text.</p>
 <table>
 <thead>
 <tr>
-<th>Variable</th>
-<th>Type</th>
-<th>Permission</th>
+<th>Topic</th>
+<th>Payload</th>
+<th>Retained</th>
 <th>Purpose</th>
-<th>Producer</th>
+<th>Publisher</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>studioScene</code></td>
-<td><code>int</code> (0–3)</td>
-<td>Read &amp; Write</td>
-<td>Global room mode (Normal, Focus, Pres., Closed)</td>
-<td>Hub, Scene Switch</td>
+<td><code>normal</code> | <code>focus</code> | <code>presentation</code> | <code>closed</code></td>
+<td>yes</td>
+<td>Global room mode</td>
+<td>Hub, scene panel</td>
 </tr>
 <tr>
 <td><code>someoneAtDoor</code></td>
-<td><code>bool</code></td>
-<td>Read only</td>
-<td>Person arrived at studio entrance</td>
+<td><code>1</code> (event)</td>
+<td>no</td>
+<td>Person arrived at the entrance</td>
 <td>Door Badge</td>
 </tr>
 <tr>
 <td><code>roomOccupied</code></td>
-<td><code>bool</code></td>
-<td>Read only</td>
+<td><code>0</code> | <code>1</code></td>
+<td>yes</td>
 <td>Human presence in room</td>
-<td>Presence Totem</td>
+<td>Presence objects</td>
 </tr>
 <tr>
 <td><code>co2</code> / <code>noiseLevel</code></td>
-<td><code>int</code></td>
-<td>Read only</td>
+<td>integer</td>
+<td>yes</td>
 <td>Environmental air/sound quality</td>
-<td>Studio Monitors</td>
+<td>Studio monitors</td>
 </tr>
 <tr>
-<td><code>&lt;obj&gt;Heartbeat</code></td>
-<td><code>int</code></td>
-<td>Read only</td>
-<td>Incremental liveness counter (1/min)</td>
-<td>Every Object</td>
+<td><code>&lt;obj&gt;/status</code></td>
+<td><code>online</code> | <code>offline</code></td>
+<td>yes</td>
+<td>Liveness (Last Will)</td>
+<td>Every object</td>
+</tr>
+<tr>
+<td><code>&lt;obj&gt;/heartbeat</code></td>
+<td>counter</td>
+<td>no</td>
+<td>"I am alive" (1/min)</td>
+<td>Every object</td>
+</tr>
+<tr>
+<td><code>&lt;obj&gt;/set/&lt;name&gt;</code></td>
+<td>depends</td>
+<td>no</td>
+<td>A <strong>command</strong> to the object</td>
+<td>Panels, hub</td>
 </tr>
 </tbody>
 </table>
 <div class="highlight">
 
-**Design Insight:** Designing the variable contract is as fundamental as designing the physical industrial casing!
+**Design Insight:** Designing the topic contract is as fundamental as designing the physical casing!
 
 </div>
 
 <hr />
-<h2 id="ex-7-objects-talking-to-objects-variable-sync">Ex 7 — Objects Talking to Objects: Variable Sync</h2>
+<h2 id="ex-7-objects-talking-to-objects-shared-topics">Ex 7 — Objects Talking to Objects: Shared Topics</h2>
 <ul>
 <li><strong>Goal:</strong> Enable direct multi-device cooperation without centralized code.</li>
-<li><strong>Key Concepts:</strong> Variable synchronisation between Things, contract adherence, loose coupling (producer does not know consumer), events vs. commands.</li>
+<li><strong>Key Concepts:</strong> Shared topics, contract adherence, loose coupling (the publisher does not know the subscribers), events vs. commands.</li>
 <li><strong>Activities:</strong></li>
-<li>Pair up with another group's Thing (e.g. Door Badge triggers Desk Lamp greeting).</li>
-<li>Link variables using <em>Sync with other Things</em>. Write reactive callbacks.</li>
-<li>Swap partners: connect to a different group's object without editing firmware.</li>
+<li>Pair up with another group (e.g. Door Badge <code>someoneAtDoor</code> → Desk Lamp greeting).</li>
+<li>Subscribe to the partner's topic; <strong>impersonate the partner from MQTTX</strong> until it is ready.</li>
+<li>Swap partners: connect to a different group's object without editing any firmware.</li>
 <li><strong>Design Reflection:</strong> What made connecting to another group's object easy or painful? How does a contract mirror physical connector standards?</li>
-<li><strong>Validation:</strong> Validate interoperability by swapping partner objects; verify that data binding works seamlessly without code recompilation.</li>
+<li><strong>Validation:</strong> Swap partner objects without recompiling; list the ambiguities found in the contract (units, ranges, retained or not, <code>1</code> vs <code>true</code>).</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/backend/#take-advantage-of-an-ecosystem-of-objects">Devices talking via publish/subscribe</a></p>
 <hr />
-<h2 id="ex-8-who-is-there-heartbeats-resilience">Ex 8 — Who is There? Heartbeats &amp; Resilience</h2>
+<h2 id="ex-8-who-is-there-status-heartbeats-resilience">Ex 8 — Who is There? Status, Heartbeats &amp; Resilience</h2>
 <ul>
 <li><strong>Goal:</strong> Make the ecosystem resilient to missing, disconnected, or unpowered devices.</li>
-<li><strong>Key Concepts:</strong> Device online/offline events, heartbeat counters, fallback strategies, <strong>graceful degradation</strong>, studio map overview dashboard.</li>
+<li><strong>Key Concepts:</strong> <code>status</code> via Last Will, heartbeat counters, wildcards (<code>iotpd/studio/+/status</code>), fallback strategies, <strong>graceful degradation</strong>, ThingsBoard device activity.</li>
 <li><strong>Activities:</strong></li>
-<li>Publish <code>&lt;object&gt;Heartbeat</code> and capability strings every minute.</li>
-<li>Monitor partner heartbeats; switch to local fallback if silent for 3 minutes.</li>
-<li>Unplug devices at random to test network fault tolerance.</li>
-<li>Build a shared <strong>Studio Map Dashboard</strong> with live floor plan status.</li>
-<li><strong>Design Reflection:</strong> In IoT, failures are normal daily events. How should an object communicate to users that its partner is missing without appearing "broken"?</li>
-<li><strong>Validation:</strong> Unplug partner objects and verify that local fallback takes over within the timeout; check that the studio map dashboard clearly reflects liveness.</li>
+<li>Publish <code>&lt;object&gt;/heartbeat</code> every minute and a retained <code>&lt;object&gt;/capabilities</code>.</li>
+<li>Watch partners' <code>status</code> and <code>heartbeat</code>; switch to local fallback when <code>offline</code> or silent for 3 min.</li>
+<li>Unplug devices at random to test fault tolerance.</li>
+<li>Build a shared <strong>Studio Map</strong> dashboard in ThingsBoard (image map with live markers).</li>
+<li><strong>Design Reflection:</strong> Failures are normal. How should an object tell users its partner is missing without appearing "broken"? "Offline" vs. "online but stuck"?</li>
+<li><strong>Validation:</strong> Unplug partners and verify that local fallback takes over within the timeout; check that the studio map clearly reflects liveness.</li>
 </ul>
 <hr />
 <h2 id="ex-9-the-orchestrator-scenes-hub-services">Ex 9 — The Orchestrator: Scenes, Hub &amp; Services</h2>
 <ul>
 <li><strong>Goal:</strong> Introduce central coordination and external data feeds.</li>
-<li><strong>Key Concepts:</strong> Coordinated scenes (<code>studioScene</code>), Hub Thing (context rules), time-based schedulers, cloud triggers, webhooks &amp; weather services.</li>
+<li><strong>Key Concepts:</strong> Scenes (retained <code>studioScene</code>), hub ESP32 subscribing to <code>iotpd/studio/#</code> (context rules), time schedules via NTP, web APIs (e.g. Open-Meteo), ThingsBoard alarms &amp; notifications.</li>
 <li><strong>Activities:</strong></li>
-<li>Build a studio scene selector (e.g. "Presentation": dim lamps, silence totems).</li>
-<li>Create hub rules combining inputs (e.g. Empty room + window open <span class="arithmatex">\(\rightarrow\)</span> alert).</li>
-<li>Add scheduled automation (e.g. evening studio shutdown).</li>
-<li>Ingest external data: sync with a Weather Thing (rain forecast <span class="arithmatex">\(\rightarrow\)</span> umbrella cue).</li>
-<li><strong>Design Reflection:</strong> Edge vs. Cloud: which rules belong in the device (fast, private, offline) vs. in the cloud (global view, multi-source context)?</li>
-<li><strong>Validation:</strong> Trigger multi-device scenes and inspect synchronization; disconnect external internet to observe which local interactions survive.</li>
+<li>Build a scene panel (e.g. "presentation": dim lamps, silence totems).</li>
+<li>Hub rule combining inputs (empty room + window open <span class="arithmatex">\(\rightarrow\)</span> <code>windowAlert</code> + ThingsBoard alarm).</li>
+<li>Scheduled automation (e.g. evening studio shutdown).</li>
+<li>External data: hub publishes <code>weather/rainExpected</code> <span class="arithmatex">\(\rightarrow\)</span> umbrella cue on the entrance lamp.</li>
+<li><strong>Design Reflection:</strong> Edge vs. hub vs. cloud: which rules belong in the device (fast, private, offline) and which centrally (global view, multi-source context)?</li>
+<li><strong>Validation:</strong> Trigger multi-device scenes and inspect synchronization; cut the internet uplink and observe which interactions survive.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/backend/#take-advantage-of-an-ecosystem-of-objects">Public APIs &amp; ThingsBoard weather example</a></p>
 <hr />
 <h2 id="ex-10-ecosystem-design-sprint-emergence-conflicts">Ex 10 — Ecosystem Design Sprint: Emergence &amp; Conflicts</h2>
 <ul>
 <li><strong>Goal:</strong> Conceive, model, and resolve system-wide ecosystem interactions.</li>
-<li><strong>Key Concepts:</strong> System mapping, emergent properties, contradictory rule conflicts, user override hierarchies, space tagging in Arduino Cloud.</li>
+<li><strong>Key Concepts:</strong> System mapping, emergent properties, contradictory rule conflicts, user override hierarchies, ThingsBoard <strong>assets &amp; relations</strong> (Studio → Areas → Devices).</li>
 <li><strong>Activities:</strong></li>
-<li>Map all objects, variables, spatial tags, and actors in the room.</li>
-<li>Identify and implement an <strong>emergent feature</strong> (e.g. unified comfort index).</li>
+<li>Map all objects, topics, rules and actors; compare with the live topic tree in MQTTX.</li>
+<li>Model places in ThingsBoard: one asset per area, devices related to their area.</li>
+<li>Identify and implement an <strong>emergent feature</strong> (e.g. <code>comfortIndex</code> computed by the hub).</li>
 <li>Simulate and resolve a <strong>conflict</strong> (e.g. auto-off rule vs. reading in a corner).</li>
-<li>Tag all Things by zone/role (<code>area:desk</code>, <code>role:sensor</code>).</li>
-<li><strong>Design Reflection:</strong> Compare current system capabilities with the limitation list from Exercise 3. What new risks (lock-in, complexity) were created?</li>
-<li><strong>Validation:</strong> Stage opposing rules simultaneously to validate override priorities; test whether the emergent comfort index aligns with actual human perception.</li>
+<li><strong>Design Reflection:</strong> Compare current capabilities with the limitation list from Exercise 3. What new risks (complexity, privacy, dependency on public servers) were created?</li>
+<li><strong>Validation:</strong> Stage opposing rules simultaneously to validate override priorities; test whether the comfort index aligns with actual human perception.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/twin/">Digital twin</a></p>
 <hr />
 <!-- _class: lead -->
 
@@ -2412,15 +2482,16 @@ void loop() {
 <h2 id="ex-11-remembering-storing-visualising-data">Ex 11 — Remembering: Storing &amp; Visualising Data</h2>
 <ul>
 <li><strong>Goal:</strong> Transition from ephemeral live streams to historical design telemetry.</li>
-<li><strong>Key Concepts:</strong> Cloud time-series, telemetry (continuous) vs. events (discrete actions), event counters, <strong>instrumentation plans</strong>, CSV export.</li>
+<li><strong>Key Concepts:</strong> MQTT does not remember → ThingsBoard <strong>time series</strong>; telemetry (continuous) vs. events (discrete actions), event counters, <strong>instrumentation plans</strong>, CSV/XLS export.</li>
 <li><strong>Activities:</strong></li>
 <li>Draft an instrumentation plan: connect design questions to specific metrics.</li>
-<li>Instrument the sketch with event variables (e.g. <code>dimmerUses</code>, <code>lastMode</code>).</li>
-<li>Build a dedicated historical "Usage Dashboard" with time-window charts.</li>
-<li>Download raw CSV logs; create initial pivot tables in a spreadsheet.</li>
+<li>Instrument the sketch with events and counters (e.g. <code>dimmerUses</code>, <code>event</code>).</li>
+<li>Build a historical "Usage Dashboard" with time-window charts.</li>
+<li>Export CSV regularly (public demo server!); create initial pivot tables.</li>
 <li><strong>Design Reflection:</strong> Data only answers questions you anticipated. What would you like to know that cannot be sensed? What data must be minimized (GDPR)?</li>
 <li><strong>Validation:</strong> Compare 24-hour logs against known physical actions to confirm no events were lost; audit metrics against data minimization standards.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/backend/">Backend: ThingsBoard</a></p>
 <hr />
 <h2 id="ex-12-how-is-it-really-used-field-deployment">Ex 12 — How is it Really Used? Field Deployment</h2>
 <ul>
@@ -2428,7 +2499,7 @@ void loop() {
 <li><strong>Key Concepts:</strong> In-the-wild deployment, usage analytics, identifying "struggle" patterns, comparing intended vs. actual user behavior.</li>
 <li><strong>Activities:</strong></li>
 <li>Deploy objects in the studio, department, or home for <strong>at least 1 week</strong>.</li>
-<li>Analyze CSV logs for non-used features, struggle patterns, or flawed defaults.</li>
+<li>Analyze exported logs for non-used features, struggle patterns, or flawed defaults.</li>
 <li>Conduct short follow-up user interviews to contextualize the numbers.</li>
 <li>Formulate 3 actionable redesign proposals supported by data.</li>
 <li><strong>Design Reflection:</strong> Where did data surprise you? Where would data alone have misled you without interviewing real users?</li>
@@ -2438,28 +2509,29 @@ void loop() {
 <h2 id="ex-13-keeping-it-alive-health-maintenance">Ex 13 — Keeping it Alive: Health &amp; Maintenance</h2>
 <ul>
 <li><strong>Goal:</strong> Instrument products for diagnostics, reliability, and maintenance.</li>
-<li><strong>Key Concepts:</strong> Health metrics (uptime, Wi-Fi RSSI, heap memory, battery voltage), wear counters (cycles, on-hours), drift detection, <strong>predictive maintenance</strong>.</li>
+<li><strong>Key Concepts:</strong> Health metrics (uptime, Wi-Fi RSSI, heap memory, battery voltage), wear counters (cycles, on-hours), drift detection, <strong>predictive maintenance</strong>, ThingsBoard <strong>alarm rules</strong> &amp; device inactivity.</li>
 <li><strong>Activities:</strong></li>
-<li>Add persistent wear counters saved across reboots.</li>
-<li>Configure multi-tier alarms (critical, major, minor, warning).</li>
+<li>Add wear counters saved across reboots (<code>Preferences</code>).</li>
+<li>Configure alarm rules with severities (critical, major, minor, warning).</li>
 <li>Build a "Fleet Health" dashboard for the space manager/technician.</li>
-<li>Implement automated push/email triggers for diagnostic alerts.</li>
 <li><strong>Design Reflection:</strong> How does maintenance telemetry alter physical industrial design (battery access, antenna placement, modular replacement parts)?</li>
-<li><strong>Validation:</strong> Simulate hardware faults (voltage drop, signal shielding, frozen sensor); confirm alerts fire at correct severity without notification fatigue.</li>
+<li><strong>Validation:</strong> Simulate hardware faults (voltage drop, signal shielding, frozen sensor); confirm alarms fire at correct severity without notification fatigue.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/twin/#maintenance">Maintenance</a> · <a href="https://andreavitaletti.github.io/Iot_new/energy/">Energy</a></p>
 <hr />
 <h2 id="ex-14-closing-the-loop-settings-ota-updates">Ex 14 — Closing the Loop: Settings &amp; OTA Updates</h2>
 <ul>
 <li><strong>Goal:</strong> Update and improve deployed products remotely based on data insights.</li>
-<li><strong>Key Concepts:</strong> Cloud configuration variables (zero-recompile parameter tuning), A/B testing in hardware, Over-The-Air (OTA) firmware deployment.</li>
+<li><strong>Key Concepts:</strong> ThingsBoard <strong>shared attributes</strong> as settings (no new upload), A/B testing in hardware, <code>firmwareVersion</code>, Over-The-Air (OTA) firmware deployment (ArduinoOTA or ThingsBoard OTA).</li>
 <li><strong>Activities:</strong></li>
-<li>Expose operational parameters as cloud sliders (e.g. <code>autoOffDelay</code>, <code>sensitivity</code>).</li>
+<li>Expose operational parameters as dashboard sliders (e.g. <code>autoOffMinutes</code>, <code>lightThreshold</code>).</li>
 <li>Deploy an A/B test across studio objects to evaluate two feedback variants.</li>
 <li>Measure variant performance on an A/B analytics dashboard.</li>
-<li>Deploy winning firmware over-the-air across the fleet.</li>
+<li>Deploy the winning firmware over-the-air across the fleet.</li>
 <li><strong>Design Reflection:</strong> A product is no longer static when sold. What does continuous evolution mean for brand trust, user agency, and ethics?</li>
-<li><strong>Validation:</strong> Alter remote settings and confirm instant live adaptation; push an OTA update and verify smooth installation with zero manual intervention.</li>
+<li><strong>Validation:</strong> Change a setting and confirm instant live adaptation; push an OTA update and verify smooth installation with zero manual intervention.</li>
 </ul>
+<p>📖 <a href="https://andreavitaletti.github.io/Iot_new/security/#over-the-air-ota-security">Over-the-air (OTA) security</a></p>
 <hr />
 <!-- _class: lead -->
 
@@ -2469,7 +2541,7 @@ void loop() {
 <h2 id="ex-15-the-final-capstone-project">Ex 15 — The Final Capstone Project</h2>
 <ul>
 <li><strong>Brief:</strong> Design a complete <strong>Product-Service Ecosystem</strong> addressing a chosen context (workplace, healthcare, retail, domestic, or cultural spaces):</li>
-<li><strong><span class="arithmatex">\(\ge 3\)</span> Interconnected Objects:</strong> Sharing a documented variable contract.</li>
+<li><strong><span class="arithmatex">\(\ge 3\)</span> Interconnected Objects:</strong> Sharing a documented topic contract.</li>
 <li><strong>Emergent Value:</strong> Delivering functionality impossible for a single device.</li>
 <li><strong>Instrumentation &amp; Field Study:</strong> Quantitative telemetry + user interviews.</li>
 <li><strong>Data-Driven Iteration:</strong> Demonstrating at least one validated redesign (OTA / settings) justified by data.</li>
@@ -2483,18 +2555,18 @@ void loop() {
 <h2 id="cross-cutting-design-themes">Cross-Cutting Design Themes</h2>
 <p>Throughout all phases, keep these strategic questions at the center of the design critique:</p>
 <ul>
-<li><strong>Privacy &amp; Ethics:</strong> Transparency to bystanders; data minimization by default.</li>
-<li><strong>Security:</strong> Guarding secret keys, Wi-Fi credentials, and dashboard access.</li>
-<li><strong>Sustainability:</strong> Power optimization (sleep modes), longevity, and circular repair.</li>
-<li><strong>Platform Dependency:</strong> Avoiding catastrophic lock-in; defining an exit plan.</li>
-<li><strong>Interoperability:</strong> From the studio contract to emerging standards (Matter, Home Assistant).</li>
+<li><strong>Privacy &amp; Ethics:</strong> On a public broker <em>everything</em> is readable by anyone; data minimization by default.</li>
+<li><strong>Security:</strong> Wi-Fi credentials, access tokens, TLS, who can publish on your command topics — <a href="https://andreavitaletti.github.io/Iot_new/security/">Security</a>.</li>
+<li><strong>Sustainability:</strong> Publish policies, <a href="https://andreavitaletti.github.io/Iot_new/energy/#esp32-sleep-modes">sleep modes</a>, longevity, and circular repair.</li>
+<li><strong>Platform Dependency:</strong> MQTT is an open standard and ThingsBoard is open source: the broker and backend can be swapped. What is the exit plan?</li>
+<li><strong>Interoperability:</strong> From the studio contract to real standards (Matter, Home Assistant MQTT discovery, Sparkplug).</li>
 <li><strong>Edge vs. Cloud:</strong> Preserving core product utility when connectivity drops.</li>
 </ul>
 <hr />
 <!-- _class: lead -->
 
 <div class="lead-title">Design with Data. Build in Ecosystems.</div>
-<div class="lead-subtitle">Ready to prototype in Wokwi, IDE 2, and Arduino Cloud.</div>
+<div class="lead-subtitle">Ready to prototype with Wokwi, IDE 2, MQTT and ThingsBoard.</div>
 
 <p><br></p>
 <p><strong><a href="../../intro/">Read Full Course Document (intro.md)</a></strong><br />
