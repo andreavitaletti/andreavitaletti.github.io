@@ -1,4 +1,4 @@
-ssh # Backend 
+# Backend 
 
 There are many options for a backend, but a nice solution I recommend is [ThingsBoard](https://thingsboard.io/).
 

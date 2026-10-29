@@ -18,20 +18,23 @@ This set of exercises introduces product design students to the Internet of Thin
 
 The path goes step by step. Each exercise introduces **one or two new concepts** and reuses the skills from the previous ones. Every exercise ends with a short **design reflection**, because the aim is to train designers who understand what the technology makes possible, not to train embedded engineers.
 
-To minimize the burden of installintools,  all the connected parts of the course (connectivity, dashboards, phone control, data storage, notifications, remote updates) are done on a **single platform: Arduino Cloud**. The class is made of designers with little experience of programming tools, so the priority is to keep the number of tools, accounts and concepts as low as possible. Three tools are used, each with a clear role:
+The connected parts of the course are built on an **open standard, MQTT**, rather than on a proprietary platform. The class is made of designers with little experience of programming tools, so the priority is to keep the number of tools, accounts and concepts as low as possible. Four tools are used, each with a clear role:
 
-| Tool                                                                  | What it is for                                                                  | Limits                                                  |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| **[Wokwi](https://wokwi.com/)** (browser simulator)                   | Sketching and trying behaviour, with no hardware and no risk                    | Limited number of simulations on the Free plan          |
-| **[Arduino IDE 2](https://www.arduino.cc/en/software)** (desktop app) | Free experimentation on the real board, Serial Plotter, unlimited uploads       | Does not create dashboards                              |
-| **[Arduino Cloud](https://cloud.arduino.cc)** (browser + phone app)   | The connected object: cloud variables, dashboards, phone control, data, sharing | Limited number of compilations per day on the Free plan |
+| Tool                                                                  | What it is for                                                                                         | Limits                                                     |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| **[Wokwi](https://wokwi.com/)** (browser simulator)                   | Sketching and trying behaviour, with no hardware and no risk — **including Wi-Fi and MQTT**            | Limited number of simulations on the Free plan             |
+| **[Arduino IDE 2](https://www.arduino.cc/en/software)** (desktop app) | Uploading to the real board, Serial Monitor/Plotter, unlimited uploads                                 | Does not create dashboards                                 |
+| **[MQTTX](https://mqttx.app/)** (desktop / web app)                   | Looking inside the network: watching every message of the studio, sending commands by hand            | A debugging tool, not an interface for end users           |
+| **[ThingsBoard](https://demo.thingsboard.io/)** (demo server)         | *Only when necessary*: dashboards for other people, history, alarms, remote settings, fleet management | Shared public demo server: not for personal or sensitive data |
 
-Because Arduino Cloud limits the number of compilations per day, students learn early to **try things in Wokwi and the Arduino IDE, and to use the Cloud only for the "connected" version** of their work (§5.3).
+Objects talk to each other through a public **MQTT broker** (e.g. `test.mosquitto.org`): no account, no quota, and it works both from the real board and from Wokwi. ThingsBoard enters the course from Exercise 6, when the object must be used, monitored and configured by people who are not its programmers.
 
-To run Arduino Cloud 1) install the Arduino Cloud Agent https://cloud.arduino.cc/download-agent/, 2) Install pyserial `sudo apt update
-sudo apt install python3-serial`
+**Setup notes.** On Linux install pyserial for the upload tool: `sudo apt update && sudo apt install python3-serial`. In the Arduino IDE install the **esp32** board package (by Espressif) and the **PubSubClient** library (by Nick O'Leary).
 
 If necessary reduce the upload speed ![](img/reduce_speed.png)
+
+!!! tip "Going deeper: the IoT course"
+    Many topics of this course are treated in more technical depth in the [IoT course notes](../Iot_new/index.md). Where useful, exercises below have a **Reference** line pointing to the relevant page, e.g. [Simulating a node](../Iot_new/simulation.md), [A real node](../Iot_new/real.md), [MQTT](../Iot_new/simulation.md#mqtt) and [ThingsBoard](../Iot_new/backend.md).
 
 ---
 
@@ -41,7 +44,7 @@ To keep the exercises coherent, they all share one scenario: a **shared studio /
 
 - Every group designs and builds **one object** for the studio, e.g. a desk lamp, a "focus" totem, a plant pot, a window/air-quality monitor, a doorbell/presence badge, a coffee corner counter, or a noise meter. All objects are described in the **[Studio Object Catalogue](studio.md)**.
 - In the first exercises each object works **alone** (smart object).
-- Later the objects **talk to each other** through Arduino Cloud (ecosystem).
+- Later the objects **talk to each other** through shared MQTT topics (ecosystem).
 - Finally the objects are **used for real** for sometimes, and the data they produce is used to **redesign** them (data-driven design).
 
 This scenario makes both goals concrete. Students experience first-hand what changes when their object is no longer alone, and when it starts "reporting back" how it is actually used.
@@ -53,7 +56,7 @@ This scenario makes both goals concrete. Students experience first-hand what cha
 - Product design students (bachelor or master level) with **limited experience of digital tools for programming**.
 - No prior programming experience is required. Variables, `if` and loops are introduced in Exercises 0–1, always starting from working examples that students modify rather than write from scratch.
 - Groups of 2–3 students, one hardware kit per group.
-- Each student needs a laptop with a Chromium-based browser or Firefox, the Arduino IDE 2, and the **Arduino Cloud Agent** (a small program that lets the browser upload code to the board). A smartphone with the **Arduino IoT Remote** app is useful from Exercise 5.
+- Each student needs a laptop with a Chromium-based browser or Firefox, the **Arduino IDE 2** (with the ESP32 package and the PubSubClient library) and **MQTTX**. From Exercise 6 each group needs a (free) account on **demo.thingsboard.io**. A smartphone with an MQTT dashboard app (e.g. **IoT MQTT Panel**, or the MQTTX web client in the browser) is useful from Exercise 5.
 
 ---
 
@@ -70,14 +73,14 @@ These components require zero external libraries and form the foundational **2×
 | **Input (Controls & Sensors)**    | **Push Button** (`digitalRead`, `INPUT_PULLUP`) | **Potentiometer** (`analogRead`, 0–4095)  |
 | **Output (Feedback & Actuators)** | **LED On/Off** (`digitalWrite`, HIGH/LOW)       | **LED Dimmer** (`analogWrite`, PWM 0–255) |
 
-This 2×2 foundation covers the universal vocabulary of physical product interfaces (switches, indicators, knobs, and dimmers) and maps 1-to-1 to the digital widgets used later in Arduino Cloud dashboards:
+This 2×2 foundation covers the universal vocabulary of physical product interfaces (switches, indicators, knobs, and dimmers) and maps 1-to-1 to the digital controls used later on phone panels and ThingsBoard dashboards:
 
-| Interaction Primitive | Physical Component   | Arduino Function | Cloud Dashboard Widget (Phase B) |
-| --------------------- | -------------------- | ---------------- | -------------------------------- |
-| **Digital Output**    | Standard LED         | `digitalWrite()` | Status LED / Value widget        |
-| **Digital Input**     | Push Button          | `digitalRead()`  | Push Button / Switch widget      |
-| **Analog Input**      | Rotary Potentiometer | `analogRead()`   | Gauge / Percentage widget        |
-| **PWM Output**        | LED Dimmer           | `analogWrite()`  | Dimmer / Slider widget           |
+| Interaction Primitive | Physical Component   | Arduino Function | Digital counterpart (Phase B)            |
+| --------------------- | -------------------- | ---------------- | ---------------------------------------- |
+| **Digital Output**    | Standard LED         | `digitalWrite()` | LED / status indicator                   |
+| **Digital Input**     | Push Button          | `digitalRead()`  | Button / switch (publishes a command)    |
+| **Analog Input**      | Rotary Potentiometer | `analogRead()`   | Gauge / chart                            |
+| **PWM Output**        | LED Dimmer           | `analogWrite()`  | Slider (publishes a value)               |
 
 #### Core Kit Components:
 
@@ -88,6 +91,8 @@ This 2×2 foundation covers the universal vocabulary of physical product interfa
 | Standard LEDs (red, green, blue) + 220–330 Ω resistors | **Digital Output** (`digitalWrite`) & **PWM Output** (`analogWrite`) | Ex 0 / Ex 2   |
 | Push buttons                                           | **Digital Input** (`digitalRead` with internal `INPUT_PULLUP`)       | Ex 1          |
 | Rotary potentiometer (10 kΩ)                           | **Analog Input** (`analogRead`, 0–4095)                              | Ex 2          |
+
+More on the board and on wiring: [Reference hardware](../Iot_new/real.md#reference-hardware) · [Understanding the breadboard](../Iot_new/simulation.md#understanding-the-breadboard).
 
 ### 4.2 Specialized Project Modules (Introduced from Exercise 3)
 
@@ -102,77 +107,92 @@ Depending on the specific studio object each group designs (desk lamp, presence 
 | Servo motor (SG90 / micro-servo)                     | Physical motion, indicators, mechanical flags          | Ex 3            |
 | Piezo buzzer                                         | Acoustic feedback and alerts                           | Ex 3            |
 | Relay module (low voltage only)                      | Switching external appliances / lights                 | Ex 7 (optional) |
-| Accelerometer (MPU6050, optional)                    | Handling, vibration, wear monitoring                   | Ex 13           |
-| LiPo battery + charger (optional)                    | Autonomy, portable power monitoring                    | Ex 13           |
+| Accelerometer ([MPU6050](../Iot_new/simulation.md#an-i2c-sensor-the-mpu6050-accelerometer), optional) | Handling, vibration, wear monitoring                   | Ex 13           |
+| LiPo battery + charger ([powering the ESP32](../Iot_new/energy.md#power-the-esp32), optional) | Autonomy, portable power monitoring                    | Ex 13           |
 
 All components above are available in **Wokwi**, so every circuit can be simulated before it is wired on the breadboard.
 
-**CO₂ and noise are simulated.** The kit has no CO₂ sensor (DHT22/BME280 do not measure CO₂) and no microphone. The `co2` and `noiseLevel` variables are therefore produced by turning the Core Kit **potentiometer**, which lets students stage repeatable scenarios, also in Wokwi. See [Simulating CO₂ and noise with a potentiometer](studio.md#simulating-co2-and-noise-with-a-potentiometer).
+**CO₂ and noise are simulated.** The kit has no CO₂ sensor (DHT22/BME280 do not measure CO₂) and no microphone. The `co2` and `noiseLevel` values are therefore produced by turning the Core Kit **potentiometer**, which lets students stage repeatable scenarios, also in Wokwi. See [Simulating CO₂ and noise with a potentiometer](studio.md#simulating-co2-and-noise-with-a-potentiometer).
 
 ---
 
-## 5. Software and cloud stack
+## 5. Software and network stack
 
-### 5.1 One platform: Arduino Cloud
+### 5.1 MQTT first, ThingsBoard when necessary
 
-| Need                                       | Arduino Cloud feature                                                                                                         | Replaces (in the previous edition)          |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| Registering the board                      | **Device** (ESP32 added as a "third-party device", with a Device ID and a Secret Key)                                         | Broker credentials                          |
-| Describing what the object senses and does | **Thing** with **cloud variables** (name, type, permission, update policy)                                                    | Topics and JSON payloads                    |
-| Writing and uploading code                 | **Cloud Editor** (web), with a sketch generated automatically from the Thing                                                  | Arduino IDE + MQTT libraries                |
-| Seeing and controlling the object          | **Dashboards** and widgets (value, gauge, chart, switch, slider, colour, status, map, image, scheduler…)                      | ThingsBoard dashboards, MQTT Explorer       |
-| Phone as a remote                          | **Arduino IoT Remote** app (iOS/Android), with phone-specific dashboard layouts                                               | MQTT Panel apps                             |
-| Objects talking to objects                 | **Variable synchronisation** between Things                                                                                   | Shared MQTT topics                          |
-| Places and groups of objects               | **Tags** on Things and devices, shared **studio dashboards**                                                                  | ThingsBoard assets and relations            |
-| History and data export                    | Chart widgets with time windows, **download of historical data as CSV**                                                       | ThingsBoard historical dashboards, InfluxDB |
-| Alerts                                     | **Triggers** (conditions on variables or on device connection → e-mail / push notification)                                   | ThingsBoard alarm rules                     |
-| External services                          | **Webhooks** (to Zapier, IFTTT, Make, Google Sheets…) and "service Things" prepared by the instructor                         | Node-RED                                    |
-| Remote configuration                       | Read & Write cloud variables used as settings (their last value is kept by the cloud and restored when the object reconnects) | Retained config topics / shared attributes  |
-| Updating the product in the field          | **Over-the-air (OTA) upload** from the Cloud Editor                                                                           | ArduinoOTA / HTTP OTA                       |
-| Working as a class                         | A **shared space** (Arduino Cloud for Schools / organisation), where all Things and dashboards of the class live together     | One broker account per group                |
+The backbone of the course is **MQTT**, the publish/subscribe protocol used by most IoT products. Its mental model fits in one sentence:
 
-Under the hood Arduino Cloud uses the same ideas seen in any IoT platform (a message broker, publish/subscribe, TLS encryption), but it hides them behind a simple mental model:
+> **The broker is a post office with labelled mailboxes (topics). An object *publishes* a message to a topic; every object that has *subscribed* to that topic receives a copy. Publishers and subscribers never need to know each other.**
 
-> **A cloud variable is a variable that exists in two places at the same time — on the board and in the cloud — and Arduino Cloud keeps the two copies in sync.**
+A short introduction to topics and wildcards, with a ready-made Wokwi example, is in [Simulating a node → MQTT](../Iot_new/simulation.md#mqtt).
 
-This model is enough for the whole course. The underlying protocol (MQTT) is mentioned in Exercise 4 and in the reflections, but students never have to program it directly.
+On top of this, ThingsBoard is used only for what plain MQTT does not give: interfaces for people who are not the designers, memory, and fleet management.
 
-**Plan-dependent features.** Some features depend on the Arduino Cloud plan (e.g. number of Things, data retention, number of daily compilations, OTA, triggers, sharing, shared spaces). In this document they are marked with **(plan)**. Check the current plan limits before the course starts (§10).
+| Need                                       | How it is done                                                                                                                  | Tool                     |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| Putting the object on the network          | Wi-Fi + an MQTT client (`PubSubClient`) connected to a public broker                                                           | IDE / Wokwi              |
+| Describing what the object senses and does | **Topics** and **payloads** (the topic contract, §5.2)                                                                          | MQTT                     |
+| Watching and debugging the network         | Subscribing to `iotpd/studio/#` and seeing every message live                                                                   | MQTTX                    |
+| Phone as a remote                          | An MQTT panel app (buttons, sliders, gauges bound to topics)                                                                   | IoT MQTT Panel / MQTTX web |
+| Objects talking to objects                 | **Shared topics**: one object publishes, any other subscribes                                                                   | MQTT                     |
+| Remembering the last state                 | **Retained messages**: the broker keeps the last value and gives it to whoever subscribes later                                  | MQTT                     |
+| Knowing who is online                      | **Last Will and Testament (LWT)**: the broker announces "offline" on behalf of an object that disappears                        | MQTT                     |
+| Dashboards for end users and space owners  | **Dashboards** and widgets (value, gauge, chart, switch, slider, LED, image map…), shareable as public links                    | ThingsBoard              |
+| Places and groups of objects               | **Assets** (Studio → Areas) and **relations** to devices                                                                        | ThingsBoard              |
+| History and data export                    | **Time series** stored for each device, chart widgets with time windows, **export to CSV/XLS**                                  | ThingsBoard              |
+| Alerts                                     | **Alarm rules** in the device profile (with severities), device **inactivity** detection, notifications                         | ThingsBoard              |
+| Remote configuration                       | **Shared attributes**: settings changed from a dashboard and pushed to the object (also on reconnect)                           | ThingsBoard              |
+| Updating the product in the field          | **OTA** firmware update (ArduinoOTA on the local network, or ThingsBoard OTA updates)                                          | IDE / ThingsBoard        |
 
-### 5.2 Shared conventions: the "variable contract"
+**Two connections, two roles.** From Exercise 6 an object may keep two MQTT connections at the same time: one to the **studio broker** (talking to other objects) and one to **ThingsBoard** (`demo.thingsboard.io`, port 1883, authenticated with the device's *access token*, topic `v1/devices/me/telemetry`). The first is the object's "conversation with its peers"; the second is its "report to the people who care for it". Keeping them separate is a design choice worth discussing (§8). The ThingsBoard side is explained step by step, with complete sketches, in [Backend](../Iot_new/backend.md).
 
-An ecosystem only works if objects "speak the same language". In Arduino Cloud, objects talk through **synchronised cloud variables**, and two variables can be synchronised only if they have the **same type**. From Exercise 7 onward the class therefore uses a shared **variable contract**, defined by the instructor together with the students:
+**Public servers.** `test.mosquitto.org` and `demo.thingsboard.io` are free public services for testing: anyone can read (and write!) the topics of a public broker, and the demo server can be reset or slowed down. This is fine — and instructive — for a class prototype, but never for personal data or real products. If the public broker is unreliable, alternatives are `broker.hivemq.com` and `broker.emqx.io`, or a Mosquitto broker run by the instructor on the lab network.
 
-| Name                | Type                                                        | Permission   | Meaning                                     | Who writes it        |
-| ------------------- | ----------------------------------------------------------- | ------------ | ------------------------------------------- | -------------------- |
-| `studioScene`       | `int` (0 = normal, 1 = focus, 2 = presentation, 3 = closed) | Read & Write | Current scene of the studio                 | Scene dashboard, hub |
-| `someoneAtDoor`     | `bool`                                                      | Read only    | A person has just arrived                   | Door badge           |
-| `roomOccupied`      | `bool`                                                      | Read only    | Someone is in the room                      | Presence objects     |
-| `co2`               | `int` (ppm)                                                 | Read only    | Air quality                                 | Air monitor          |
-| `noiseLevel`        | `int` (0–100)                                               | Read only    | Loudness                                    | Noise meter          |
-| `<object>Heartbeat` | `int` (counter)                                             | Read only    | "I am alive" signal, increases every minute | Every object         |
-| `<object>Mode`      | `String`                                                    | Read & Write | Current mode of each object                 | Object, dashboard    |
+### 5.2 Shared conventions: the "topic contract"
 
-Each group also documents, for its own object, a **product sheet of its variables**: name, type, unit, range, permission, update policy, and what it means for the user.
+An ecosystem only works if objects "speak the same language". In MQTT this language is made of **topic names** and **payload formats**. From Exercise 7 onward the class therefore uses a shared **topic contract**, defined by the instructor together with the students.
 
-Naming rules: `camelCase`, English, units written in the documentation (not in the name), no spaces or accents.
+All topics start with a common **class prefix**, here `iotpd/studio` (on a public broker, choose a prefix that nobody else is likely to use, e.g. adding the year and university). Values that describe the whole studio live directly under the prefix; values that belong to one object live under its name:
+
+| Topic (after `iotpd/studio/`) | Payload                                                     | Retained | Meaning                                     | Who publishes        |
+| ----------------------------- | ----------------------------------------------------------- | -------- | ------------------------------------------- | -------------------- |
+| `studioScene`                 | `normal` \| `focus` \| `presentation` \| `closed`           | yes      | Current scene of the studio                 | Scene panel, hub     |
+| `someoneAtDoor`               | `1` (event)                                                 | no       | A person has just arrived                   | Door badge           |
+| `roomOccupied`                | `0` \| `1`                                                  | yes      | Someone is in the room                      | Presence objects     |
+| `co2`                         | integer, ppm                                                | yes      | Air quality                                 | Air monitor          |
+| `noiseLevel`                  | integer, 0–100                                              | yes      | Loudness                                    | Noise meter          |
+| `<object>/status`             | `online` \| `offline`                                       | yes      | Set by the object, and by the broker (LWT)  | Every object         |
+| `<object>/heartbeat`          | integer counter                                             | no       | "I am alive" signal, increases every minute | Every object         |
+| `<object>/mode`               | short camelCase word, e.g. `focus`, `inUse`                 | yes      | Current mode of each object                 | Object               |
+| `<object>/set/<name>`         | depends on `<name>`                                         | no       | A **command** to the object                 | Panels, hub, others  |
+
+Each group also documents, for its own object, a **product sheet of its topics**: topic, payload format, unit, range, retained or not, how often it is published, and what it means for the user.
+
+Rules:
+
+- Topic levels in `camelCase`, English, no spaces or accents; units are written in the documentation, not in the topic.
+- Payloads are **plain text** (`812`, `1`, `focus`), easy to read in MQTTX and to send from a phone. JSON is used only towards ThingsBoard.
+- **State** topics (what *is*) are published by the object itself, usually retained. **Command** topics (`.../set/...`, what someone *wants*) are published by others and never retained. The object obeys a command and then publishes its new state.
 
 Designing this contract is itself a design activity: it is the object's **"interface" towards other objects**, just as its form and controls are its interface towards people.
 
-### 5.3 The "compilation budget": where to do what
+### 5.3 Where to do what
 
-On the Free plan, every compilation in the Cloud Editor (including each upload and each OTA update) uses up part of a **daily allowance**. This is not only a constraint: it is an opportunity to teach a good prototyping habit — **think and try cheaply first, commit to the real thing later.**
+Wokwi can simulate Wi-Fi (network `Wokwi-GUEST`, no password) and reach public MQTT brokers, so even connected behaviour can be designed **without hardware**. The rule of thumb given to students:
 
-The rule of thumb given to students:
-
-![](img/Diagram.png)
+| Step                         | Tool                       | Question it answers                                    |
+| ---------------------------- | -------------------------- | ------------------------------------------------------ |
+| **1. Sketch & simulate**     | Wokwi + MQTTX              | Does the logic work? Do the right messages go out?     |
+| **2. Try on the real board** | Arduino IDE 2 + MQTTX      | Does it work with real sensors, parts and Wi-Fi?       |
+| **3. Serve people**          | ThingsBoard                | Does it work as a service for someone who is not me?   |
 
 Practical tips:
 
-- **Simulate the dashboard in Wokwi.** A potentiometer or a button in the simulator can stand in for a dashboard slider or switch; the Serial Monitor can stand in for a value widget. The behaviour can be refined without any Cloud compilation.
-- **Keep the behaviour in functions.** The same functions (e.g. `updateLamp()`, `readSensors()`) are copied from the Wokwi/IDE sketch into the Cloud sketch unchanged; only the "glue" with cloud variables is new.
-- **Use the "Verify" button sparingly** in the Cloud Editor: fix errors in the IDE first.
-- **Cloud sketches can also be compiled in the Arduino IDE 2.** Once students are confident (from Exercise 6), they can open their Cloud sketch in the desktop IDE (via the IDE's *Remote Sketchbook*, or by downloading it) with the `ArduinoIoTCloud` library installed, and upload it with no daily limit. The object still connects to Arduino Cloud, because the Device ID and Secret Key are part of the sketch. After adding or changing variables in the Thing, the sketch must be pulled again, because the Cloud regenerates the `thingProperties.h` file.
+- **MQTTX is the stand-in for any other object.** Before your partner's object exists, publish its messages by hand from MQTTX (e.g. `iotpd/studio/co2` → `1500`) and check how your object reacts.
+- **Keep the behaviour in functions.** The same functions (e.g. `updateLamp()`, `readSensors()`) are reused unchanged from Exercise 3 onward; only the "glue" with MQTT is new.
+- **Keep secrets in one file.** Wi-Fi password and ThingsBoard access token go in a `secrets.h` tab, never in screenshots or shared Wokwi projects (see [Identity and secret management](../Iot_new/security.md#identity-and-secret-management)).
+- **Moving from Wokwi to the board** is described in [From Wokwi to a real device](../Iot_new/real.md#from-wokwi-to-a-real-device).
+- **Use a unique client ID** for every connection (e.g. built from the board's MAC address): two clients with the same ID keep kicking each other off the broker.
 - The table in §6 shows, for every exercise, which tools are used.
 
 ---
@@ -191,26 +211,26 @@ The exercises are grouped in four phases. The first two phases build the skills;
 
 ### Concept progression
 
-W = Wokwi, IDE = Arduino IDE 2, AC = Arduino Cloud. **Bold** = main tool of the exercise.
+W = Wokwi, IDE = Arduino IDE 2, MQ = MQTT broker + MQTTX, TB = ThingsBoard. **Bold** = main tool of the exercise.
 
-| #   | Exercise                                | New concepts                                                                                                                                       | Tools               | Builds on |
-| --- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------- |
-| 0   | Hello Light (GPIO Output)               | Wokwi, IDE, upload, `setup()`/`loop()`, `pinMode()`, `digitalWrite()`, `delay()`; light as visual language / expressing moods                      | **W**, **IDE**      | —         |
-| 1   | The Tactile Switch (GPIO Input)         | `pinMode(..., INPUT_PULLUP)`, `digitalRead()`, Serial Monitor, conditional logic (`if/else`), momentary vs. latching/toggle state, switch bouncing | W, **IDE**          | 0         |
-| 2   | The Continuous Dial (Analog Read & PWM) | Potentiometer, `analogRead()` (ADC 0–4095), Serial Plotter, PWM LED dimming (`analogWrite()`), `map()`, controlling brightness and blink tempo     | W, **IDE**          | 0, 1      |
-| 3   | The isolated smart object               | Sense→decide→act loop, state machines, non-blocking timing with `millis()`, introducing specialized project modules (sensors & actuators)          | **W**, IDE          | 1, 2      |
-| 4   | Going online                            | Device, Thing, cloud variables, auto-generated sketch, first dashboard                                                                             | W, **AC**           | 3         |
-| 5   | Remote control                          | Read & Write variables, `onChange` callbacks, phone as a remote (IoT Remote)                                                                       | W, **AC**           | 4         |
-| 6   | The object as a service                 | Update policies, variable types, connection events, security, dashboard design, sharing; compiling Cloud sketches in the IDE                       | **AC**, IDE         | 4, 5      |
-| 7   | Objects talking to objects              | **Variable synchronisation**, shared contract, loose coupling                                                                                      | **AC**              | 5, 6      |
-| 8   | Who is there?                           | Device status, heartbeats, connection callbacks, graceful degradation, **studio map dashboard**                                                    | W, **AC**           | 6, 7      |
-| 9   | The orchestrator                        | Scenes, hub Thing, scheduler, triggers, webhooks, service Things                                                                                   | **AC**              | 7, 8      |
-| 10  | Ecosystem design sprint                 | System mapping, emergent behaviour, conflicts, **tags** and studio dashboard                                                                       | **AC**              | 7 – 9     |
-| 11  | Remembering                             | Historical data, telemetry vs. events, instrumentation plan, CSV export                                                                            | **AC**              | 6, 9      |
-| 12  | How is it really used?                  | Usage analytics in a spreadsheet, field study, design insights from data                                                                           | **AC**, spreadsheet | 11        |
-| 13  | Keeping it alive                        | Device health, wear counters, predictive maintenance, **triggers as alarms**                                                                       | IDE, **AC**         | 11, 12    |
-| 14  | Closing the loop                        | Settings variables, **OTA updates**, A/B testing                                                                                                   | **AC**              | 12, 13    |
-| 15  | Final project                           | Integration of everything                                                                                                                          | all                 | all       |
+| #   | Exercise                                | New concepts                                                                                                                                       | Tools                 | Builds on |
+| --- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 0   | Hello Light (GPIO Output)               | Wokwi, IDE, upload, `setup()`/`loop()`, `pinMode()`, `digitalWrite()`, `delay()`; light as visual language / expressing moods                      | **W**, **IDE**        | —         |
+| 1   | The Tactile Switch (GPIO Input)         | `pinMode(..., INPUT_PULLUP)`, `digitalRead()`, Serial Monitor, conditional logic (`if/else`), momentary vs. latching/toggle state, switch bouncing | W, **IDE**            | 0         |
+| 2   | The Continuous Dial (Analog Read & PWM) | Potentiometer, `analogRead()` (ADC 0–4095), Serial Plotter, PWM LED dimming (`analogWrite()`), `map()`, controlling brightness and blink tempo     | W, **IDE**            | 0, 1      |
+| 3   | The isolated smart object               | Sense→decide→act loop, state machines, non-blocking timing with `millis()`, introducing specialized project modules (sensors & actuators)          | **W**, IDE            | 1, 2      |
+| 4   | Going online                            | Wi-Fi, broker, publish/subscribe, topics and payloads, `PubSubClient`, watching messages in MQTTX                                                 | **W**, IDE, **MQ**    | 3         |
+| 5   | Remote control                          | Subscribing, message callback, command vs. state topics, retained messages, phone as a remote                                                     | W, **MQ**             | 4         |
+| 6   | The object as a service                 | Publish policies, QoS, Last Will (online/offline), security; **first ThingsBoard device and dashboard**, sharing                                   | IDE, MQ, **TB**       | 4, 5      |
+| 7   | Objects talking to objects              | **Shared topics**, topic contract, loose coupling, events vs. commands                                                                             | **MQ**                | 5, 6      |
+| 8   | Who is there?                           | LWT status, heartbeats, wildcards, graceful degradation, **studio map dashboard**                                                                  | W, **MQ**, TB         | 6, 7      |
+| 9   | The orchestrator                        | Scenes, hub object, time schedules (NTP), external web services, alarms and notifications                                                          | **MQ**, TB            | 7, 8      |
+| 10  | Ecosystem design sprint                 | System mapping, emergent behaviour, conflicts, **assets and relations** for places                                                                 | MQ, **TB**            | 7 – 9     |
+| 11  | Remembering                             | Time series, telemetry vs. events, instrumentation plan, CSV export                                                                                | **TB**                | 6, 9      |
+| 12  | How is it really used?                  | Usage analytics in a spreadsheet, field study, design insights from data                                                                           | **TB**, spreadsheet   | 11        |
+| 13  | Keeping it alive                        | Device health, wear counters, predictive maintenance, **alarm rules**, inactivity                                                                  | IDE, **TB**           | 11, 12    |
+| 14  | Closing the loop                        | **Shared attributes** as settings, **OTA updates**, A/B testing                                                                                    | **TB**, IDE           | 12, 13    |
+| 15  | Final project                           | Integration of everything                                                                                                                          | all                   | all       |
 
 ---
 
@@ -224,7 +244,7 @@ Every exercise requires an explicit form of **validation**. The goal is not mere
 
 ### Phase A — The smart object
 
-In Phase A the object works alone, so **Arduino Cloud is not used yet**. Students become comfortable with code in the two unlimited environments, Wokwi and the Arduino IDE, using the **Core Kit** (LED, Button, Potentiometer).
+In Phase A the object works alone, so **the network is not used yet**. Students become comfortable with code in Wokwi and the Arduino IDE, using the **Core Kit** (LED, Button, Potentiometer).
 
 Phase A is explicitly built around the **2×2 matrix of physical interaction**:
 
@@ -238,16 +258,17 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
 #### Exercise 0 — Hello Light: GPIO Output and Visual Feedback
 
 - **Goal:** Get familiar with the prototyping tools and learn how code controls physical output through a simple LED.
-- **New concepts:** Simulator (Wokwi) versus physical hardware, Arduino IDE 2, ESP32 board package, selecting board and serial port, uploading code, structure of a sketch (`setup()` and `loop()`), configuring GPIO pins (`pinMode()`, `OUTPUT`), digital output (`digitalWrite()`, `HIGH`/`LOW`), blocking delays with `delay()`. Creating an Arduino account for later phases.
+- **New concepts:** Simulator (Wokwi) versus physical hardware, Arduino IDE 2, ESP32 board package, selecting board and serial port, uploading code, structure of a sketch (`setup()` and `loop()`), configuring GPIO pins (`pinMode()`, `OUTPUT`), digital output (`digitalWrite()`, `HIGH`/`LOW`), blocking delays with `delay()`.
 - **Tools:** Wokwi (sketching), Arduino IDE 2 (uploading).
 - **Material (Core Kit):** ESP32, 1–2 standard LEDs, 220–330 Ω current-limiting resistors, breadboard, USB data cable.
 - **Activities:**
   1. **Wokwi:** Open the ESP32 *Blink* project provided by the instructor, press *Play*, change the duration numbers in `delay()`, and observe the changes immediately. Add a second LED to the circuit on another GPIO pin and make them alternate.
   2. **Arduino IDE 2:** Install the IDE and the ESP32 board package (step-by-step sheet provided). Connect the ESP32 via USB, select the correct COM/serial port and board model, and upload the *Blink* sketch to the physical hardware.
   3. **Visual expression:** Experiment with the rhythm and cadence of the LED to communicate distinct product "moods" (e.g. calm beacon, urgent warning, natural heartbeat pulse). Test in Wokwi first, then flash to the real board.
-  4. Create an Arduino account and install the Arduino Cloud Agent, preparing the environment for Phase B.
+  4. Prepare the environment for Phase B: install the **PubSubClient** library in the IDE and install **MQTTX**.
 - **Design reflection:** Even a single light emitter carries expressive semantics. Which blinking patterns are instantly understandable to a human user without instruction? What physical differences did you notice between the simulated LED on screen and the real LED in physical space?
 - **Validation:** Validate the visual communication: test the three mood rhythms with a peer without explaining them in advance. Can an observer unambiguously tell which pattern signals "calm", "alarm", or "heartbeat"? Validate that the physical LED's perceived brightness, viewing angle, and timing match the intended communication.
+- **Reference:** [Simulating a node](../Iot_new/simulation.md#lets-start) · [A real node: Arduino IDE](../Iot_new/real.md#arduino-ide) · [From Wokwi to a real device](../Iot_new/real.md#from-wokwi-to-a-real-device)
 - **Time:** 2 h.
 
 #### Exercise 1 — The Tactile Switch: GPIO Input and Interaction
@@ -263,6 +284,7 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
   4. **The reality of hardware (Bouncing):** Upload the toggle code to the real ESP32 board. Observe that occasionally one press causes the lamp to flicker or skip states — an artifact of mechanical metal contacts bouncing that does not appear in the simulator. Add a simple debounce delay (e.g. `delay(50)`) or edge-detection logic to stabilize the input.
 - **Design reflection:** Affordance and feedback in physical controls. What is the experiential difference between a momentary button (like a doorbell or camera shutter) and a toggle switch (like a table lamp)? How critical is instantaneous physical or visual feedback for user confidence?
 - **Validation:** Validate the interaction reliability and user feedback: confirm that the toggle mechanism responds reliably to 20 consecutive rapid presses without false triggers (contact bouncing), and validate with a user that the physical click and visual LED change provide unambiguous confirmation of the state transition.
+- **Reference:** [The simplest digital sensor: a button](../Iot_new/simulation.md#the-simplest-digital-sensor-namely-a-button)
 - **Time:** 2 h.
 
 #### Exercise 2 — The Continuous Dial: Analog Read and PWM Modulation
@@ -278,6 +300,7 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
   4. **Modulating time vs. intensity:** Modify the sketch so the potentiometer does not change brightness, but instead controls the **frequency** of the blinking LED (mapping 0–4095 to a time delay of 50 ms–1500 ms). Students experience how the exact same analog gesture can control either magnitude (light intensity) or temporal rhythm (pulse rate).
 - **Design reflection:** Discrete versus continuous interaction. In what product scenarios is a continuous dial superior to a discrete button? How do friction, throw, and range of motion in an analog knob communicate fidelity and control to the user?
 - **Validation:** Validate continuous control fidelity: check on the Serial Plotter that the analog signal covers the full 0–4095 range smoothly without dead zones, and validate with a user whether they can dial in and hold a precise target brightness or blink rhythm purely by physical feel and visual feedback.
+- **Reference:** [An analog sensor: the potentiometer](../Iot_new/simulation.md#a-bit-more-interesting-analog-sensor-namely-a-potentiometer) · [Sampling](../Iot_new/sample.md) · [Filters](../Iot_new/filters.md)
 - **Time:** 2 h.
 
 #### Exercise 3 — The Isolated Smart Object: State Machines, Non-blocking Timing, and Project Modules
@@ -300,201 +323,254 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
      - The *Focus Totem* group connects an **RGB NeoPixel ring** for rich chromatic status signaling.
      - The *Air Monitor* group hooks up a **DHT22/BME280** to track ambient comfort.
      - The *Meeting / Availability Gauge* group adds a **Servo motor** for a physical indicator needle.
-- **Why `millis()` matters here:** In Phase B (Exercise 4 onwards), the object must run `ArduinoCloud.update()` continuously to keep its network connection alive. Any long `delay()` would freeze network packets and cause disconnects. Mastering non-blocking timing now guarantees the code is cloud-ready.
+- **Why `millis()` matters here:** In Phase B (Exercise 4 onwards), the object must call `mqtt.loop()` continuously to receive messages and keep its connection to the broker alive. Any long `delay()` would make the object deaf to incoming messages and can cause disconnects. Mastering non-blocking timing now guarantees the code is network-ready.
 - **Design reflection (key milestone):** Compile a list of everything your object **cannot** do because it is completely isolated. It cannot know if anyone is in the wider room, cannot be monitored remotely, cannot warn maintenance if a component degrades, and provides no usage history to the designer. This limitation list forms the direct motivation for Phase B (The Connected Object).
 - **Validation:** Validate system responsiveness and state transitions: verify that inputs (buttons, dials, sensors) respond instantaneously without lag caused by blocking `delay()`, cycle through all operating states to verify that no dead-end states exist, and validate the list of "isolation limitations" by walking through a real scenario in the studio where the object fails to meet user needs because it is disconnected.
+- **Reference:** [Quick overview of more advanced sensors](../Iot_new/simulation.md#quick-overview-of-more-advanced-way-to-interact-with-sensors) · [OS is better (beyond millis())](../Iot_new/os.md)
 - **Time:** 4 h.
 
 ---
 
 ### Phase B — The connected object
 
-From Phase B the object lives on Arduino Cloud. Before each Cloud session, students prepare their changes in Wokwi or the IDE (§5.3).
+From Phase B the object talks MQTT. Everything can be designed first in Wokwi (network `Wokwi-GUEST`) while watching the messages in MQTTX, and then uploaded to the real board (§5.3).
 
 #### Exercise 4 — Going online
 
-- **Goal:** Put the object on the network and let it "speak" to the cloud.
-- **New concepts:** **Device** (the physical board), **Thing** (the digital description of the object), **cloud variables** (name, type, *Read only* permission), network credentials, the sketch that Arduino Cloud writes automatically (`thingProperties.h`, `ArduinoCloud.update()`), first **dashboard**. The idea behind the scenes: the cloud acts as a "post office" (a broker) that receives and delivers messages (publish/subscribe, MQTT).
-- **Tools:** Arduino Cloud (Cloud Editor, dashboards). Wokwi to prepare the code.
+- **Goal:** Put the object on the network and let it "speak".
+- **New concepts:** Wi-Fi connection, the **broker** as a post office, **publish/subscribe**, **topics** (hierarchical names like `iotpd/studio/lamp/brightness`) and **payloads** (the content, here plain text), the `PubSubClient` library, **client ID**, `mqtt.loop()`. Watching the network with **MQTTX** and the wildcard `#`.
+- **Tools:** Wokwi and Arduino IDE 2 for the code, MQTTX to watch.
 - **Activities:**
-  1. In Arduino Cloud, add the ESP32 as a **device** (third-party device). Save the Device ID and Secret Key in a safe place.
-  2. Create a **Thing** for the group's object, associate the device, and enter the Wi-Fi credentials.
-  3. Add the object's sensors as **Read only** variables (e.g. `temperature`, `light`, `presence`).
-  4. Open the automatically generated sketch. Paste in the functions from Exercise 3 and assign sensor readings to the cloud variables. **One** compilation and upload.
-  5. Build a first dashboard with value and gauge widgets. Then look at the dashboards of other groups on the projector: the whole class is now online.
-- **Code skeleton** (the parts marked "generated" are written by Arduino Cloud):
+  1. In MQTTX, connect to the class broker and subscribe to `iotpd/studio/#`. Keep this window open for the whole phase: it is your "X-ray" of the studio.
+  2. Open the instructor's MQTT template in Wokwi. Add the functions from Exercise 3 and publish the sensor readings of your object under `iotpd/studio/<object>/...` (e.g. `iotpd/studio/airmonitor/temperature`). Watch them appear in MQTTX.
+  3. Move the same sketch to the real board with the Arduino IDE (change only the Wi-Fi credentials in `secrets.h`).
+  4. Look at the MQTTX window on the projector: the whole class is now online, and everybody can see everybody's messages.
+- **Code skeleton:**
   ```cpp
-  #include "thingProperties.h"    // generated: cloud variables and connection
+  #include <WiFi.h>
+  #include <PubSubClient.h>
+  #include "secrets.h"                 // WIFI_SSID, WIFI_PASS ("Wokwi-GUEST", "" in Wokwi)
 
+  const char* BROKER = "test.mosquitto.org";
+  const String ROOT  = "iotpd/studio/airmonitor/";   // class prefix + object name
+
+  WiFiClient net;
+  PubSubClient mqtt(net);
   unsigned long lastRead = 0;
 
+  void connectMqtt() {
+    String clientId = "iotpd-" + String((uint32_t)ESP.getEfuseMac(), HEX);   // unique per board
+    while (!mqtt.connected()) {
+      if (!mqtt.connect(clientId.c_str())) delay(2000);   // retry while offline
+    }
+  }
+
+  void publishValue(String name, float value) {
+    mqtt.publish((ROOT + name).c_str(), String(value).c_str());
+  }
+
   void setup() {
-    Serial.begin(9600);
-    initProperties();                                    // generated
-    ArduinoCloud.begin(ArduinoIoTPreferredConnection);   // generated
-    setupSensors();              // your code from Exercise 3
+    Serial.begin(115200);
+    setupSensors();                    // your code from Exercise 3
+    WiFi.begin(WIFI_SSID, WIFI_PASS);
+    while (WiFi.status() != WL_CONNECTED) delay(500);
+    mqtt.setServer(BROKER, 1883);
   }
 
   void loop() {
-    ArduinoCloud.update();       // keeps the two copies of the variables in sync
-    if (millis() - lastRead > 10000) {   // every 10 s, without delay()
+    if (!mqtt.connected()) connectMqtt();
+    mqtt.loop();                       // keeps the connection alive: never block it with delay()
+    if (millis() - lastRead > 10000) { // every 10 s, without delay()
       lastRead = millis();
-      temperature = readTemperature();   // assigning = "sending to the cloud"
-      light = readLight();
+      publishValue("temperature", readTemperature());   // publishing = "posting a letter"
+      publishValue("humidity", readHumidity());
     }
-    updateOutputs();             // your behaviour from Exercise 3
+    updateOutputs();                   // your behaviour from Exercise 3
   }
   ```
-- **Design reflection:** Your data is now visible to others. What does that imply for privacy? What should an object send to the cloud, and what should it keep to itself?
-- **Validation:** Validate cloud synchronisation and data privacy: verify that physical sensor updates appear on the dashboard within acceptable latency, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced from the live dashboard widgets.
+- **Design reflection:** Your data is now visible to others — on a public broker, to *anyone in the world* who subscribes to `#`. What does that imply for privacy? What should an object send over the network, and what should it keep to itself?
+- **Validation:** Validate connectivity and data privacy: measure with MQTTX the delay between a physical change (e.g. covering the LDR) and the arrival of the message, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced by simply listening to your topics.
+- **Reference:** [MQTT](../Iot_new/simulation.md#mqtt) · [Connected by MQTT (Wokwi example)](../Iot_new/simulation.md#its-time-to-be-connected-by-mqtt) · [Wireless connectivity](../Iot_new/wireless.md)
 - **Time:** 3 h.
 
 #### Exercise 5 — Remote control
 
 - **Goal:** Let the network change the object's behaviour.
-- **New concepts:** **Read & Write** variables, `onXxxChange()` callback functions (the code that runs when the variable is changed from the dashboard), control widgets (switch, push button, slider, colour/coloured light, value selector), the **Arduino IoT Remote** app on the phone, keeping physical and digital controls consistent.
-- **Tools:** Arduino Cloud, IoT Remote app. Wokwi to test the callbacks, using a button or potentiometer in place of the widget.
+- **New concepts:** **Subscribing** to a topic, the **message callback** (the function that runs when a message arrives), **command** topics (`.../set/brightness`) versus **state** topics (`.../brightness`), **retained messages** (the broker keeps the last state, so a dashboard or object that connects later immediately knows it), the phone as a remote (an MQTT panel app with buttons and sliders bound to topics), keeping physical and digital controls consistent.
+- **Tools:** MQTTX and a phone MQTT panel app; Wokwi to test the callbacks.
 - **Activities:**
-  1. Add Read & Write variables such as `mode` (String or int), `lampColor` (Coloured Light) and `brightness` (int), and implement their callbacks.
-  2. Build a control panel on the dashboard and check its phone layout in the IoT Remote app.
-  3. Keep the physical controls working. When the user presses the object's own button, the code must also update the cloud variable, so that the dashboard always shows the truth.
+  1. Subscribe to `iotpd/studio/<object>/set/#` and implement a callback that reacts to commands such as `set/mode`, `set/brightness`, `set/color`. Test by publishing commands by hand from MQTTX.
+  2. After obeying a command, the object publishes its **new state** on the state topic, **retained** (e.g. `iotpd/studio/lamp/brightness` → `180`).
+  3. Build a control panel on the phone: a slider that publishes on `set/brightness`, a gauge or text that shows the state topic.
+  4. Keep the physical controls working. When the user presses the object's own button, the code must also publish the new state, so that every panel always shows the truth.
 - **Code example:**
   ```cpp
-  // generated empty by Arduino Cloud, filled in by the students
-  void onBrightnessChange() {
-    setLampBrightness(brightness);   // the dashboard changed the value
+  void onMessage(char* topic, byte* payload, unsigned int length) {
+    String t = topic;
+    String msg = "";
+    for (unsigned int i = 0; i < length; i++) msg += (char)payload[i];
+
+    if (t == ROOT + "set/brightness") {          // someone wants a new brightness
+      setLampBrightness(msg.toInt());
+      mqtt.publish((ROOT + "brightness").c_str(), msg.c_str(), true);   // retained state
+    }
   }
 
-  void onButtonPressed() {           // physical control
-    mode = "focus";                  // the dashboard will show "focus" too
-    applyMode(mode);
+  void onButtonPressed() {                       // physical control
+    applyMode("focus");
+    mqtt.publish((ROOT + "mode").c_str(), "focus", true);   // panels will show "focus" too
   }
+
+  // in setup():        mqtt.setCallback(onMessage);
+  // in connectMqtt():  after mqtt.connect(...) succeeds:
+  //                    mqtt.subscribe((ROOT + "set/#").c_str());   // re-subscribe after every reconnect
   ```
-- **Design reflection:** The object now has two interfaces, one physical and one digital. How do you keep them consistent? Who "wins" in a conflict?
-- **Validation:** Validate bi-directional consistency and conflict handling: simultaneously actuate the physical button/dial and the mobile app slider/switch to validate that both interfaces converge to a consistent state without glitches, and evaluate whether the physical user or remote user experience is prioritized and preserved.
+- **Design reflection:** The object now has two interfaces, one physical and one digital. How do you keep them consistent? Who "wins" in a conflict? And on a public broker, anyone can publish on your `set/` topics: what should your object refuse to do?
+- **Validation:** Validate bi-directional consistency and conflict handling: simultaneously actuate the physical button/dial and the phone slider/switch to validate that both interfaces converge to a consistent state without glitches or message loops, and evaluate whether the physical user or remote user experience is prioritized and preserved.
+- **Reference:** [How to receive a command on the node](../Iot_new/backend.md#how-to-receive-a-command-on-the-node)
 - **Time:** 3 h.
 
 #### Exercise 6 — The object as a service
 
 - **Goal:** Turn the object into a small **service** with a designed dashboard, and make it robust and secure.
 - **New concepts:**
-  - **Update policies:** *on change* (with a threshold) versus *periodically* — how often the object talks, and why it matters for energy, data and clarity.
-  - **Specialised variable types** (e.g. temperature, percentage, coloured light, location, schedule) that carry meaning and units.
-  - **Connection events** (`ArduinoCloud.addCallback(...CONNECT / DISCONNECT / SYNC...)`): what the object shows to the user while it is connecting or offline.
-  - **Security:** the Secret Key and Wi-Fi password live in the *Secret* tab and must never be shared (screenshots, public sketches); who has access to a dashboard can control the object.
-  - **Dashboard design** for a specific user; **sharing** dashboards (plan).
-  - Opening the Cloud sketch in the **Arduino IDE 2** to compile without the daily limit (§5.3).
-- **Tools:** Arduino Cloud, Arduino IDE 2.
+  - **Publish policies:** *on change* (with a threshold) versus *periodically* — how often the object talks, and why it matters for energy ([duty cycle](../Iot_new/energy.md#duty-cycle)), data and clarity. **QoS** levels 0 and 1 (fire-and-forget versus "at least once").
+  - **Last Will and Testament (LWT):** when connecting, the object leaves a "will" with the broker (`<object>/status` → `offline`, retained); if the object disappears, the broker publishes it. On connection the object publishes `online` itself. What the object shows to the user while it is connecting or offline, and non-blocking reconnection.
+  - **Security:** Wi-Fi passwords and access tokens live in `secrets.h` and are never shared; a public broker has no access control (anyone can read and write), which is why real products use authentication and **TLS** (port 8883).
+  - **ThingsBoard**: when the object must serve people who are not its programmers. A **device** with its **access token**, sending **telemetry** as JSON on `v1/devices/me/telemetry`; a **dashboard** designed for a specific user; **sharing** a dashboard (public link or customer user).
+- **Tools:** Arduino IDE 2, MQTTX, ThingsBoard (`demo.thingsboard.io`).
 - **Activities:**
-  1. Set a sensible update policy for each variable and justify it (e.g. temperature on change with a 0.5 °C threshold; light every 60 s).
-  2. Show the connection status on the object itself (e.g. a slow blue blink while connecting).
-  3. Open the Thing's sketch in the Arduino IDE 2, compile and upload it from there, and check that the dashboard still works.
-  4. Redesign the dashboard for a specific user. Which information is shown first, and which is hidden? Use layout, widget choice, labels and the phone layout on purpose. Make separate desktop and phone versions if they serve different moments of use.
+  1. Set a sensible publish policy for each value and justify it (e.g. temperature on change with a 0.5 °C threshold; light every 60 s).
+  2. Add the LWT and show the connection status on the object itself (e.g. a slow blue blink while connecting). Check in MQTTX that `status` turns `offline` when you unplug the board (it takes up to the keep-alive time, ~15 s by default).
+  3. Create a ThingsBoard account, a **device** for your object, and copy its access token. Add a second MQTT connection that sends the object's main values to ThingsBoard (see code below). Keep the studio broker connection for the other objects.
+  4. Design a ThingsBoard **dashboard** for a specific user. Which information is shown first, and which is hidden? Use layout, widget choice and labels on purpose; check how it looks on a phone.
   5. Share the dashboard with the instructor and with another group.
-- **Design reflection:** The product is now a *physical object plus a digital service*. Which part is the product? Sketch the service blueprint. Is the dashboard designed for the end user, the owner of the space, or the maintainer?
-- **Validation:** Validate service usability and network resilience: test the redesigned dashboard with a peer representing the target persona (end-user vs. space manager) to validate that they can understand and operate the service in under 30 seconds without coaching; intentionally disconnect Wi-Fi to validate that the physical object signals its offline status gracefully and maintains baseline local function.
+- **Code example** (second connection, towards ThingsBoard):
+  ```cpp
+  WiFiClient tbNet;
+  PubSubClient tb(tbNet);                         // a second, independent client
+
+  // in setup():
+  tb.setServer("demo.thingsboard.io", 1883);
+  tb.setBufferSize(512);                          // JSON messages can be longer than the default 256 bytes
+
+  // in loop(), next to mqtt.loop():
+  if (!tb.connected()) tb.connect("airmonitor", TB_TOKEN, NULL);   // the token is the username
+  tb.loop();
+
+  // when sending:
+  String json = "{\"co2\":" + String(readCo2()) + ",\"temperature\":" + String(readTemperature()) + "}";
+  tb.publish("v1/devices/me/telemetry", json.c_str());
+  ```
+- **Design reflection:** The product is now a *physical object plus a digital service*. Which part is the product? Sketch the service blueprint. Is the dashboard designed for the end user, the owner of the space, or the maintainer? Why do the object's peers and its people use two different channels?
+- **Validation:** Validate service usability and network resilience: test the redesigned dashboard with a peer representing the target persona (end-user vs. space manager) to validate that they can understand and operate the service in under 30 seconds without coaching; intentionally disconnect Wi-Fi to validate that the physical object signals its offline status gracefully, that `status` becomes `offline` for the others, and that the object maintains baseline local function.
+- **Reference:** [Backend: ThingsBoard](../Iot_new/backend.md) · [Secure communication (TLS)](../Iot_new/security.md#secure-communication-tlsssl) · [Identity and secret management](../Iot_new/security.md#identity-and-secret-management)
 - **Time:** 4 h.
 
 ---
 
 ### Phase C — The ecosystem (Goal 1)
 
-Phase C needs all the class's Things to be able to see each other. This is done in a **shared space** of Arduino Cloud (plan). See §10 for alternatives.
+Phase C needs all the objects of the class to talk on the **same broker** with the **same class prefix**, following the topic contract (§5.2). Nothing else is required: on MQTT every object can already hear every other.
 
 #### Exercise 7 — Objects talking to objects
 
 - **Goal:** Make objects from **different groups** cooperate directly, without any central logic.
-- **New concepts:** **Variable synchronisation** (a variable of one Thing is linked to a variable of another Thing, so that when one changes, the other changes too), the shared variable contract (§5.2), loose coupling (the object that produces a value does not need to know who uses it), events versus commands.
-- **Tools:** Arduino Cloud.
+- **New concepts:** **Shared topics** (one object publishes `iotpd/studio/co2`, any object can subscribe), the topic contract (§5.2), loose coupling (the object that produces a value does not need to know who uses it), events versus commands (announcing "this happened" versus asking "do this").
+- **Tools:** MQTT broker, MQTTX.
 - **Activities:**
-  1. Groups pair up. Object A reacts to a variable of object B. Examples:
-     - The door presence badge sets `someoneAtDoor`, and the desk lamp greets the person.
+  1. Groups pair up. Object A reacts to a topic published by object B. Examples:
+     - The door presence badge publishes `someoneAtDoor`, and the desk lamp greets the person.
      - The air monitor's `co2` goes above a threshold, and the focus totem suggests a break with a colour.
-     - The plant pot's `thirsty` becomes true, and the coffee corner counter shows a reminder.
-  2. In each Thing, add the variable to listen to (with the **same type** as in the contract) and link it with *Sync with other Things*. Write the callback that reacts to it.
-  3. Then swap partners. If the contract is respected, the objects must work with *new* partners without changing the code of the other group — often by only changing the synchronisation, without any new compilation.
+     - The plant pot's `plant/mode` becomes `thirsty`, and the coffee corner counter shows a reminder.
+  2. Subscribe to the partner's topic exactly as written in the contract, and extend the callback to react to it. Before the partner is ready, **impersonate them from MQTTX**.
+  3. Then swap partners. If the contract is respected, the objects must work with *new* partners without changing the code of either group: an object that publishes `co2` does not care who listens.
 - **Design reflection:** What made it easy or hard to connect to someone else's object? The contract is a design artefact, just like a physical connector standard.
-- **Validation:** Validate ecosystem interoperability: test variable synchronisation with one partner object, then swap to a different group's object without recompiling local firmware. Validate whether adhering to the shared variable contract makes multi-object cooperation truly plug-and-play or uncovers ambiguous edge cases in the data definition.
+- **Validation:** Validate ecosystem interoperability: test the exchange with one partner object, then swap to a different group's object without recompiling either firmware. Validate whether adhering to the shared topic contract makes multi-object cooperation truly plug-and-play or uncovers ambiguous edge cases in the contract (units, ranges, retained or not, `1` vs `true`).
+- **Reference:** [Devices talking to each other via publish/subscribe](../Iot_new/backend.md#take-advantage-of-an-ecosystem-of-objects)
 - **Time:** 3 h.
 
 #### Exercise 8 — Who is there? Presence and resilience
 
 - **Goal:** Make the ecosystem aware of which objects are alive and able to cope when some are missing.
-- **New concepts:** Device status (online/offline) in Arduino Cloud, **heartbeats** (a counter that increases every minute: if it stops, the object is gone), connection callbacks, a "capabilities" description of each object, **graceful degradation**.
-- **Tools:** Arduino Cloud; Wokwi to test the fallback logic (a switch in the simulator plays the role of "partner offline").
+- **New concepts:** The `status` topic and LWT seen from the *other* objects, **heartbeats** (a counter that increases every minute: if it stops, the object is frozen even if still connected), **wildcards** (`iotpd/studio/+/status` to watch everybody), a retained `capabilities` description of each object, **graceful degradation**. ThingsBoard **device activity** (a device is marked inactive when it stops sending).
+- **Tools:** MQTT broker and MQTTX; Wokwi to test the fallback logic (a switch in the simulator plays the role of "partner offline"); ThingsBoard for the studio map.
 - **Activities:**
-  1. Each object publishes a `<object>Heartbeat` counter and a `<object>Capabilities` String (e.g. `"sensors: temp, lux; actuators: rgb"`), both part of the contract.
-  2. Objects that depend on a partner watch its heartbeat, synchronised as in Exercise 7. If it does not change for 3 minutes, they switch to a fallback, e.g. the lamp goes back to its local PIR when the door badge is offline.
+  1. Each object publishes `<object>/heartbeat` every minute and a retained `<object>/capabilities` (e.g. `sensors: temp, lux; actuators: rgb`), both part of the contract.
+  2. Objects that depend on a partner subscribe to its `status` and `heartbeat`. If the status is `offline`, or the heartbeat does not change for 3 minutes, they switch to a fallback, e.g. the lamp goes back to its local PIR when the door badge is offline.
   3. Unplug objects at random. The others must notice and adapt, and the user must be able to tell (e.g. a small "alone" colour).
-  4. As a class, build a **"studio map" dashboard**: an image widget with the floor plan of the room, and next to it one status/LED widget per object, arranged like the objects in the room and labelled with their position. Each widget shows whether the object is alive. Add links (or notes) to each group's own dashboard.
-- **Design reflection:** In an ecosystem, failures are normal. How should each object behave when its partners disappear? Can the user tell what is going on?
-- **Validation:** Validate graceful degradation and failure visibility: power down partner objects at random and verify that the remaining objects transition to local fallback behavior within the 3-minute heartbeat timeout; validate with an outside observer whether the studio map dashboard and physical status cues make it obvious that a partner is offline rather than simply broken.
+  4. As a class, build a **"studio map" dashboard** in ThingsBoard: an image map widget with the floor plan of the room, with one marker per object placed in its position and coloured by whether the device is active. Add links to each group's own dashboard.
+- **Design reflection:** In an ecosystem, failures are normal. How should each object behave when its partners disappear? Can the user tell what is going on? What is the difference between "offline" and "online but not working"?
+- **Validation:** Validate graceful degradation and failure visibility: power down partner objects at random and verify that the remaining objects transition to local fallback behavior within the timeout; validate with an outside observer whether the studio map dashboard and physical status cues make it obvious that a partner is offline rather than simply broken.
 - **Time:** 3 h.
 
 #### Exercise 9 — The orchestrator: scenes, rules and external services
 
 - **Goal:** Add a "brain" that coordinates many objects and brings in information from outside the room.
 - **New concepts:**
-  - **Scenes:** one intent controls many objects. A single `studioScene` variable, synchronised with every object, and each object decides how to interpret it.
-  - A **hub Thing:** an ESP32 (prepared by the instructor or by a volunteer group) that receives the variables of all objects and implements rules that combine several sources (context).
-  - **Scheduler** widgets and schedule variables for time-based behaviour (e.g. "closed" scene every evening at 20:00).
-  - **Triggers** (plan): e-mail or push notifications when a condition occurs.
-  - **Webhooks** (plan) to external services (Zapier, IFTTT, Make, Google Sheets, Telegram), and **service Things** prepared by the instructor that bring external data into the Cloud (e.g. a *Weather* Thing with `rainExpected` and `outsideTemp`).
-  - Trade-offs between logic in the objects (edge) and logic in the cloud/hub.
-- **Tools:** Arduino Cloud.
+  - **Scenes:** one intent controls many objects. A single retained `studioScene` topic, to which every object subscribes, and each object decides how to interpret it.
+  - A **hub object:** an ESP32 (prepared by the instructor or by a volunteer group) that subscribes to `iotpd/studio/#` and implements rules that combine several sources (context).
+  - **Time-based behaviour:** the hub gets the time from the internet (NTP, `configTime()`) and changes the scene at given times (e.g. "closed" every evening at 20:00).
+  - **External services:** the hub calls a web API over HTTP (e.g. [Open-Meteo](https://open-meteo.com/), free and without key) and republishes the result as a studio topic, e.g. `weather/rainExpected`.
+  - **Alarms and notifications** in ThingsBoard (alarm rules on telemetry, shown in an alarm widget and in the notification centre).
+  - Trade-offs between logic in the objects (edge) and logic in the hub or in the cloud.
+- **Tools:** MQTT broker, MQTTX, phone panel; ThingsBoard for alarms.
 - **Activities:**
-  1. Build a **scene dashboard** with a value selector for `studioScene` (Normal, Focus, Presentation, Closed). Implement at least one scene in every object, e.g. *"Presentation"*: lamps dim, focus totems turn blue, the noise meter alerts on loud sounds.
-  2. Implement one **context rule** in the hub that uses more than one object, e.g. "if nobody is present for 30 min and the window monitor says the window is open → set `windowAlert`", with a trigger that sends a notification to the phone.
-  3. Add a schedule that changes the scene automatically at given times.
-  4. Bring in an external service: sync with the *Weather* Thing, so the lamp at the entrance turns blue when rain is expected ("take an umbrella").
-  5. *(Optional)* Use the IoT Remote app's "phone as a device" function: the phone becomes a Thing that shares, for example, its position or light sensor with the ecosystem.
-- **Design reflection:** Which logic should live in the object (fast, works offline, private) and which in the cloud or in the hub (global view, easy to change)? What happens to the user experience if the internet goes down?
-- **Validation:** Validate ecosystem orchestration and internet-loss resilience: trigger studio scenes and multi-object rules to validate that all devices respond synchronously and accurately; temporarily disconnect the studio's internet uplink to validate which critical safety/comfort interactions survive at the edge versus which break down when cloud logic is unavailable.
+  1. Build a **scene panel** on the phone (or in a ThingsBoard dashboard of the hub) that publishes `studioScene` (`normal`, `focus`, `presentation`, `closed`), retained. Implement at least one scene in every object, e.g. *"presentation"*: lamps dim, focus totems turn blue, the noise meter alerts on loud sounds.
+  2. Implement one **context rule** in the hub that uses more than one object, e.g. "if nobody is present for 30 min and the window monitor says the window is open → publish `windowAlert`". The hub also sends `windowAlert` to its ThingsBoard device, where an **alarm rule** raises an alarm visible on the phone.
+  3. Add a schedule in the hub that changes the scene automatically at given times.
+  4. Bring in an external service: the hub publishes `weather/rainExpected`, so the lamp at the entrance turns blue when rain is expected ("take an umbrella").
+  5. *(Optional)* Use the phone as an object of the ecosystem: a phone panel button that publishes `someoneAtDoor` ("I'm coming in").
+- **Design reflection:** Which logic should live in the object (fast, works offline, private) and which in the hub or in the cloud (global view, easy to change)? What happens to the user experience if the internet goes down? (Note: with a broker on the local network the studio could keep working even without internet.)
+- **Validation:** Validate ecosystem orchestration and internet-loss resilience: trigger studio scenes and multi-object rules to validate that all devices respond synchronously and accurately; temporarily disconnect the studio's internet uplink to validate which critical safety/comfort interactions survive at the edge versus which break down when the broker or the hub is unavailable.
+- **Reference:** [Public APIs and ThingsBoard weather example](../Iot_new/backend.md#take-advantage-of-an-ecosystem-of-objects)
 - **Time:** 4 h.
 
 #### Exercise 10 — Ecosystem design sprint
 
 - **Goal:** Consolidate Goal 1 by designing the studio as a **system** rather than a collection of objects.
-- **New concepts:** System maps, emergent behaviour, conflicts between objects (two rules that want opposite things), priorities and user override, ecosystem value versus object value. **Tags** in Arduino Cloud (e.g. `area: desk`, `area: coffee corner`, `role: sensor`) as a simple digital model of places and roles.
-- **Tools:** Arduino Cloud, paper and post-its.
+- **New concepts:** System maps, emergent behaviour, conflicts between objects (two rules that want opposite things), priorities and user override, ecosystem value versus object value. **Assets and relations** in ThingsBoard (e.g. *Studio* → *Desk area*, *Coffee corner* → devices) as a simple digital model of places and roles.
+- **Tools:** MQTTX, ThingsBoard, paper and post-its.
 - **Activities:**
-  1. As a whole class, map all the objects, variables, rules and people in the studio.
-  2. Turn the map into a model in Arduino Cloud: add **tags** to every Thing and device (area, role, owner group), and use them to filter the list of Things. Organise the studio dashboard by area.
+  1. As a whole class, map all the objects, topics, rules and people in the studio. Compare the paper map with the live topic tree in MQTTX.
+  2. Turn the map into a model in ThingsBoard: create an **asset** for the studio and one for each area, and relate every device to its area. Organise the studio dashboard by area.
   3. Find at least one **emergent** feature, a service that no single object can provide (e.g. an "occupancy and comfort" index of the room built from every object's data).
   4. Find and solve at least one **conflict** (e.g. the energy-saving rule turns the lamp off while someone is reading in a corner the PIR cannot see). Decide the priorities: what can the user always override?
-  5. Implement the emergent feature in the hub Thing, save it as a variable (e.g. `comfortIndex`), and show it on a **studio-level dashboard**.
-- **Design reflection:** Compare the list of limitations from Exercise 3 with what the ecosystem now does. What has the ecosystem added, and what new problems (complexity, privacy, dependency on one company's platform) has it introduced?
+  5. Implement the emergent feature in the hub, publish it on the studio broker (e.g. `comfortIndex`), send it to ThingsBoard and show it on a **studio-level dashboard**.
+- **Design reflection:** Compare the list of limitations from Exercise 3 with what the ecosystem now does. What has the ecosystem added, and what new problems (complexity, privacy, dependency on public servers) has it introduced?
 - **Validation:** Validate emergent system behavior and conflict resolution: stage a scenario where contradictory rules trigger simultaneously (e.g., energy-saving shutdown vs. active work in a sensor blind spot) to validate that user overrides function as expected; validate that the emergent studio metric (e.g. comfort index) genuinely reflects the actual physical experience in the room.
+- **Reference:** [Digital twin](../Iot_new/twin.md)
 - **Time:** 4 h (workshop).
 
 ---
 
 ### Phase D — Data-driven design (Goal 2)
 
-Phase D needs data to be kept for the whole field study. Check the **data retention** of the plan (plan) before starting; if it is shorter than the deployment, download the data every day (Exercise 11).
+MQTT does not remember: a broker only keeps the last retained message. Phase D therefore relies on **ThingsBoard**, which stores every value it receives as a time series. The demo server is a shared public service, so **export the data regularly** (Exercise 11) and do not rely on it as the only copy.
 
 #### Exercise 11 — Remembering: storing and visualising data
 
 - **Goal:** Move from live data to **historical data**, the raw material for design insights.
-- **New concepts:** Arduino Cloud stores every change of a variable with its time, so a variable is also a **time series**. The difference between **telemetry** (periodic measurements, e.g. `temperature`) and **events** (user actions, state changes). Representing events in Arduino Cloud: an event variable (e.g. `lastEvent` as a String such as `"long_press:focus"`) and **event counters** (e.g. `dimmerUses`, increased at each use). An **instrumentation plan** (deciding in advance what to record and why). Chart widgets and time windows. **Downloading historical data** as CSV.
-- **Tools:** Arduino Cloud, a spreadsheet (Google Sheets, Excel, Numbers).
+- **New concepts:** ThingsBoard stores every telemetry value with its timestamp, so each key is a **time series**. The difference between **telemetry** (periodic measurements, e.g. `temperature`) and **events** (user actions, state changes). Representing events: an event key (e.g. `event` with a value such as `"long_press:focus"`) and **event counters** (e.g. `dimmerUses`, increased at each use). An **instrumentation plan** (deciding in advance what to record and why). Chart widgets and time windows. **Exporting** widget data as CSV/XLS.
+- **Tools:** ThingsBoard, a spreadsheet (Google Sheets, Excel, Numbers).
 - **Activities:**
-  1. Write an instrumentation plan: for each design question you have about your object ("Do people use the dimmer?", "How long do they stay?"), define which variable or event answers it and its update policy.
-  2. Add the event and counter variables to the Thing, and update them in the code. Prepare and test the changes in Wokwi first; then compile once in the Cloud (or in the IDE).
+  1. Write an instrumentation plan: for each design question you have about your object ("Do people use the dimmer?", "How long do they stay?"), define which telemetry key or event answers it and its publish policy.
+  2. Add the events and counters to the code and send them to ThingsBoard. Prepare and test the changes in Wokwi first (watching ThingsBoard's *Latest telemetry* tab), then upload to the board.
   3. Build a **"usage" dashboard**, separate from the live dashboard of Exercise 6, with charts over days and the counters. Give each widget the question it answers as its title.
-  4. Download the historical data as CSV and open it in a spreadsheet. Make a first pivot table (e.g. events per hour of the day).
-- **Design reflection:** Data only answers the questions you prepared for. What would you *like* to know that your object cannot measure? Which data should you **not** collect (data minimisation, GDPR)? Where is the data stored, and who can see it?
+  4. Export the historical data as CSV and open it in a spreadsheet. Make a first pivot table (e.g. events per hour of the day).
+- **Design reflection:** Data only answers the questions you prepared for. What would you *like* to know that your object cannot measure? Which data should you **not** collect (data minimisation, GDPR)? Where is the data stored, and who can see it — on the broker and on ThingsBoard?
 - **Validation:** Validate telemetry completeness and data ethics: compare 24 hours of logged events and time-series charts against known physical interactions to validate that no critical usage events were lost or miscategorized; validate the dataset against the instrumentation plan to ensure no unnecessary personal or identifiable data is being gathered.
+- **Reference:** [Backend: ThingsBoard](../Iot_new/backend.md)
 - **Time:** 4 h.
 
 #### Exercise 12 — How is it really used? (use and design)
 
 - **Goal:** Use field data to understand real use and to derive **design insights**.
 - **New concepts:** Field deployment ("in the wild"), usage analytics (frequency, duration, time of day, feature adoption, error paths), combining quantitative data with qualitative observations (short interviews, diaries), and the difference between intended and actual use.
-- **Tools:** Arduino Cloud (dashboards, CSV download), spreadsheet.
+- **Tools:** ThingsBoard (dashboards, CSV export), spreadsheet.
 - **Activities:**
-  1. Deploy the objects in a real space (the studio, the department, the students' homes) for **at least one week**. Objects taken home need a 2.4 GHz Wi-Fi network: the Wi-Fi credentials in the Thing can be changed without touching the code, but a new upload is needed.
-  2. Download the data (daily, if retention is short) and analyse it in the spreadsheet. Look for:
+  1. Deploy the objects in a real space (the studio, the department, the students' homes) for **at least one week**. Objects taken home need a 2.4 GHz Wi-Fi network: change the credentials in `secrets.h` and upload again (or add a Wi-Fi setup page with a library such as WiFiManager).
+  2. Export the data (daily) and analyse it in the spreadsheet. Look for:
      - features that are never used, or that are used differently than expected;
      - "struggle" patterns (e.g. repeated button presses, commands overridden right away);
      - wrong defaults (e.g. people always change the brightness right after power-on).
@@ -506,36 +582,38 @@ Phase D needs data to be kept for the whole field study. Check the **data retent
 #### Exercise 13 — Keeping it alive (maintenance)
 
 - **Goal:** Use data to **monitor and maintain** the product in the field.
-- **New concepts:** Device health variables (uptime, reboot reason, Wi-Fi signal strength RSSI, free memory, battery voltage), wear counters (servo cycles, relay switches, LED on-hours), sensor drift and plausibility checks ("stuck" values), threshold and trend-based alerts, basic **predictive maintenance**. **Triggers as alarms** (plan): conditions on health variables or on device disconnection, with e-mail or push notifications, and severity levels designed by the students.
-- **Tools:** Arduino IDE 2 to develop and test the health code on the board (Serial Monitor), then Arduino Cloud.
+- **New concepts:** Device health telemetry (uptime, reboot reason, Wi-Fi signal strength RSSI, free memory, battery voltage), wear counters (servo cycles, relay switches, LED on-hours), sensor drift and plausibility checks ("stuck" values), threshold and trend-based alerts, basic **predictive maintenance**. **Alarm rules** in the ThingsBoard device profile, with the severities *critical, major, minor, warning*, and **inactivity** of a device (no data for a given time).
+- **Tools:** Arduino IDE 2 to develop and test the health code on the board (Serial Monitor), then ThingsBoard.
 - **Activities:**
-  1. Add a small set of health variables, updated every few minutes. Wear counters are **Read & Write** variables: the cloud keeps their last value, so they survive a reboot of the object (alternatively, store them in the board's flash memory with `Preferences`).
+  1. Add a small set of health values, sent to ThingsBoard every few minutes. Wear counters must survive a reboot: store them in the board's flash memory with `Preferences`.
   2. Define alarms with a severity, for example:
-     - *critical:* object disconnected for more than 10 min (device status trigger);
+     - *critical:* object inactive for more than 10 min;
      - *major:* battery below a threshold;
      - *minor:* RSSI too weak;
      - *warning:* sensor stuck at a constant value, or servo cycles close to the expected lifetime.
 
-     Implement the simple ones as triggers, and the complex ones on the object itself, which then sets an `alarmLevel` variable (0–3) that can itself fire a trigger.
-  3. Build a **"fleet health" dashboard** for the maintainer: the studio map from Exercise 8 with each object's `alarmLevel`, RSSI and battery widgets, and charts of the wear counters.
+     Implement the simple ones as alarm rules on telemetry, and the complex ones on the object itself, which then sends an `alarmLevel` value (0–3) that a rule turns into an alarm.
+  3. Build a **"fleet health" dashboard** for the maintainer: the studio map from Exercise 8 with each object's `alarmLevel`, RSSI and battery, an alarm table, and charts of the wear counters.
   4. Optional: use the accelerometer to detect drops or vibration, or estimate when a battery will run out from its discharge trend.
 - **Design reflection:** How would the maintenance data change the *physical* design of the next version (battery size, antenna position, component choice, access for repairs)? How does it change the service (support, warranty, replacement)?
-- **Validation:** Validate diagnostic triggers and predictive alarms: simulate hardware distress (e.g. low battery voltage, weak Wi-Fi signal, or simulated sensor freeze) to validate that maintenance notifications trigger at the correct severity level without false alarms; validate whether the physical diagnostic data would provide sufficient guidance for a field technician.
+- **Validation:** Validate diagnostic triggers and predictive alarms: simulate hardware distress (e.g. low battery voltage, weak Wi-Fi signal, or simulated sensor freeze) to validate that alarms are raised at the correct severity level without false alarms; validate whether the physical diagnostic data would provide sufficient guidance for a field technician.
+- **Reference:** [Maintenance (digital twin)](../Iot_new/twin.md#maintenance) · [Energy: powering the ESP32 and measuring consumption](../Iot_new/energy.md)
 - **Time:** 3 h.
 
 #### Exercise 14 — Closing the loop (development)
 
 - **Goal:** Improve the product **after it has been deployed**, and test the changes with data.
-- **New concepts:** **Settings variables** (Read & Write variables that hold parameters such as timeouts, thresholds and colours; the cloud keeps them and sends them back to the object when it reconnects), **A/B testing**, versioning (a `firmwareVersion` String variable), **OTA updates** from the Cloud Editor (plan), and the ethics of changing a product after the user has bought it.
-- **Tools:** Arduino Cloud.
+- **New concepts:** **Shared attributes** as settings (parameters such as timeouts, thresholds and colours, edited on a ThingsBoard dashboard and pushed to the object on `v1/devices/me/attributes`; the object asks for them again when it reconnects), **A/B testing**, versioning (a `firmwareVersion` attribute), **OTA updates** (over-the-air firmware), and the ethics of changing a product after the user has bought it.
+- **Tools:** ThingsBoard, Arduino IDE 2.
 - **Activities:**
-  1. Make the key behaviour parameters configurable remotely instead of hard-coding them (e.g. `autoOffMinutes`, `lightThreshold`, `alertColor`).
-  2. Build a **settings dashboard** with sliders and selectors, so that non-programmers (e.g. the owner of the space) can also change the parameters. Changing a setting needs **no compilation at all**.
+  1. Make the key behaviour parameters configurable remotely instead of hard-coding them (e.g. `autoOffMinutes`, `lightThreshold`, `alertColor`): subscribe to `v1/devices/me/attributes` on the ThingsBoard connection and apply the values received.
+  2. Build a **settings dashboard** with sliders and selectors bound to the shared attributes, so that non-programmers (e.g. the owner of the space) can also change the parameters. Changing a setting needs **no new upload at all**.
   3. Choose one insight from Exercise 12 and create two variants (A and B), e.g. two auto-off timeouts or two feedback styles.
-  4. Assign half of the objects to A and half to B (an `abGroup` variable), run the test for a few days, and compare the metrics side by side on an **A/B dashboard**, then in the spreadsheet.
-  5. Push a firmware update **over the air** that includes the winning variant, and show the `firmwareVersion` of each object on the fleet health dashboard. Plan the OTA updates carefully: each one uses a compilation.
+  4. Assign half of the objects to A and half to B (an `abGroup` attribute), run the test for a few days, and compare the metrics side by side on an **A/B dashboard**, then in the spreadsheet.
+  5. Push a firmware update **over the air** that includes the winning variant — with **ArduinoOTA** (the board appears as a network port in the Arduino IDE when on the same Wi-Fi) or, for objects deployed elsewhere, with ThingsBoard's **OTA updates** — and show the `firmwareVersion` of each object on the fleet health dashboard.
 - **Design reflection:** The product is no longer "finished" when it leaves the factory. What does this mean for the design process, for the business model, and for the user's trust? What changes when the settings can be modified by someone who is not in the room?
-- **Validation:** Validate post-deployment iteration and remote updates: demonstrate that altering a cloud setting updates the deployed physical behavior with zero downtime or recompilation; execute an OTA update in the field and validate that the A/B metric discriminates which design variant delivers demonstrably better user experience.
+- **Validation:** Validate post-deployment iteration and remote updates: demonstrate that altering a setting on the dashboard updates the deployed physical behavior with zero downtime and no new upload; execute an OTA update in the field and validate that the A/B metric discriminates which design variant delivers demonstrably better user experience.
+- **Reference:** [Over-the-air (OTA) security](../Iot_new/security.md#over-the-air-ota-security)
 - **Time:** 4 h + a few days of testing.
 
 ---
@@ -548,13 +626,13 @@ The final project changes every year, depending on the selected design theme. Th
 
 - **Goal:** Integrate both goals in an original project.
 - **Brief:** Each group, or a team of groups, designs a **product-service ecosystem** in a domain of its choice (home, health and well-being, retail, mobility, workplace, museum, agriculture…) that:
-  1. includes **at least three cooperating objects** (at least two physical ESP32 objects, plus the hub, a service Thing, the phone or an external service) that follow a documented variable contract;
+  1. includes **at least three cooperating objects** (at least two physical ESP32 objects, plus the hub, the phone or an external service) that follow a documented topic contract;
   2. provides at least one **emergent feature** that no single object could provide;
   3. has an **instrumentation plan** covering use and maintenance;
   4. is deployed for a short field test and goes through **at least one data-driven iteration** (a settings change or an OTA update) that is justified by the data.
 - **Validation:**
   - **Live ecosystem validation:** demonstrate the multi-object ecosystem functioning reliably under real studio conditions with active user interactions.
-  - **Interoperability validation:** verify that all objects exchange data strictly adhering to the variable contract without runtime type or timing conflicts.
+  - **Interoperability validation:** verify that all objects exchange data strictly adhering to the topic contract without payload format or timing conflicts.
   - **Data-driven redesign validation:** prove that field telemetry collected directly justifies the design iteration (settings change or OTA update), and validate with end-users that the iteration improved product experience.
   - **Design reflection validation:** evaluate the ecosystem against cross-cutting themes (ethics, privacy, graceful degradation when offline, and user trust).
 - **Time:** 3–4 weeks.
@@ -565,9 +643,9 @@ The final project changes every year, depending on the selected design theme. Th
 
 These themes should come back throughout the path, especially in the design reflections:
 
-- **Privacy and ethics:** data minimisation, consent, transparency to users (e.g. an LED that shows when data is being sent), GDPR, who owns the data, where the servers are.
-- **Security:** Secret Keys and Wi-Fi passwords, who has access to a dashboard or to a shared space, what happens if someone else changes a Read & Write variable of your object.
-- **Sustainability:** energy consumption (update policies, deep sleep), product lifespan, and repairability supported by maintenance data.
-- **Platforms and dependency:** doing everything on one platform is simple, but the product now depends on a company's service, its plans and prices. What happens to the objects if the service changes or closes? What is the "exit plan"?
-- **Interoperability:** the class variable contract, and a mention of real-world standards (Matter, Home Assistant, oneM2M) as the "grown-up" version of it.
+- **Privacy and ethics:** data minimisation, consent, transparency to users (e.g. an LED that shows when data is being sent), GDPR, who owns the data, where the servers are. On a public broker *everything* is readable by anyone: a powerful way to make privacy tangible.
+- **Security:** Wi-Fi passwords and access tokens, authentication and TLS, who can publish on your command topics, what happens if someone else sends a command to your object. See [Security](../Iot_new/security.md).
+- **Sustainability:** energy consumption (publish policies, [deep sleep](../Iot_new/energy.md#esp32-sleep-modes)), product lifespan, and repairability supported by maintenance data. Why Wi-Fi is a power-hungry choice, and the alternatives: [Wireless](../Iot_new/wireless.md).
+- **Platforms and dependency:** MQTT is an open standard, so the broker can be swapped (public, self-hosted, commercial) without changing the objects' behaviour; ThingsBoard is open source and can be self-hosted. Compare with an all-in-one proprietary platform: simpler at first, but the product depends on a company's service, its plans and prices. What is the "exit plan"?
+- **Interoperability:** the class topic contract, and a mention of real-world standards (Matter, Home Assistant's MQTT discovery, Sparkplug, oneM2M) as the "grown-up" version of it.
 - **Edge vs. cloud:** what must keep working without the internet.
