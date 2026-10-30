@@ -13,7 +13,11 @@ This page describes the objects groups can choose from. Each object:
 
 Technical background for the sensors, the network and the backend is in the [IoT course notes](../Iot_new/index.md), e.g. [Simulating a node](../Iot_new/simulation.md), [MQTT](../Iot_new/simulation.md#mqtt) and [ThingsBoard](../Iot_new/backend.md).
 
-The descriptions are starting points, not specifications. Groups are expected to change states, outputs and behaviours, as long as they keep the topics of the contract.
+!!! Warning
+    The descriptions are starting points, not specifications. Groups are expected to change states, outputs and behaviours, as long as they keep the topics of the contract. 
+
+!!! Note
+    The basic activity relies on the [Focus Lamp](#1-focus-lamp) and how to exchange messages with that Object
 
 ---
 
@@ -45,8 +49,12 @@ Topics are written without the class prefix: `co2` means `iotpd/studio/co2`, `la
     - `FOCUS` — steady light; the potentiometer sets the brightness.
     - `DO_NOT_DISTURB` — slow "breathing" pulse; returns to `FOCUS` after a timeout.
 - **Publishes:** `lamp/mode` (`off` · `focus` · `dnd`).
+
+!!! Note
+    How to address a specific lamp in the Studio
+
 - **Subscribes to:** `studioScene` (`presentation` → dim), `co2` (a short flicker suggests opening the window).
-- **Design question:** how do you signal "do not disturb me" to others without disturbing *yourself*?
+- **Design question:** how to design the interface to send the messages? A potentiometer can be used to set the light intensity, but also to select the lamp to address the message. 
 
 ## 2. Focus Totem
 
