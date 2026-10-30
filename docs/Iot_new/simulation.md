@@ -176,6 +176,8 @@ You want to transform a door into a **smart door**.
 
 ![](assets/images/2024-10-25-05-01-31.png)
 
+WILDCARDS: + single level, # multi-level (the las character of a topic)
+
 TOPICS:
 
 1.  myhome/groundfloor/livingroom/temperature
