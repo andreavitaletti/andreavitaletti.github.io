@@ -337,12 +337,15 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
 
 #### Exercise 4 — Going online
 
+!!! Warning
+    The ESP32 requires a 2.4 GHz WiFi network, not 5 GHz
+
 !!! Note
     For the sake of simplicity, we recommend to use your mobile in Tethering to connect the ESP32. While WiFi is not appropriate in many IoT applications, mostly due to its high energy consumption, it is a convenient mean to test the concepts. 
 
 - **Goal:** Put the object on the network and let it "speak".
 - **New concepts:** Wi-Fi connection, [MQTT](https://andreavitaletti.github.io/Iot_new/simulation/#mqtt), the **broker** as a post office, **publish/subscribe**, **topics** (hierarchical names like `iotpd/studio/lamp/brightness`) and **payloads** (the content, here plain text), the `PubSubClient` library. Watching the network with **MQTTX** and the wildcard `#`.
-- **Tools:** Wokwi and Arduino IDE 2 for the code, [MQTTX](https://mqttx.app/downloads) to watch. [Wokwi example on MQTT](https://wokwi.com/projects/367405831605855233)
+- **Tools:** Wokwi and Arduino IDE 2 for the code, [MQTT cool](https://testclient-cloud.mqtt.cool/). [Wokwi example on MQTT](https://wokwi.com/projects/367405831605855233)
 - **Activities:**
   1. In MQTTX, connect to the class broker and subscribe to `iotpd/studio/#`. Keep this window open for the whole phase: it is your "X-ray" of the studio.
   2. Open the instructor's MQTT template in Wokwi. Add the functions from Exercise 3 and publish the sensor readings of your object under `iotpd/studio/<object>/...` (e.g. `iotpd/studio/airmonitor/temperature`). Watch them appear in MQTTX.
