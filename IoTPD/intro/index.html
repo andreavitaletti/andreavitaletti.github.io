@@ -3067,6 +3067,10 @@
 <h3 id="phase-b-the-connected-object">Phase B — The connected object</h3>
 <p>From Phase B the object talks MQTT. Everything can be designed first in Wokwi (network <code>Wokwi-GUEST</code>) while watching the messages in MQTTX, and then uploaded to the real board (§5.3).</p>
 <h4 id="exercise-4-going-online">Exercise 4 — Going online</h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the sake of simplicity, we recommend to use your mobile in Tethering to connect the ESP32. While WiFi is not appropriate in many IoT applications, mostly due to its high energy consumption, it is a convenient mean to test the concepts. </p>
+</div>
 <ul>
 <li><strong>Goal:</strong> Put the object on the network and let it "speak".</li>
 <li><strong>New concepts:</strong> Wi-Fi connection, <a href="https://andreavitaletti.github.io/Iot_new/simulation/#mqtt">MQTT</a>, the <strong>broker</strong> as a post office, <strong>publish/subscribe</strong>, <strong>topics</strong> (hierarchical names like <code>iotpd/studio/lamp/brightness</code>) and <strong>payloads</strong> (the content, here plain text), the <code>PubSubClient</code> library. Watching the network with <strong>MQTTX</strong> and the wildcard <code>#</code>.</li>
