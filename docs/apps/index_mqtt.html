@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <title>ESP32 Mobile IoT Gateway</title>
+
+  <!-- MQTT.js browser library -->
+  <script src="https://cdn.jsdelivr.net/npm/mqtt@5.10.4/dist/mqtt.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 750px;
+      margin: 30px auto;
+      padding: 15px;
+      background: #f5f5f5;
+    }
+
+    h2, h3 {
+      color: #333;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: white;
+    }
+
+    button:disabled {
+      background: #999;
+    }
+
+    #status {
+      padding: 12px;
+      background: white;
+      border-radius: 6px;
+      line-height: 1.8;
+    }
+
+    pre {
+      background: #222;
+      color: #9ef59e;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>ESP32 Mobile IoT Gateway</h2>
+
+  <button id="connectBLE">
+    1. Connect to ESP32 (BLE)
+  </button>
+
+  <button id="enableMotion">
+    2. Enable smartphone accelerometer
+  </button>
+
+  <button id="connectMQTT">
+    3. Connect to MQTT broker
+  </button>
+
+  <button id="forward">
+    4. Start forwarding
+  </button>
+
+  <div class="label">Connection status</div>
+
+  <div id="status">
+    BLE: Disconnected<br>
+    Accelerometer: Disabled<br>
+    MQTT: Disconnected<br>
+    Forwarding: Stopped
+  </div>
+
+  <h3>Latest ESP32 measurement</h3>
+  <pre id="esp32Data">Waiting for ESP32...</pre>
+
+  <h3>Latest smartphone sensor data</h3>
+  <pre id="phoneData">Waiting for accelerometer...</pre>
+
+  <h3>Enriched data published to MQTT</h3>
+  <pre id="output">Waiting for data...</pre>
+
+  <script>
+
+    // ==========================================
+    // CONFIGURATION
+    // ==========================================
+
+    const BLE_SERVICE_UUID =
+      "12345678-1234-1234-1234-123456789001";
+
+    const BLE_CHARACTERISTIC_UUID =
+      "12345678-1234-1234-1234-123456789002";
+
+    const MQTT_URL =
+      "wss://broker.emqx.io:8084/mqtt";
+
+    const MQTT_TOPIC =
+      "seedpeers/demo/esp32-001/enriched";
+
+    const DEVICE_ID = "esp32-001";
+
+
+    // ==========================================
+    // GLOBAL VARIABLES
+    // ==========================================
+
+    let bleDevice = null;
+    let bleCharacteristic = null;
+
+    let mqttClient = null;
+
+    let latestESP32 = null;
+    let latestAcceleration = null;
+
+    let motionEnabled = false;
+    let forwarding = false;
+
+
+    // ==========================================
+    // STATUS DISPLAY
+    // ==========================================
+
+    function updateStatus() {
+
+      const ble =
+        bleCharacteristic ? "Connected" : "Disconnected";
+
+      const mqtt =
+        mqttClient && mqttClient.connected
+          ? "Connected"
+          : "Disconnected";
+
+      const motion =
+        motionEnabled ? "Enabled" : "Disabled";
+
+      const forward =
+        forwarding ? "Running" : "Stopped";
+
+      document.getElementById("status").innerHTML = `
+        BLE: ${ble}<br>
+        Accelerometer: ${motion}<br>
+        MQTT: ${mqtt}<br>
+        Forwarding: ${forward}
+      `;
+    }
+
+
+    // ==========================================
+    // 1. BLUETOOTH CONNECTION
+    // ==========================================
+
+    document.getElementById("connectBLE").onclick =
+      async function () {
+
+        try {
+
+          if (!navigator.bluetooth) {
+            throw new Error(
+              "Web Bluetooth unavailable. Use Chrome on Android."
+            );
+          }
+
+          if (bleDevice && bleDevice.gatt.connected) {
+            bleDevice.gatt.disconnect();
+          }
+
+          console.log("Scanning for ESP32...");
+
+          bleDevice = await navigator.bluetooth.requestDevice({
+
+            filters: [
+              { services: [BLE_SERVICE_UUID] }
+            ]
+
+          });
+
+          bleDevice.addEventListener(
+            "gattserverdisconnected",
+            () => {
+              bleCharacteristic = null;
+              updateStatus();
+              console.log("ESP32 disconnected");
+            }
+          );
+
+          const server =
+            await bleDevice.gatt.connect();
+
+          const service =
+            await server.getPrimaryService(
+              BLE_SERVICE_UUID
+            );
+
+          bleCharacteristic =
+            await service.getCharacteristic(
+              BLE_CHARACTERISTIC_UUID
+            );
+
+          await bleCharacteristic.startNotifications();
+
+          bleCharacteristic.addEventListener(
+            "characteristicvaluechanged",
+            handleESP32Data
+          );
+
+          console.log("Connected to ESP32");
+
+          updateStatus();
+
+        } catch (error) {
+
+          console.error("BLE error:", error);
+          alert("BLE error: " + error.message);
+
+        }
+
+      };
+
+
+    // ==========================================
+    // RECEIVE ESP32 NOTIFICATIONS
+    // ==========================================
+
+    function handleESP32Data(event) {
+
+      try {
+
+        const value = event.target.value;
+
+        const bytes = new Uint8Array(
+          value.buffer,
+          value.byteOffset,
+          value.byteLength
+        );
+
+        const text = new TextDecoder().decode(bytes);
+
+        latestESP32 = JSON.parse(text);
+
+        document.getElementById("esp32Data").textContent =
+          JSON.stringify(latestESP32, null, 2);
+
+        enrichAndPublish();
+
+      } catch (error) {
+
+        console.error("ESP32 data error:", error);
+
+      }
+
+    }
+
+
+    // ==========================================
+    // 2. SMARTPHONE ACCELEROMETER
+    // ==========================================
+
+    document.getElementById("enableMotion").onclick =
+      async function () {
+
+        try {
+
+          if (!("DeviceMotionEvent" in window)) {
+            throw new Error(
+              "DeviceMotion API not available"
+            );
+          }
+
+          // Required by some browsers, notably iOS Safari.
+          if (
+            typeof DeviceMotionEvent.requestPermission ===
+            "function"
+          ) {
+
+            const permission =
+              await DeviceMotionEvent.requestPermission();
+
+            if (permission !== "granted") {
+              throw new Error(
+                "Accelerometer permission denied"
+              );
+            }
+
+          }
+
+          window.addEventListener(
+            "devicemotion",
+            handleMotion
+          );
+
+          motionEnabled = true;
+
+          updateStatus();
+
+        } catch (error) {
+
+          console.error("Motion error:", error);
+          alert(error.message);
+
+        }
+
+      };
+
+
+    function handleMotion(event) {
+
+      const acceleration =
+        event.accelerationIncludingGravity ||
+        event.acceleration;
+
+      if (!acceleration) return;
+
+      const { x, y, z } = acceleration;
+
+      if (x === null || y === null || z === null) {
+        return;
+      }
+
+      latestAcceleration = {
+
+        x: x,
+        y: y,
+        z: z,
+
+        timestamp_ms: Date.now()
+
+      };
+
+      document.getElementById("phoneData").textContent =
+        JSON.stringify(latestAcceleration, null, 2);
+
+    }
+
+
+    // ==========================================
+    // 3. MQTT CONNECTION
+    // ==========================================
+
+    document.getElementById("connectMQTT").onclick =
+      function () {
+
+        if (typeof mqtt === "undefined") {
+          alert("MQTT.js library failed to load");
+          return;
+        }
+
+        if (mqttClient) {
+          mqttClient.end(true);
+        }
+
+        const clientId =
+          "gateway_" +
+          Math.random().toString(16).slice(2, 12);
+
+        mqttClient = mqtt.connect(MQTT_URL, {
+
+          clientId: clientId,
+
+          clean: true,
+
+          connectTimeout: 10000,
+
+          reconnectPeriod: 3000,
+
+          keepalive: 60
+
+        });
+
+        mqttClient.on("connect", function () {
+
+          console.log("MQTT connected");
+
+          updateStatus();
+
+        });
+
+        mqttClient.on("reconnect", function () {
+
+          console.log("MQTT reconnecting");
+
+          updateStatus();
+
+        });
+
+        mqttClient.on("offline", function () {
+
+          console.log("MQTT offline");
+
+          updateStatus();
+
+        });
+
+        mqttClient.on("error", function (error) {
+
+          console.error("MQTT error:", error);
+
+          updateStatus();
+
+        });
+
+        mqttClient.on("close", function () {
+
+          updateStatus();
+
+        });
+
+      };
+
+
+    // ==========================================
+    // 4. ENRICH AND PUBLISH
+    // ==========================================
+
+    function enrichAndPublish() {
+
+      if (!latestESP32) return;
+
+      const enriched = {
+
+        device_id:
+          latestESP32.id || DEVICE_ID,
+
+        sequence:
+          latestESP32.seq,
+
+        esp32_uptime_ms:
+          latestESP32.uptime_ms,
+
+        esp32_timestamp_received_ms:
+          Date.now(),
+
+        sensors: {
+
+          temperature:
+            latestESP32.temp,
+
+          humidity:
+            latestESP32.humidity
+
+        },
+
+        smartphone: {
+
+          accelerometer:
+            latestAcceleration
+
+        }
+
+      };
+
+      document.getElementById("output").textContent =
+        JSON.stringify(enriched, null, 2);
+
+      if (forwarding) {
+
+        publishMQTT(enriched);
+
+      }
+
+    }
+
+
+    // ==========================================
+    // MQTT PUBLISH
+    // ==========================================
+
+    function publishMQTT(data) {
+
+      if (!mqttClient || !mqttClient.connected) {
+
+        console.warn(
+          "MQTT unavailable: measurement not published"
+        );
+
+        return;
+
+      }
+
+      mqttClient.publish(
+
+        MQTT_TOPIC,
+
+        JSON.stringify(data),
+
+        {
+          qos: 1,
+          retain: false
+        },
+
+        function (error) {
+
+          if (error) {
+            console.error("Publish error:", error);
+          } else {
+            console.log("Measurement published");
+          }
+
+        }
+
+      );
+
+    }
+
+
+    // ==========================================
+    // 5. START / STOP FORWARDING
+    // ==========================================
+
+    document.getElementById("forward").onclick =
+      function () {
+
+        forwarding = !forwarding;
+
+        this.textContent = forwarding
+          ? "Stop forwarding"
+          : "4. Start forwarding";
+
+        updateStatus();
+
+      };
+
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+
+    updateStatus();
+
+    console.log("Mobile IoT Gateway initialized");
+
+  </script>
+
+</body>
+</html>

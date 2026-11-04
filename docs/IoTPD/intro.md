@@ -24,8 +24,13 @@ The connected parts of the course are built on an **open standard, MQTT**, rathe
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
 | **[Wokwi](https://wokwi.com/)** (browser simulator)                   | Sketching and trying behaviour, with no hardware and no risk — **including Wi-Fi and MQTT**            | Limited number of simulations on the Free plan             |
 | **[Arduino IDE 2](https://www.arduino.cc/en/software)** (desktop app) | Uploading to the real board, Serial Monitor/Plotter, unlimited uploads                                 | Does not create dashboards                                 |
-| **[MQTTX](https://mqttx.app/)** (desktop / web app)                   | Looking inside the network: watching every message of the studio, sending commands by hand            | A debugging tool, not an interface for end users           |
+| **[MQTT.Cool test client](https://testclient-cloud.mqtt.cool/)** (browser, nothing to install) | Looking inside the network: watching every message of the studio, sending commands by hand | A debugging tool, not an interface for end users           |
 | **[ThingsBoard](https://demo.thingsboard.io/)** (demo server)         | *Only when necessary*: dashboards for other people, history, alarms, remote settings, fleet management | Shared public demo server: not for personal or sensitive data |
+
+If you prefer a desktop application, **[MQTTX](https://mqttx.app/)** (Windows, macOS, Linux) does the same job as the MQTT.Cool test client, with a few extras such as saved connections and a topic tree; everything below works with either.
+
+!!! note "Same broker, different door"
+    The ESP32 connects to the broker with plain MQTT (port 1883), while a browser client such as MQTT.Cool connects through **WebSockets**. With `test.mosquitto.org` use port **8081** (secure WebSockets, `wss://`) in the browser. Both reach the same broker, so they see the same messages.
 
 Objects talk to each other through a public **MQTT broker** (e.g. `test.mosquitto.org`): no account, no quota, and it works both from the real board and from Wokwi. ThingsBoard enters the course from Exercise 6, when the object must be used, monitored and configured by people who are not its programmers.
 
@@ -56,7 +61,7 @@ This scenario makes both goals concrete. Students experience first-hand what cha
 - Product design students (bachelor or master level) with **limited experience of digital tools for programming**.
 - No prior programming experience is required. Variables, `if` and loops are introduced in Exercises 0–1, always starting from working examples that students modify rather than write from scratch.
 - Groups of 2–3 students, one hardware kit per group.
-- Each student needs a laptop with a Chromium-based browser or Firefox, the **Arduino IDE 2** (with the ESP32 package and the PubSubClient library) and **MQTTX**. From Exercise 6 each group needs a (free) account on **demo.thingsboard.io**. A smartphone with an MQTT dashboard app (e.g. **IoT MQTT Panel**, or the MQTTX web client in the browser) is useful from Exercise 5.
+- Each student needs a laptop with a Chromium-based browser or Firefox, the **Arduino IDE 2** (with the ESP32 package and the PubSubClient library); the MQTT client runs in the browser. From Exercise 6 each group needs a (free) account on **demo.thingsboard.io**. A smartphone with an MQTT dashboard app (e.g. **IoT MQTT Panel**, or the MQTT.Cool test client in the phone's browser) is useful from Exercise 5.
 
 ---
 
@@ -132,8 +137,8 @@ On top of this, ThingsBoard is used only for what plain MQTT does not give: inte
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | Putting the object on the network          | Wi-Fi + an MQTT client (`PubSubClient`) connected to a public broker                                                           | IDE / Wokwi              |
 | Describing what the object senses and does | **Topics** and **payloads** (the topic contract, §5.2)                                                                          | MQTT                     |
-| Watching and debugging the network         | Subscribing to `iotpd/studio/#` and seeing every message live                                                                   | MQTTX                    |
-| Phone as a remote                          | An MQTT panel app (buttons, sliders, gauges bound to topics)                                                                   | IoT MQTT Panel / MQTTX web |
+| Watching and debugging the network         | Subscribing to `iotpd/studio/#` and seeing every message live                                                                   | MQTT.Cool                    |
+| Phone as a remote                          | An MQTT panel app (buttons, sliders, gauges bound to topics)                                                                   | IoT MQTT Panel / MQTT.Cool |
 | Objects talking to objects                 | **Shared topics**: one object publishes, any other subscribes                                                                   | MQTT                     |
 | Remembering the last state                 | **Retained messages**: the broker keeps the last value and gives it to whoever subscribes later                                  | MQTT                     |
 | Knowing who is online                      | **Last Will and Testament (LWT)**: the broker announces "offline" on behalf of an object that disappears                        | MQTT                     |
@@ -171,7 +176,7 @@ Each group also documents, for its own object, a **product sheet of its topics**
 Rules:
 
 - Topic levels in `camelCase`, English, no spaces or accents; units are written in the documentation, not in the topic.
-- Payloads are **plain text** (`812`, `1`, `focus`), easy to read in MQTTX and to send from a phone. JSON is used only towards ThingsBoard.
+- Payloads are **plain text** (`812`, `1`, `focus`), easy to read in MQTT.Cool and to send from a phone. JSON is used only towards ThingsBoard.
 - **State** topics (what *is*) are published by the object itself, usually retained. **Command** topics (`.../set/...`, what someone *wants*) are published by others and never retained. The object obeys a command and then publishes its new state.
 
 Designing this contract is itself a design activity: it is the object's **"interface" towards other objects**, just as its form and controls are its interface towards people.
@@ -182,13 +187,13 @@ Wokwi can simulate Wi-Fi (network `Wokwi-GUEST`, no password) and reach public M
 
 | Step                         | Tool                       | Question it answers                                    |
 | ---------------------------- | -------------------------- | ------------------------------------------------------ |
-| **1. Sketch & simulate**     | Wokwi + MQTTX              | Does the logic work? Do the right messages go out?     |
-| **2. Try on the real board** | Arduino IDE 2 + MQTTX      | Does it work with real sensors, parts and Wi-Fi?       |
+| **1. Sketch & simulate**     | Wokwi + MQTT.Cool              | Does the logic work? Do the right messages go out?     |
+| **2. Try on the real board** | Arduino IDE 2 + MQTT.Cool      | Does it work with real sensors, parts and Wi-Fi?       |
 | **3. Serve people**          | ThingsBoard                | Does it work as a service for someone who is not me?   |
 
 Practical tips:
 
-- **MQTTX is the stand-in for any other object.** Before your partner's object exists, publish its messages by hand from MQTTX (e.g. `iotpd/studio/co2` → `1500`) and check how your object reacts.
+- **The MQTT client is the stand-in for any other object.** Before your partner's object exists, publish its messages by hand from MQTT.Cool (e.g. `iotpd/studio/co2` → `1500`) and check how your object reacts.
 - **Keep the behaviour in functions.** The same functions (e.g. `updateLamp()`, `readSensors()`) are reused unchanged from Exercise 3 onward; only the "glue" with MQTT is new.
 - **Keep secrets in one file.** Wi-Fi password and ThingsBoard access token go in a `secrets.h` tab, never in screenshots or shared Wokwi projects (see [Identity and secret management](../Iot_new/security.md#identity-and-secret-management)).
 - **Moving from Wokwi to the board** is described in [From Wokwi to a real device](../Iot_new/real.md#from-wokwi-to-a-real-device).
@@ -211,7 +216,7 @@ The exercises are grouped in four phases. The first two phases build the skills;
 
 ### Concept progression
 
-W = Wokwi, IDE = Arduino IDE 2, MQ = MQTT broker + MQTTX, TB = ThingsBoard. **Bold** = main tool of the exercise.
+W = Wokwi, IDE = Arduino IDE 2, MQ = MQTT broker + MQTT.Cool test client, TB = ThingsBoard. **Bold** = main tool of the exercise.
 
 | #   | Exercise                                | New concepts                                                                                                                                       | Tools                 | Builds on |
 | --- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
@@ -219,7 +224,7 @@ W = Wokwi, IDE = Arduino IDE 2, MQ = MQTT broker + MQTTX, TB = ThingsBoard. **Bo
 | 1   | The Tactile Switch (GPIO Input)         | `pinMode(..., INPUT_PULLUP)`, `digitalRead()`, Serial Monitor, conditional logic (`if/else`), momentary vs. latching/toggle state, switch bouncing | W, **IDE**            | 0         |
 | 2   | The Continuous Dial (Analog Read & PWM) | Potentiometer, `analogRead()` (ADC 0–4095), Serial Plotter, PWM LED dimming (`analogWrite()`), `map()`, controlling brightness and blink tempo     | W, **IDE**            | 0, 1      |
 | 3   | The isolated smart object               | Sense→decide→act loop, state machines, non-blocking timing with `millis()`, introducing specialized project modules (sensors & actuators)          | **W**, IDE            | 1, 2      |
-| 4   | Going online                            | Wi-Fi, broker, publish/subscribe, topics and payloads, `PubSubClient`, watching messages in MQTTX                                                 | **W**, IDE, **MQ**    | 3         |
+| 4   | Going online                            | Wi-Fi, broker, publish/subscribe, topics and payloads, `PubSubClient`, watching messages in MQTT.Cool                                                 | **W**, IDE, **MQ**    | 3         |
 | 5   | Remote control                          | Subscribing, message callback, command vs. state topics, retained messages, phone as a remote                                                     | W, **MQ**             | 4         |
 | 6   | The object as a service                 | Publish policies, QoS, Last Will (online/offline), security; **first ThingsBoard device and dashboard**, sharing                                   | IDE, MQ, **TB**       | 4, 5      |
 | 7   | Objects talking to objects              | **Shared topics**, topic contract, loose coupling, events vs. commands                                                                             | **MQ**                | 5, 6      |
@@ -265,7 +270,7 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
   1. **Wokwi:** Open the ESP32 *Blink* project provided by the instructor, press *Play*, change the duration numbers in `delay()`, and observe the changes immediately. Add a second LED to the circuit on another GPIO pin and make them alternate.
   2. **Arduino IDE 2:** Install the IDE and the ESP32 board package (step-by-step sheet provided). Connect the ESP32 via USB, select the correct COM/serial port and board model, and upload the *Blink* sketch to the physical hardware.
   3. **Visual expression:** Experiment with the rhythm and cadence of the LED to communicate distinct product "moods" (e.g. calm beacon, urgent warning, natural heartbeat pulse). Test in Wokwi first, then flash to the real board.
-  4. Prepare the environment for Phase B: install the **PubSubClient** library in the IDE and install **MQTTX**.
+  4. Prepare the environment for Phase B: install the **PubSubClient** library in the IDE and bookmark the **[MQTT.Cool test client](https://testclient-cloud.mqtt.cool/)**.
 - **Design reflection:** Even a single light emitter carries expressive semantics. Which blinking patterns are instantly understandable to a human user without instruction? What physical differences did you notice between the simulated LED on screen and the real LED in physical space?
 - **Validation:** Validate the visual communication: test the three mood rhythms with a peer without explaining them in advance. Can an observer unambiguously tell which pattern signals "calm", "alarm", or "heartbeat"? Validate that the physical LED's perceived brightness, viewing angle, and timing match the intended communication.
 - **Reference:** [Simulating a node](../Iot_new/simulation.md#lets-start) · [A real node: Arduino IDE](../Iot_new/real.md#arduino-ide) · [From Wokwi to a real device](../Iot_new/real.md#from-wokwi-to-a-real-device)
@@ -333,7 +338,7 @@ No external libraries are needed for Exercises 0 to 2; the entire focus is on ma
 
 ### Phase B — The connected object
 
-From Phase B the object talks MQTT. Everything can be designed first in Wokwi (network `Wokwi-GUEST`) while watching the messages in MQTTX, and then uploaded to the real board (§5.3).
+From Phase B the object talks MQTT. Everything can be designed first in Wokwi (network `Wokwi-GUEST`) while watching the messages in MQTT.Cool, and then uploaded to the real board (§5.3).
 
 #### Exercise 4 — Going online
 
@@ -344,13 +349,13 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
     For the sake of simplicity, we recommend to use your mobile in Tethering to connect the ESP32. While WiFi is not appropriate in many IoT applications, mostly due to its high energy consumption, it is a convenient mean to test the concepts. 
 
 - **Goal:** Put the object on the network and let it "speak".
-- **New concepts:** Wi-Fi connection, [MQTT](https://andreavitaletti.github.io/Iot_new/simulation/#mqtt), the **broker** as a post office, **publish/subscribe**, **topics** (hierarchical names like `iotpd/studio/lamp/brightness`) and **payloads** (the content, here plain text), the `PubSubClient` library. Watching the network with **MQTTX** and the wildcard `#`.
+- **New concepts:** Wi-Fi connection, [MQTT](https://andreavitaletti.github.io/Iot_new/simulation/#mqtt), the **broker** as a post office, **publish/subscribe**, **topics** (hierarchical names like `iotpd/studio/lamp/brightness`) and **payloads** (the content, here plain text), the `PubSubClient` library. Watching the network with **MQTT.Cool** and the wildcard `#`.
 - **Tools:** Wokwi and Arduino IDE 2 for the code, [MQTT cool](https://testclient-cloud.mqtt.cool/). [Wokwi example on MQTT](https://wokwi.com/projects/367405831605855233)
 - **Activities:**
-  1. In MQTTX, connect to the class broker and subscribe to `iotpd/studio/#`. Keep this window open for the whole phase: it is your "X-ray" of the studio.
-  2. Open the instructor's MQTT template in Wokwi. Add the functions from Exercise 3 and publish the sensor readings of your object under `iotpd/studio/<object>/...` (e.g. `iotpd/studio/airmonitor/temperature`). Watch them appear in MQTTX.
+  1. In the [MQTT.Cool test client](https://testclient-cloud.mqtt.cool/), connect to the class broker and subscribe to `iotpd/studio/#`. Keep this window open for the whole phase: it is your "X-ray" of the studio.
+  2. Open the instructor's MQTT template in Wokwi. Add the functions from Exercise 3 and publish the sensor readings of your object under `iotpd/studio/<object>/...` (e.g. `iotpd/studio/airmonitor/temperature`). Watch them appear in MQTT.Cool.
   3. Move the same sketch to the real board with the Arduino IDE (change only the Wi-Fi credentials in `secrets.h`).
-  4. Look at the MQTTX window on the projector: the whole class is now online, and everybody can see everybody's messages.
+  4. Look at the MQTT.Cool window on the projector: the whole class is now online, and everybody can see everybody's messages.
 - **Code skeleton:**
 
   ```cpp
@@ -398,7 +403,7 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
   ```
 
 - **Design reflection:** Your data is now visible to others — on a public broker, to *anyone in the world* who subscribes to `#`. What does that imply for privacy? What should an object send over the network, and what should it keep to itself?
-- **Validation:** Validate connectivity and data privacy: measure with MQTTX the delay between a physical change (e.g. covering the LDR) and the arrival of the message, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced by simply listening to your topics.
+- **Validation:** Validate connectivity and data privacy: measure with MQTT.Cool the delay between a physical change (e.g. covering the LDR) and the arrival of the message, and conduct a privacy walkthrough with another group to evaluate what personal habits or room states could be unintentionally deduced by simply listening to your topics.
 - **Reference:** [MQTT](../Iot_new/simulation.md#mqtt) · [Connected by MQTT (Wokwi example)](../Iot_new/simulation.md#its-time-to-be-connected-by-mqtt) · [Wireless connectivity](../Iot_new/wireless.md)
 - **Time:** 3 h.
 
@@ -406,9 +411,9 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
 
 - **Goal:** Let the network change the object's behaviour.
 - **New concepts:** **Subscribing** to a topic, the **message callback** (the function that runs when a message arrives), **command** topics (`.../set/brightness`) versus **state** topics (`.../brightness`), **retained messages** (the broker keeps the last state, so a dashboard or object that connects later immediately knows it), the phone as a remote (an MQTT panel app with buttons and sliders bound to topics), keeping physical and digital controls consistent.
-- **Tools:** MQTTX and a phone MQTT panel app; Wokwi to test the callbacks.
+- **Tools:** MQTT.Cool and a phone MQTT panel app; Wokwi to test the callbacks.
 - **Activities:**
-  1. Subscribe to `iotpd/studio/<object>/set/#` and implement a callback that reacts to commands such as `set/mode`, `set/brightness`, `set/color`. Test by publishing commands by hand from MQTTX.
+  1. Subscribe to `iotpd/studio/<object>/set/#` and implement a callback that reacts to commands such as `set/mode`, `set/brightness`, `set/color`. Test by publishing commands by hand from MQTT.Cool.
   2. After obeying a command, the object publishes its **new state** on the state topic, **retained** (e.g. `iotpd/studio/lamp/brightness` → `180`).
   3. Build a control panel on the phone: a slider that publishes on `set/brightness`, a gauge or text that shows the state topic.
   4. Keep the physical controls working. When the user presses the object's own button, the code must also publish the new state, so that every panel always shows the truth.
@@ -447,10 +452,10 @@ From Phase B the object talks MQTT. Everything can be designed first in Wokwi (n
   - **Last Will and Testament (LWT):** when connecting, the object leaves a "will" with the broker (`<object>/status` → `offline`, retained); if the object disappears, the broker publishes it. On connection the object publishes `online` itself. What the object shows to the user while it is connecting or offline, and non-blocking reconnection.
   - **Security:** Wi-Fi passwords and access tokens live in `secrets.h` and are never shared; a public broker has no access control (anyone can read and write), which is why real products use authentication and **TLS** (port 8883).
   - **[ThingsBoard](https://thingsboard.io/)**: when the object must serve people who are not its programmers. A **device** with its **access token**, sending **telemetry** as JSON on `v1/devices/me/telemetry`; a **dashboard** designed for a specific user; **sharing** a dashboard (public link or customer user).
-- **Tools:** Arduino IDE 2, MQTTX, ThingsBoard (`demo.thingsboard.io`).
+- **Tools:** Arduino IDE 2, MQTT.Cool, ThingsBoard (`demo.thingsboard.io`).
 - **Activities:**
   1. Set a sensible publish policy for each value and justify it (e.g. temperature on change with a 0.5 °C threshold; light every 60 s).
-  2. Add the LWT and show the connection status on the object itself (e.g. a slow blue blink while connecting). Check in MQTTX that `status` turns `offline` when you unplug the board (it takes up to the keep-alive time, ~15 s by default).
+  2. Add the LWT and show the connection status on the object itself (e.g. a slow blue blink while connecting). Check in MQTT.Cool that `status` turns `offline` when you unplug the board (it takes up to the keep-alive time, ~15 s by default).
   3. Create a ThingsBoard account, a **device** for your object, and copy its access token. Add a second MQTT connection that sends the object's main values to ThingsBoard (see code below). Keep the studio broker connection for the other objects.
   4. Design a ThingsBoard **dashboard** for a specific user. Which information is shown first, and which is hidden? Use layout, widget choice and labels on purpose; check how it looks on a phone.
   5. Share the dashboard with the instructor and with another group.
@@ -486,13 +491,13 @@ Phase C needs all the objects of the class to talk on the **same broker** with t
 
 - **Goal:** Make objects from **different groups** cooperate directly, without any central logic.
 - **New concepts:** **Shared topics** (one object publishes `iotpd/studio/co2`, any object can subscribe), the topic contract (§5.2), loose coupling (the object that produces a value does not need to know who uses it), events versus commands (announcing "this happened" versus asking "do this").
-- **Tools:** MQTT broker, MQTTX.
+- **Tools:** MQTT broker, MQTT.Cool.
 - **Activities:**
   1. Groups pair up. Object A reacts to a topic published by object B. Examples:
      - The door presence badge publishes `someoneAtDoor`, and the desk lamp greets the person.
      - The air monitor's `co2` goes above a threshold, and the focus totem suggests a break with a colour.
      - The plant pot's `plant/mode` becomes `thirsty`, and the coffee corner counter shows a reminder.
-  2. Subscribe to the partner's topic exactly as written in the contract, and extend the callback to react to it. Before the partner is ready, **impersonate them from MQTTX**.
+  2. Subscribe to the partner's topic exactly as written in the contract, and extend the callback to react to it. Before the partner is ready, **impersonate them from MQTT.Cool**.
   3. Then swap partners. If the contract is respected, the objects must work with *new* partners without changing the code of either group: an object that publishes `co2` does not care who listens.
 - **Design reflection:** What made it easy or hard to connect to someone else's object? The contract is a design artefact, just like a physical connector standard.
 - **Validation:** Validate ecosystem interoperability: test the exchange with one partner object, then swap to a different group's object without recompiling either firmware. Validate whether adhering to the shared topic contract makes multi-object cooperation truly plug-and-play or uncovers ambiguous edge cases in the contract (units, ranges, retained or not, `1` vs `true`).
@@ -503,7 +508,7 @@ Phase C needs all the objects of the class to talk on the **same broker** with t
 
 - **Goal:** Make the ecosystem aware of which objects are alive and able to cope when some are missing.
 - **New concepts:** The `status` topic and LWT seen from the *other* objects, **heartbeats** (a counter that increases every minute: if it stops, the object is frozen even if still connected), **wildcards** (`iotpd/studio/+/status` to watch everybody), a retained `capabilities` description of each object, **graceful degradation**. ThingsBoard **device activity** (a device is marked inactive when it stops sending).
-- **Tools:** MQTT broker and MQTTX; Wokwi to test the fallback logic (a switch in the simulator plays the role of "partner offline"); ThingsBoard for the studio map.
+- **Tools:** MQTT broker and MQTT.Cool; Wokwi to test the fallback logic (a switch in the simulator plays the role of "partner offline"); ThingsBoard for the studio map.
 - **Activities:**
   1. Each object publishes `<object>/heartbeat` every minute and a retained `<object>/capabilities` (e.g. `sensors: temp, lux; actuators: rgb`), both part of the contract.
   2. Objects that depend on a partner subscribe to its `status` and `heartbeat`. If the status is `offline`, or the heartbeat does not change for 3 minutes, they switch to a fallback, e.g. the lamp goes back to its local PIR when the door badge is offline.
@@ -523,7 +528,7 @@ Phase C needs all the objects of the class to talk on the **same broker** with t
   - **External services:** the hub calls a web API over HTTP (e.g. [Open-Meteo](https://open-meteo.com/), free and without key) and republishes the result as a studio topic, e.g. `weather/rainExpected`.
   - **Alarms and notifications** in ThingsBoard (alarm rules on telemetry, shown in an alarm widget and in the notification centre).
   - Trade-offs between logic in the objects (edge) and logic in the hub or in the cloud.
-- **Tools:** MQTT broker, MQTTX, phone panel; ThingsBoard for alarms.
+- **Tools:** MQTT broker, MQTT.Cool, phone panel; ThingsBoard for alarms.
 - **Activities:**
   1. Build a **scene panel** on the phone (or in a ThingsBoard dashboard of the hub) that publishes `studioScene` (`normal`, `focus`, `presentation`, `closed`), retained. Implement at least one scene in every object, e.g. *"presentation"*: lamps dim, focus totems turn blue, the noise meter alerts on loud sounds.
   2. Implement one **context rule** in the hub that uses more than one object, e.g. "if nobody is present for 30 min and the window monitor says the window is open → publish `windowAlert`". The hub also sends `windowAlert` to its ThingsBoard device, where an **alarm rule** raises an alarm visible on the phone.
@@ -539,9 +544,9 @@ Phase C needs all the objects of the class to talk on the **same broker** with t
 
 - **Goal:** Consolidate Goal 1 by designing the studio as a **system** rather than a collection of objects.
 - **New concepts:** System maps, emergent behaviour, conflicts between objects (two rules that want opposite things), priorities and user override, ecosystem value versus object value. **Assets and relations** in ThingsBoard (e.g. *Studio* → *Desk area*, *Coffee corner* → devices) as a simple digital model of places and roles.
-- **Tools:** MQTTX, ThingsBoard, paper and post-its.
+- **Tools:** MQTT.Cool, ThingsBoard, paper and post-its.
 - **Activities:**
-  1. As a whole class, map all the objects, topics, rules and people in the studio. Compare the paper map with the live topic tree in MQTTX.
+  1. As a whole class, map all the objects, topics, rules and people in the studio. Compare the paper map with the live messages in the MQTT client.
   2. Turn the map into a model in ThingsBoard: create an **asset** for the studio and one for each area, and relate every device to its area. Organise the studio dashboard by area.
   3. Find at least one **emergent** feature, a service that no single object can provide (e.g. an "occupancy and comfort" index of the room built from every object's data).
   4. Find and solve at least one **conflict** (e.g. the energy-saving rule turns the lamp off while someone is reading in a corner the PIR cannot see). Decide the priorities: what can the user always override?
