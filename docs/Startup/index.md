@@ -17,6 +17,12 @@ Due to the limited time of the course, we will only marginally consider PART III
     
     The book is an excellent guide. To provide an overview of the concepts I'm going to embed a [selection](Learn from the master.md) of the Linkedin post from [Ash Maurya](https://www.linkedin.com/in/ashmaurya/)
 
+## The Essence
+
+We aim to create value for a specific target who recognize that value and is willing to pay for it.
+
+![](images/triangle.png)
+
 ## The exam
 
 ### Individual assignments (typically three):
