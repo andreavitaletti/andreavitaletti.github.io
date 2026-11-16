@@ -79,7 +79,7 @@
 * [EE374 Stanford](https://ee374.stanford.edu/)
 * [15827-E / 18847-D Carnegie Mellon](http://www.cs.cmu.edu/~runting/blockchain/blockchain-course.html)
 * [Decentralized Thoughts](https://decentralizedthoughts.github.io/)
-* [Bitcoin and Cryptocurrency Technologies](https://d28rh4a8wq0iu5.cloudfront.net/bitcointech/readings/princeton_bitcoin_book.pdf)
+* [Bitcoin and Cryptocurrency Technologies](https://bitcoinbook.cs.princeton.edu/)
 * [Mastering Bitcoin](https://github.com/bitcoinbook/bitcoinbook)
 * [Mastering Ethereum](https://github.com/ethereumbook/ethereumbook)
 
