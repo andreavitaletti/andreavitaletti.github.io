@@ -10,6 +10,7 @@ theme:
     primary: lime
   features:
     - content.tooltips
+    - navigation.indexes  # clicking a section opens its index.md (must be the section's first page)
 
 markdown_extensions:
   - pymdownx.critic:
@@ -31,10 +32,15 @@ plugins:
 
 nav:
   - About me: index.md
-  - Blockchain: BC
-  - Startup: Startup
+  - Blockchain:
+      - BC/index.md
+      - blockchain-demo: BC/blockchain-demo.md
+      - slides: BC/slides.md
+  - Startup:
+      - Startup/index.md
+      - Learn from the master: Startup/Learn from the master.md
   - IoT:
-      - Home: Iot_new/index.md
+      - Iot_new/index.md
       - Premise: Iot_new/premise.md
       - Intro: Iot_new/intro.md
       - Simulate a node: Iot_new/simulation.md
