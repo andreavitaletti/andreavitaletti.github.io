@@ -1843,11 +1843,16 @@ graph TD
     U --&gt; S["Solution:&lt;br/&gt;The tangible proof that you can&lt;br/&gt;deliver on your promise"]
     Constraints --&gt;|IoT| S
 
-    q1([What is the single feature that allows you to fulfill your promise?]) -.-&gt; S
-q2(["What are the current solutions used&lt;br/&gt;by customers, and why are they unsatisfactory?"]) -.-&gt; U
+    S --&gt;|IoT Role| I["What are the components of your solution? &lt;br/&gt; What data they exchange? &lt;br/&gt; For what purpose? &lt;br/&gt; What kind of feedback provides?"]:::red
 
-    style q1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
-    style q2 fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+    q1([What is the single feature that allows you to fulfill your promise?]) -.-&gt; S
+    q2(["What are the current solutions used&lt;br/&gt;by customers, and why are they unsatisfactory?"]) -.-&gt; U
+    q3(["Is the IoT fubnctional to the achievement of the Unique Value Proposition?"]) -.-&gt; I
+
+    classDef question fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f
+    class q1,q2,q3 question
+
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
 </code></pre>
 <blockquote>
 <p>📊 <strong>Course Slides:</strong> <a href="assets/slides.pdf">Download Presentation Slides (PDF)</a> | <a href="assets/slides/">View Slide Source (Marp Markdown)</a></p>
