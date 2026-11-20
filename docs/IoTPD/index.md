@@ -12,9 +12,11 @@ graph TD
     U --> S["Solution:<br/>The tangible proof that you can<br/>deliver on your promise"]
     Constraints -->|IoT| S
 
-    q1([What is the single feature that allows you to fulfill your promise?]) --> S
+    q1([What is the single feature that allows you to fulfill your promise?]) -.-> S
+q2(["What are the current solutions used<br/>by customers, and why are they unsatisfactory?"]) -.-> U
 
     style q1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+    style q2 fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
     
 ```
 
