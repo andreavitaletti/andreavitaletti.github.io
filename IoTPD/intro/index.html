@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
     
     
       
@@ -2352,6 +2352,21 @@
 
 
 <h1 id="iot-for-product-design">IoT for Product Design</h1>
+<pre class="mermaid"><code>
+graph TD
+    G["Goals of your customer"] --&gt; P["Problems that make it difficult&lt;br/&gt;to achieve those goals"]
+    Constraints -.-&gt; P
+
+    P --&gt; U["Unique Value Proposition:&lt;br/&gt;A promise to solve the problem and achieve&lt;br/&gt;the goal by providing unique value"]
+    Constraints -.-&gt; U
+
+    U --&gt; S["Solution:&lt;br/&gt;The tangible proof that you can&lt;br/&gt;deliver on your promise"]
+    Constraints --&gt;|IoT| S
+
+    q1([What is the single feature that allows you to fulfill your promise?]) --&gt; S
+
+    style q1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+</code></pre>
 <blockquote>
 <p>📊 <strong>Course Slides:</strong> <a href="../assets/slides.pdf">Download Presentation Slides (PDF)</a> | <a href="../assets/slides/">View Slide Source (Marp Markdown)</a></p>
 </blockquote>
