@@ -12,11 +12,13 @@ graph TD
     U --> S["Solution:<br/>The tangible proof that you can<br/>deliver on your promise"]
     Constraints -->|IoT| S
 
-    S -->|IoT Role| I["What are the components of your solution? <br/> What data they exchange? <br/> For what purpose? <br/> What kind of feedback provides?"]:::red
+    S -->|IoT Role| I["What are the components of your solution?<br/>What data do they exchange?<br/>For what purpose?<br/>What kind of feedback does it provide?"]:::red
+
+    I -->|Can I implement it?|T["What sensors? What actuators? Do I have enough energy? What protocol? etc."]:::red
 
     q1([What is the single feature that allows you to fulfill your promise?]) -.-> S
     q2(["What are the current solutions used<br/>by customers, and why are they unsatisfactory?"]) -.-> U
-    q3(["Is the IoT fubnctional to the achievement of the Unique Value Proposition?"]) -.-> I
+    q3(["Is the IoT functional to the achievement of the Unique Value Proposition?"]) -.-> I
 
     classDef question fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f
     class q1,q2,q3 question
