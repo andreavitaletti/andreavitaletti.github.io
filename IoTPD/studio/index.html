@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://andreavitaletti.github.io/IoTPD/studio/">
       
       
-        <link rel="prev" href="../intro/">
+        <link rel="prev" href="../">
       
       
         <link rel="next" href="../datadesign/">
@@ -1043,6 +1043,8 @@
     
       
         
+          
+        
       
         
       
@@ -1059,8 +1061,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -1074,8 +1077,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
@@ -1088,32 +1097,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../intro/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Outline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -1717,14 +1700,14 @@
 
 <h1 id="the-connected-studio-object-catalogue">The Connected Studio: Object Catalogue</h1>
 <blockquote>
-<p>Back to the <a href="../intro/">course outline</a> · <a href="../assets/slides.pdf">Course slides</a></p>
+<p>Back to the <a href="../">course outline</a> · <a href="../assets/slides.pdf">Course slides</a></p>
 </blockquote>
-<p>All exercises share one scenario: a <strong>shared studio / co-working room</strong> that the class progressively brings to life (see <a href="../intro/#2-running-scenario-the-connected-studio">§2 of the outline</a>). Each group (2–3 students) designs and builds <strong>one object</strong> for the studio.</p>
+<p>All exercises share one scenario: a <strong>shared studio / co-working room</strong> that the class progressively brings to life (see <a href="../#2-running-scenario-the-connected-studio">§2 of the outline</a>). Each group (2–3 students) designs and builds <strong>one object</strong> for the studio.</p>
 <p>This page describes the objects groups can choose from. Each object:</p>
 <ul>
-<li>uses only the <strong>Core Kit</strong> (button, potentiometer, LEDs) plus <strong>one or two Specialized Project Modules</strong> (<a href="../intro/#42-specialized-project-modules-introduced-from-exercise-3">§4.2</a>);</li>
+<li>uses only the <strong>Core Kit</strong> (button, potentiometer, LEDs) plus <strong>one or two Specialized Project Modules</strong> (<a href="../#42-specialized-project-modules-introduced-from-exercise-3">§4.2</a>);</li>
 <li>has at least <strong>three states</strong>, ready for the state machine of <strong>Exercise 3</strong>;</li>
-<li><strong>publishes</strong> at least one topic of the shared <strong>topic contract</strong> (<a href="../intro/#52-shared-conventions-the-topic-contract">§5.2</a>) and <strong>subscribes</strong> to at least one published by another object, so that from Exercise 7 every object has someone to talk to;</li>
+<li><strong>publishes</strong> at least one topic of the shared <strong>topic contract</strong> (<a href="../#52-shared-conventions-the-topic-contract">§5.2</a>) and <strong>subscribes</strong> to at least one published by another object, so that from Exercise 7 every object has someone to talk to;</li>
 <li>comes with a <strong>design question</strong> to drive the design reflections.</li>
 </ul>
 <p>Technical background for the sensors, the network and the backend is in the <a href="../../Iot_new/">IoT course notes</a>, e.g. <a href="../../Iot_new/simulation/">Simulating a node</a>, <a href="../../Iot_new/simulation/#mqtt">MQTT</a> and <a href="../../Iot_new/backend/">ThingsBoard</a>.</p>
@@ -1816,7 +1799,7 @@
 </tr>
 </tbody>
 </table>
-<p>Topics are written without the class prefix: <code>co2</code> means <code>iotpd/studio/co2</code>, <code>lamp/mode</code> means <code>iotpd/studio/lamp/mode</code> (see the <a href="../intro/#52-shared-conventions-the-topic-contract">topic contract</a>). Every object also publishes its own <code>&lt;object&gt;/status</code> (online/offline, with Last Will, Exercise 6) and <code>&lt;object&gt;/heartbeat</code> (Exercise 8).</p>
+<p>Topics are written without the class prefix: <code>co2</code> means <code>iotpd/studio/co2</code>, <code>lamp/mode</code> means <code>iotpd/studio/lamp/mode</code> (see the <a href="../#52-shared-conventions-the-topic-contract">topic contract</a>). Every object also publishes its own <code>&lt;object&gt;/status</code> (online/offline, with Last Will, Exercise 6) and <code>&lt;object&gt;/heartbeat</code> (Exercise 8).</p>
 <hr />
 <h2 id="1-focus-lamp">1. Focus Lamp</h2>
 <p><em>A desk lamp that shows when you are concentrating.</em></p>
