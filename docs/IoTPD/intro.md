@@ -1,5 +1,23 @@
 # IoT for Product Design
 
+```mermaid
+
+graph TD
+    G["Goals of your customer"] --> P["Problems that make it difficult<br/>to achieve those goals"]
+    Constraints -.-> P
+
+    P --> U["Unique Value Proposition:<br/>A promise to solve the problem and achieve<br/>the goal by providing unique value"]
+    Constraints -.-> U
+
+    U --> S["Solution:<br/>The tangible proof that you can<br/>deliver on your promise"]
+    Constraints -->|IoT| S
+
+    q1([What is the single feature that allows you to fulfill your promise?]) --> S
+
+    style q1 fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d
+    
+```
+
 > 📊 **Course Slides:** [Download Presentation Slides (PDF)](assets/slides.pdf) | [View Slide Source (Marp Markdown)](assets/slides.md)
 
 !!! warning "Course Agreement & Ground Rules"
