@@ -63,7 +63,7 @@ nav:
       - Crowdsourcing: Iot_new/crowdsourcing.md
       - Scale on Sim: Iot_new/scale.md
   - IoTPD:
-      - Outline: IoTPD/intro.md
+      - IoTPD/index.md
       - Studio Objects: IoTPD/studio.md
       - data-*: IoTPD/datadesign.md
   - links: links.md

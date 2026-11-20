@@ -1,14 +1,14 @@
 # The Connected Studio: Object Catalogue
 
-> Back to the [course outline](intro.md) · [Course slides](assets/slides.pdf)
+> Back to the [course outline](index.md) · [Course slides](assets/slides.pdf)
 
-All exercises share one scenario: a **shared studio / co-working room** that the class progressively brings to life (see [§2 of the outline](intro.md#2-running-scenario-the-connected-studio)). Each group (2–3 students) designs and builds **one object** for the studio.
+All exercises share one scenario: a **shared studio / co-working room** that the class progressively brings to life (see [§2 of the outline](index.md#2-running-scenario-the-connected-studio)). Each group (2–3 students) designs and builds **one object** for the studio.
 
 This page describes the objects groups can choose from. Each object:
 
-- uses only the **Core Kit** (button, potentiometer, LEDs) plus **one or two Specialized Project Modules** ([§4.2](intro.md#42-specialized-project-modules-introduced-from-exercise-3));
+- uses only the **Core Kit** (button, potentiometer, LEDs) plus **one or two Specialized Project Modules** ([§4.2](index.md#42-specialized-project-modules-introduced-from-exercise-3));
 - has at least **three states**, ready for the state machine of **Exercise 3**;
-- **publishes** at least one topic of the shared **topic contract** ([§5.2](intro.md#52-shared-conventions-the-topic-contract)) and **subscribes** to at least one published by another object, so that from Exercise 7 every object has someone to talk to;
+- **publishes** at least one topic of the shared **topic contract** ([§5.2](index.md#52-shared-conventions-the-topic-contract)) and **subscribes** to at least one published by another object, so that from Exercise 7 every object has someone to talk to;
 - comes with a **design question** to drive the design reflections.
 
 Technical background for the sensors, the network and the backend is in the [IoT course notes](../Iot_new/index.md), e.g. [Simulating a node](../Iot_new/simulation.md), [MQTT](../Iot_new/simulation.md#mqtt) and [ThingsBoard](../Iot_new/backend.md).
@@ -34,7 +34,7 @@ Technical background for the sensors, the network and the backend is in the [IoT
 | 7   | [Meeting / Availability Gauge](#7-meeting-availability-gauge) | Button, pot                     | Servo                                       | `meeting/mode`                     | `studioScene`                          |
 | 8   | [Coffee Corner Counter](#8-coffee-corner-counter)       | Button, LED                           | NeoPixel ring or buzzer                     | `coffee/count`                     | `roomOccupied`, `totem/mode`           |
 
-Topics are written without the class prefix: `co2` means `iotpd/studio/co2`, `lamp/mode` means `iotpd/studio/lamp/mode` (see the [topic contract](intro.md#52-shared-conventions-the-topic-contract)). Every object also publishes its own `<object>/status` (online/offline, with Last Will, Exercise 6) and `<object>/heartbeat` (Exercise 8).
+Topics are written without the class prefix: `co2` means `iotpd/studio/co2`, `lamp/mode` means `iotpd/studio/lamp/mode` (see the [topic contract](index.md#52-shared-conventions-the-topic-contract)). Every object also publishes its own `<object>/status` (online/offline, with Last Will, Exercise 6) and `<object>/heartbeat` (Exercise 8).
 
 ---
 
