@@ -42,3 +42,6 @@ We presented our project at the [4th International Summer School of Scientific a
 
 * [An article on the Indian Express](https://indianexpress.com/article/long-reads/how-ai-data-computational-gastronomy-redefining-flavour-pairings-10863553/)
 * [A Zotero library on Computational Gastronomy and rice specifically](https://www.zotero.org/groups/6504580/computational_gastronomy/library)
+* [RiceVarMap](https://ricevarmap.ncpgr.cn/v3/)
+* [Phenotype and GWAS Information](https://ricevarmap.ncpgr.cn/v3/phenos/)
+* [DB on rice](https://iric.irri.org/resources/rice-databases)
