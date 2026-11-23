@@ -32,7 +32,7 @@ Cooking.
 
 We presented our project at the [4th International Summer School of Scientific and Computational Gastronomy](https://www.futurecookinglab.it/?page_id=1721&lang=en) and at the [II International Workshop of Scientific and Computational Gastronomy](https://scientificgastronomy.org/education/workshops/workshop-2026/)
 
-![](assets/images/rice1.jpg)
+![](assets/images/rice4.png)
 
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQkauCk-OABsoCJex4lAdaA6Gmzj35hQPvBY0fgMAQbX8wJHZm6sjn22PHV-GUmnqTkicwvBnBh2WfU/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="1058" height="624" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
