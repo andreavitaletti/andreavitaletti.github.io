@@ -45,3 +45,8 @@ We presented our project at the [4th International Summer School of Scientific a
 * [RiceVarMap](https://ricevarmap.ncpgr.cn/v3/)
 * [Phenotype and GWAS Information](https://ricevarmap.ncpgr.cn/v3/phenos/)
 * [DB on rice](https://iric.irri.org/resources/rice-databases)
+
+## Acknowledgments
+
+This work was supported in part by the Italian Ministry of Foreign Affairs and International Cooperation, grant number KR26GR07
+![](assets/images/logo_MAECI.png)
