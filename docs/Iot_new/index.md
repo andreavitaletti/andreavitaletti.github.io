@@ -1,5 +1,13 @@
 Initially this course has been conceived as a short course on IoT with the main purpose to give a first understanding of the main issues in developing IoT solutions. We do believe the most efficient way to learn this subject is experimenting, this is way the course encourage attendants to hands-on.
 
+!!! tip
+    An Embedded Wireless Sensor Network (EWSNs) is a distributed collection of **resource-constrained embedded devices** that cooperate through wireless communication to sense, process, and potentially act upon information about the physical environment.
+
+!!! tip
+    Internet of Things (IoT) focuses on interconnecting physical objects, primarily through the Internet, and integrating them into a wider digital ecosystem.
+
+!!! warning
+    The challenges posed by resource-constrained devices are particularly interesting. Therefore, in this course, we focus on Embedded Wireless Sensor Networks (EWSNs) as a specific and technically challenging component of the broader IoT ecosystem.
 
  No specific background is needed, even if a basic knowledge of electronics and computer science might help. 
 
