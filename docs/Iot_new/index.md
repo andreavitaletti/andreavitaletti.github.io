@@ -1,3 +1,5 @@
+# Overview
+
 Initially this course has been conceived as a short course on IoT with the main purpose to give a first understanding of the main issues in developing IoT solutions. We do believe the most efficient way to learn this subject is experimenting, this is way the course encourage attendants to hands-on.
 
  No specific background is needed, even if a basic knowledge of electronics and computer science might help. 
