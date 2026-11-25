@@ -45,7 +45,6 @@ nav:
       - Learn from the master: Startup/Learn from the master.md
   - IoT:
       - Iot_new/index.md
-      - Premise: Iot_new/premise.md
       - Intro: Iot_new/intro.md
       - Simulate a node: Iot_new/simulation.md
       - A real node: Iot_new/real.md
