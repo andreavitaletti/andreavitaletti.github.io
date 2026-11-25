@@ -14,7 +14,7 @@
         <link rel="prev" href="../Startup/Learn%20from%20the%20master/">
       
       
-        <link rel="next" href="premise/">
+        <link rel="next" href="intro/">
       
       
         
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tools-and-materials" class="md-skip">
+        <a href="#premise" class="md-skip">
           Skip to content
         </a>
       
@@ -557,7 +557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="premise/" class="md-nav__link">
+      <a href="premise.md" class="md-nav__link">
         
   
   
@@ -1357,6 +1357,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#premise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Premise
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tools-and-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1409,6 +1420,11 @@
   <h1>Index</h1>
 
 <p>Initially this course has been conceived as a short course on IoT with the main purpose to give a first understanding of the main issues in developing IoT solutions. We do believe the most efficient way to learn this subject is experimenting, this is way the course encourage attendants to hands-on.</p>
+<p>No specific background is needed, even if a basic knowledge of electronics and computer science might help. </p>
+<p>Over the years the course evolved and it is now not so short, however, the idea is to guide the attendants step by step, incrementally.  So it is up to you how far to go. </p>
+<h2 id="premise">Premise</h2>
+<p>If you ask multiple people what the Internet of Things (IoT) is, you will likely get many different answers. Devices such as a Raspberry Pi, Jetson Nano, Arduino Uno, or ESP32 are all legitimately considered IoT devices, but they differ significantly in capabilities.</p>
+<p>The Raspberry Pi, Jetson Nano, and Arduino Uno Q can handle relatively complex tasks, including AI workloads, whereas the resource-constrained ESP32 cannot easily achieve the same performance.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>An Embedded Wireless Sensor Network (EWSNs) is a distributed collection of <strong>resource-constrained embedded devices</strong> that cooperate through wireless communication to sense, process, and potentially act upon information about the physical environment.</p>
@@ -1421,8 +1437,37 @@
 <p class="admonition-title">Warning</p>
 <p>The challenges posed by resource-constrained devices are particularly interesting. Therefore, in this course, we focus on Embedded Wireless Sensor Networks (EWSNs) as a specific and technically challenging component of the broader IoT ecosystem.</p>
 </div>
-<p>No specific background is needed, even if a basic knowledge of electronics and computer science might help. </p>
-<p>Over the years the course evolved and it is now not so short, however, the idea is to guide the attendants step by step, incrementally.  So it is up to you how far to go. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this course, we make an <strong>unconditional choice</strong>: students will work with the <strong>ESP32 powered by a battery</strong></p>
+</div>
+<p><strong>Why?</strong></p>
+<ul>
+<li>From a teaching perspective, it provides the most valuable learning experience, emphasising efficiency and thoughtful system design.</li>
+<li>It presents a greater challenge, encouraging careful design.</li>
+<li>Solutions developed for the resource-limited ESP32 will generally scale easily to more powerful devices.</li>
+<li>The battery force students to design power efficient solutions</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In many IoT environments, particularly industrial ones, devices are easily line-powered. Yet, the constraints of battery-powered design offer a much more engaging set of challenges.</p>
+</div>
+<p>Regardless of the fact that, for simplicity, you might use a more resource-demanding (“non-IoT‑friendly”) technology, we expect you to <strong>demonstrate a thoughtful design process and provide a prototype</strong> that shows how you optimised limited resources to meet your application’s requirements.</p>
+<p>As an example, it is well known that Wi-Fi is not particularly IoT-friendly, as it consumes a significant amount of energy. At the same time, most ESP32 devices natively support Wi-Fi, making it a very convenient choice.</p>
+<p>While we encourage you to challenge yourself with more IoT-friendly technologies (e.g., LoRa), using WiFi is perfectly acceptable <strong>provided that you demonstrate the following</strong>:</p>
+<ol>
+<li>You clarify what is the most suitable technology and you are aware of pros and cons;</li>
+<li>You measure and report the energy consumption of your solution employing WiFi;</li>
+<li>You discuss whether your design meets the requirements of your application;</li>
+<li>You optimise your design to meet the requirements (e.g. applying energy-aware mechanisms such as duty cycling, sleep modes, or other techniques) under <strong>suitable assumptions</strong> (e.g. assuming you are using LoRa instead of WiFi).</li>
+</ol>
+<p>This approach ensures that even when using convenient technologies like Wi-Fi, you remain mindful of IoT constraints and practice efficient design principles.</p>
+<!-- both the admonitions below work, but the second one is rendered properly also on obsidian -->
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We value the process and the right questions with sound answers more than the final product.</p>
+</div>
 <h2 id="tools-and-materials">Tools and Materials</h2>
 <p>The reference hardware is the <a href="http://esp32.net/">ESP32</a> and we now mostly use <a href="https://platformio.org/">PlatformIO</a>.<br />
 <a href="https://code.visualstudio.com/">vscode</a> is a nice companion together with  the <a href="https://platformio.org/install/ide?install=vscode">Platformio extension</a>.</p>
