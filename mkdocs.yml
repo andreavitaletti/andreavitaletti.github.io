@@ -65,6 +65,7 @@ nav:
       - IoTPD/index.md
       - Studio Objects: IoTPD/studio.md
       - data-*: IoTPD/datadesign.md
+      - Tangible Interface: IoTPD/tangible.md
   - links: links.md
   - thesis:
       - Proposals: Thesis/thesis.md
